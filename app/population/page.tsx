@@ -5,8 +5,8 @@ import {
   HISTORICAL_STATE_POP
 } from "@/lib/data/population"
 import {
-  AreaChart, Area, LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer, Legend
+  ComposedChart, AreaChart, Area, LineChart, Line, BarChart, Bar,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, ReferenceLine
 } from "recharts"
 
 export default function PopulationPage() {
@@ -16,15 +16,15 @@ export default function PopulationPage() {
   const peak = HISTORICAL_NOM_DETAIL.reduce((a, b) => a.total_k > b.total_k ? a : b)
   const trough = HISTORICAL_NOM_DETAIL.reduce((a, b) => a.total_k < b.total_k ? a : b)
 
-  // Area chart data: population + NOM
+  // Dual-axis ComposedChart: stacked bars (natural increase + NOM) + population line
   const histData = HISTORICAL_NATIONAL.map((d) => ({
     year: d.year,
     population: d.population_m,
-    nim: d.nim * 1000,
-    natural: d.natural_increase * 1000,
+    natural: Math.round(d.natural_increase * 1000),
+    nim: Math.round(d.nim * 1000),
   }))
 
-  // NOM detail bar chart
+  // NOM detail stacked bar — Streamlit colors: blue, green, orange, purple
   const nomData = HISTORICAL_NOM_DETAIL.map((d) => ({
     year: d.year,
     skilled: d.skilled_k,
@@ -33,7 +33,7 @@ export default function PopulationPage() {
     other: d.other_k,
   }))
 
-  // State population lines
+  // State population lines with dots
   const stateYears = HISTORICAL_STATE_POP.NSW.map((d) => d.year)
   const stateChartData = stateYears.map((yr) => {
     const row: Record<string, number | string> = { year: yr }
@@ -45,16 +45,12 @@ export default function PopulationPage() {
   })
 
   const stateColors: Record<string, string> = {
-    NSW: "#3498db", VIC: "#e74c3c", QLD: "#f39c12", WA: "#27ae60", SA: "#9b59b6"
+    NSW: "#4a90d9",
+    VIC: "#e74c3c",
+    QLD: "#f39c12",
+    WA:  "#2ecc71",
+    SA:  "#b97cff",
   }
-
-  // Projections area chart
-  const projData = NATIONAL_PROJECTIONS.map((d) => ({
-    year: d.year,
-    population: d.population_m,
-    required_approvals: ACCORD_TARGET / 1000,
-    current_approvals: CURRENT_ANNUAL_APPROVALS / 1000,
-  }))
 
   return (
     <div style={{ background: "#0f0f1a", minHeight: "100vh" }}>
@@ -87,7 +83,7 @@ export default function PopulationPage() {
           <div className="kpi-card">
             <div className="kpi-label">Peak NOM (2023)</div>
             <div className="kpi-value" style={{ color: "#e74c3c" }}>{peak.total_k.toLocaleString()}k</div>
-            <div className="kpi-delta">Record — 2x pre-COVID average</div>
+            <div className="kpi-delta">Record — 2× pre-COVID average</div>
           </div>
           <div className="kpi-card">
             <div className="kpi-label">COVID trough (2021)</div>
@@ -96,37 +92,56 @@ export default function PopulationPage() {
           </div>
         </div>
 
-        {/* National population area chart */}
-        <div className="grid-2" style={{ marginBottom: 24 }}>
-          <div className="chart-container">
-            <div className="chart-title">National Population (M) — 2015 to 2024</div>
-            <ResponsiveContainer width="100%" height={260}>
-              <AreaChart data={histData} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
-                <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
-                <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 10 }} tickLine={false} />
-                <YAxis domain={[23, 28]} tick={{ fill: "#666", fontSize: 10 }} tickLine={false} tickFormatter={(v) => `${v}M`} />
-                <Tooltip contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }} formatter={(v: unknown, n: unknown) => [((n as string) === "population") ? `${v}M` : (v as number).toLocaleString(), n as string]} />
-                <Area type="monotone" dataKey="population" stroke="#f6c90e" fill="rgba(246,201,14,0.1)" strokeWidth={2.5} name="Population (M)" />
-              </AreaChart>
-            </ResponsiveContainer>
+        {/* ── Dual-axis: population line + stacked bars ── */}
+        <div className="chart-container" style={{ marginBottom: 24 }}>
+          <div className="chart-title">National Population &amp; Net Overseas Migration — 2015 to 2024</div>
+          <div style={{ fontSize: "0.75rem", color: "#666", marginBottom: 12 }}>
+            ABS Cat. 3101.0 &amp; 3412.0 — annual June-year figures
           </div>
-
-          <div className="chart-container">
-            <div className="chart-title">Net Overseas Migration by Visa Class (000s)</div>
-            <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={nomData} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
-                <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
-                <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 10 }} tickLine={false} />
-                <YAxis tick={{ fill: "#666", fontSize: 10 }} tickLine={false} />
-                <Tooltip contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }} formatter={(v: unknown) => [`${v}k`, ""]} />
-                <Legend wrapperStyle={{ fontSize: 10, color: "#888" }} />
-                <Bar dataKey="skilled" fill="#27ae60" name="Skilled" stackId="a" />
-                <Bar dataKey="family" fill="#3498db" name="Family" stackId="a" />
-                <Bar dataKey="student" fill="#f39c12" name="Student" stackId="a" />
-                <Bar dataKey="other" fill="#9b59b6" name="Other" stackId="a" radius={[2, 2, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={300}>
+            <ComposedChart data={histData} margin={{ top: 10, right: 60, bottom: 0, left: 10 }}>
+              <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
+              <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 11 }} tickLine={false} />
+              {/* Left Y: Population (M) */}
+              <YAxis
+                yAxisId="pop"
+                domain={[23, 28]}
+                tick={{ fill: "#666", fontSize: 10 }}
+                tickLine={false}
+                tickFormatter={(v) => `${v}M`}
+                label={{ value: "Population (M)", angle: -90, position: "insideLeft", fill: "#555", fontSize: 10, dx: -4 }}
+              />
+              {/* Right Y: Annual arrivals (000s) */}
+              <YAxis
+                yAxisId="nom"
+                orientation="right"
+                domain={[-150, 700]}
+                tick={{ fill: "#666", fontSize: 10 }}
+                tickLine={false}
+                tickFormatter={(v) => `${v}k`}
+                label={{ value: "Annual arrivals", angle: 90, position: "insideRight", fill: "#555", fontSize: 10, dx: 12 }}
+              />
+              <Tooltip
+                contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }}
+                formatter={(v: unknown) => [`${v}`, ""]}
+              />
+              <Legend wrapperStyle={{ fontSize: 11, color: "#999", paddingTop: 8 }} />
+              {/* Stacked bars on right axis */}
+              <Bar yAxisId="nom" dataKey="natural" name="Natural increase" stackId="a" fill="#2ecc71" opacity={0.85} />
+              <Bar yAxisId="nom" dataKey="nim" name="Net overseas migration" stackId="a" fill="#4a90d9" opacity={0.85} radius={[2, 2, 0, 0]} />
+              {/* Population line on left axis */}
+              <Line
+                yAxisId="pop"
+                type="monotone"
+                dataKey="population"
+                name="National population"
+                stroke="#f6c90e"
+                strokeWidth={2.5}
+                dot={{ r: 4, fill: "#f6c90e", stroke: "#0f0f1a", strokeWidth: 2 }}
+                activeDot={{ r: 6 }}
+              />
+            </ComposedChart>
+          </ResponsiveContainer>
         </div>
 
         {/* Migration phases */}
@@ -152,20 +167,63 @@ export default function PopulationPage() {
           </div>
         </div>
 
-        {/* State population */}
+        {/* ── State population lines with dots ── */}
         <div className="chart-container" style={{ marginBottom: 24 }}>
           <div className="chart-title">State Population Growth — 2015 to 2024 (M)</div>
-          <ResponsiveContainer width="100%" height={280}>
-            <LineChart data={stateChartData} margin={{ top: 10, right: 20, bottom: 0, left: 0 }}>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={stateChartData} margin={{ top: 10, right: 20, bottom: 0, left: 10 }}>
               <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
-              <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 10 }} tickLine={false} />
-              <YAxis tick={{ fill: "#666", fontSize: 10 }} tickLine={false} tickFormatter={(v) => `${v}M`} />
-              <Tooltip contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }} formatter={(v: unknown) => [`${v}M`, ""]} />
-              <Legend wrapperStyle={{ fontSize: 11, color: "#888" }} />
-              {Object.keys(stateColors).map((st) => (
-                <Line key={st} type="monotone" dataKey={st} stroke={stateColors[st]} strokeWidth={2} dot={false} />
+              <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 11 }} tickLine={false} />
+              <YAxis
+                tick={{ fill: "#666", fontSize: 10 }}
+                tickLine={false}
+                tickFormatter={(v) => `${v}M`}
+                label={{ value: "Population (M)", angle: -90, position: "insideLeft", fill: "#555", fontSize: 10, dx: -4 }}
+              />
+              <Tooltip
+                contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }}
+                formatter={(v: unknown) => [`${v}M`, ""]}
+              />
+              <Legend wrapperStyle={{ fontSize: 11, color: "#999" }} />
+              {Object.entries(stateColors).map(([st, color]) => (
+                <Line
+                  key={st}
+                  type="monotone"
+                  dataKey={st}
+                  stroke={color}
+                  strokeWidth={2.2}
+                  dot={{ r: 4, fill: color, stroke: "#0f0f1a", strokeWidth: 1.5 }}
+                  activeDot={{ r: 6 }}
+                />
               ))}
             </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* ── Migration breakdown stacked bars ── */}
+        <div className="chart-container" style={{ marginBottom: 24 }}>
+          <div className="chart-title">Migration Breakdown by Visa Stream — 2015 to 2024 (000s)</div>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={nomData} margin={{ top: 10, right: 20, bottom: 0, left: 10 }}>
+              <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
+              <XAxis dataKey="year" tick={{ fill: "#666", fontSize: 11 }} tickLine={false} />
+              <YAxis
+                tick={{ fill: "#666", fontSize: 10 }}
+                tickLine={false}
+                tickFormatter={(v) => `${v}k`}
+                label={{ value: "People ('000s)", angle: -90, position: "insideLeft", fill: "#555", fontSize: 10, dx: -4 }}
+              />
+              <Tooltip
+                contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }}
+                formatter={(v: unknown) => [`${v}k`, ""]}
+              />
+              <Legend wrapperStyle={{ fontSize: 11, color: "#999" }} />
+              <ReferenceLine yAxisId={0} y={0} stroke="#444" />
+              <Bar dataKey="skilled" name="Skilled migration" stackId="a" fill="#4a90d9" opacity={0.9} />
+              <Bar dataKey="family" name="Family stream" stackId="a" fill="#2ecc71" opacity={0.9} />
+              <Bar dataKey="student" name="International students" stackId="a" fill="#f0a30a" opacity={0.9} />
+              <Bar dataKey="other" name="Other / humanitarian" stackId="a" fill="#9b59b6" opacity={0.9} radius={[2, 2, 0, 0]} />
+            </BarChart>
           </ResponsiveContainer>
         </div>
 
