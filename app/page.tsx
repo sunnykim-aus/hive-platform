@@ -232,7 +232,7 @@ export default function HomePage() {
 
         {/* ── Why This Exists ──────────────────────────────── */}
         <div style={{ marginBottom: 36 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16, borderLeft: "3px solid #f6c90e", paddingLeft: 12 }}>Why This Exists</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>Why This Exists</div>
           <div className="grid-3">
             <div className="hive-card">
               <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>📋</div>
@@ -309,7 +309,7 @@ export default function HomePage() {
 
         {/* ── The Housing Crisis in Numbers ───────────────── */}
         <div style={{ marginBottom: 36 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16, borderLeft: "3px solid #f6c90e", paddingLeft: 12 }}>The Housing Crisis in Numbers — Right Now</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>The Housing Crisis in Numbers — Right Now</div>
           <div className="grid-4" style={{ marginBottom: 20 }}>
             <div className="kpi-card">
               <div className="kpi-label">Dwellings Built Per Year</div>
@@ -346,7 +346,7 @@ export default function HomePage() {
 
         {/* ── Platform capabilities ────────────────────────── */}
         <div style={{ marginBottom: 36 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16, borderLeft: "3px solid #f6c90e", paddingLeft: 12 }}>What HIVE Does</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>What HIVE Does</div>
           <div className="grid-4">
             {capabilities.map((cap) => (
               <a key={cap.title} href={cap.href} style={{ textDecoration: "none" }}>
@@ -369,7 +369,7 @@ export default function HomePage() {
 
         {/* ── Who Uses HIVE ────────────────────────────────── */}
         <div style={{ marginBottom: 36 }}>
-          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16, borderLeft: "3px solid #f6c90e", paddingLeft: 12 }}>Who Uses HIVE</div>
+          <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>Who Uses HIVE</div>
           <div className="grid-3">
             {userRoles.map((r) => (
               <div key={r.role} className="role-card">
