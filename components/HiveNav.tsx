@@ -34,11 +34,15 @@ export default function HiveNav() {
         gap: 10,
       }}>
         {/* Brand */}
-        <div style={{ display: "flex", alignItems: "baseline", gap: 10 }}>
-          <span style={{ fontSize: "1.3em", fontWeight: 900, color: "#f6c90e", letterSpacing: "-0.5px" }}>
-            🐝 HIVE Intelligence
-          </span>
-          <span style={{ fontSize: "0.78rem", color: "#666" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: "1.4em", lineHeight: 1 }}>🐝</span>
+            <span style={{ fontSize: "1.15em", fontWeight: 900, color: "#f6c90e", letterSpacing: "1.5px", textTransform: "uppercase" }}>
+              HIVE
+            </span>
+          </div>
+          <span style={{ color: "#2a2a4e", fontSize: "1.2em" }}>|</span>
+          <span style={{ fontSize: "0.82rem", color: "#aaa", fontWeight: 400 }}>
             Housing Intelligence &amp; Evidence
           </span>
         </div>
