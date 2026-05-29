@@ -152,35 +152,42 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Badge pills */}
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", maxWidth: 620 }}>
-              {[
-                { label: "📄 681 Reports Indexed",          color: "#f6c90e", bg: "rgba(246,201,14,0.12)",  border: "rgba(246,201,14,0.3)" },
+            {/* Badge pills — 2 rows of 5 */}
+            {[
+              [
+                { label: "📄 681 Reports Indexed",           color: "#f6c90e", bg: "rgba(246,201,14,0.12)",  border: "rgba(246,201,14,0.3)" },
                 { label: "🏛 ABS · AHURI · AIHW · Treasury", color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
                 { label: "📈 Population Projections to 2044",color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
-                { label: "🔴 Construction Cost Crisis",      color: "#e74c3c", bg: "rgba(231,76,60,0.1)",    border: "rgba(231,76,60,0.28)" },
-                { label: "🤖 AI Synthesis · Word Export",    color: "#3498db", bg: "rgba(52,152,219,0.1)",   border: "rgba(52,152,219,0.28)" },
+                { label: "🔴 Construction Cost Crisis",       color: "#e74c3c", bg: "rgba(231,76,60,0.1)",    border: "rgba(231,76,60,0.28)" },
+                { label: "🤖 AI Synthesis · Word Export",     color: "#3498db", bg: "rgba(52,152,219,0.1)",   border: "rgba(52,152,219,0.28)" },
+              ],
+              [
                 { label: "🗺 State-by-State Intelligence",   color: "#f39c12", bg: "rgba(243,156,18,0.1)",   border: "rgba(243,156,18,0.28)" },
                 { label: "🏠 Live Building Approvals",       color: "#27ae60", bg: "rgba(39,174,96,0.1)",    border: "rgba(39,174,96,0.28)" },
                 { label: "📋 Social Housing Waitlists",      color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
                 { label: "💰 HAFF Round Analysis",           color: "#9b59b6", bg: "rgba(155,89,182,0.1)",   border: "rgba(155,89,182,0.28)" },
                 { label: "📅 20 Years of Policy History",    color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
-              ].map(({ label, color, bg, border }) => (
-                <span key={label} style={{
-                  display: "inline-block",
-                  padding: "5px 12px",
-                  borderRadius: 20,
-                  fontSize: "0.72rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.2px",
-                  color,
-                  background: bg,
-                  border: `1px solid ${border}`,
-                }}>
-                  {label}
-                </span>
-              ))}
-            </div>
+              ],
+            ].map((row, ri) => (
+              <div key={ri} style={{ display: "flex", gap: 8, marginBottom: ri === 0 ? 8 : 0 }}>
+                {row.map(({ label, color, bg, border }) => (
+                  <span key={label} style={{
+                    display: "inline-block",
+                    padding: "5px 12px",
+                    borderRadius: 20,
+                    fontSize: "0.72rem",
+                    fontWeight: 600,
+                    letterSpacing: "0.2px",
+                    whiteSpace: "nowrap",
+                    color,
+                    background: bg,
+                    border: `1px solid ${border}`,
+                  }}>
+                    {label}
+                  </span>
+                ))}
+              </div>
+            ))}
 
           </div>
         </div>
