@@ -1,0 +1,89 @@
+import { NextRequest, NextResponse } from "next/server"
+import { Pinecone } from "@pinecone-database/pinecone"
+import Anthropic from "@anthropic-ai/sdk"
+
+const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
+
+export async function POST(req: NextRequest) {
+  try {
+    const { policyName, fundingAmount, year } = await req.json()
+
+    if (!policyName?.trim()) {
+      return NextResponse.json({ error: "Policy name is required" }, { status: 400 })
+    }
+
+    // ── 1. Search Pinecone ────────────────────────────────────────────────────
+    const index = pc.index(process.env.PINECONE_INDEX!)
+    const namespacedIndex = index.namespace(process.env.PINECONE_NAMESPACE!)
+    const results = await namespacedIndex.searchRecords({
+      query: { inputs: { text: `${policyName} housing policy impact outcomes results effectiveness evaluation` }, topK: 12 },
+      fields: ["text", "title", "source_url", "source_agency", "authors", "year"],
+    })
+
+    const hits = (results as { result?: { hits?: unknown[] } }).result?.hits ?? []
+
+    if (hits.length === 0) {
+      return NextResponse.json({
+        answer: "No relevant research found for this policy. The evidence base may not include evaluations of this specific program.",
+        sources: [],
+      })
+    }
+
+    // ── 2. Build context ──────────────────────────────────────────────────────
+    const context = (hits as { fields?: Record<string, string>; _score?: number }[]).map((h, i) => {
+      const f = h.fields ?? {}
+      return `[${i + 1}] ${f.title ?? "Untitled"} (${f.source_agency ?? ""}, ${f.year ?? ""})
+${f.text ?? ""}`
+    }).join("\n\n---\n\n")
+
+    // ── 3. Synthesise with Claude ─────────────────────────────────────────────
+    const message = await anthropic.messages.create({
+      model: "claude-haiku-4-5",
+      max_tokens: 1400,
+      messages: [{
+        role: "user",
+        content: `You are HIVE — an Australian housing policy analyst. Analyse the impact of the following policy using ONLY the research excerpts below.
+
+Policy: ${policyName}
+Year announced: ${year}
+Funding: $${fundingAmount}B
+
+Your analysis should:
+1. Summarise what the policy was designed to do
+2. Report on actual outcomes vs targets (citing evidence)
+3. Identify what worked and what didn't
+4. Note any unintended consequences
+5. Give an overall effectiveness assessment (High/Medium/Low confidence)
+6. End with a "Key Evidence" section citing sources as [1], [2] etc
+
+If evidence is limited or mixed, say so explicitly. Do not extrapolate beyond the evidence.
+
+Research excerpts:
+${context}`,
+      }],
+    })
+
+    const answer = message.content[0].type === "text" ? message.content[0].text : ""
+
+    // ── 4. Format sources ─────────────────────────────────────────────────────
+    const sources = (hits as { fields?: Record<string, string | number>; _score?: number }[]).map((h, i) => {
+      const f = h.fields ?? {}
+      return {
+        index: i + 1,
+        title: f.title ?? "Untitled",
+        agency: f.source_agency ?? "",
+        year: f.year ?? "",
+        url: f.source_url ?? "",
+        authors: f.authors ?? "",
+        score: h._score ?? 0,
+      }
+    })
+
+    return NextResponse.json({ answer, sources })
+
+  } catch (err: unknown) {
+    console.error("Policy impact error:", err)
+    return NextResponse.json({ error: "Analysis failed. Please try again." }, { status: 500 })
+  }
+}

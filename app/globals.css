@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 :root {
+  --hive-gold:     #f6c90e;
+  --hive-dark:     #0f0f1a;
+  --hive-card:     #1a1a2e;
+  --hive-border:   #2a2a4e;
   --hive-midnight: #0c1829;
   --hive-blue:     #1e3a5f;
   --hive-accent:   #3b82f6;
@@ -11,18 +15,143 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--hive-midnight);
+  background: var(--hive-dark);
   color: #f1f5f9;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
+/* ── Cards ── */
 .hive-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 14px;
+  background: var(--hive-card);
+  border: 1px solid var(--hive-border);
+  border-radius: 12px;
+  padding: 20px;
 }
 
+.hive-card-hover:hover {
+  border-color: #3a3a6e;
+  background: rgba(26,26,46,0.9);
+  transition: all 0.2s;
+}
+
+/* ── KPI card ── */
+.kpi-card {
+  background: var(--hive-card);
+  border: 1px solid var(--hive-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+}
+
+.kpi-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #666;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+}
+
+.kpi-value-sm {
+  font-size: 1.5rem;
+}
+
+.kpi-delta {
+  font-size: 0.72rem;
+  margin-top: 4px;
+  color: #888;
+}
+
+/* ── Section labels ── */
+.section-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ── Page layout ── */
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  font-size: 0.88rem;
+  color: #888;
+  line-height: 1.7;
+  max-width: 800px;
+}
+
+/* ── Grid layouts ── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .page-container { padding: 20px 16px; }
+  .kpi-value { font-size: 1.5rem; }
+}
+
+/* ── Charts container ── */
+.chart-container {
+  background: var(--hive-card);
+  border: 1px solid var(--hive-border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.chart-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* ── Inputs ── */
 .hive-input {
   background: rgba(255,255,255,0.06);
   border: 1.5px solid rgba(255,255,255,0.12);
@@ -32,22 +161,139 @@ body {
 }
 .hive-input:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: #f6c90e;
   background: rgba(255,255,255,0.08);
 }
 .hive-input::placeholder { color: rgba(255,255,255,0.3); }
 
+/* ── Buttons ── */
 .hive-btn {
-  background: #3b82f6;
-  color: white;
+  background: #f6c90e;
+  color: #0f0f1a;
   font-weight: 700;
   border-radius: 10px;
   transition: background 0.15s;
+  cursor: pointer;
+  border: none;
 }
-.hive-btn:hover { background: #2563eb; }
+.hive-btn:hover { background: #e0b60c; }
 .hive-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+.hive-btn-outline {
+  background: transparent;
+  color: #f6c90e;
+  font-weight: 600;
+  border-radius: 10px;
+  border: 1px solid #f6c90e;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.hive-btn-outline:hover { background: rgba(246,201,14,0.1); }
+
+/* ── Badge / pill ── */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badge-gold { background: rgba(246,201,14,0.15); color: #f6c90e; border: 1px solid rgba(246,201,14,0.3); }
+.badge-green { background: rgba(39,174,96,0.15); color: #27ae60; border: 1px solid rgba(39,174,96,0.3); }
+.badge-red { background: rgba(231,76,60,0.15); color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
+.badge-blue { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
+.badge-grey { background: rgba(255,255,255,0.08); color: #888; border: 1px solid rgba(255,255,255,0.12); }
+
+/* ── Divider ── */
+.hive-divider {
+  border: none;
+  border-top: 1px solid var(--hive-border);
+  margin: 28px 0;
+}
+
+/* ── Alert/callout ── */
+.callout-red {
+  background: rgba(231,76,60,0.08);
+  border: 1px solid rgba(231,76,60,0.3);
+  border-left: 4px solid #e74c3c;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+}
+
+.callout-gold {
+  background: rgba(246,201,14,0.06);
+  border: 1px solid rgba(246,201,14,0.2);
+  border-left: 4px solid #f6c90e;
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+}
+
+/* ── Tab pills ── */
+.tab-pill {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--hive-border);
+  background: transparent;
+  color: #888;
+  transition: all 0.15s;
+}
+.tab-pill:hover { color: #ccc; border-color: #3a3a6e; }
+.tab-pill.active { background: rgba(246,201,14,0.12); color: #f6c90e; border-color: rgba(246,201,14,0.4); }
+
+/* ── Progress bar ── */
+.progress-bar {
+  height: 12px;
+  background: #1a1a2e;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--hive-border);
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+/* ── Dot grid bg ── */
 .dot-grid {
-  background-image: radial-gradient(circle, rgba(59,130,246,0.10) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(246,201,14,0.06) 1px, transparent 1px);
   background-size: 28px 28px;
 }
+
+/* ── Source card ── */
+.source-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--hive-border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+}
+
+/* ── Table ── */
+.hive-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.hive-table th {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--hive-border);
+  color: #888;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.hive-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(42,42,78,0.5);
+  color: #ccc;
+}
+.hive-table tr:hover td { background: rgba(255,255,255,0.02); }
