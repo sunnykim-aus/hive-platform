@@ -249,6 +249,7 @@ export const POLICY_ADVOCACY: PolicyAdvocacy[] = [
 ]
 
 export const ACCORD_TARGET = 240000
-// 3-month average × 12, from ABS cache to Mar 2026 — matches Streamlit fetch_housing_indicators()
-export const CURRENT_ANNUAL_APPROVALS = 188408
+// ABS 12-month snapshot used in population/supply-gap analysis — matches Python population_data.py
+// (Note: live run rate on homepage/live-dashboard uses getBuildingApprovalsSummary() = 188,408)
+export const CURRENT_ANNUAL_APPROVALS = 163000
 export const CURRENT_DWELLING_STOCK_M = 11.2
