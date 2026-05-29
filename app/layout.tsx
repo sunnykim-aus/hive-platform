@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <div style={{ fontSize: "0.88rem", color: "#888", marginBottom: 16, fontWeight: 500 }}>
               🐝 HIVE Intelligence — Research &amp; Policy Analysis &nbsp;|&nbsp; Platform by{" "}
-              <a href="https://www.linkedin.com/in/sunny-kim" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
+              <a href="https://www.linkedin.com/in/sunny-kim-58a780100/" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
                 Sunny Kim
               </a>
               , Housing Data Lead
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
             <p style={{ fontSize: "0.72rem", color: "#555", lineHeight: 1.8 }}>
               Content from this platform is intended to support evidence-based decision-making within the community housing sector. If you are considering sharing or publishing any analysis externally — including in reports, media, grant applications, or public submissions — please reach out to{" "}
-              <a href="https://www.linkedin.com/in/sunny-kim" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
+              <a href="https://www.linkedin.com/in/sunny-kim-58a780100/" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
                 Sunny Kim
               </a>{" "}
               before doing so, to ensure accuracy, appropriate context, and correct attribution.
