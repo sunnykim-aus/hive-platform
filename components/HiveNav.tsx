@@ -69,15 +69,16 @@ export default function HiveNav() {
                 href={page.href}
                 style={{
                   display: "inline-block",
-                  padding: "5px 14px",
-                  fontSize: "0.78rem",
+                  padding: "6px 16px",
+                  fontSize: "0.88rem",
                   fontWeight: isActive ? 700 : 500,
-                  color: isActive ? "#fff" : "#888",
+                  color: isActive ? "#fff" : "#aaa",
                   border: `1px solid ${isActive ? "rgba(246,201,14,0.5)" : "#2a2a4e"}`,
                   borderRadius: 20,
                   textDecoration: "none",
                   background: isActive ? "rgba(246,201,14,0.1)" : "transparent",
                   transition: "all 0.15s",
+                  padding: "6px 16px",
                 }}
               >
                 {page.label}
