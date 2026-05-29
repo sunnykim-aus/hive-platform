@@ -29,8 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
             <p style={{ fontSize: "0.72rem", color: "#555", lineHeight: 1.8 }}>
               HIVE is a subscription platform. Access is licensed to individual subscribers and organisations. Redistribution of platform outputs or data exports outside your organisation requires written permission. For licensing enquiries, partnerships, or custom research, contact{" "}
-              <a href="https://www.linkedin.com/in/sunny-kim-58a780100/" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
-                Sunny Kim
+              <a href="https://impactanalyticsaustralia.com.au/" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
+                Impact Analytics Australia
               </a>.
             </p>
           </div>
