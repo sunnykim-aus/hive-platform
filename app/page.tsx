@@ -12,7 +12,7 @@ export default function HomePage() {
     { title: "Outcome Ledger", desc: "Track what government programs promised vs what they delivered, with funding efficiency analysis.", nav: "Outcomes", href: "/outcome-ledger", navColor: "#27ae60" },
     { title: "Population Projections", desc: "ABS Series B projections to 2044, disaggregated by state, with implied housing demand calculations.", nav: "Population", href: "/population", navColor: "#e74c3c" },
     { title: "State Intelligence", desc: "Deep-dive waitlist trends, building approvals, demographics, and social housing completions by state.", nav: "Demand & Supply", href: "/state-demand-supply", navColor: "#f39c12" },
-    { title: "Construction Costs", desc: "Construction cost index from 2019–2025, global events timeline, and what $1B buys now vs then.", nav: "Conditions", href: "/conditions", navColor: "#888" },
+    { title: "Construction Costs", desc: "Construction cost index from 2019–2025, global events timeline, and what $1B buys now vs then.", nav: "Conditions", href: "/conditions", navColor: "#e67e22" },
     { title: "Policy Timeline", desc: "20 years of federal housing policy with investment amounts, types, and evidence of outcomes.", nav: "Timeline", href: "/policy-timeline", navColor: "#3498db" },
   ]
 
