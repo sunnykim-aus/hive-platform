@@ -136,10 +136,10 @@ export default function HomePage() {
             </h1>
 
             {/* Subtext */}
-            <p style={{ fontSize: "1.05rem", color: "#c8c8d8", lineHeight: 1.85, marginBottom: 32, maxWidth: 560 }}>
-              681 indexed reports. Live government data. 10 years of population history.{" "}
-              <strong style={{ color: "#fff", fontWeight: 600 }}>AI-powered synthesis.</strong>{" "}
-              Built for the people making the case for community housing investment in Australia.
+            <p style={{ fontSize: "1.05rem", color: "#c8c8d8", lineHeight: 1.85, marginBottom: 32, maxWidth: 580 }}>
+              Walk into every meeting with the numbers.{" "}
+              <strong style={{ color: "#fff", fontWeight: 600 }}>Ask any question about Australian housing and get a cited, evidence-based answer in seconds</strong>{" "}
+              — drawn from 681 indexed reports, live ABS &amp; AIHW data, and 20 years of policy history. Built for CHPs, advocates, developers, and investors who need evidence, not opinions.
             </p>
 
             {/* CTA buttons */}
