@@ -2,16 +2,48 @@
 import { useState } from "react"
 import { PROGRAMS, Program } from "@/lib/data/programs"
 import {
-  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell
+  ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from "recharts"
 
-const CONFIDENCE_COLORS = { High: "#27ae60", Medium: "#f39c12", Low: "#e74c3c" }
+const CONFIDENCE_COLORS: Record<string, string> = { High: "#27ae60", Medium: "#f39c12", Low: "#e74c3c" }
+
 const STATUS_COLORS: Record<string, string> = {
   "Completed": "#27ae60",
   "Active": "#3498db",
   "Ongoing": "#3498db",
   "Ongoing (now Home Guarantee Scheme)": "#3498db",
   "Closed (running down)": "#888",
+}
+
+// Match Streamlit's program type colors
+const TYPE_COLORS: Record<string, string> = {
+  "Social & Affordable Housing Fund": "#4a90d9",
+  "Housing Supply Target":           "#6baed6",
+  "Construction Stimulus":           "#f0a030",
+  "Homeownership Assistance":        "#e74c3c",
+  "Bond Aggregation / CHP Finance":  "#2ecc71",
+  "Public Housing Construction":     "#27ae60",
+  "Affordable Rental Supply":        "#f6c90e",
+  "Indigenous Housing":              "#e67e22",
+}
+
+// Custom bubble shape with label
+function BubbleShape(props: {
+  cx?: number; cy?: number;
+  payload?: { name: string; funding: number; type: string };
+}) {
+  const { cx = 0, cy = 0, payload } = props
+  if (!payload) return null
+  const r = Math.max(14, Math.sqrt(payload.funding) * 18)
+  const color = TYPE_COLORS[payload.type] ?? "#888"
+  return (
+    <g>
+      <circle cx={cx} cy={cy} r={r} fill={color} fillOpacity={0.85} stroke="#0f0f1a" strokeWidth={1.5} />
+      <text x={cx} y={cy - r - 5} textAnchor="middle" fill="#ccc" fontSize={9} fontWeight={600}>
+        {payload.name}
+      </text>
+    </g>
+  )
 }
 
 export default function OutcomeLedgerPage() {
@@ -21,11 +53,12 @@ export default function OutcomeLedgerPage() {
   const totalDrawn = PROGRAMS.reduce((s, p) => s + (p.funding_drawn_bn ?? 0), 0)
   const activeCount = PROGRAMS.filter((p) => p.status === "Active" || p.status === "Ongoing" || p.status.includes("Ongoing")).length
 
-  // Bubble chart data
+  // Bubble chart data — use program_type for colors
   const bubbleData = PROGRAMS.map((p) => ({
     year: p.announced_year,
     funding: p.funding_committed_bn,
     name: p.short_name,
+    type: p.program_type,
     status: p.status,
   }))
 
@@ -66,41 +99,46 @@ export default function OutcomeLedgerPage() {
 
         {/* Bubble chart */}
         <div className="chart-container" style={{ marginBottom: 24 }}>
-          <div className="chart-title">Program Investment by Year ($B committed)</div>
-          <ResponsiveContainer width="100%" height={260}>
-            <ScatterChart margin={{ top: 10, right: 20, bottom: 20, left: 0 }}>
+          <div className="chart-title">Housing Programs by Year and Investment Scale</div>
+          <ResponsiveContainer width="100%" height={360}>
+            <ScatterChart margin={{ top: 30, right: 40, bottom: 30, left: 10 }}>
               <CartesianGrid stroke="#2a2a4e" strokeDasharray="3 3" />
               <XAxis
                 type="number" dataKey="year" name="Year"
-                domain={[2005, 2028]}
-                tick={{ fill: "#666", fontSize: 10 }} tickLine={false}
+                domain={[2005, 2026]}
+                label={{ value: "Year", position: "insideBottom", offset: -10, fill: "#666", fontSize: 11 }}
+                tick={{ fill: "#666", fontSize: 11 }} tickLine={false}
               />
               <YAxis
-                type="number" dataKey="funding" name="Funding ($B)"
+                type="number" dataKey="funding" name="Committed $B"
                 tick={{ fill: "#666", fontSize: 10 }} tickLine={false}
                 tickFormatter={(v) => `$${v}B`}
+                label={{ value: "Committed $B", angle: -90, position: "insideLeft", fill: "#666", fontSize: 10, dx: -4 }}
               />
               <Tooltip
                 contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }}
-                formatter={(value: unknown, name: unknown) => [(name as string) === "Year" ? String(value) : `$${value}B`, name as string]}
+                formatter={(value: unknown, name: unknown) => {
+                  const n = name as string
+                  if (n === "Year") return [String(value), n]
+                  if (n === "Committed $B") return [`$${value}B`, n]
+                  return [String(value), n]
+                }}
                 cursor={{ strokeDasharray: "3 3" }}
               />
-              <Scatter data={bubbleData} name="Programs">
-                {bubbleData.map((entry, i) => (
-                  <Cell
-                    key={i}
-                    fill={STATUS_COLORS[entry.status] ?? "#888"}
-                    r={Math.max(8, Math.sqrt(entry.funding) * 8)}
-                  />
-                ))}
-              </Scatter>
+              <Scatter
+                data={bubbleData}
+                name="Programs"
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                shape={(props: any) => <BubbleShape {...props} />}
+              />
             </ScatterChart>
           </ResponsiveContainer>
-          <div style={{ display: "flex", gap: 16, marginTop: 8, flexWrap: "wrap" }}>
-            {Object.entries(STATUS_COLORS).filter((_, i) => i < 3).map(([status, color]) => (
-              <div key={status} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.72rem", color: "#888" }}>
-                <div style={{ width: 10, height: 10, borderRadius: "50%", background: color }} />
-                {status}
+          {/* Type legend */}
+          <div style={{ display: "flex", gap: 12, marginTop: 12, flexWrap: "wrap" }}>
+            {Object.entries(TYPE_COLORS).map(([type, color]) => (
+              <div key={type} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: "0.68rem", color: "#888" }}>
+                <div style={{ width: 9, height: 9, borderRadius: "50%", background: color, flexShrink: 0 }} />
+                {type}
               </div>
             ))}
           </div>
