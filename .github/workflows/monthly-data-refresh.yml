@@ -1,0 +1,35 @@
+name: Monthly Data Refresh
+
+on:
+  schedule:
+    - cron: "0 23 14 * *"   # 15th of month at 9am AEST
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    name: Fetch latest ABS data & update TypeScript
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run refresh
+      - name: Commit if data changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add lib/data/building-approvals.ts
+          if git diff --cached --quiet; then
+            echo "No data changes — nothing to commit."
+          else
+            git commit -m "auto: refresh ABS building approvals $(date -u '+%Y-%m-%d') [skip ci]"
+            git push
+            echo "Pushed — Vercel will redeploy automatically."
+          fi
