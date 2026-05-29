@@ -78,7 +78,6 @@ export default function HiveNav() {
                   textDecoration: "none",
                   background: isActive ? "rgba(246,201,14,0.1)" : "transparent",
                   transition: "all 0.15s",
-                  padding: "6px 16px",
                 }}
               >
                 {page.label}
