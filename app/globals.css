@@ -352,3 +352,14 @@ body {
   width: 100%;
 }
 .source-pill:hover { border-color: #3a3a6e; }
+
+/* ── Data source card (What Data Powers HIVE) ── */
+.data-source-card {
+  background: #1a1a2e;
+  border: 1px solid #2a2a4e;
+  border-left: 4px solid #888;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+.data-source-card:hover { background: #1e1e36; }

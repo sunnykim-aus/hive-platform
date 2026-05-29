@@ -25,15 +25,56 @@ export default function HomePage() {
     { role: "Government Stakeholder", icon: "🏛️", desc: "Research support for housing strategy, budget submissions, and ministerial briefings.", pills: ["Ask Research", "Population", "HAFF"] },
   ]
 
+  // Data sources matching Streamlit "What Data Powers HIVE" section
   const dataSources = [
-    { abbr: "AHURI", name: "Australian Housing and Urban Research Institute — peer-reviewed research", type: "Research" },
-    { abbr: "AIHW", name: "Specialist Homelessness Services, Australian Institute of Health and Welfare", type: "Government" },
-    { abbr: "ABS 8731.0", name: "Building Approvals (monthly updates)", type: "Statistical" },
-    { abbr: "ABS 3222.0", name: "Population Projections to 2044, Series B", type: "Statistical" },
-    { abbr: "Housing Australia", name: "HAFF progress reports, NHFIC Annual Reports", type: "Government" },
-    { abbr: "Treasury", name: "Budget papers, National Housing Accord documents", type: "Government" },
-    { abbr: "State Authorities", name: "NSW DCJ · VIC DFFH · QLD DCHDE · WA DPLH · SA SAHT", type: "State" },
-    { abbr: "SQM / CoreLogic", name: "Rental vacancy rates, property price indexes", type: "Commercial" },
+    {
+      abbr: "AHURI",
+      subtitle: "Australian Housing and Urban Research Institute",
+      desc: "15 years of final reports, policy bulletins, research briefs and evidence reviews — the authoritative academic source on Australian housing.",
+      color: "#e74c3c",
+    },
+    {
+      abbr: "Housing Australia",
+      subtitle: "Housing Australia (formerly NHFIC)",
+      desc: "Annual reports, Home Guarantee Scheme trends, bond aggregation data, and social housing investment reports.",
+      color: "#3498db",
+    },
+    {
+      abbr: "Treasury",
+      subtitle: "Australian Government Treasury",
+      desc: "Federal Budget Papers (2010–2026) — Budget Paper 2 lists every housing program, its funding, and year-by-year allocations. The financial ground truth.",
+      color: "#f6c90e",
+    },
+    {
+      abbr: "ABS",
+      subtitle: "Australian Bureau of Statistics",
+      desc: "Building approvals (monthly), Census housing data, residential property price indexes, housing occupancy and costs surveys.",
+      color: "#f6c90e",
+    },
+    {
+      abbr: "AIHW",
+      subtitle: "Australian Institute of Health and Welfare",
+      desc: "Specialist Homelessness Services annual reports, homelessness estimates from Census, Indigenous housing data — the authoritative source on housing outcomes.",
+      color: "#9b59b6",
+    },
+    {
+      abbr: "Productivity Commission",
+      subtitle: "Productivity Commission",
+      desc: "Major housing inquiries including the landmark 2022 Housing and Homelessness report, rental assistance review, and Report on Government Services (housing chapter).",
+      color: "#27ae60",
+    },
+    {
+      abbr: "DSS",
+      subtitle: "Department of Social Services",
+      desc: "National Housing and Homelessness Agreement, National Rental Affordability Scheme documentation, homelessness strategy policy papers.",
+      color: "#888",
+    },
+    {
+      abbr: "Power Housing",
+      subtitle: "Power Housing Australia",
+      desc: "Community housing sector peak body publications and State of the Sector reports (where accessible).",
+      color: "#888",
+    },
   ]
 
   const pillHrefMap: Record<string, string> = {
@@ -67,7 +108,6 @@ export default function HomePage() {
           background: "linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(20,12,5,0.72) 50%, rgba(10,10,20,0.90) 100%)",
         }} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "64px 28px" }}>
-          {/* Badge pills */}
           <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
             <span className="badge badge-gold">Live Data</span>
             <span className="badge badge-grey">681 Reports Indexed</span>
@@ -274,21 +314,72 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Data Sources ─────────────────────────────────── */}
+        {/* ── Not Sure Where to Start ──────────────────────── */}
         <div style={{ marginBottom: 40 }}>
-          <div className="section-label">Data Sources</div>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#fff", marginBottom: 8 }}>Not Sure Where to Start? Search Anything</h2>
+          <p style={{ fontSize: "0.88rem", color: "#888", marginBottom: 16 }}>
+            Type a question, a policy name, a housing issue — HIVE will find what the research says.
+          </p>
+          <a href="/ask-research" style={{ textDecoration: "none", display: "block" }}>
+            <div style={{
+              background: "#1a1a2e",
+              border: "1px solid #2a2a4e",
+              borderRadius: 10,
+              padding: "14px 20px",
+              fontSize: "0.88rem",
+              color: "#555",
+              cursor: "pointer",
+              transition: "border-color 0.2s",
+            }}>
+              e.g. What does the research say about social housing waitlists in Victoria?
+            </div>
+          </a>
+        </div>
+
+        {/* ── What Data Powers HIVE ────────────────────────── */}
+        <div style={{ marginBottom: 36 }}>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: 800, color: "#fff", marginBottom: 8 }}>What Data Powers HIVE</h2>
+          <p style={{ fontSize: "0.88rem", color: "#888", marginBottom: 20 }}>
+            Every answer HIVE gives is grounded in real publications from these sources. Nothing is made up. Every claim can be traced to a specific report.
+          </p>
+
+          {/* Stats row */}
+          <div className="hive-card" style={{ marginBottom: 20, background: "linear-gradient(135deg, #1a1a2e, #0f0f1a)" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 24, textAlign: "center" }}>
+              <div>
+                <div className="stat-highlight">683</div>
+                <div className="stat-label">Reports Indexed</div>
+              </div>
+              <div>
+                <div className="stat-highlight">5,059</div>
+                <div className="stat-label">Searchable Chunks</div>
+              </div>
+              <div>
+                <div className="stat-highlight">8</div>
+                <div className="stat-label">Data Sources</div>
+              </div>
+              <div>
+                <div className="stat-highlight">15+</div>
+                <div className="stat-label">Years of Research</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Source cards */}
           <div className="grid-2">
             {dataSources.map((ds) => (
-              <div key={ds.abbr} className="source-pill">
-                <div style={{ minWidth: 96 }}>
-                  <div style={{ fontWeight: 700, color: "#fff", fontSize: "0.82rem" }}>{ds.abbr}</div>
-                  <span className="badge badge-grey" style={{ fontSize: "0.58rem", marginTop: 3, display: "inline-block" }}>{ds.type}</span>
-                </div>
-                <div style={{ width: 1, height: 32, background: "#2a2a4e", flexShrink: 0 }} />
-                <div style={{ fontSize: "0.78rem", color: "#888", lineHeight: 1.55 }}>{ds.name}</div>
+              <div key={ds.abbr} className="data-source-card" style={{ borderLeftColor: ds.color }}>
+                <div style={{ fontWeight: 700, color: "#fff", fontSize: "0.92rem", marginBottom: 3 }}>{ds.abbr}</div>
+                <div style={{ fontSize: "0.72rem", color: "#666", marginBottom: 10 }}>{ds.subtitle}</div>
+                <div style={{ fontSize: "0.8rem", color: "#aaa", lineHeight: 1.65 }}>{ds.desc}</div>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ── How the data pipeline works ─────────────────── */}
+        <div className="callout-gold" style={{ marginBottom: 40, fontSize: "0.85rem", color: "#ccc", lineHeight: 1.8 }}>
+          <strong style={{ color: "#f6c90e" }}>How the data pipeline works:</strong> HIVE&apos;s crawler automatically downloads PDFs and HTML pages from each source above. Each document is split into ~400-word chunks and embedded using a local AI model. When you search, HIVE finds the most relevant chunks semantically — not just by keyword — then sends them to Claude to synthesise a coherent, cited answer. The pipeline runs on your machine. No data leaves your environment except the Claude API call. Re-run the pipeline at any time from Browse Reports to pick up new publications.
         </div>
 
       </div>
