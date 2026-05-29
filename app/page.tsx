@@ -98,8 +98,8 @@ export default function HomePage() {
         position: "relative",
         backgroundImage: "url(https://images.pexels.com/photos/5103918/pexels-photo-5103918.jpeg?auto=compress&cs=tinysrgb&w=1400)",
         backgroundSize: "cover",
-        backgroundPosition: "center 30%",
-        minHeight: 380,
+        backgroundPosition: "center 25%",
+        minHeight: 520,
         display: "flex",
         alignItems: "center",
       }}>

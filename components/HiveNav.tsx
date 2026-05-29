@@ -46,31 +46,8 @@ export default function HiveNav() {
             Housing Intelligence &amp; Evidence
           </span>
         </div>
-        {/* Right side */}
+        {/* Right side — clean, no personal branding */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.78rem", color: "#888" }}>
-          <span>Housing Data Lead | Sunny Kim</span>
-          <a
-            href="https://www.linkedin.com/in/sunny-kim"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 28,
-              height: 28,
-              borderRadius: 6,
-              background: "#1a1a2e",
-              border: "1px solid #2a2a4e",
-              color: "#0e76a8",
-              textDecoration: "none",
-              fontSize: "0.9rem",
-              fontWeight: 700,
-            }}
-          >
-            in
-          </a>
         </div>
       </div>
 

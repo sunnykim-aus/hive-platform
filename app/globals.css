@@ -193,19 +193,19 @@ body {
 /* ── Badge / pill ── */
 .badge {
   display: inline-block;
-  padding: 3px 10px;
+  padding: 5px 14px;
   border-radius: 20px;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
-.badge-gold { background: rgba(246,201,14,0.15); color: #f6c90e; border: 1px solid rgba(246,201,14,0.3); }
+.badge-gold { background: rgba(246,201,14,0.15); color: #f6c90e; border: 1px solid rgba(246,201,14,0.4); }
 .badge-green { background: rgba(39,174,96,0.15); color: #27ae60; border: 1px solid rgba(39,174,96,0.3); }
 .badge-red { background: rgba(231,76,60,0.15); color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
 .badge-blue { background: rgba(52,152,219,0.15); color: #3498db; border: 1px solid rgba(52,152,219,0.3); }
-.badge-grey { background: rgba(255,255,255,0.08); color: #888; border: 1px solid rgba(255,255,255,0.12); }
+.badge-grey { background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.18); }
 
 /* ── Divider ── */
 .hive-divider {
