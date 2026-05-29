@@ -25,14 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               , Housing Data Lead
             </div>
             <p style={{ fontSize: "0.72rem", color: "#555", lineHeight: 1.8, marginBottom: 10 }}>
-              All analysis, data synthesis, and visualisations produced by this platform are sourced from publicly available government and research publications — including the Australian Bureau of Statistics, AIHW, AHURI, Housing Australia, Treasury, and the Productivity Commission. When using findings from HIVE, please cite the underlying source directly (e.g. <em>&quot;ABS Building Approvals, Cat. 8731.0&quot;</em> or <em>&quot;AIHW SHS Annual Report 2023–24&quot;</em>) rather than the platform itself.
+              HIVE synthesises publicly available research and government data — including ABS, AIHW, AHURI, Housing Australia, Treasury, and the Productivity Commission — into a single intelligence platform for the Australian housing sector. Analysis, visualisations, and synthesis produced by HIVE may be used in subscriber reports, submissions, briefings, and presentations. Where citing specific statistics, we recommend referencing the underlying source alongside HIVE (e.g. <em>&quot;Source: ABS Cat. 8731.0, via HIVE Intelligence&quot;</em>).
             </p>
             <p style={{ fontSize: "0.72rem", color: "#555", lineHeight: 1.8 }}>
-              Content from this platform is intended to support evidence-based decision-making within the community housing sector. If you are considering sharing or publishing any analysis externally — including in reports, media, grant applications, or public submissions — please reach out to{" "}
+              HIVE is a subscription platform. Access is licensed to individual subscribers and organisations. Redistribution of platform outputs or data exports outside your organisation requires written permission. For licensing enquiries, partnerships, or custom research, contact{" "}
               <a href="https://www.linkedin.com/in/sunny-kim-58a780100/" target="_blank" rel="noopener noreferrer" style={{ color: "#f6c90e", textDecoration: "none", fontWeight: 700 }}>
                 Sunny Kim
-              </a>{" "}
-              before doing so, to ensure accuracy, appropriate context, and correct attribution.
+              </a>.
             </p>
           </div>
         </footer>
