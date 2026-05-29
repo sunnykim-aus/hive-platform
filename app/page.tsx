@@ -107,34 +107,26 @@ export default function HomePage() {
           position: "absolute", inset: 0,
           background: "linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(20,12,5,0.72) 50%, rgba(10,10,20,0.90) 100%)",
         }} />
-        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "64px 28px" }}>
-          <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
-            <span className="badge badge-gold">Live Data</span>
-            <span className="badge badge-grey">681 Reports Indexed</span>
-            <span className="badge badge-grey">AI Synthesis</span>
-            <span className="badge badge-grey">Open to Housing Sector</span>
-            <span className="badge badge-grey">Updated Monthly</span>
-          </div>
+        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "56px 48px 48px 48px" }}>
           <h1 style={{
             fontSize: "clamp(2rem, 5vw, 3.2em)",
             fontWeight: 900,
             color: "#fff",
-            marginBottom: 18,
-            lineHeight: 1.12,
-            letterSpacing: "-0.5px",
+            marginBottom: 10,
+            lineHeight: 1.05,
+            letterSpacing: "-1.5px",
           }}>
             Housing Intelligence<br />&amp; Evidence
           </h1>
-          <p style={{ fontSize: "1rem", color: "#bbb", maxWidth: 580, lineHeight: 1.75, marginBottom: 28 }}>
-            Australia&apos;s housing crisis in numbers. Real-time data synthesis across 681 research reports, live government datasets, and 20 years of policy evidence — built for the housing sector.
+          <p style={{ fontSize: "1rem", color: "#c0c0c0", maxWidth: 640, lineHeight: 1.8, marginBottom: 28 }}>
+            681 indexed reports. Live government data. 10 years of population history. AI-powered synthesis. Built for the people making the case for community housing investment in Australia.
           </p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-            <a href="/ask-research" className="hive-btn" style={{ padding: "12px 26px", fontSize: "0.88rem", borderRadius: 10, display: "inline-block", textDecoration: "none" }}>
-              🔍 Ask Research
-            </a>
-            <a href="/live-dashboard" className="hive-btn-outline" style={{ padding: "12px 26px", fontSize: "0.88rem", borderRadius: 10, display: "inline-block", textDecoration: "none" }}>
-              Live Dashboard →
-            </a>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <span className="badge badge-gold">681 Reports Indexed</span>
+            <span className="badge badge-grey">ABS · AHURI · AIHW · Treasury</span>
+            <span className="badge badge-grey">Population Projections to 2044</span>
+            <span className="badge badge-grey">Construction Cost Crisis</span>
+            <span className="badge badge-grey">AI Synthesis · Word Export</span>
           </div>
         </div>
       </div>
@@ -142,27 +134,36 @@ export default function HomePage() {
       <div className="page-container">
 
         {/* ── Research index status ────────────────────────── */}
-        <div className="hive-card" style={{ marginBottom: 32, background: "linear-gradient(135deg, #1a1a2e, #16213e)" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27ae60", boxShadow: "0 0 6px #27ae60" }} />
-            <span style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: 2, color: "#888", fontWeight: 600 }}>Research Index — Live</span>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
+        <div style={{
+          background: "linear-gradient(135deg, #13131f, #1a1a2e)",
+          border: "1px solid #2a2a4e", borderRadius: 12,
+          padding: "20px 28px", marginBottom: 32,
+        }}>
+          <div style={{ display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" }}>
             <div>
-              <div className="stat-highlight">681</div>
-              <div className="stat-label">Reports Indexed</div>
+              <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.5px", color: "#666", marginBottom: 4 }}>Reports Indexed</div>
+              <div style={{ fontSize: "2em", fontWeight: 800, color: "#fff", lineHeight: 1 }}>683</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", marginTop: 4 }}>AHURI · ABS · AIHW · Treasury</div>
             </div>
+            <div style={{ width: 1, height: 48, background: "#2a2a4e" }} />
             <div>
-              <div className="stat-highlight" style={{ color: "#3498db" }}>5,059</div>
-              <div className="stat-label">Searchable Chunks</div>
+              <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.5px", color: "#666", marginBottom: 4 }}>Searchable Chunks</div>
+              <div style={{ fontSize: "2em", fontWeight: 800, color: "#fff", lineHeight: 1 }}>5,059</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", marginTop: 4 }}>Vector embeddings ready</div>
             </div>
+            <div style={{ width: 1, height: 48, background: "#2a2a4e" }} />
             <div>
-              <div className="stat-highlight" style={{ color: "#27ae60" }}>Active</div>
-              <div className="stat-label">AI Search Status</div>
+              <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.5px", color: "#666", marginBottom: 4 }}>AI Search Status</div>
+              <div style={{ fontSize: "1rem", fontWeight: 700, color: "#27ae60", marginTop: 4 }}>
+                <span style={{ fontSize: "0.7em" }}>●</span> Live &amp; Indexed
+              </div>
+              <div style={{ fontSize: "0.78rem", color: "#888", marginTop: 4 }}>Ready — use Ask Research to query</div>
             </div>
+            <div style={{ width: 1, height: 48, background: "#2a2a4e" }} />
             <div>
-              <div className="stat-highlight" style={{ color: "#888", fontSize: "1.4em" }}>May 2025</div>
-              <div className="stat-label">Last Indexed</div>
+              <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.5px", color: "#666", marginBottom: 4 }}>Last Indexed</div>
+              <div style={{ fontSize: "0.95em", fontWeight: 700, color: "#fff", marginTop: 4 }}>May 2024</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", marginTop: 4 }}>Re-run pipeline to update</div>
             </div>
           </div>
         </div>
