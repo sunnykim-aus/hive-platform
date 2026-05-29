@@ -345,20 +345,29 @@ export default function HomePage() {
         </div>
 
         {/* ── Platform capabilities ────────────────────────── */}
-        <div style={{ marginBottom: 36 }}>
+        <div style={{ marginBottom: 40 }}>
           <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>What HIVE Does</div>
           <div className="grid-4">
             {capabilities.map((cap) => (
               <a key={cap.title} href={cap.href} style={{ textDecoration: "none" }}>
-                <div className="role-card" style={{ height: "100%" }}>
-                  <div style={{ fontWeight: 700, color: "#fff", marginBottom: 8, fontSize: "0.9rem" }}>{cap.title}</div>
-                  <div style={{ fontSize: "0.78rem", color: "#aaa", lineHeight: 1.65, marginBottom: 14 }}>{cap.desc}</div>
+                <div className="role-card" style={{
+                  height: "100%",
+                  borderTop: `3px solid ${cap.navColor}`,
+                  display: "flex",
+                  flexDirection: "column",
+                }}>
+                  <div style={{ fontWeight: 800, color: "#fff", marginBottom: 8, fontSize: "0.95rem" }}>{cap.title}</div>
+                  <div style={{ fontSize: "0.8rem", color: "#aaa", lineHeight: 1.7, marginBottom: 16, flex: 1 }}>{cap.desc}</div>
                   <div>
-                    <span className="badge" style={{
-                      background: `${cap.navColor}22`,
+                    <span style={{
+                      display: "inline-block",
+                      background: `${cap.navColor}20`,
                       color: cap.navColor,
-                      border: `1px solid ${cap.navColor}44`,
-                      fontSize: "0.62rem",
+                      border: `1px solid ${cap.navColor}55`,
+                      borderRadius: 8,
+                      padding: "5px 12px",
+                      fontSize: "0.72rem",
+                      fontWeight: 700,
                     }}>{cap.nav} →</span>
                   </div>
                 </div>
@@ -368,20 +377,30 @@ export default function HomePage() {
         </div>
 
         {/* ── Who Uses HIVE ────────────────────────────────── */}
-        <div style={{ marginBottom: 36 }}>
+        <div style={{ marginBottom: 40 }}>
           <div style={{ fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.3px", marginBottom: 16 }}>Who Uses HIVE</div>
           <div className="grid-3">
             {userRoles.map((r) => (
               <div key={r.role} className="role-card">
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
-                  <span style={{ fontSize: "1.4rem" }}>{r.icon}</span>
-                  <span className="role-title">{r.role}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
+                  <span style={{ fontSize: "1.8rem", lineHeight: 1 }}>{r.icon}</span>
+                  <span style={{ fontWeight: 800, color: "#f6c90e", fontSize: "0.95rem" }}>{r.role}</span>
                 </div>
-                <div style={{ fontSize: "0.8rem", color: "#aaa", lineHeight: 1.65, marginBottom: 12 }}>{r.desc}</div>
+                <div style={{ fontSize: "0.82rem", color: "#aaa", lineHeight: 1.7, marginBottom: 14 }}>{r.desc}</div>
                 <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
                   {r.pills.map((pill) => (
                     <a key={pill} href={pillHrefMap[pill] ?? "#"} style={{ textDecoration: "none" }}>
-                      <span className="badge badge-grey" style={{ fontSize: "0.62rem", cursor: "pointer" }}>{pill}</span>
+                      <span style={{
+                        display: "inline-block",
+                        background: "rgba(255,255,255,0.06)",
+                        border: "1px solid rgba(255,255,255,0.14)",
+                        borderRadius: 6,
+                        padding: "3px 10px",
+                        fontSize: "0.72rem",
+                        color: "#ccc",
+                        fontWeight: 500,
+                        cursor: "pointer",
+                      }}>{pill}</span>
                     </a>
                   ))}
                 </div>
@@ -453,10 +472,6 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── How the data pipeline works ─────────────────── */}
-        <div className="callout-gold" style={{ marginBottom: 40, fontSize: "0.85rem", color: "#ccc", lineHeight: 1.8 }}>
-          <strong style={{ color: "#f6c90e" }}>How the data pipeline works:</strong> HIVE&apos;s crawler automatically downloads PDFs and HTML pages from each source above. Each document is split into ~400-word chunks and embedded using a local AI model. When you search, HIVE finds the most relevant chunks semantically — not just by keyword — then sends them to Claude to synthesise a coherent, cited answer. The pipeline runs on your machine. No data leaves your environment except the Claude API call. Re-run the pipeline at any time from Browse Reports to pick up new publications.
-        </div>
 
       </div>
     </div>
