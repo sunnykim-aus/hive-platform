@@ -21,8 +21,14 @@ export default function HiveNav() {
   const pathname = usePathname()
 
   return (
-    <nav style={{ background: "#0f0f1a", borderBottom: "1px solid #2a2a4e" }}>
-      {/* Top bar */}
+    <nav style={{
+      background: "#0d0d1a",
+      borderBottom: "1px solid #252540",
+      position: "sticky",
+      top: 0,
+      zIndex: 100,
+    }}>
+      {/* ── Brand bar ── */}
       <div style={{
         maxWidth: 1400,
         margin: "0 auto",
@@ -33,33 +39,74 @@ export default function HiveNav() {
         flexWrap: "wrap",
         gap: 10,
       }}>
-        {/* Brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: "1.4em", lineHeight: 1 }}>🐝</span>
-            <span style={{ fontSize: "1.15em", fontWeight: 900, color: "#f6c90e", letterSpacing: "1.5px", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "1.35em", lineHeight: 1 }}>🐝</span>
+            <span style={{
+              fontSize: "1.15em",
+              fontWeight: 900,
+              color: "#f6c90e",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+            }}>
               HIVE
             </span>
           </div>
-          <span style={{ color: "#2a2a4e", fontSize: "1.2em" }}>|</span>
-          <span style={{ fontSize: "0.82rem", color: "#aaa", fontWeight: 400 }}>
+          <span style={{ color: "#333355", fontSize: "1.1em", fontWeight: 300 }}>|</span>
+          <span style={{ fontSize: "0.8rem", color: "#888", fontWeight: 400 }}>
             Housing Intelligence &amp; Evidence
           </span>
         </div>
-        {/* Right side — clean, no personal branding */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.78rem", color: "#888" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.75rem", color: "#666" }}>
+          <span style={{
+            background: "rgba(39,174,96,0.12)",
+            border: "1px solid rgba(39,174,96,0.3)",
+            borderRadius: 20,
+            padding: "3px 10px",
+            color: "#27ae60",
+            fontSize: "0.7rem",
+            fontWeight: 600,
+          }}>
+            ● Live
+          </span>
+          <a
+            href="https://www.linkedin.com/in/sunny-kim"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 26,
+              height: 26,
+              borderRadius: 6,
+              background: "#1a1a2e",
+              border: "1px solid #2a2a4e",
+              color: "#0e76a8",
+              textDecoration: "none",
+              fontSize: "0.82rem",
+              fontWeight: 800,
+            }}
+          >
+            in
+          </a>
         </div>
       </div>
 
-      {/* Pill nav */}
-      <div style={{ borderTop: "1px solid #1a1a2e", overflowX: "auto", paddingBottom: 8 }}>
+      {/* ── Pill nav ── */}
+      <div style={{
+        borderTop: "1px solid #1a1a30",
+        overflowX: "auto",
+        scrollbarWidth: "none",
+      }}>
         <div style={{
           maxWidth: 1400,
           margin: "0 auto",
-          padding: "6px 16px 0",
+          padding: "8px 20px 10px",
           display: "flex",
-          gap: 4,
+          gap: 6,
           whiteSpace: "nowrap",
+          alignItems: "center",
         }}>
           {PAGES.map((page) => {
             const isActive = pathname === page.href || (page.href !== "/" && pathname.startsWith(page.href))
@@ -70,14 +117,15 @@ export default function HiveNav() {
                 style={{
                   display: "inline-block",
                   padding: "6px 16px",
-                  fontSize: "0.88rem",
+                  fontSize: "0.82rem",
                   fontWeight: isActive ? 700 : 500,
-                  color: isActive ? "#fff" : "#aaa",
-                  border: `1px solid ${isActive ? "rgba(246,201,14,0.5)" : "#2a2a4e"}`,
+                  color: isActive ? "#0d0d1a" : "#b0b0c8",
+                  border: `1px solid ${isActive ? "#f6c90e" : "#2a2a45"}`,
                   borderRadius: 20,
                   textDecoration: "none",
-                  background: isActive ? "rgba(246,201,14,0.1)" : "transparent",
+                  background: isActive ? "#f6c90e" : "rgba(255,255,255,0.04)",
                   transition: "all 0.15s",
+                  letterSpacing: isActive ? "0.1px" : "0",
                 }}
               >
                 {page.label}
