@@ -40,20 +40,20 @@ export default function HiveNav() {
         gap: 10,
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: "1.35em", lineHeight: 1 }}>🐝</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <span style={{ fontSize: "1.7em", lineHeight: 1 }}>🐝</span>
             <span style={{
-              fontSize: "1.15em",
+              fontSize: "1.45em",
               fontWeight: 900,
               color: "#f6c90e",
-              letterSpacing: "2px",
+              letterSpacing: "2.5px",
               textTransform: "uppercase",
             }}>
               HIVE
             </span>
           </div>
-          <span style={{ color: "#333355", fontSize: "1.1em", fontWeight: 300 }}>|</span>
-          <span style={{ fontSize: "0.8rem", color: "#888", fontWeight: 400 }}>
+          <span style={{ color: "#333355", fontSize: "1.2em", fontWeight: 300 }}>|</span>
+          <span style={{ fontSize: "0.92rem", color: "#aaa", fontWeight: 500 }}>
             Housing Intelligence &amp; Evidence
           </span>
         </div>
