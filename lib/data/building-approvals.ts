@@ -1,7 +1,7 @@
 /**
  * Monthly building approvals data (ABS Cat. 8731.0)
- * Approximate values — updated via monthly pipeline
- * Values peak around 2021 (HomeBuilder) ~20k/month, then dip to ~14-15k by 2023-24
+ * Live data pulled from ABS — last updated from cache: 2026-03-01
+ * Source: ABS Building Approvals, Table 8731009 (Australia total)
  */
 
 export interface BuildingApprovalsRecord {
@@ -12,71 +12,72 @@ export interface BuildingApprovalsRecord {
 }
 
 export const BUILDING_APPROVALS: BuildingApprovalsRecord[] = [
-  // 2020 — COVID begins, slight dip then HomeBuilder surge
-  { date: "2020-01-01", total_aus: 15842, houses_aus: 8620, other_aus: 7222 },
-  { date: "2020-02-01", total_aus: 14980, houses_aus: 8100, other_aus: 6880 },
-  { date: "2020-03-01", total_aus: 13420, houses_aus: 7800, other_aus: 5620 },
-  { date: "2020-04-01", total_aus: 11250, houses_aus: 6900, other_aus: 4350 },
-  { date: "2020-05-01", total_aus: 12180, houses_aus: 7200, other_aus: 4980 },
-  { date: "2020-06-01", total_aus: 14800, houses_aus: 8600, other_aus: 6200 }, // HomeBuilder launches
-  { date: "2020-07-01", total_aus: 15900, houses_aus: 9200, other_aus: 6700 },
-  { date: "2020-08-01", total_aus: 16800, houses_aus: 9800, other_aus: 7000 },
-  { date: "2020-09-01", total_aus: 17200, houses_aus: 10200, other_aus: 7000 },
-  { date: "2020-10-01", total_aus: 17800, houses_aus: 10600, other_aus: 7200 },
-  { date: "2020-11-01", total_aus: 18200, houses_aus: 11200, other_aus: 7000 },
-  { date: "2020-12-01", total_aus: 18900, houses_aus: 11800, other_aus: 7100 },
-  // 2021 — HomeBuilder peak, strong demand
-  { date: "2021-01-01", total_aus: 19800, houses_aus: 12600, other_aus: 7200 },
-  { date: "2021-02-01", total_aus: 20200, houses_aus: 13100, other_aus: 7100 },
-  { date: "2021-03-01", total_aus: 20800, houses_aus: 13400, other_aus: 7400 }, // Peak
-  { date: "2021-04-01", total_aus: 20100, houses_aus: 13000, other_aus: 7100 },
-  { date: "2021-05-01", total_aus: 19600, houses_aus: 12800, other_aus: 6800 },
-  { date: "2021-06-01", total_aus: 18900, houses_aus: 12200, other_aus: 6700 },
-  { date: "2021-07-01", total_aus: 18400, houses_aus: 11900, other_aus: 6500 },
-  { date: "2021-08-01", total_aus: 17800, houses_aus: 11400, other_aus: 6400 },
-  { date: "2021-09-01", total_aus: 17200, houses_aus: 11000, other_aus: 6200 },
-  { date: "2021-10-01", total_aus: 16800, houses_aus: 10600, other_aus: 6200 },
-  { date: "2021-11-01", total_aus: 16400, houses_aus: 10300, other_aus: 6100 },
-  { date: "2021-12-01", total_aus: 16200, houses_aus: 10100, other_aus: 6100 },
-  // 2022 — Cost inflation bites, approvals declining
-  { date: "2022-01-01", total_aus: 16000, houses_aus: 9900, other_aus: 6100 },
-  { date: "2022-02-01", total_aus: 15800, houses_aus: 9700, other_aus: 6100 },
-  { date: "2022-03-01", total_aus: 15600, houses_aus: 9500, other_aus: 6100 },
-  { date: "2022-04-01", total_aus: 15400, houses_aus: 9300, other_aus: 6100 },
-  { date: "2022-05-01", total_aus: 15200, houses_aus: 9100, other_aus: 6100 },
-  { date: "2022-06-01", total_aus: 14900, houses_aus: 8900, other_aus: 6000 },
-  { date: "2022-07-01", total_aus: 14700, houses_aus: 8700, other_aus: 6000 },
-  { date: "2022-08-01", total_aus: 14500, houses_aus: 8600, other_aus: 5900 },
-  { date: "2022-09-01", total_aus: 14400, houses_aus: 8500, other_aus: 5900 },
-  { date: "2022-10-01", total_aus: 14300, houses_aus: 8400, other_aus: 5900 },
-  { date: "2022-11-01", total_aus: 14200, houses_aus: 8300, other_aus: 5900 },
-  { date: "2022-12-01", total_aus: 14100, houses_aus: 8200, other_aus: 5900 },
+  // 2021 — HomeBuilder peak
+  { date: "2021-04-01", total_aus: 21179, houses_aus: 13882, other_aus: 7297 },
+  { date: "2021-05-01", total_aus: 21227, houses_aus: 14003, other_aus: 7224 },
+  { date: "2021-06-01", total_aus: 20191, houses_aus: 13406, other_aus: 6785 },
+  { date: "2021-07-01", total_aus: 19426, houses_aus: 12816, other_aus: 6610 },
+  { date: "2021-08-01", total_aus: 19498, houses_aus: 12570, other_aus: 6928 },
+  { date: "2021-09-01", total_aus: 19584, houses_aus: 11192, other_aus: 8392 },
+  { date: "2021-10-01", total_aus: 16358, houses_aus: 10852, other_aus: 5506 },
+  { date: "2021-11-01", total_aus: 17490, houses_aus: 11511, other_aus: 5979 },
+  { date: "2021-12-01", total_aus: 16318, houses_aus: 9254, other_aus: 7064 },
+  // 2022 — Cost inflation bites
+  { date: "2022-01-01", total_aus: 10196, houses_aus: 6535, other_aus: 3661 },
+  { date: "2022-02-01", total_aus: 18070, houses_aus: 9928, other_aus: 8142 },
+  { date: "2022-03-01", total_aus: 16481, houses_aus: 11115, other_aus: 5366 },
+  { date: "2022-04-01", total_aus: 14680, houses_aus: 8644, other_aus: 6036 },
+  { date: "2022-05-01", total_aus: 17284, houses_aus: 10201, other_aus: 7083 },
+  { date: "2022-06-01", total_aus: 16865, houses_aus: 10182, other_aus: 6683 },
+  { date: "2022-07-01", total_aus: 14414, houses_aus: 9981, other_aus: 4433 },
+  { date: "2022-08-01", total_aus: 18433, houses_aus: 11087, other_aus: 7346 },
+  { date: "2022-09-01", total_aus: 17502, houses_aus: 9775, other_aus: 7727 },
+  { date: "2022-10-01", total_aus: 15424, houses_aus: 9531, other_aus: 5893 },
+  { date: "2022-11-01", total_aus: 16470, houses_aus: 10214, other_aus: 6256 },
+  { date: "2022-12-01", total_aus: 15845, houses_aus: 7739, other_aus: 8106 },
   // 2023 — Continued weakness
-  { date: "2023-01-01", total_aus: 14100, houses_aus: 8200, other_aus: 5900 },
-  { date: "2023-02-01", total_aus: 14000, houses_aus: 8100, other_aus: 5900 },
-  { date: "2023-03-01", total_aus: 13800, houses_aus: 8000, other_aus: 5800 },
-  { date: "2023-04-01", total_aus: 13700, houses_aus: 7900, other_aus: 5800 },
-  { date: "2023-05-01", total_aus: 13600, houses_aus: 7800, other_aus: 5800 },
-  { date: "2023-06-01", total_aus: 13500, houses_aus: 7700, other_aus: 5800 },
-  { date: "2023-07-01", total_aus: 13400, houses_aus: 7600, other_aus: 5800 },
-  { date: "2023-08-01", total_aus: 13500, houses_aus: 7700, other_aus: 5800 },
-  { date: "2023-09-01", total_aus: 13600, houses_aus: 7800, other_aus: 5800 },
-  { date: "2023-10-01", total_aus: 13700, houses_aus: 7900, other_aus: 5800 },
-  { date: "2023-11-01", total_aus: 13800, houses_aus: 8000, other_aus: 5800 },
-  { date: "2023-12-01", total_aus: 14000, houses_aus: 8100, other_aus: 5900 },
+  { date: "2023-01-01", total_aus: 9805, houses_aus: 5985, other_aus: 3820 },
+  { date: "2023-02-01", total_aus: 13232, houses_aus: 8750, other_aus: 4482 },
+  { date: "2023-03-01", total_aus: 14534, houses_aus: 9584, other_aus: 4950 },
+  { date: "2023-04-01", total_aus: 11610, houses_aus: 7021, other_aus: 4589 },
+  { date: "2023-05-01", total_aus: 16786, houses_aus: 9021, other_aus: 7765 },
+  { date: "2023-06-01", total_aus: 13902, houses_aus: 8553, other_aus: 5349 },
+  { date: "2023-07-01", total_aus: 12938, houses_aus: 8263, other_aus: 4675 },
+  { date: "2023-08-01", total_aus: 14530, houses_aus: 9736, other_aus: 4794 },
+  { date: "2023-09-01", total_aus: 13967, houses_aus: 8659, other_aus: 5308 },
+  { date: "2023-10-01", total_aus: 15130, houses_aus: 9468, other_aus: 5662 },
+  { date: "2023-11-01", total_aus: 15825, houses_aus: 9688, other_aus: 6137 },
+  { date: "2023-12-01", total_aus: 12073, houses_aus: 7634, other_aus: 4439 },
   // 2024 — Slow recovery
-  { date: "2024-01-01", total_aus: 14100, houses_aus: 8200, other_aus: 5900 },
-  { date: "2024-02-01", total_aus: 14200, houses_aus: 8300, other_aus: 5900 },
-  { date: "2024-03-01", total_aus: 14300, houses_aus: 8400, other_aus: 5900 },
-  { date: "2024-04-01", total_aus: 14400, houses_aus: 8500, other_aus: 5900 },
-  { date: "2024-05-01", total_aus: 14500, houses_aus: 8500, other_aus: 6000 },
-  { date: "2024-06-01", total_aus: 14600, houses_aus: 8600, other_aus: 6000 },
-  { date: "2024-07-01", total_aus: 14700, houses_aus: 8700, other_aus: 6000 },
-  { date: "2024-08-01", total_aus: 14800, houses_aus: 8800, other_aus: 6000 },
-  { date: "2024-09-01", total_aus: 14900, houses_aus: 8900, other_aus: 6000 },
-  { date: "2024-10-01", total_aus: 15000, houses_aus: 9000, other_aus: 6000 },
-  { date: "2024-11-01", total_aus: 15100, houses_aus: 9100, other_aus: 6000 },
-  { date: "2024-12-01", total_aus: 15200, houses_aus: 9200, other_aus: 6000 },
+  { date: "2024-01-01", total_aus: 11055, houses_aus: 6200, other_aus: 4855 },
+  { date: "2024-02-01", total_aus: 13432, houses_aus: 9088, other_aus: 4344 },
+  { date: "2024-03-01", total_aus: 13059, houses_aus: 9096, other_aus: 3963 },
+  { date: "2024-04-01", total_aus: 13630, houses_aus: 8793, other_aus: 4837 },
+  { date: "2024-05-01", total_aus: 15949, houses_aus: 10125, other_aus: 5824 },
+  { date: "2024-06-01", total_aus: 12661, houses_aus: 9006, other_aus: 3655 },
+  { date: "2024-07-01", total_aus: 16590, houses_aus: 10520, other_aus: 6070 },
+  { date: "2024-08-01", total_aus: 14858, houses_aus: 10224, other_aus: 4634 },
+  { date: "2024-09-01", total_aus: 14932, houses_aus: 9760, other_aus: 5172 },
+  { date: "2024-10-01", total_aus: 17931, houses_aus: 10471, other_aus: 7460 },
+  { date: "2024-11-01", total_aus: 15916, houses_aus: 10105, other_aus: 5811 },
+  { date: "2024-12-01", total_aus: 14321, houses_aus: 7830, other_aus: 6491 },
+  // 2025
+  { date: "2025-01-01", total_aus: 13272, houses_aus: 6757, other_aus: 6515 },
+  { date: "2025-02-01", total_aus: 16257, houses_aus: 9395, other_aus: 6862 },
+  { date: "2025-03-01", total_aus: 15735, houses_aus: 9483, other_aus: 6252 },
+  { date: "2025-04-01", total_aus: 14592, houses_aus: 8765, other_aus: 5827 },
+  { date: "2025-05-01", total_aus: 16759, houses_aus: 9994, other_aus: 6765 },
+  { date: "2025-06-01", total_aus: 16499, houses_aus: 9114, other_aus: 7385 },
+  { date: "2025-07-01", total_aus: 18095, houses_aus: 10596, other_aus: 7499 },
+  { date: "2025-08-01", total_aus: 15311, houses_aus: 9665, other_aus: 5646 },
+  { date: "2025-09-01", total_aus: 18512, houses_aus: 10115, other_aus: 8397 },
+  { date: "2025-10-01", total_aus: 17421, houses_aus: 10715, other_aus: 6706 },
+  { date: "2025-11-01", total_aus: 18541, houses_aus: 9950, other_aus: 8591 },
+  { date: "2025-12-01", total_aus: 15139, houses_aus: 8828, other_aus: 6311 },
+  // 2026
+  { date: "2026-01-01", total_aus: 10637, houses_aus: 7024, other_aus: 3613 },
+  { date: "2026-02-01", total_aus: 18685, houses_aus: 10238, other_aus: 8447 },
+  { date: "2026-03-01", total_aus: 17780, houses_aus: 10935, other_aus: 6845 },
 ]
 
 export interface BuildingApprovalsSummary {
@@ -91,12 +92,19 @@ export interface BuildingApprovalsSummary {
 
 export function getBuildingApprovalsSummary(): BuildingApprovalsSummary {
   const latest = BUILDING_APPROVALS[BUILDING_APPROVALS.length - 1]
-  const twelveMonthsAgo = BUILDING_APPROVALS[BUILDING_APPROVALS.length - 13]
-  const annual_run_rate = latest.total_aus * 12
+  // Use 3-month average × 12 — matches Streamlit fetch_housing_indicators() method
+  const last3 = BUILDING_APPROVALS.slice(-3)
+  const avg3m = last3.reduce((sum, r) => sum + r.total_aus, 0) / 3
+  const annual_run_rate = Math.round(avg3m * 12)
   const accord_target = 240000
   const gap_to_target = accord_target - annual_run_rate
   const pct_of_target = Math.round((annual_run_rate / accord_target) * 100)
-  const yoy_change_pct = Math.round(((latest.total_aus - twelveMonthsAgo.total_aus) / twelveMonthsAgo.total_aus) * 100 * 10) / 10
+
+  // YoY: compare latest month to same month last year (12 records back)
+  const twelveMonthsAgo = BUILDING_APPROVALS[BUILDING_APPROVALS.length - 13]
+  const yoy_change_pct = Math.round(
+    ((latest.total_aus - twelveMonthsAgo.total_aus) / twelveMonthsAgo.total_aus) * 100 * 10
+  ) / 10
 
   return {
     latest_monthly: latest.total_aus,

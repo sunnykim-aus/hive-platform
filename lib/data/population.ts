@@ -249,5 +249,6 @@ export const POLICY_ADVOCACY: PolicyAdvocacy[] = [
 ]
 
 export const ACCORD_TARGET = 240000
-export const CURRENT_ANNUAL_APPROVALS = 163000
+// 3-month average × 12, from ABS cache to Mar 2026 — matches Streamlit fetch_housing_indicators()
+export const CURRENT_ANNUAL_APPROVALS = 188408
 export const CURRENT_DWELLING_STOCK_M = 11.2
