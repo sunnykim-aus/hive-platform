@@ -175,24 +175,24 @@ export default function HomePage() {
           <div className="section-label">Why This Exists</div>
           <div className="grid-3">
             <div className="hive-card">
-              <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>🔴</div>
+              <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>📋</div>
               <div style={{ fontWeight: 700, color: "#fff", marginBottom: 8, fontSize: "0.95rem" }}>The Problem</div>
               <div style={{ fontSize: "0.82rem", color: "#aaa", lineHeight: 1.75 }}>
-                Australia is building <strong style={{ color: "#e74c3c" }}>26% fewer homes</strong> than needed. {shs.total_clients.toLocaleString()} people sought crisis housing support last year. The waitlist across NSW, VIC, QLD, WA, and SA exceeds 203,500 households.
+                Every week, sector professionals need evidence fast — for submissions, board papers, grant applications. The answers exist. Finding them takes days.
               </div>
             </div>
             <div className="hive-card">
               <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>📚</div>
               <div style={{ fontWeight: 700, color: "#fff", marginBottom: 8, fontSize: "0.95rem" }}>The Evidence Base</div>
               <div style={{ fontSize: "0.82rem", color: "#aaa", lineHeight: 1.75 }}>
-                There are <strong style={{ color: "#f6c90e" }}>681 research reports</strong> from AHURI, AIHW, ABS, Housing Australia, state authorities, and academic institutions. Most practitioners don&apos;t have time to read them.
+                681 reports across AHURI, ABS, AIHW, Treasury and state housing registers — synthesised and searchable in seconds.
               </div>
             </div>
             <div className="hive-card">
-              <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>🐝</div>
+              <div style={{ fontSize: "1.5rem", marginBottom: 8 }}>⚡</div>
               <div style={{ fontWeight: 700, color: "#fff", marginBottom: 8, fontSize: "0.95rem" }}>The Solution</div>
               <div style={{ fontSize: "0.82rem", color: "#aaa", lineHeight: 1.75 }}>
-                HIVE synthesises that evidence base instantly. Ask any question about Australian housing — get a <strong style={{ color: "#f6c90e" }}>sourced answer</strong> drawn from the research, not hallucinated by AI.
+                HIVE connects the evidence base to live data and AI synthesis — collapsing the time between question and answer from days to minutes.
               </div>
             </div>
           </div>
@@ -202,72 +202,85 @@ export default function HomePage() {
         <div className="insight-box" style={{ marginBottom: 36 }}>
           <div style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
             <div style={{
-              width: 40, height: 40, borderRadius: "50%",
-              background: "linear-gradient(135deg, #f6c90e, #e0a800)",
+              width: 32, height: 32, borderRadius: "50%",
+              background: "#f6c90e",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontSize: "0.9rem", fontWeight: 800, color: "#0f0f1a", flexShrink: 0,
+              fontSize: "0.7rem", fontWeight: 800, color: "#0f0f1a", flexShrink: 0,
             }}>
               SK
             </div>
             <div>
-              <p style={{ fontSize: "0.88rem", color: "#ccc", lineHeight: 1.8, fontStyle: "italic", marginBottom: 8 }}>
+              <p style={{ fontSize: "0.95rem", color: "#d0d0d0", lineHeight: 1.9, fontStyle: "italic", marginBottom: 16 }}>
                 &ldquo;Housing policy decisions are made with incomplete information. HIVE exists to close that gap — making 20 years of research and live data accessible to everyone working on the housing crisis, not just those with the time to read hundreds of reports.&rdquo;
               </p>
-              <div style={{ fontSize: "0.72rem", color: "#f6c90e", fontWeight: 600 }}>Sunny Kim · Housing Data Lead</div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: "0.88rem", color: "#f6c90e", fontWeight: 700 }}>Sunny Kim</span>
+                <span style={{ color: "#444" }}>·</span>
+                <span style={{ fontSize: "0.82rem", color: "#888" }}>Housing Data Lead · Community Housing Professional, Australia</span>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ── Platform stats bar ───────────────────────────── */}
-        <div className="hive-card" style={{ marginBottom: 36, background: "linear-gradient(135deg, #1a1a2e, #0f0f1a)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24, textAlign: "center" }}>
-            <div>
-              <div className="stat-highlight">12</div>
-              <div className="stat-label">Platform Modules</div>
+        <div style={{
+          background: "linear-gradient(135deg, #1a1a2e, #0f0f1a)",
+          border: "1px solid #2a2a4e", borderRadius: 12,
+          padding: "20px 28px", marginBottom: 36,
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          flexWrap: "wrap", gap: 0,
+        }}>
+          {[
+            { value: "12", label: "Platform Modules", color: "#f6c90e" },
+            { value: "681+", label: "Reports Indexed", color: "#fff" },
+            { value: "10 yrs", label: "Population History", color: "#fff" },
+            { value: "+58%", label: "Construction Cost Rise", color: "#e74c3c" },
+            { value: "2044", label: "Projections To", color: "#fff" },
+          ].map((stat, i) => (
+            <div key={stat.label} style={{ display: "flex", alignItems: "stretch", flex: 1 }}>
+              {i > 0 && <div style={{ width: 1, background: "#2a2a4e", margin: "0 0", alignSelf: "stretch" }} />}
+              <div style={{ flex: 1, textAlign: "center", padding: "8px 16px" }}>
+                <div style={{ fontSize: "1.6em", fontWeight: 800, color: stat.color, lineHeight: 1 }}>{stat.value}</div>
+                <div style={{ fontSize: "0.72rem", textTransform: "uppercase", letterSpacing: "1px", color: "#666", marginTop: 6 }}>{stat.label}</div>
+              </div>
             </div>
-            <div>
-              <div className="stat-highlight">681+</div>
-              <div className="stat-label">Reports Indexed</div>
-            </div>
-            <div>
-              <div className="stat-highlight">10 yrs</div>
-              <div className="stat-label">Population History</div>
-            </div>
-            <div>
-              <div className="stat-highlight" style={{ color: "#e74c3c" }}>+58%</div>
-              <div className="stat-label">Construction Cost Rise</div>
-            </div>
-            <div>
-              <div className="stat-highlight">2044</div>
-              <div className="stat-label">Projections To</div>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* ── The Housing Crisis in Numbers ───────────────── */}
         <div style={{ marginBottom: 36 }}>
-          <div className="section-label">The Housing Crisis in Numbers</div>
-          <div className="grid-4">
+          <div className="section-label">The Housing Crisis in Numbers — Right Now</div>
+          <div className="grid-4" style={{ marginBottom: 20 }}>
             <div className="kpi-card">
-              <div className="kpi-label">Annual Build Rate</div>
-              <div className="kpi-value" style={{ color: "#e74c3c" }}>{(approvals.annual_run_rate / 1000).toFixed(0)}k</div>
-              <div className="kpi-delta">{approvals.pct_of_target}% of 240k Accord target</div>
+              <div className="kpi-label">Dwellings Built Per Year</div>
+              <div className="kpi-value" style={{ color: "#f6c90e" }}>{approvals.annual_run_rate.toLocaleString()}</div>
+              <div className="kpi-delta" style={{ color: "#e74c3c" }}>{approvals.pct_of_target}% of the 240,000 National Accord target</div>
             </div>
             <div className="kpi-card">
               <div className="kpi-label">Annual Supply Shortfall</div>
-              <div className="kpi-value" style={{ color: "#e74c3c" }}>{(approvals.gap_to_target / 1000).toFixed(0)}k</div>
-              <div className="kpi-delta">Dwellings/year below target</div>
+              <div className="kpi-value" style={{ color: "#f39c12" }}>{approvals.gap_to_target.toLocaleString()}</div>
+              <div className="kpi-delta">Dwellings per year below what Australia needs</div>
             </div>
             <div className="kpi-card">
-              <div className="kpi-label">SHS Clients {shs.latest_year}</div>
-              <div className="kpi-value" style={{ color: "#f39c12" }}>{(shs.total_clients / 1000).toFixed(0)}k</div>
-              <div className="kpi-delta">{shs.client_change_yoy > 0 ? "+" : ""}{shs.client_change_yoy}% YoY</div>
+              <div className="kpi-label">Unmet Housing Requests (2023–24)</div>
+              <div className="kpi-value" style={{ color: "#f39c12" }}>{shs.unassisted_requests.toLocaleString()}</div>
+              <div className="kpi-delta">People who sought help and didn&apos;t receive housing</div>
             </div>
             <div className="kpi-card">
-              <div className="kpi-label">Unmet SHS Requests</div>
-              <div className="kpi-value" style={{ color: "#f39c12" }}>{(shs.unassisted_requests / 1000).toFixed(0)}k</div>
-              <div className="kpi-delta">{shs.latest_year} · unassisted</div>
+              <div className="kpi-label">Housing Success Rate (SHS)</div>
+              <div className="kpi-value" style={{ color: "#f39c12" }}>{shs.housing_success_rate}%</div>
+              <div className="kpi-delta">Only 1 in 4 people who needed housing actually received it</div>
             </div>
+          </div>
+
+          {/* Insight box */}
+          <div className="callout-gold" style={{ fontSize: "0.88rem", color: "#ccc", lineHeight: 1.8 }}>
+            <strong style={{ color: "#f6c90e" }}>What this means for community housing:</strong><br />
+            Australia is building at <strong style={{ color: "#fff" }}>{approvals.pct_of_target}% of the pace needed</strong> to meet the National Housing Accord — a shortfall of <strong style={{ color: "#e74c3c" }}>{approvals.gap_to_target.toLocaleString()} dwellings every year</strong>. At the same time, demand is accelerating: <strong>{shs.unassisted_requests.toLocaleString()} people</strong> sought homelessness services last year and left without housing. There are over <strong style={{ color: "#fff" }}>203,500 approved applicants</strong> on social housing waitlists across the major states — a confirmed tenant pipeline that no private developer can match.
+            <br /><br />
+            Compounding this: net overseas migration hit a record <strong style={{ color: "#f6c90e" }}>518,000 in 2023</strong> — more than double the pre-COVID average — driving national rental vacancy to 1.0% and rents 48% above 2015 levels. And the same $1B that built 3,226 social homes in 2019 builds only <strong style={{ color: "#e74c3c" }}>1,786 today</strong>, after a 58% rise in construction costs since COVID. The case for community housing investment has never been stronger — and the evidence to make that case has never been more complete.
+            <br /><br />
+            <em style={{ color: "#666" }}>ABS Building Approvals (Cat. 8731.0), AIHW SHS Annual Report 2023–24, ABS Cat. 3412.0 (migration), ABS PPI House Construction (Cat. 6427.0). Updated May 2026.</em>
           </div>
         </div>
 
