@@ -101,14 +101,14 @@ export default function HomePage() {
         backgroundPosition: "center 25%",
         minHeight: 520,
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
       }}>
         <div style={{
           position: "absolute", inset: 0,
           background: "linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(20,12,5,0.72) 50%, rgba(10,10,20,0.90) 100%)",
         }} />
-        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "72px 48px 64px" }}>
-          <div style={{ maxWidth: "62%", textAlign: "left" }}>
+        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "40px 48px 56px", width: "100%" }}>
+          <div style={{ maxWidth: "60%", textAlign: "left" }}>
 
             {/* Eyebrow */}
             <div style={{
