@@ -153,13 +153,18 @@ export default function HomePage() {
             </div>
 
             {/* Badge pills */}
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap", maxWidth: 620 }}>
               {[
-                { label: "681 Reports Indexed", color: "#f6c90e", bg: "rgba(246,201,14,0.12)", border: "rgba(246,201,14,0.3)" },
-                { label: "ABS · AHURI · AIHW · Treasury", color: "#aaa", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)" },
-                { label: "Population Projections to 2044", color: "#aaa", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)" },
-                { label: "Construction Cost Crisis", color: "#e74c3c", bg: "rgba(231,76,60,0.1)", border: "rgba(231,76,60,0.25)" },
-                { label: "AI Synthesis · Word Export", color: "#3498db", bg: "rgba(52,152,219,0.1)", border: "rgba(52,152,219,0.25)" },
+                { label: "📄 681 Reports Indexed",          color: "#f6c90e", bg: "rgba(246,201,14,0.12)",  border: "rgba(246,201,14,0.3)" },
+                { label: "🏛 ABS · AHURI · AIHW · Treasury", color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
+                { label: "📈 Population Projections to 2044",color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
+                { label: "🔴 Construction Cost Crisis",      color: "#e74c3c", bg: "rgba(231,76,60,0.1)",    border: "rgba(231,76,60,0.28)" },
+                { label: "🤖 AI Synthesis · Word Export",    color: "#3498db", bg: "rgba(52,152,219,0.1)",   border: "rgba(52,152,219,0.28)" },
+                { label: "🗺 State-by-State Intelligence",   color: "#f39c12", bg: "rgba(243,156,18,0.1)",   border: "rgba(243,156,18,0.28)" },
+                { label: "🏠 Live Building Approvals",       color: "#27ae60", bg: "rgba(39,174,96,0.1)",    border: "rgba(39,174,96,0.28)" },
+                { label: "📋 Social Housing Waitlists",      color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
+                { label: "💰 HAFF Round Analysis",           color: "#9b59b6", bg: "rgba(155,89,182,0.1)",   border: "rgba(155,89,182,0.28)" },
+                { label: "📅 20 Years of Policy History",    color: "#ccc",    bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.14)" },
               ].map(({ label, color, bg, border }) => (
                 <span key={label} style={{
                   display: "inline-block",
@@ -167,7 +172,7 @@ export default function HomePage() {
                   borderRadius: 20,
                   fontSize: "0.72rem",
                   fontWeight: 600,
-                  letterSpacing: "0.3px",
+                  letterSpacing: "0.2px",
                   color,
                   background: bg,
                   border: `1px solid ${border}`,
