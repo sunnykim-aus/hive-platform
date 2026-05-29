@@ -107,28 +107,76 @@ export default function HomePage() {
           position: "absolute", inset: 0,
           background: "linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(20,12,5,0.72) 50%, rgba(10,10,20,0.90) 100%)",
         }} />
-        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "56px 48px 48px 48px" }}>
-          <div style={{ maxWidth: "55%", textAlign: "left" }}>
+        <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "72px 48px 64px" }}>
+          <div style={{ maxWidth: "62%", textAlign: "left" }}>
+
+            {/* Eyebrow */}
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              background: "rgba(246,201,14,0.1)", border: "1px solid rgba(246,201,14,0.25)",
+              borderRadius: 20, padding: "5px 14px", marginBottom: 22,
+            }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#f6c90e", display: "inline-block", boxShadow: "0 0 8px #f6c90e" }} />
+              <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "#f6c90e", letterSpacing: "1.5px", textTransform: "uppercase" }}>
+                Australian Housing Intelligence Platform
+              </span>
+            </div>
+
+            {/* H1 */}
             <h1 style={{
-              fontSize: "clamp(2rem, 5vw, 3.2em)",
+              fontSize: "clamp(2.2rem, 5.5vw, 3.6em)",
               fontWeight: 900,
               color: "#fff",
-              marginBottom: 14,
-              lineHeight: 1.05,
-              letterSpacing: "-1.5px",
+              marginBottom: 20,
+              lineHeight: 1.0,
+              letterSpacing: "-2px",
             }}>
-              Housing Intelligence<br />&amp; Evidence
+              Housing Intelligence<br />
+              <span style={{ color: "#f6c90e" }}>&amp; Evidence</span>
             </h1>
-            <p style={{ fontSize: "0.95rem", color: "#c0c0c0", lineHeight: 1.8, marginBottom: 24 }}>
-              681 indexed reports. Live government data. 10 years of population history. AI-powered synthesis. Built for the people making the case for community housing investment in Australia.
+
+            {/* Subtext */}
+            <p style={{ fontSize: "1.05rem", color: "#c8c8d8", lineHeight: 1.85, marginBottom: 32, maxWidth: 560 }}>
+              681 indexed reports. Live government data. 10 years of population history.{" "}
+              <strong style={{ color: "#fff", fontWeight: 600 }}>AI-powered synthesis.</strong>{" "}
+              Built for the people making the case for community housing investment in Australia.
             </p>
-            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-              <span className="badge badge-gold">681 Reports Indexed</span>
-              <span className="badge badge-grey">ABS · AHURI · AIHW · Treasury</span>
-              <span className="badge badge-grey">Population Projections to 2044</span>
-              <span className="badge badge-grey">Construction Cost Crisis</span>
-              <span className="badge badge-grey">AI Synthesis · Word Export</span>
+
+            {/* CTA buttons */}
+            <div style={{ display: "flex", gap: 12, marginBottom: 36, flexWrap: "wrap" }}>
+              <a href="/ask-research" className="hive-btn" style={{ padding: "13px 28px", fontSize: "0.9rem", borderRadius: 10, display: "inline-block", textDecoration: "none", fontWeight: 700 }}>
+                🔍 Ask Research
+              </a>
+              <a href="/live-dashboard" className="hive-btn-outline" style={{ padding: "13px 28px", fontSize: "0.9rem", borderRadius: 10, display: "inline-block", textDecoration: "none" }}>
+                Live Dashboard →
+              </a>
             </div>
+
+            {/* Badge pills */}
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              {[
+                { label: "681 Reports Indexed", color: "#f6c90e", bg: "rgba(246,201,14,0.12)", border: "rgba(246,201,14,0.3)" },
+                { label: "ABS · AHURI · AIHW · Treasury", color: "#aaa", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)" },
+                { label: "Population Projections to 2044", color: "#aaa", bg: "rgba(255,255,255,0.06)", border: "rgba(255,255,255,0.12)" },
+                { label: "Construction Cost Crisis", color: "#e74c3c", bg: "rgba(231,76,60,0.1)", border: "rgba(231,76,60,0.25)" },
+                { label: "AI Synthesis · Word Export", color: "#3498db", bg: "rgba(52,152,219,0.1)", border: "rgba(52,152,219,0.25)" },
+              ].map(({ label, color, bg, border }) => (
+                <span key={label} style={{
+                  display: "inline-block",
+                  padding: "5px 12px",
+                  borderRadius: 20,
+                  fontSize: "0.72rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.3px",
+                  color,
+                  background: bg,
+                  border: `1px solid ${border}`,
+                }}>
+                  {label}
+                </span>
+              ))}
+            </div>
+
           </div>
         </div>
       </div>

@@ -57,39 +57,22 @@ export default function HiveNav() {
             Housing Intelligence &amp; Evidence
           </span>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: "0.75rem", color: "#666" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <span style={{
             background: "rgba(39,174,96,0.12)",
             border: "1px solid rgba(39,174,96,0.3)",
             borderRadius: 20,
-            padding: "3px 10px",
+            padding: "3px 12px",
             color: "#27ae60",
-            fontSize: "0.7rem",
+            fontSize: "0.72rem",
             fontWeight: 600,
+            letterSpacing: "0.5px",
           }}>
             ● Live
           </span>
-          <a
-            href="https://www.linkedin.com/in/sunny-kim"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 26,
-              height: 26,
-              borderRadius: 6,
-              background: "#1a1a2e",
-              border: "1px solid #2a2a4e",
-              color: "#0e76a8",
-              textDecoration: "none",
-              fontSize: "0.82rem",
-              fontWeight: 800,
-            }}
-          >
-            in
-          </a>
+          <span style={{ fontSize: "0.72rem", color: "#555", fontWeight: 500 }}>
+            681 reports · Updated monthly
+          </span>
         </div>
       </div>
 
