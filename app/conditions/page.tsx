@@ -4,7 +4,7 @@ import {
   STOCK_CONDITION, STATE_CONDITION, GOVERNMENT_RESPONSES, getCostImpactSummary
 } from "@/lib/data/construction"
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine, ReferenceArea
 } from "recharts"
 
 export default function ConditionsPage() {
@@ -64,8 +64,22 @@ export default function ConditionsPage() {
                 contentStyle={{ background: "#1a1a2e", border: "1px solid #2a2a4e", borderRadius: 8, fontSize: 12 }}
                 formatter={(v: unknown) => [`${(v as number).toFixed(1)}`, "Index"]}
               />
-              <ReferenceLine y={100} stroke="#555" strokeDasharray="4 2" label={{ value: "2019 baseline (100)", fill: "#555", fontSize: 9 }} />
-              <Line type="monotone" dataKey="index" stroke="#f6c90e" strokeWidth={2.5} dot={false} />
+              {/* Shaded regions for key periods */}
+              <ReferenceArea x1="2020 Q1" x2="2021 Q4" fill="rgba(231,76,60,0.08)" label={{ value: "COVID", position: "insideTopLeft", fill: "#e74c3c", fontSize: 9 }} />
+              <ReferenceArea x1="2022 Q1" x2="2022 Q4" fill="rgba(246,201,14,0.06)" label={{ value: "Ukraine + Rate hikes", position: "insideTopLeft", fill: "#f6c90e", fontSize: 9 }} />
+              <ReferenceLine y={100} stroke="#555" strokeDasharray="4 2" label={{ value: "2019 baseline (100)", fill: "#555", fontSize: 9, position: "right" }} />
+              <Line
+                type="monotone"
+                dataKey="index"
+                stroke="#f6c90e"
+                strokeWidth={2.5}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                dot={(props: any) =>
+                  props.payload?.hasLabel
+                    ? <circle key={`dot-${props.cx}`} cx={props.cx ?? 0} cy={props.cy ?? 0} r={5} fill="#e74c3c" stroke="#0f0f1a" strokeWidth={2} />
+                    : <g key={`dot-empty-${props.cx}`} />
+                }
+              />
             </LineChart>
           </ResponsiveContainer>
         </div>
@@ -115,6 +129,31 @@ export default function ConditionsPage() {
               </div>
               <div style={{ fontSize: "0.82rem", color: "#aaa", marginTop: 6 }}>social homes not built</div>
               <div style={{ fontSize: "0.75rem", color: "#666", marginTop: 4 }}>Due to cost escalation alone</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Flow-on effects */}
+        <div style={{ marginBottom: 28 }}>
+          <div className="section-label">Flow-on Effects — Property Market &amp; Rental Crisis</div>
+          <div className="grid-3">
+            <div className="hive-card">
+              <div style={{ fontSize: "0.75rem", color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>Private Rental Market</div>
+              <div style={{ fontSize: "2.4rem", fontWeight: 900, color: "#e74c3c", lineHeight: 1, marginBottom: 6 }}>+32%</div>
+              <div style={{ fontSize: "0.72rem", color: "#aaa", letterSpacing: 0.5, marginBottom: 10 }}>MEDIAN RENT RISE 2020–2025</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", lineHeight: 1.6 }}>Construction cost inflation fed directly into new build costs, lifting the price floor for developers. Vacancy rates fell to historic lows — 1.0–1.2% nationally in 2023.</div>
+            </div>
+            <div className="hive-card">
+              <div style={{ fontSize: "0.75rem", color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>Owner-Occupied Market</div>
+              <div style={{ fontSize: "2.4rem", fontWeight: 900, color: "#e74c3c", lineHeight: 1, marginBottom: 6 }}>+58%</div>
+              <div style={{ fontSize: "0.72rem", color: "#aaa", letterSpacing: 0.5, marginBottom: 10 }}>NEW BUILD COST RISE SINCE 2019</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", lineHeight: 1.6 }}>New home builds are now $250,000–$280,000 more expensive than 2019. With 13 RBA rate hikes, mortgage serviceability dropped sharply — more buyers pushed into rentals.</div>
+            </div>
+            <div className="hive-card" style={{ borderColor: "#e74c3c44" }}>
+              <div style={{ fontSize: "0.75rem", color: "#888", textTransform: "uppercase", letterSpacing: 1, marginBottom: 8 }}>Public Sector Capacity</div>
+              <div style={{ fontSize: "2.4rem", fontWeight: 900, color: "#e74c3c", lineHeight: 1, marginBottom: 6 }}>−44%</div>
+              <div style={{ fontSize: "0.72rem", color: "#aaa", letterSpacing: 0.5, marginBottom: 10 }}>HOMES PER $1B VS 2019</div>
+              <div style={{ fontSize: "0.78rem", color: "#888", lineHeight: 1.6 }}>Government programs announced in 2022–23 at 2022 cost assumptions now face significant funding gaps. HAFF grants cover only 70–85% of current build costs.</div>
             </div>
           </div>
         </div>
