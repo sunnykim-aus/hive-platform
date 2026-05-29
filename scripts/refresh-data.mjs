@@ -1,0 +1,244 @@
+/**
+ * HIVE Data Refresh Script
+ * Fetches latest ABS Building Approvals data and regenerates lib/data/building-approvals.ts
+ *
+ * Run manually:  node scripts/refresh-data.mjs
+ * Run via CI:    see .github/workflows/monthly-data-refresh.yml
+ *
+ * Sources:
+ *   ABS Cat. 8731.0 — Building Approvals, Australia
+ *   Table 8731009 — Total dwellings approved, all sectors, by state and Australia
+ */
+
+import ExcelJS from "exceljs"
+import { writeFileSync, readFileSync } from "fs"
+import { fileURLToPath } from "url"
+import { dirname, join } from "path"
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const ROOT = join(__dirname, "..")
+const OUTPUT_PATH = join(ROOT, "lib/data/building-approvals.ts")
+
+const ABS_BASE = "https://www.abs.gov.au"
+const BA_LISTING =
+  "/statistics/industry/building-and-construction/building-approvals-australia/latest-release"
+const HEADERS = {
+  "User-Agent":
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+}
+
+// ── Step 1: Find the latest Excel URL from ABS listing page ──────────────────
+async function findExcelUrl(tableNum = "8731009") {
+  console.log(`  Fetching ABS listing page...`)
+  const res = await fetch(ABS_BASE + BA_LISTING, { headers: HEADERS })
+  if (!res.ok) throw new Error(`ABS listing fetch failed: ${res.status}`)
+  const html = await res.text()
+
+  // Extract all href attributes containing the table number and .xlsx
+  const regex = new RegExp(`href="([^"]*${tableNum}[^"]*\\.xlsx)"`, "gi")
+  let match
+  while ((match = regex.exec(html)) !== null) {
+    const href = match[1]
+    const url = href.startsWith("http") ? href : ABS_BASE + href
+    console.log(`  Found Excel URL: ${url}`)
+    return url
+  }
+
+  // Fallback: construct the likely URL from the current month
+  const now = new Date()
+  const months = [
+    "jan", "feb", "mar", "apr", "may", "jun",
+    "jul", "aug", "sep", "oct", "nov", "dec",
+  ]
+  const monthStr = `${months[now.getMonth()]}-${now.getFullYear()}`
+  const fallback = `${ABS_BASE}/statistics/industry/building-and-construction/building-approvals-australia/${monthStr}/${tableNum}.xlsx`
+  console.log(`  Using fallback URL: ${fallback}`)
+  return fallback
+}
+
+// ── Step 2: Download and parse the Excel file ────────────────────────────────
+async function parseApprovals(url) {
+  console.log(`  Downloading Excel file...`)
+  const res = await fetch(url, { headers: HEADERS })
+  if (!res.ok) throw new Error(`Excel download failed: ${res.status}`)
+  const buffer = Buffer.from(await res.arrayBuffer())
+
+  const workbook = new ExcelJS.Workbook()
+  await workbook.xlsx.load(buffer)
+
+  const ws = workbook.getWorksheet("Data1")
+  if (!ws) throw new Error("Data1 sheet not found in workbook")
+
+  // Read header row to locate Australia total columns
+  const headerRow = ws.getRow(1).values // 1-indexed, index 0 is undefined
+  let totalAusCol = null
+  let housesAusCol = null
+  let otherAusCol = null
+
+  for (let i = 1; i < headerRow.length; i++) {
+    const h = String(headerRow[i] ?? "")
+    if (h.includes("Australia") && h.includes("Total (Type of Building)")) {
+      totalAusCol = i
+    } else if (h.includes("Australia") && h.includes(" Houses ;")) {
+      housesAusCol = i
+    } else if (h.includes("Australia") && h.includes("Dwellings excluding houses")) {
+      otherAusCol = i
+    }
+  }
+
+  if (!totalAusCol) throw new Error("Could not find Australia total column in header row")
+  console.log(
+    `  Columns: total=${totalAusCol}, houses=${housesAusCol}, other=${otherAusCol}`
+  )
+
+  // Read data rows (data starts at row 11 in ABS format)
+  const records = []
+  const cutoff = new Date("2021-01-01")
+
+  ws.eachRow((row, rowNum) => {
+    if (rowNum < 11) return
+    const dateCell = row.getCell(1).value
+    if (!(dateCell instanceof Date)) return
+    if (dateCell < cutoff) return
+
+    const total = row.getCell(totalAusCol).value
+    const houses = housesAusCol ? row.getCell(housesAusCol).value : null
+    const other = otherAusCol ? row.getCell(otherAusCol).value : null
+
+    if (typeof total !== "number") return
+
+    records.push({
+      date: dateCell.toISOString().slice(0, 10).replace(/\d{2}$/, "01"), // normalise to 1st of month
+      total_aus: Math.round(total),
+      houses_aus: houses ? Math.round(Number(houses)) : 0,
+      other_aus: other ? Math.round(Number(other)) : 0,
+    })
+  })
+
+  // Keep last 60 months (~5 years)
+  return records.slice(-60)
+}
+
+// ── Step 3: Generate the TypeScript file content ─────────────────────────────
+function generateTs(records, fetchedDate) {
+  const rows = records
+    .map(
+      (r) =>
+        `  { date: "${r.date}", total_aus: ${r.total_aus}, houses_aus: ${r.houses_aus}, other_aus: ${r.other_aus} },`
+    )
+    .join("\n")
+
+  return `/**
+ * Monthly building approvals data (ABS Cat. 8731.0)
+ * Auto-generated by scripts/refresh-data.mjs — do not edit manually.
+ * Last refreshed: ${fetchedDate}
+ * Source: ABS Building Approvals, Table 8731009 (Australia total, all sectors)
+ */
+
+export interface BuildingApprovalsRecord {
+  date: string
+  total_aus: number
+  houses_aus: number
+  other_aus: number
+}
+
+export const BUILDING_APPROVALS: BuildingApprovalsRecord[] = [
+${rows}
+]
+
+export interface BuildingApprovalsSummary {
+  latest_monthly: number
+  annual_run_rate: number
+  accord_target: number
+  gap_to_target: number
+  pct_of_target: number
+  yoy_change_pct: number
+  latest_date: string
+}
+
+export function getBuildingApprovalsSummary(): BuildingApprovalsSummary {
+  const latest = BUILDING_APPROVALS[BUILDING_APPROVALS.length - 1]
+  // 3-month average × 12 — standard ABS methodology, smooths monthly volatility
+  const last3 = BUILDING_APPROVALS.slice(-3)
+  const avg3m = last3.reduce((sum, r) => sum + r.total_aus, 0) / 3
+  const annual_run_rate = Math.round(avg3m * 12)
+  const accord_target = 240000
+  const gap_to_target = accord_target - annual_run_rate
+  const pct_of_target = Math.round((annual_run_rate / accord_target) * 100)
+
+  // YoY: compare latest month to same month last year (12 records back)
+  const twelveMonthsAgo = BUILDING_APPROVALS[BUILDING_APPROVALS.length - 13]
+  const yoy_change_pct =
+    Math.round(
+      ((latest.total_aus - twelveMonthsAgo.total_aus) / twelveMonthsAgo.total_aus) *
+        100 *
+        10
+    ) / 10
+
+  return {
+    latest_monthly: latest.total_aus,
+    annual_run_rate,
+    accord_target,
+    gap_to_target,
+    pct_of_target,
+    yoy_change_pct,
+    latest_date: latest.date,
+  }
+}
+`
+}
+
+// ── Step 4: Check whether the data actually changed ──────────────────────────
+function hasChanged(newContent) {
+  try {
+    const existing = readFileSync(OUTPUT_PATH, "utf8")
+    // Compare only the data rows, not the timestamp comment
+    const stripHeader = (s) => s.replace(/Last refreshed:.*\n/, "")
+    return stripHeader(existing) !== stripHeader(newContent)
+  } catch {
+    return true // file doesn't exist yet
+  }
+}
+
+// ── Main ──────────────────────────────────────────────────────────────────────
+async function main() {
+  console.log("HIVE Data Refresh — ABS Building Approvals")
+  console.log("===========================================")
+
+  try {
+    const url = await findExcelUrl("8731009")
+    const records = await parseApprovals(url)
+
+    if (records.length === 0) throw new Error("No records parsed from Excel")
+
+    const latest = records[records.length - 1]
+    const last3 = records.slice(-3)
+    const avg3m = last3.reduce((sum, r) => sum + r.total_aus, 0) / 3
+    const runRate = Math.round(avg3m * 12)
+
+    console.log(`\n  Records parsed: ${records.length}`)
+    console.log(`  Date range: ${records[0].date} → ${latest.date}`)
+    console.log(`  Latest month: ${latest.total_aus.toLocaleString()} approvals`)
+    console.log(`  3m avg × 12: ${runRate.toLocaleString()} / year`)
+    console.log(`  Gap to 240k target: ${(240000 - runRate).toLocaleString()}`)
+    console.log(`  % of target: ${Math.round((runRate / 240000) * 100)}%`)
+
+    const today = new Date().toISOString().slice(0, 10)
+    const newContent = generateTs(records, today)
+
+    if (hasChanged(newContent)) {
+      writeFileSync(OUTPUT_PATH, newContent, "utf8")
+      console.log(`\n✅ Updated: lib/data/building-approvals.ts`)
+      console.log("   (Vercel will redeploy automatically on push)")
+    } else {
+      console.log(`\n✔ No change — data is already up to date.`)
+    }
+  } catch (err) {
+    console.error(`\n❌ Refresh failed: ${err.message}`)
+    console.error("   Existing data unchanged — site continues working.")
+    process.exit(1)
+  }
+}
+
+main()

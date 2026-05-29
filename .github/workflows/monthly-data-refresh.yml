@@ -1,0 +1,64 @@
+name: Monthly Data Refresh
+
+# Runs on the 15th of every month at 9am AEST (11pm UTC previous day)
+# ABS publishes building approvals data around the 12th–15th of each month.
+# Also runnable manually from GitHub → Actions tab → "Run workflow"
+
+on:
+  schedule:
+    - cron: "0 23 14 * *"   # 14th at 23:00 UTC = 15th at 9am AEST
+  workflow_dispatch:          # manual trigger button in GitHub Actions UI
+
+jobs:
+  refresh:
+    name: Fetch latest ABS data & update TypeScript
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write         # needed to push the updated .ts file back
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run data refresh
+        run: npm run refresh
+
+      - name: Commit updated data (if changed)
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add lib/data/building-approvals.ts
+          if git diff --cached --quiet; then
+            echo "No data changes — nothing to commit."
+          else
+            LATEST=$(node -e "
+              const d = require('./lib/data/building-approvals.ts');
+            " 2>/dev/null || node -e "
+              import('./lib/data/building-approvals.js').catch(() => {
+                const fs = require('fs');
+                const match = fs.readFileSync('./lib/data/building-approvals.ts','utf8')
+                  .match(/Last refreshed: (\S+)/);
+                console.log(match ? match[1] : 'unknown');
+              });
+            " 2>/dev/null || echo "unknown")
+            git commit -m "auto: refresh ABS building approvals data
+
+Fetched from ABS Cat. 8731.0 via monthly GitHub Actions cron.
+Data updated: $(date -u '+%Y-%m-%d')
+
+[skip ci]"
+            git push
+            echo "✅ Pushed updated building-approvals.ts → Vercel will redeploy."
+          fi
