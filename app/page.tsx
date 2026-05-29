@@ -108,25 +108,27 @@ export default function HomePage() {
           background: "linear-gradient(135deg, rgba(10,10,20,0.88) 0%, rgba(20,12,5,0.72) 50%, rgba(10,10,20,0.90) 100%)",
         }} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto", padding: "56px 48px 48px 48px" }}>
-          <h1 style={{
-            fontSize: "clamp(2rem, 5vw, 3.2em)",
-            fontWeight: 900,
-            color: "#fff",
-            marginBottom: 10,
-            lineHeight: 1.05,
-            letterSpacing: "-1.5px",
-          }}>
-            Housing Intelligence<br />&amp; Evidence
-          </h1>
-          <p style={{ fontSize: "1rem", color: "#c0c0c0", maxWidth: 640, lineHeight: 1.8, marginBottom: 28 }}>
-            681 indexed reports. Live government data. 10 years of population history. AI-powered synthesis. Built for the people making the case for community housing investment in Australia.
-          </p>
-          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            <span className="badge badge-gold">681 Reports Indexed</span>
-            <span className="badge badge-grey">ABS · AHURI · AIHW · Treasury</span>
-            <span className="badge badge-grey">Population Projections to 2044</span>
-            <span className="badge badge-grey">Construction Cost Crisis</span>
-            <span className="badge badge-grey">AI Synthesis · Word Export</span>
+          <div style={{ maxWidth: "55%", textAlign: "left" }}>
+            <h1 style={{
+              fontSize: "clamp(2rem, 5vw, 3.2em)",
+              fontWeight: 900,
+              color: "#fff",
+              marginBottom: 14,
+              lineHeight: 1.05,
+              letterSpacing: "-1.5px",
+            }}>
+              Housing Intelligence<br />&amp; Evidence
+            </h1>
+            <p style={{ fontSize: "0.95rem", color: "#c0c0c0", lineHeight: 1.8, marginBottom: 24 }}>
+              681 indexed reports. Live government data. 10 years of population history. AI-powered synthesis. Built for the people making the case for community housing investment in Australia.
+            </p>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <span className="badge badge-gold">681 Reports Indexed</span>
+              <span className="badge badge-grey">ABS · AHURI · AIHW · Treasury</span>
+              <span className="badge badge-grey">Population Projections to 2044</span>
+              <span className="badge badge-grey">Construction Cost Crisis</span>
+              <span className="badge badge-grey">AI Synthesis · Word Export</span>
+            </div>
           </div>
         </div>
       </div>
