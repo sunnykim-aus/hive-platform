@@ -103,8 +103,8 @@ export default function LiveDashboardPage() {
                 formatter={(value: unknown, name: unknown) => [(value as number).toLocaleString(), (name as string) === "total" ? "Monthly approvals" : "12-mo average"]}
               />
               <ReferenceLine y={20000} stroke="#e74c3c" strokeDasharray="6 3" label={{ value: "20,000/mo target", fill: "#e74c3c", fontSize: 10 }} />
-              <Line type="monotone" dataKey="total" stroke="#3498db" strokeWidth={1.5} dot={false} name="total" />
-              <Line type="monotone" dataKey="ma12" stroke="#f6c90e" strokeWidth={2.5} dot={false} name="ma12" />
+              <Line type="monotone" dataKey="total" stroke="#3498db" strokeWidth={2} dot={false} name="total" opacity={0.75} />
+              <Line type="monotone" dataKey="ma12" stroke="#f6c90e" strokeWidth={3} dot={false} name="ma12" />
             </LineChart>
           </ResponsiveContainer>
           <div style={{ fontSize: "0.72rem", color: "#666", marginTop: 8 }}>

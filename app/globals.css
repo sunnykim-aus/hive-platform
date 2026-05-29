@@ -88,19 +88,25 @@ body {
 
 .page-header {
   margin-bottom: 32px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #13131f 0%, #1a1a2e 100%);
+  border: 1px solid #2a2a4e;
+  border-left: 4px solid #f6c90e;
+  border-radius: 0 12px 12px 0;
 }
 
 .page-title {
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 2rem;
+  font-weight: 900;
   color: #fff;
   margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
 .page-subtitle {
   font-size: 0.88rem;
-  color: #888;
-  line-height: 1.7;
+  color: #999;
+  line-height: 1.75;
   max-width: 800px;
 }
 
