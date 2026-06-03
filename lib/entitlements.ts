@@ -37,21 +37,27 @@ export const ROUTE_MIN_TIER: Record<string, Tier> = {
   "/": "free",
   "/legal": "free",
 
-  // ── Free (Starter) ──
+  // ── Free (Starter) — substantive pages ──
   "/live-dashboard": "free",      // Housing Data
-  "/housing-need": "free",        // national overview is free; cohort detail gated in-page
-  "/state-demand-supply": "free", // state-level is free; full pipeline gated in-page
-  "/research": "free",            // sample reports free; full RAG search gated in-page
-  "/population": "free",          // sub-page of Housing Need / Supply Pipeline
-  "/chp-sector": "free",          // sub-page reached from the free dashboard
+  "/housing-need": "free",        // national overview free; cohort detail gated in-page
+  "/state-demand-supply": "free", // state-level free; full pipeline gated in-page
+  "/research": "free",            // Evidence & Policy; full RAG search gated in-page
+  "/population": "free",          // demographic sub-page
 
-  // ── CHP Pro ──
-  "/ask-research": "pro",         // full RAG search
-  "/reports": "pro",              // full report library
+  // ── Redirect stubs ──
+  // These pages only redirect to a real page. Keep them open ("free") so the
+  // redirect passes through; the destination page then enforces its own tier.
+  "/ask-research": "free",        // → /research  (full RAG gated in-page on /research)
+  "/reports": "free",             // → /research
+  "/policy-impact": "free",       // → /research  (policy work lives in Evidence & Policy)
+  "/policy-timeline": "free",     // → /research
+  "/chp-sector": "free",          // → /funding-sector (gated there)
+  "/funding-navigator": "free",   // → /funding-sector (gated there)
+
+  // ── CHP Pro — substantive paid pages ──
   "/feasibility": "pro",          // Development Viability modeller
-  "/haff": "pro",                 // HAFF modeller (Enterprise adds submission pack feature)
+  "/haff": "pro",                 // HAFF modeller (Enterprise adds the submission-pack feature)
   "/funding-sector": "pro",       // Funding & Programs
-  "/funding-navigator": "pro",
   "/sustainability": "pro",       // Sustainability suite (+ children below)
   "/climate-risk": "pro",
   "/building-energy": "pro",
@@ -60,9 +66,9 @@ export const ROUTE_MIN_TIER: Record<string, Tier> = {
   "/asset-intelligence": "pro",   // compound risk
   "/my-portfolio": "pro",         // portfolio personalisation
 
-  // ── Government / HA (also open to Enterprise) ──
-  "/policy-impact": "enterprise", // policy scenario modelling
-  "/policy-timeline": "enterprise",
+  // Note: there is no Enterprise/Government-exclusive *route*. Those tiers are
+  // differentiated by FEATURES (branded export, briefing packs, custom data
+  // feeds, seat count) — see FEATURE_MIN_TIER below.
 }
 
 /** Fail closed: unlisted routes require Pro at minimum. */
