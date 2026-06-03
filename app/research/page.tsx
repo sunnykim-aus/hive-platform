@@ -31,23 +31,23 @@ const REPORTS = [
   { title: "AHURI Final Report No. 409: Social housing supply and demand",                     agency: "AHURI",                  year: "2024", type: "Research",    url: "https://www.ahuri.edu.au/research/final-reports/409" },
   { title: "Housing Assistance in Australia 2023",                                             agency: "AIHW",                   year: "2023", type: "Government",  url: "https://www.aihw.gov.au/reports/housing-assistance/housing-assistance-in-australia" },
   { title: "Specialist Homelessness Services Annual Report 2022-23",                           agency: "AIHW",                   year: "2023", type: "Government",  url: "https://www.aihw.gov.au/reports/homelessness-services/specialist-homelessness-services-annual-report" },
-  { title: "National Housing Finance and Investment Corporation Annual Report 2023-24",        agency: "Housing Australia",      year: "2024", type: "Government",  url: "https://www.housingaustralia.gov.au" },
+  { title: "National Housing Finance and Investment Corporation Annual Report 2023-24",        agency: "Housing Australia",      year: "2024", type: "Government",  url: "https://www.housingaustralia.gov.au/annual-report-2023-24" },
   { title: "Building Approvals, Australia (ABS 8731.0)",                                      agency: "ABS",                    year: "2024", type: "Statistical", url: "https://www.abs.gov.au/statistics/industry/building-and-construction/building-approvals-australia/latest-release" },
   { title: "Population Projections, Australia (ABS 3222.0)",                                  agency: "ABS",                    year: "2023", type: "Statistical", url: "https://www.abs.gov.au/statistics/people/population/population-projections-australia/latest-release" },
   { title: "AHURI Final Report No. 378: The adequacy of social housing in Australia",         agency: "AHURI",                  year: "2022", type: "Research",    url: "https://www.ahuri.edu.au/research/final-reports/378" },
-  { title: "AHURI Research Insights: Inclusionary zoning for social and affordable housing",  agency: "AHURI",                  year: "2022", type: "Research",    url: "https://www.ahuri.edu.au" },
+  { title: "AHURI Research Insights: Inclusionary zoning for social and affordable housing",  agency: "AHURI",                  year: "2022", type: "Research",    url: "https://www.ahuri.edu.au/research/final-reports/297" },
   { title: "HAFF Round 1 Allocation Outcomes Report",                                         agency: "Housing Australia",      year: "2024", type: "Government",  url: "https://www.housingaustralia.gov.au/housing-australia-future-fund" },
   { title: "National Housing Accord — First Year Progress Report",                            agency: "Treasury",               year: "2024", type: "Government",  url: "https://treasury.gov.au/policy-topics/housing" },
-  { title: "Social Housing Futures — UNSW City Futures Research Centre",                      agency: "UNSW City Futures",      year: "2023", type: "Research",    url: "https://cityfutures.ada.unsw.edu.au" },
-  { title: "AHURI Research Paper: Rental affordability in Australia",                         agency: "AHURI",                  year: "2023", type: "Research",    url: "https://www.ahuri.edu.au" },
-  { title: "National Rental Affordability Scheme Evaluation",                                 agency: "DSS",                    year: "2014", type: "Government",  url: "https://www.dss.gov.au" },
+  { title: "Social Housing Futures — UNSW City Futures Research Centre",                      agency: "UNSW City Futures",      year: "2023", type: "Research",    url: "https://cityfutures.ada.unsw.edu.au/research/projects/social-housing-infrastructure-investment-pathway/" },
+  { title: "AHURI Research Paper: Rental affordability in Australia",                         agency: "AHURI",                  year: "2023", type: "Research",    url: "https://www.ahuri.edu.au/research/final-reports/427" },
+  { title: "National Rental Affordability Scheme Evaluation",                                 agency: "DSS",                    year: "2014", type: "Government",  url: "https://www.dss.gov.au/national-rental-affordability-scheme" },
   { title: "HomeBuilder Scheme Final Report",                                                 agency: "Treasury",               year: "2022", type: "Government",  url: "https://www.treasury.gov.au/homebuilder" },
-  { title: "ANAO Performance Audit: National Partnership on Remote Indigenous Housing",       agency: "ANAO",                   year: "2017", type: "Audit",       url: "https://www.anao.gov.au" },
+  { title: "ANAO Performance Audit: National Partnership on Remote Indigenous Housing",       agency: "ANAO",                   year: "2017", type: "Audit",       url: "https://www.anao.gov.au/work/performance-audit/implementation-the-national-partnership-agreement-remote-indigenous-housing-the-nt" },
   { title: "Australian Demographic Statistics (ABS 3101.0)",                                  agency: "ABS",                    year: "2024", type: "Statistical", url: "https://www.abs.gov.au/statistics/people/population/national-state-and-territory-population/latest-release" },
-  { title: "AHURI: Planning reform and housing supply in Australian cities",                  agency: "AHURI",                  year: "2023", type: "Research",    url: "https://www.ahuri.edu.au" },
-  { title: "ACOSS Rental Stress Report 2024",                                                 agency: "ACOSS",                  year: "2024", type: "Advocacy",    url: "https://www.acoss.org.au" },
-  { title: "HIA Housing Report: Construction Pipeline 2024",                                  agency: "HIA",                    year: "2024", type: "Industry",    url: "https://hia.com.au" },
-  { title: "Power Housing Australia: CHP Capacity & Funding Gap Report 2024",                agency: "Power Housing Australia", year: "2024", type: "Industry",    url: "https://powerhousing.com.au" },
+  { title: "AHURI: Planning reform and housing supply in Australian cities",                  agency: "AHURI",                  year: "2023", type: "Research",    url: "https://www.ahuri.edu.au/research/final-reports/300" },
+  { title: "ACOSS Rental Stress Report 2024",                                                 agency: "ACOSS",                  year: "2024", type: "Advocacy",    url: "https://povertyandinequality.acoss.org.au/" },
+  { title: "HIA Housing Report: Construction Pipeline 2024",                                  agency: "HIA",                    year: "2024", type: "Industry",    url: "https://hia.com.au/our-industry/economics/housing-outlook" },
+  { title: "Power Housing Australia: CHP Capacity & Funding Gap Report 2024",                agency: "Power Housing Australia", year: "2024", type: "Industry",    url: "https://www.powerhousingaustralia.com.au/resources/" },
 ]
 
 const REPORT_TYPES = ["All", "Research", "Government", "Statistical", "Audit", "Advocacy", "Industry"]
@@ -242,17 +242,22 @@ export default function ResearchPage() {
   }
 
   // Delivery grade — pace-adjusted for active programs, final result for completed ones
-  function getScore(prog: typeof PROGRAMS[0]): { grade: string; pct: number; color: string; note: string } | null {
+  function getScore(prog: typeof PROGRAMS[0]): { grade: string; pct: number; pctLabel: string; color: string; note: string } | null {
     const t = prog.targets[0]
     const o = prog.outcomes[0]
     if (!t || !o || typeof o.actual_value !== "number") return null
     const pct = Math.round((o.actual_value / t.target_value) * 100)
+    const exceeded = pct >= 150
+    const pctLabel = pct >= 200 ? `${(pct / 100).toFixed(1)}×` : `${pct}%`
     const completed = /Completed|Closed|running down/i.test(prog.status)
     const gradeFromPct = (p: number) => (p >= 95 ? "A" : p >= 80 ? "B" : p >= 60 ? "C" : p >= 40 ? "D" : "F")
 
     let grade: string
     let note: string
-    if (completed) {
+    if (exceeded) {
+      grade = "A"
+      note = `Exceeded — ${(pct / 100).toFixed(1)}× the original target`
+    } else if (completed) {
       grade = gradeFromPct(Math.min(pct, 120))
       note = `${pct}% of target delivered`
     } else {
@@ -274,7 +279,7 @@ export default function ResearchPage() {
       }
     }
     const color = grade === "A" || grade === "B" ? "#5aad8a" : grade === "C" ? "#c49a3a" : grade === "D" ? "#e67e22" : "#c0614a"
-    return { grade, pct, color, note }
+    return { grade, pct, pctLabel, color, note }
   }
 
   return (
@@ -612,6 +617,12 @@ export default function ResearchPage() {
               What Australian housing programs promised vs what they delivered — funding committed, primary targets,
               actual outcomes and confidence ratings sourced from government evaluations and AHURI research.
             </p>
+            <div className="callout-blue" style={{ marginBottom: 24, fontSize: "0.74rem", color: "#94a3b8" }}>
+              <strong style={{ color: "#7aaad4" }}>How the delivery grade works.</strong>{" "}
+              For active programs the grade is pace-adjusted — delivery against target measured relative to how far through
+              the timeline the program is (so a mid-flight program isn&apos;t judged on raw % alone). Completed programs are
+              graded on final delivery. A = on or ahead of pace, through to F = well behind.
+            </div>
 
             <div className="grid-4" style={{ marginBottom: 28 }}>
               <div className="kpi-card">
@@ -745,7 +756,7 @@ export default function ResearchPage() {
                               <span style={{ fontSize: "1.45rem", fontWeight: 900, color: score.color, lineHeight: 1 }}>{score.grade}</span>
                             </div>
                             <div style={{ fontSize: "0.55rem", color: "#4a5a6a", textTransform: "uppercase", letterSpacing: "0.5px", marginTop: 5 }}>Delivery</div>
-                            <div style={{ fontSize: "0.62rem", color: score.color, fontWeight: 800 }}>{score.pct}%</div>
+                            <div style={{ fontSize: "0.62rem", color: score.color, fontWeight: 800 }}>{score.pctLabel}</div>
                           </div>
                         )}
 

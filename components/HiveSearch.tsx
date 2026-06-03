@@ -148,7 +148,7 @@ export default function HiveSearch() {
               borderRadius: "50%",
               animation: "spin 0.7s linear infinite",
             }} />
-            Searching 683 reports and synthesising answer…
+            Searching 681 reports and synthesising answer…
           </div>
         </div>
       )}
