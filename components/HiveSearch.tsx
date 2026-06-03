@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Markdown from "./Markdown"
-import { copyBrief } from "@/lib/briefExport"
+import { downloadWordBrief, printPdfBrief, type BriefOpts } from "@/lib/briefExport"
 
 type Source = {
   index: number
@@ -31,19 +31,15 @@ export default function HiveSearch() {
   const [loading, setLoading] = useState(false)
   const [result, setResult]   = useState<SearchResult | null>(null)
   const [error, setError]     = useState("")
-  const [copied, setCopied]   = useState(false)
 
-  const exportBrief = async () => {
-    if (!result) return
+  const briefOpts = (): BriefOpts => {
     const date = new Date().toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" })
-    await copyBrief({
+    return {
       docTitle: "HIVE Evidence Brief",
       metaLines: [`Question: ${query}`, `Date: ${date}`],
-      answer: result.answer,
-      sources: result.sources,
-    })
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2500)
+      answer: result!.answer,
+      sources: result!.sources,
+    }
   }
 
   const search = async (q: string) => {
@@ -191,19 +187,30 @@ export default function HiveSearch() {
                   HIVE Analysis · {result.sources.length} sources
                 </span>
               </div>
-              <button
-                onClick={exportBrief}
-                style={{
-                  padding: "5px 14px", fontSize: "0.72rem", fontWeight: 700,
-                  color: copied ? "#0b1220" : "#f6c90e",
-                  background: copied ? "#f6c90e" : "rgba(246,201,14,0.06)",
-                  border: "1px solid rgba(246,201,14,0.3)",
-                  borderRadius: 6, cursor: "pointer", transition: "all 0.2s",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {copied ? "✓ Copied to clipboard" : "Export Brief"}
-              </button>
+              <div style={{ display: "flex", gap: 8 }}>
+                <button
+                  onClick={() => printPdfBrief(briefOpts())}
+                  style={{
+                    padding: "5px 14px", fontSize: "0.72rem", fontWeight: 700,
+                    color: "#f6c90e", background: "rgba(246,201,14,0.06)",
+                    border: "1px solid rgba(246,201,14,0.3)",
+                    borderRadius: 6, cursor: "pointer", whiteSpace: "nowrap",
+                  }}
+                >
+                  ⬇ PDF
+                </button>
+                <button
+                  onClick={() => downloadWordBrief(briefOpts())}
+                  style={{
+                    padding: "5px 14px", fontSize: "0.72rem", fontWeight: 700,
+                    color: "#c8d8e8", background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    borderRadius: 6, cursor: "pointer", whiteSpace: "nowrap",
+                  }}
+                >
+                  ⬇ Word
+                </button>
+              </div>
             </div>
             <Markdown text={result.answer} />
           </div>
