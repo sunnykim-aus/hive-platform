@@ -63,13 +63,14 @@ export async function proxy(request: NextRequest) {
     return carryCookies(NextResponse.redirect(url), response)
   }
 
-  // Logged in → look up tier and enforce.
+  // Logged in → resolve tier from the user's organisation and enforce.
   const { data: profile } = await supabase
     .from("profiles")
-    .select("tier")
+    .select("organisations(tier)")
     .eq("id", user.id)
     .single()
-  const tier = (profile?.tier ?? "free") as Tier
+  const org = profile?.organisations as { tier?: Tier } | null
+  const tier = (org?.tier ?? "free") as Tier
 
   if (!meetsTier(tier, required)) {
     const url = request.nextUrl.clone()

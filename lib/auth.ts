@@ -8,16 +8,26 @@ export type Session = {
   userId: string | null
   email: string | null
   tier: Tier
+  orgId: string | null
+  orgName: string | null
 }
 
 /** Resolve the current user and their tier. Anonymous users are `free`. */
 export async function getSession(): Promise<Session> {
   // Auth not configured yet → everyone is anonymous `free` (site stays open).
+  const anon: Session = {
+    userId: null,
+    email: null,
+    tier: "free",
+    orgId: null,
+    orgName: null,
+  }
+
   if (
     !process.env.NEXT_PUBLIC_SUPABASE_URL ||
     !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   ) {
-    return { userId: null, email: null, tier: "free" }
+    return anon
   }
 
   const supabase = await createClient()
@@ -25,18 +35,22 @@ export async function getSession(): Promise<Session> {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (!user) return { userId: null, email: null, tier: "free" }
+  if (!user) return anon
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("tier")
+    .select("org_id, organisations(tier, name)")
     .eq("id", user.id)
     .single()
+
+  const org = profile?.organisations as { tier?: Tier; name?: string } | null
 
   return {
     userId: user.id,
     email: user.email ?? null,
-    tier: (profile?.tier ?? "free") as Tier,
+    tier: (org?.tier ?? "free") as Tier,
+    orgId: profile?.org_id ?? null,
+    orgName: org?.name ?? null,
   }
 }
 
