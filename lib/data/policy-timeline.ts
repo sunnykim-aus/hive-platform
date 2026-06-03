@@ -19,14 +19,14 @@ export const POLICY_TIMELINE: PolicyEvent[] = [
 ]
 
 export const TYPE_COLORS: Record<string, string> = {
-  construction: "#f39c12",
-  public_housing: "#27ae60",
-  affordable_rental: "#3498db",
-  agreement: "#9b59b6",
-  financing: "#1abc9c",
-  homeownership: "#e74c3c",
-  supply: "#f6c90e",
-  social_housing: "#2ecc71",
+  construction:     "#c49a3a",   // amber — stimulus / demand-side
+  public_housing:   "#4d7fb5",   // primary blue — government delivery
+  affordable_rental: "#7aaad4",  // lighter blue — affordable supply
+  agreement:        "#6b8aa0",   // blue-slate — federal agreements
+  financing:        "#4d7fb5",   // blue — financing vehicles
+  homeownership:    "#6b8aa0",   // slate — homeownership (lower social housing relevance)
+  supply:           "#f6c90e",   // gold — major supply targets
+  social_housing:   "#5aad8a",   // green — social/affordable (positive)
 }
 
 export const TYPE_LABELS: Record<string, string> = {

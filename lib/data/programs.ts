@@ -124,16 +124,16 @@ export const PROGRAMS: Program[] = [
     program_type: "Social & Affordable Housing Fund",
     geographic_scope: "Federal",
     status: "Active",
-    description: "A $10B off-budget fund whose returns (not principal) fund social and affordable housing. Managed by Future Fund. Distributes approximately $500M per year to Housing Australia for allocation to CHPs and states. First round allocations announced 2024. Target: 30,000 new dwellings (20,000 social, 10,000 affordable) over 5 years.",
+    description: "A $10B off-budget endowment fund whose returns (not principal) fund social and affordable housing. Managed by Future Fund; distributes ~$500M/year to Housing Australia for allocation to CHPs and states via competitive rounds. Target: 40,000 new dwellings (20,000 social + 20,000 affordable) by 2029. Rounds 1–2 contracted 18,650 homes; Round 3 in application phase targeting 21,350 more. Source: Housing Australia 3 Jul 2025.",
     source_url: "https://www.housingaustralia.gov.au/housing-australia-future-fund",
     targets: [
+      { metric: "Total homes (social + affordable)", target_value: 40000, target_unit: "dwellings", target_year: 2029, source: "HAFF legislation 2023; Housing Australia" },
       { metric: "Social housing dwellings", target_value: 20000, target_unit: "dwellings", target_year: 2029, source: "HAFF legislation 2023" },
-      { metric: "Affordable housing dwellings", target_value: 10000, target_unit: "dwellings", target_year: 2029, source: "HAFF legislation 2023" },
-      { metric: "Women's/family safety dwellings", target_value: 4000, target_unit: "dwellings", target_year: 2029, source: "HAFF Round 1 guidelines" },
+      { metric: "Affordable housing dwellings", target_value: 20000, target_unit: "dwellings", target_year: 2029, source: "HAFF legislation 2023" },
     ],
     outcomes: [
-      { metric: "Round 1 dwellings funded", actual_value: 13756, actual_unit: "dwellings", measurement_year: 2024, confidence: "High", source_report: "Housing Australia HAFF Round 1 Outcomes 2024", notes: "First round exceeded expectations. Mix of social and affordable. CHPs received majority of allocations." },
-      { metric: "Fund returns available per year (est.)", actual_value: 500, actual_unit: "$M", measurement_year: 2024, confidence: "Medium", source_report: "Housing Australia", notes: "Returns vary with market conditions — risk that low-return years reduce funding available." },
+      { metric: "Homes contracted (Rounds 1+2)", actual_value: 18650, actual_unit: "dwellings", measurement_year: 2025, confidence: "High", source_report: "Housing Australia media release 3 Jul 2025", notes: "R1: 13,649 homes (Sep 2024). R2: 5,001 social homes (Jul 2025). Round 3 targeting 21,350 more; applications open Jan 2026." },
+      { metric: "% of 5-year target contracted", actual_value: 47, actual_unit: "%", measurement_year: 2025, confidence: "High", source_report: "Housing Australia 3 Jul 2025", notes: "18,650 ÷ 40,000 = 46.6%. Full delivery requires flawless Round 3 execution by 2029." },
     ],
   },
   {

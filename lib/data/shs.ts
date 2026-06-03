@@ -27,6 +27,10 @@ export const SHS_DATA: SHSRecord[] = [
   { year: "2021-22", clients: 278900, unassisted: 68500, needing_housing: 150200, got_housing: 42000 },
   { year: "2022-23", clients: 284300, unassisted: 71800, needing_housing: 155200, got_housing: 43100 },
   { year: "2023-24", clients: 301200, unassisted: 79600, needing_housing: 163400, got_housing: 44800 },
+  // 2024-25: AIHW SHS Annual Report 2024-25 (published Feb 2026)
+  // clients + unassisted: confirmed. needing_housing = 56% citing accommodation issues.
+  // got_housing: estimated from homeless cohort outcomes (~29% housed rate applied to needing_housing).
+  { year: "2024-25", clients: 289000, unassisted: 129000, needing_housing: 160000, got_housing: 46500 },
 ]
 
 export const WAITLIST_DATA: WaitlistRecord[] = [
@@ -55,6 +59,15 @@ export const WAITLIST_DATA: WaitlistRecord[] = [
   { state: "SA",  year: 2022, applicants: 15800, source: "SAHT Register" },
   { state: "SA",  year: 2023, applicants: 17200, source: "SAHT Register" },
   { state: "SA",  year: 2024, applicants: 18400, source: "SAHT Register" },
+  { state: "TAS", year: 2022, applicants: 3200,  source: "Housing Tasmania Register" },
+  { state: "TAS", year: 2023, applicants: 3400,  source: "Housing Tasmania Register" },
+  { state: "TAS", year: 2024, applicants: 3500,  source: "Housing Tasmania Register" },
+  { state: "NT",  year: 2022, applicants: 2600,  source: "NT Housing Register" },
+  { state: "NT",  year: 2023, applicants: 2700,  source: "NT Housing Register" },
+  { state: "NT",  year: 2024, applicants: 2800,  source: "NT Housing Register" },
+  { state: "ACT", year: 2022, applicants: 3100,  source: "ACT Housing Registrar" },
+  { state: "ACT", year: 2023, applicants: 3200,  source: "ACT Housing Registrar" },
+  { state: "ACT", year: 2024, applicants: 3200,  source: "ACT Housing Registrar" },
 ]
 
 export interface SHSSummary {

@@ -27,7 +27,7 @@ export default function DigestPage() {
   }
 
   return (
-    <div style={{ background: "#0f0f1a", minHeight: "100vh" }}>
+    <div style={{ background: "#0b1220", minHeight: "100vh" }}>
       <div className="page-container">
 
         <div className="page-header">
@@ -48,13 +48,13 @@ export default function DigestPage() {
             ].map(({ label, desc }) => (
               <div key={label}>
                 <div style={{ fontWeight: 700, color: "#f6c90e", marginBottom: 6, fontSize: "0.88rem" }}>{label}</div>
-                <div style={{ fontSize: "0.8rem", color: "#888", lineHeight: 1.6 }}>{desc}</div>
+                <div style={{ fontSize: "0.8rem", color: "#94a3b8", lineHeight: 1.6 }}>{desc}</div>
               </div>
             ))}
           </div>
 
-          <div style={{ borderTop: "1px solid #2a2a4e", paddingTop: 16 }}>
-            <div style={{ fontSize: "0.8rem", color: "#888", marginBottom: 16, lineHeight: 1.6 }}>
+          <div style={{ borderTop: "1px solid #1e2d40", paddingTop: 16 }}>
+            <div style={{ fontSize: "0.8rem", color: "#94a3b8", marginBottom: 16, lineHeight: 1.6 }}>
               The digest includes: building approvals run rate vs Accord target, SHS unmet demand update, HAFF delivery progress, key state waitlist movements, and sector context.
             </div>
             <button
@@ -70,14 +70,14 @@ export default function DigestPage() {
 
         {/* Error */}
         {error && (
-          <div className="callout-red" style={{ marginBottom: 20, fontSize: "0.85rem", color: "#e74c3c" }}>
+          <div className="callout-red" style={{ marginBottom: 20, fontSize: "0.85rem", color: "#c0614a" }}>
             {error}
           </div>
         )}
 
         {/* Loading */}
         {loading && (
-          <div className="hive-card" style={{ textAlign: "center", padding: 48, color: "#666" }}>
+          <div className="hive-card" style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>
             <div style={{ fontSize: "1.5rem", marginBottom: 12 }}>Compiling weekly digest...</div>
             <div style={{ fontSize: "0.82rem" }}>Gathering live indicators, synthesising with AI...</div>
           </div>
@@ -88,9 +88,9 @@ export default function DigestPage() {
           <div className="hive-card">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
               <div className="section-label" style={{ marginBottom: 0 }}>Weekly Intelligence Digest</div>
-              <div style={{ fontSize: "0.72rem", color: "#555" }}>Generated {new Date(result.generated_at).toLocaleDateString("en-AU", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>
+              <div style={{ fontSize: "0.72rem", color: "#94a3b8" }}>Generated {new Date(result.generated_at).toLocaleDateString("en-AU", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</div>
             </div>
-            <div style={{ fontSize: "0.88rem", color: "#ccc", lineHeight: 1.9, whiteSpace: "pre-wrap" }}>
+            <div style={{ fontSize: "0.88rem", color: "#cbd5e1", lineHeight: 1.9, whiteSpace: "pre-wrap" }}>
               {result.digest}
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function DigestPage() {
               ].map(({ title, desc }) => (
                 <div key={title} className="hive-card">
                   <div style={{ fontWeight: 700, color: "#fff", marginBottom: 6, fontSize: "0.88rem" }}>{title}</div>
-                  <div style={{ fontSize: "0.78rem", color: "#888", lineHeight: 1.6 }}>{desc}</div>
+                  <div style={{ fontSize: "0.78rem", color: "#94a3b8", lineHeight: 1.6 }}>{desc}</div>
                 </div>
               ))}
             </div>

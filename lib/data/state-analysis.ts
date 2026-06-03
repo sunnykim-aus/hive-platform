@@ -95,6 +95,27 @@ export const WAITLIST_TREND: Record<string, WaitlistDataPoint[]> = {
     { year: 2022, applicants: 15800 }, { year: 2023, applicants: 17200 },
     { year: 2024, applicants: 18400 },
   ],
+  TAS: [
+    { year: 2010, applicants: 2400 }, { year: 2012, applicants: 2600 },
+    { year: 2014, applicants: 2800 }, { year: 2016, applicants: 2900 },
+    { year: 2018, applicants: 2800 }, { year: 2020, applicants: 3000 },
+    { year: 2022, applicants: 3200 }, { year: 2023, applicants: 3400 },
+    { year: 2024, applicants: 3500 },
+  ],
+  NT: [
+    { year: 2010, applicants: 1800 }, { year: 2012, applicants: 2000 },
+    { year: 2014, applicants: 2100 }, { year: 2016, applicants: 2200 },
+    { year: 2018, applicants: 2300 }, { year: 2020, applicants: 2400 },
+    { year: 2022, applicants: 2600 }, { year: 2023, applicants: 2700 },
+    { year: 2024, applicants: 2800 },
+  ],
+  ACT: [
+    { year: 2010, applicants: 2600 }, { year: 2012, applicants: 2800 },
+    { year: 2014, applicants: 2900 }, { year: 2016, applicants: 3000 },
+    { year: 2018, applicants: 3000 }, { year: 2020, applicants: 3100 },
+    { year: 2022, applicants: 3100 }, { year: 2023, applicants: 3200 },
+    { year: 2024, applicants: 3200 },
+  ],
 }
 
 export const WAITLIST_DEMOGRAPHICS: Record<string, { year: string; source: string; types: DemographicType[] }> = {
@@ -136,6 +157,30 @@ export const WAITLIST_DEMOGRAPHICS: Record<string, { year: string; source: strin
       { label: "Single person", pct: 53 }, { label: "Single parent + children", pct: 19 },
       { label: "Aged 65+", pct: 14 }, { label: "Couple + children", pct: 7 },
       { label: "Couple, no children", pct: 4 }, { label: "Other", pct: 3 },
+    ],
+  },
+  TAS: {
+    year: "2023-24", source: "Housing Tasmania Applicant Register 2023-24",
+    types: [
+      { label: "Single person", pct: 57 }, { label: "Single parent + children", pct: 18 },
+      { label: "Aged 65+", pct: 12 }, { label: "Couple + children", pct: 6 },
+      { label: "Couple, no children", pct: 4 }, { label: "Other", pct: 3 },
+    ],
+  },
+  NT: {
+    year: "2023-24", source: "NT Housing Register 2023-24",
+    types: [
+      { label: "Single person", pct: 41 }, { label: "Single parent + children", pct: 28 },
+      { label: "Aged 65+", pct: 7 }, { label: "Couple + children", pct: 14 },
+      { label: "Couple, no children", pct: 6 }, { label: "Other", pct: 4 },
+    ],
+  },
+  ACT: {
+    year: "2023-24", source: "ACT Housing Registrar 2023-24",
+    types: [
+      { label: "Single person", pct: 50 }, { label: "Single parent + children", pct: 22 },
+      { label: "Aged 65+", pct: 11 }, { label: "Couple + children", pct: 9 },
+      { label: "Couple, no children", pct: 5 }, { label: "Other", pct: 3 },
     ],
   },
 }
@@ -183,6 +228,27 @@ export const APPROVALS_BY_TYPE: Record<string, ApprovalsDataPoint[]> = {
     { year: 2018, houses: 8200, other: 4200 }, { year: 2020, houses: 9800, other: 3600 },
     { year: 2022, houses: 9200, other: 3800 }, { year: 2023, houses: 8400, other: 3600 },
     { year: 2024, houses: 7800, other: 3400 },
+  ],
+  TAS: [
+    { year: 2010, houses: 2400, other: 600 }, { year: 2012, houses: 2100, other: 550 },
+    { year: 2014, houses: 1900, other: 480 }, { year: 2016, houses: 2000, other: 520 },
+    { year: 2018, houses: 2400, other: 700 }, { year: 2020, houses: 2800, other: 900 },
+    { year: 2022, houses: 3100, other: 1100 }, { year: 2023, houses: 2900, other: 1000 },
+    { year: 2024, houses: 2700, other: 900 },
+  ],
+  NT: [
+    { year: 2010, houses: 1100, other: 400 }, { year: 2012, houses: 1200, other: 350 },
+    { year: 2014, houses: 1000, other: 300 }, { year: 2016, houses: 900, other: 280 },
+    { year: 2018, houses: 850, other: 250 }, { year: 2020, houses: 950, other: 280 },
+    { year: 2022, houses: 1100, other: 320 }, { year: 2023, houses: 1050, other: 300 },
+    { year: 2024, houses: 1000, other: 290 },
+  ],
+  ACT: [
+    { year: 2010, houses: 1800, other: 1400 }, { year: 2012, houses: 1900, other: 1600 },
+    { year: 2014, houses: 2000, other: 1800 }, { year: 2016, houses: 2200, other: 2100 },
+    { year: 2018, houses: 2100, other: 2400 }, { year: 2020, houses: 2400, other: 2600 },
+    { year: 2022, houses: 2600, other: 2900 }, { year: 2023, houses: 2500, other: 2800 },
+    { year: 2024, houses: 2400, other: 2600 },
   ],
 }
 
@@ -234,6 +300,27 @@ export const SOCIAL_HOUSING_COMPLETIONS: Record<string, SocialCompletionsDataPoi
     { year: 2022, social: 320, affordable: 160 }, { year: 2023, social: 380, affordable: 190 },
     { year: 2024, social: 420, affordable: 210 },
   ],
+  TAS: [
+    { year: 2010, social: 160, affordable: 60 }, { year: 2012, social: 140, affordable: 55 },
+    { year: 2014, social: 120, affordable: 50 }, { year: 2016, social: 100, affordable: 45 },
+    { year: 2018, social: 90, affordable: 40 }, { year: 2020, social: 110, affordable: 50 },
+    { year: 2022, social: 140, affordable: 65 }, { year: 2023, social: 170, affordable: 80 },
+    { year: 2024, social: 200, affordable: 95 },
+  ],
+  NT: [
+    { year: 2010, social: 320, affordable: 80 }, { year: 2012, social: 280, affordable: 70 },
+    { year: 2014, social: 260, affordable: 65 }, { year: 2016, social: 230, affordable: 60 },
+    { year: 2018, social: 210, affordable: 55 }, { year: 2020, social: 240, affordable: 60 },
+    { year: 2022, social: 270, affordable: 70 }, { year: 2023, social: 290, affordable: 75 },
+    { year: 2024, social: 310, affordable: 80 },
+  ],
+  ACT: [
+    { year: 2010, social: 180, affordable: 90 }, { year: 2012, social: 160, affordable: 85 },
+    { year: 2014, social: 150, affordable: 80 }, { year: 2016, social: 140, affordable: 80 },
+    { year: 2018, social: 160, affordable: 90 }, { year: 2020, social: 190, affordable: 100 },
+    { year: 2022, social: 230, affordable: 120 }, { year: 2023, social: 260, affordable: 140 },
+    { year: 2024, social: 290, affordable: 155 },
+  ],
 }
 
 export const HOUSEHOLD_SIZE_TREND: Record<string, HouseholdSizeDataPoint[]> = {
@@ -242,6 +329,9 @@ export const HOUSEHOLD_SIZE_TREND: Record<string, HouseholdSizeDataPoint[]> = {
   VIC: [{ year: 2001, avg: 2.60 }, { year: 2006, avg: 2.57 }, { year: 2011, avg: 2.55 }, { year: 2016, avg: 2.52 }, { year: 2021, avg: 2.48 }],
   QLD: [{ year: 2001, avg: 2.63 }, { year: 2006, avg: 2.60 }, { year: 2011, avg: 2.57 }, { year: 2016, avg: 2.52 }, { year: 2021, avg: 2.48 }],
   SA:  [{ year: 2001, avg: 2.44 }, { year: 2006, avg: 2.40 }, { year: 2011, avg: 2.38 }, { year: 2016, avg: 2.35 }, { year: 2021, avg: 2.31 }],
+  TAS: [{ year: 2001, avg: 2.48 }, { year: 2006, avg: 2.44 }, { year: 2011, avg: 2.40 }, { year: 2016, avg: 2.37 }, { year: 2021, avg: 2.33 }],
+  NT:  [{ year: 2001, avg: 2.72 }, { year: 2006, avg: 2.68 }, { year: 2011, avg: 2.65 }, { year: 2016, avg: 2.62 }, { year: 2021, avg: 2.58 }],
+  ACT: [{ year: 2001, avg: 2.62 }, { year: 2006, avg: 2.58 }, { year: 2011, avg: 2.55 }, { year: 2016, avg: 2.52 }, { year: 2021, avg: 2.49 }],
 }
 
 export const STATE_INFO: Record<string, StateInfo> = {
@@ -267,7 +357,7 @@ export const STATE_INFO: Record<string, StateInfo> = {
     social_housing_stock: 83000,
     target_new_pa: 12000,
     key_program: "Big Housing Build ($5.3B)",
-    insight: "Victoria's waitlist nearly doubled from 38,000 to 63,000 in five years — the steepest deterioration of any state. The Big Housing Build ($5.3B, 12,000 new dwellings) is the largest state housing investment in Australian history and is now delivering. VIC is the only state building enough to potentially bend the curve — but 55% of applicants are singles, and the build mix must skew toward smaller typologies to match.",
+    insight: "Victoria's waitlist grew by two-thirds — from 38,000 to 63,000 in five years — the largest absolute increase of any state. The Big Housing Build ($5.3B, 12,000 new dwellings) is the largest state housing investment in Australian history and is now delivering. VIC is the only state building enough to potentially bend the curve — but 55% of applicants are singles, and the build mix must skew toward smaller typologies to match.",
   },
   QLD: {
     full: "Queensland",
@@ -283,7 +373,31 @@ export const STATE_INFO: Record<string, StateInfo> = {
     social_housing_stock: 37000,
     target_new_pa: 1000,
     key_program: "Housing Roadmap 2024",
-    insight: "SA has a smaller but rapidly growing waitlist, up 38% since 2022. SA's housing market has become one of Australia's tightest, with Adelaide vacancy rates under 0.5%. The SAHT stock has declined due to sales and demolitions outpacing new builds. Demographics show 53% singles and 14% aged — both groups needing affordable, smaller dwellings in accessible locations.",
+    insight: "SA has a smaller but rapidly growing waitlist, up 16% since 2022 and up ~38% over the past decade. SA's housing market has become one of Australia's tightest, with Adelaide vacancy rates under 0.5%. The SAHT stock has declined due to sales and demolitions outpacing new builds. Demographics show 53% singles and 14% aged — both groups needing affordable, smaller dwellings in accessible locations.",
+  },
+  TAS: {
+    full: "Tasmania",
+    authority: "Housing Tasmania — Dept. of Communities",
+    social_housing_stock: 12500,
+    target_new_pa: 400,
+    key_program: "Tasmanian Affordable Housing Action Plan",
+    insight: "Tasmania has Australia's tightest rental market by vacancy rate — Hobart sat below 0.5% for most of 2022-23, pushing rents up 35% in three years. The waitlist has grown steadily to 3,500, disproportionately large for a state of 570,000. Supply is severely constrained by geography, construction cost premiums, and a limited CHP sector. With 57% of waitlist applicants being single-person households, the urgent need is for compact, well-located dwellings in Hobart and Launceston.",
+  },
+  NT: {
+    full: "Northern Territory",
+    authority: "NT Housing — Dept. of Housing and Community Development",
+    social_housing_stock: 14000,
+    target_new_pa: 350,
+    key_program: "Our Community. Our Future. Our Homes",
+    insight: "The NT has the highest rate of overcrowding and homelessness per capita in Australia, concentrated in remote Aboriginal communities. A disproportionate share of the 2,800-strong waitlist represents families needing larger dwellings — 14% couples with children vs 9% nationally. Construction costs in the NT are the highest in Australia (42% above national average) due to supply chain constraints, remoteness, and climate. Federal investment through the remote housing program is critical.",
+  },
+  ACT: {
+    full: "Australian Capital Territory",
+    authority: "ACT Housing — Community Services Directorate",
+    social_housing_stock: 11000,
+    target_new_pa: 500,
+    key_program: "ACT Housing Strategy 2018–2028",
+    insight: "Despite being Australia's wealthiest jurisdiction by income, Canberra has a waitlist of 3,200 — driven by high market rents, public sector churn, and inadequate social stock relative to demand. ACT's infill-focused planning means most new supply is mid-to-high density, yet the social housing mix remains outdated. The ACT government has ambitious sustainability targets and its housing pipeline skews toward apartments, which aligns well with the 50% singles and 22% single-parent demographics on the waitlist.",
   },
 }
 
@@ -344,7 +458,7 @@ export function getStateSummary(state = "WA"): StateSummary {
   const latest_affordable_completions = latest_social_entry.affordable ?? 0
   const accessible_total = latest_social_completions + latest_affordable_completions
   const accessible_pct_of_approvals = total_approvals ? Math.round((accessible_total / total_approvals) * 100 * 10) / 10 : 0
-  const years_to_clear_waitlist = latest_social_completions ? Math.round(latest_wl.applicants / latest_social_completions) : null
+  const years_to_clear_waitlist = accessible_total ? Math.round(latest_wl.applicants / accessible_total) : null
 
   return {
     state,
@@ -376,7 +490,7 @@ export function getStateSummary(state = "WA"): StateSummary {
 }
 
 export function getAllStatesLatest() {
-  return ["NSW", "VIC", "QLD", "WA", "SA"].map(state => {
+  return ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "NT", "ACT"].map(state => {
     const s = getStateSummary(state)
     return {
       state,

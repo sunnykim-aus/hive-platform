@@ -93,32 +93,32 @@ export const GLOBAL_EVENTS: GlobalEvent[] = [
   {
     date: "Mar 2020", year_frac: 2020.17, event: "COVID-19 Global Pandemic",
     impact: "Construction sites shut across Australia. Import supply chains disrupted. Cost pressures initially muted — then exploded as demand rebounded.",
-    cost_impact: "+0.4% in 2020, followed by +18% over 2021", icon: "🦠", color: "#e74c3c",
+    cost_impact: "+0.4% in 2020, followed by +18% over 2021", icon: "🦠", color: "#c0614a",
   },
   {
     date: "Jun 2020", year_frac: 2020.42, event: "HomeBuilder Scheme Launched",
     impact: "Government stimulus offering $25,000 grants for new homes. Created an immediate demand surge — builders booked out 12–18 months. Trades prices rose sharply as capacity was overwhelmed.",
-    cost_impact: "Added estimated $15,000–$25,000 to average build cost due to trades premium", icon: "🏠", color: "#f39c12",
+    cost_impact: "Added estimated $15,000–$25,000 to average build cost due to trades premium", icon: "🏠", color: "#c49a3a",
   },
   {
     date: "Jan 2021", year_frac: 2021.0, event: "Global Timber Crisis",
     impact: "Framing lumber prices rose 130% globally in 12 months. North American sawmill shutdowns during COVID combined with surging US housing demand created a worldwide shortage.",
-    cost_impact: "Framing and structural timber: +40–60% vs 2019", icon: "🪵", color: "#8e5e3a",
+    cost_impact: "Framing and structural timber: +40–60% vs 2019", icon: "🪵", color: "#7a8fa8",
   },
   {
     date: "Mar 2021", year_frac: 2021.21, event: "Suez Canal Blockage",
     impact: "Ever Given grounded for 6 days — halted $9.6B/day in global trade. Compounded an already strained shipping container shortage.",
-    cost_impact: "Imported materials: +15–25% freight premiums through to mid-2022", icon: "🚢", color: "#3498db",
+    cost_impact: "Imported materials: +15–25% freight premiums through to mid-2022", icon: "🚢", color: "#4d7fb5",
   },
   {
     date: "Feb 2022", year_frac: 2022.12, event: "Russia Invades Ukraine",
     impact: "Russia and Ukraine supply ~30% of global steel and significant shares of nickel, aluminium, and neon gas. Energy prices spiked and fed through to Australian LNG prices.",
-    cost_impact: "Structural steel: +22–30%. Reinforcing bar: +35%. Energy-intensive materials: +15–20%", icon: "⚔️", color: "#c0392b",
+    cost_impact: "Structural steel: +22–30%. Reinforcing bar: +35%. Energy-intensive materials: +15–20%", icon: "⚔️", color: "#c0614a",
   },
   {
     date: "May 2022", year_frac: 2022.37, event: "RBA Begins Rate Hikes",
     impact: "Cash rate rose from 0.1% to 4.35% in 13 months. Builder financing costs rose sharply. Fixed-price contracts signed in 2021 became loss-making.",
-    cost_impact: "Financing costs: +200–300bps. Triggered wave of builder insolvencies.", icon: "📈", color: "#9b59b6",
+    cost_impact: "Financing costs: +200–300bps. Triggered wave of builder insolvencies.", icon: "📈", color: "#6b8aa0",
   },
   {
     date: "2022–2023", year_frac: 2022.75, event: "Labour Shortage Crisis",
@@ -128,7 +128,7 @@ export const GLOBAL_EVENTS: GlobalEvent[] = [
   {
     date: "2023–2025", year_frac: 2023.5, event: "Elevated Plateau",
     impact: "Cost growth has slowed but costs remain 55–60% above 2019. The structural factors (labour shortages, tight trades capacity, elevated materials) have not unwound.",
-    cost_impact: "Current build cost: $3,800–$5,500/m² for social housing — vs $2,200–$3,100/m² in 2019", icon: "📊", color: "#7f8c8d",
+    cost_impact: "Current build cost: $3,800–$5,500/m² for social housing — vs $2,200–$3,100/m² in 2019", icon: "📊", color: "#6b8aa0",
   },
 ]
 
@@ -191,6 +191,21 @@ export const STATE_CONDITION: Record<string, StateCondition> = {
     program: "South Australian Housing Trust Capital Program — $400M over 4 years.",
     flagship_renewal: "Woodville West, Angle Park, Bowden — inner-ring estate renewal.",
   },
+  TAS: {
+    dwellings: 12500, backlog_m: 820, avg_age: 46,
+    program: "Tasmanian Housing Strategy — $400M (2023–27). Focus on new builds and critical maintenance of ageing pre-1970s stock.",
+    flagship_renewal: "Clarendon Vale and Rokeby (Hobart), Riverside and Ravenswood (Launceston) — estate upgrades underway.",
+  },
+  NT: {
+    dwellings: 14000, backlog_m: 1400, avg_age: 28,
+    program: "National Partnership on Remote Housing — $550M over 5 years (2021–26). Federally co-funded with NT Government.",
+    flagship_renewal: "Remote Aboriginal Community Housing — over 70 communities in scope. Stock is newer but climate-exposed and overcrowded.",
+  },
+  ACT: {
+    dwellings: 11000, backlog_m: 680, avg_age: 40,
+    program: "Growing and Renewing Public Housing — $200M (2022–26). Targets older walk-up flats for renewal and energy upgrade.",
+    flagship_renewal: "Northbourne Avenue corridor — older public housing replaced with mixed-tenure developments.",
+  },
 }
 
 export const GOVERNMENT_RESPONSES: GovernmentResponse[] = [
@@ -198,7 +213,7 @@ export const GOVERNMENT_RESPONSES: GovernmentResponse[] = [
     program: "Social Housing Accelerator", year: 2023, amount_m: 2000,
     type: "New construction grants to states", homes: 10000,
     notes: "Direct federal grants to state housing authorities. No requirement for community housing provider involvement.",
-    status: "Underway", color: "#27ae60",
+    status: "Underway", color: "#5aad8a",
   },
   {
     program: "HAFF — Social Housing Component", year: 2023, amount_m: 4000,
@@ -210,7 +225,7 @@ export const GOVERNMENT_RESPONSES: GovernmentResponse[] = [
     program: "National Housing Infrastructure Facility", year: 2018, amount_m: 3000,
     type: "Concessional loans for infrastructure", homes: null,
     notes: "Finances enabling infrastructure (roads, water, sewerage) for housing developments.",
-    status: "Ongoing", color: "#3498db",
+    status: "Ongoing", color: "#4d7fb5",
   },
   {
     program: "Homes for Australians — Energy Efficiency", year: 2024, amount_m: 300,
@@ -222,7 +237,7 @@ export const GOVERNMENT_RESPONSES: GovernmentResponse[] = [
     program: "State Maintenance Budgets (combined)", year: 2024, amount_m: 1200,
     type: "Ongoing state maintenance", homes: null,
     notes: "Combined annual state housing authority maintenance spend. Against a $26.5B backlog, this represents under 5% per year.",
-    status: "Ongoing — inadequate", color: "#e74c3c",
+    status: "Ongoing — inadequate", color: "#c0614a",
   },
 ]
 
