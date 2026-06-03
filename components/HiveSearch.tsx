@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Markdown from "./Markdown"
 
 type Source = {
   index: number
@@ -224,9 +225,7 @@ export default function HiveSearch() {
                 {copied ? "✓ Copied to clipboard" : "Export Brief"}
               </button>
             </div>
-            <div style={{ fontSize: "0.88rem", color: "#c8d8e8", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
-              {result.answer}
-            </div>
+            <Markdown text={result.answer} />
           </div>
 
           {/* Sources */}
@@ -237,7 +236,7 @@ export default function HiveSearch() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {result.sources.map(s => (
-                  <div key={s.index} className="hive-card" style={{ padding: "12px 16px", display: "flex", gap: 14 }}>
+                  <div key={s.index} id={`hive-source-${s.index}`} className="hive-card" style={{ padding: "12px 16px", display: "flex", gap: 14, scrollMarginTop: 90 }}>
                     <span style={{ color: "#f6c90e", fontWeight: 800, fontSize: "0.78rem", flexShrink: 0, marginTop: 2, minWidth: 24 }}>
                       [{s.index}]
                     </span>

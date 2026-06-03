@@ -17,11 +17,22 @@ export async function POST(req: NextRequest) {
     const index = pc.index(process.env.PINECONE_INDEX!)
     const namespacedIndex = index.namespace(process.env.PINECONE_NAMESPACE!)
     const results = await namespacedIndex.searchRecords({
-      query: { inputs: { text: `${policyName} housing policy impact outcomes results effectiveness evaluation` }, topK: 12 },
+      query: { inputs: { text: `${policyName} housing policy impact outcomes results effectiveness evaluation` }, topK: 16 },
       fields: ["text", "title", "source_url", "source_agency", "authors", "year"],
     })
 
-    const hits = (results as { result?: { hits?: unknown[] } }).result?.hits ?? []
+    // Dedupe to unique reports — keep best-scoring chunk per source, cap at 8
+    const rawHits = ((results as { result?: { hits?: unknown[] } }).result?.hits ?? []) as { fields?: Record<string, string> }[]
+    const seen = new Set<string>()
+    const hits: { fields?: Record<string, string>; _score?: number }[] = []
+    for (const h of rawHits) {
+      const f = h.fields ?? {}
+      const k = String(f.source_url || f.title || "").trim().toLowerCase()
+      if (!k || seen.has(k)) continue
+      seen.add(k)
+      hits.push(h as { fields?: Record<string, string>; _score?: number })
+      if (hits.length >= 8) break
+    }
 
     if (hits.length === 0) {
       return NextResponse.json({
@@ -40,26 +51,31 @@ ${f.text ?? ""}`
     // ── 3. Synthesise with Claude ─────────────────────────────────────────────
     const message = await anthropic.messages.create({
       model: "claude-haiku-4-5",
-      max_tokens: 1400,
+      max_tokens: 1600,
       messages: [{
         role: "user",
-        content: `You are HIVE — an Australian housing policy analyst. Analyse the impact of the following policy using ONLY the research excerpts below.
+        content: `You are HIVE — an Australian housing policy analyst. Assess the impact of the policy below using ONLY the numbered research excerpts.
 
 Policy: ${policyName}
 Year announced: ${year}
 Funding: $${fundingAmount}B
 
-Your analysis should:
-1. Summarise what the policy was designed to do
-2. Report on actual outcomes vs targets (citing evidence)
-3. Identify what worked and what didn't
-4. Note any unintended consequences
-5. Give an overall effectiveness assessment (High/Medium/Low confidence)
-6. End with a "Key Evidence" section citing sources as [1], [2] etc
+Write it in Markdown with this structure:
+- Open with a 2–3 sentence verdict: what the policy set out to do and how effective it actually was (no heading).
+- "## Intended design" — what it was meant to achieve.
+- "## Outcomes vs targets" — actual results against goals; lead with figures (dollars, dwellings, %, timeframes) wherever the evidence gives them.
+- "## What worked / what didn't" — be specific and balanced.
+- "## Unintended consequences" — only if the evidence supports them.
+- "## Effectiveness rating" — High / Medium / Low, with a one-line justification and a note on evidence confidence.
+- "## What this means" — 2–3 implications for housing decision-makers today.
 
-If evidence is limited or mixed, say so explicitly. Do not extrapolate beyond the evidence.
+Rules:
+- Synthesise in your own analytical voice; do not stitch quotes. Use a short quote only when exact wording matters.
+- Cite every claim inline as [1], [2], matching the excerpt numbers. Never invent sources or facts beyond the excerpts.
+- If evidence is limited, mixed, or one-sided, say so plainly. Do not extrapolate.
+- Do NOT include a sources list — sources are displayed separately.
 
-Research excerpts:
+Numbered research excerpts:
 ${context}`,
       }],
     })

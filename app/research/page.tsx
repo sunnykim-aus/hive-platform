@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react"
 import HiveSearch from "@/components/HiveSearch"
+import Markdown from "@/components/Markdown"
 import { POLICY_TIMELINE, TYPE_LABELS as POLICY_TYPE_LABELS, TYPE_COLORS as POLICY_TYPE_COLORS } from "@/lib/data/policy-timeline"
 import { PROGRAMS } from "@/lib/data/programs"
 
@@ -489,16 +490,14 @@ export default function ResearchPage() {
                       {briefCopied ? "✓ Copied to clipboard" : "Export Brief"}
                     </button>
                   </div>
-                  <div style={{ fontSize: "0.88rem", color: "#cbd5e1", lineHeight: 1.8, whiteSpace: "pre-wrap" }}>
-                    {result.answer}
-                  </div>
+                  <Markdown text={result.answer} />
                 </div>
                 {result.sources.length > 0 && (
                   <div style={{ marginBottom: 32 }}>
                     <div className="section-label">Sources Referenced</div>
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {result.sources.map((s) => (
-                        <div key={s.index} className="source-card">
+                        <div key={s.index} id={`hive-source-${s.index}`} className="source-card" style={{ scrollMarginTop: 90 }}>
                           <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
                             <span style={{ color: "#f6c90e", fontWeight: 700, minWidth: 24 }}>[{s.index}]</span>
                             <div style={{ flex: 1 }}>
