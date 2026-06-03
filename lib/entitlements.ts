@@ -37,6 +37,11 @@ export const ROUTE_MIN_TIER: Record<string, Tier> = {
   "/": "free",
   "/legal": "free",
 
+  // ── Auth surfaces — must always be public, or login itself gets gated ──
+  "/login": "free",
+  "/locked": "free",
+  "/auth": "free", // covers /auth/callback and /auth/signout
+
   // ── Free (Starter) — substantive pages ──
   "/live-dashboard": "free",      // Housing Data
   "/housing-need": "free",        // national overview free; cohort detail gated in-page
