@@ -241,6 +241,42 @@ export default function ResearchPage() {
     return "Shortfall"
   }
 
+  // Delivery grade — pace-adjusted for active programs, final result for completed ones
+  function getScore(prog: typeof PROGRAMS[0]): { grade: string; pct: number; color: string; note: string } | null {
+    const t = prog.targets[0]
+    const o = prog.outcomes[0]
+    if (!t || !o || typeof o.actual_value !== "number") return null
+    const pct = Math.round((o.actual_value / t.target_value) * 100)
+    const completed = /Completed|Closed|running down/i.test(prog.status)
+    const gradeFromPct = (p: number) => (p >= 95 ? "A" : p >= 80 ? "B" : p >= 60 ? "C" : p >= 40 ? "D" : "F")
+
+    let grade: string
+    let note: string
+    if (completed) {
+      grade = gradeFromPct(Math.min(pct, 120))
+      note = `${pct}% of target delivered`
+    } else {
+      const start = prog.implemented_year || prog.announced_year
+      const end = t.target_year ?? prog.end_year ?? null
+      const now = new Date().getFullYear()
+      if (end && end > start) {
+        const elapsedPct = Math.round(Math.max(0, Math.min(1, (now - start) / (end - start))) * 100)
+        const ratio = elapsedPct > 0 ? pct / elapsedPct : 1
+        grade = ratio >= 1.05 ? "A" : ratio >= 0.9 ? "B" : ratio >= 0.7 ? "C" : ratio >= 0.5 ? "D" : "F"
+        note = ratio >= 1.0
+          ? `On track — ${pct}% delivered, ${elapsedPct}% of timeline elapsed`
+          : ratio >= 0.7
+            ? `Slightly behind — ${pct}% delivered vs ${elapsedPct}% of time`
+            : `Behind pace — ${pct}% delivered vs ${elapsedPct}% of time`
+      } else {
+        grade = gradeFromPct(pct)
+        note = `${pct}% of target so far`
+      }
+    }
+    const color = grade === "A" || grade === "B" ? "#5aad8a" : grade === "C" ? "#c49a3a" : grade === "D" ? "#e67e22" : "#c0614a"
+    return { grade, pct, color, note }
+  }
+
   return (
     <div style={{ background: "#0b1220", minHeight: "100vh" }}>
       <div className="page-container">
@@ -254,10 +290,10 @@ export default function ResearchPage() {
           <div style={{ display: "flex", gap: 10, marginTop: 12, flexWrap: "wrap" }}>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(90,173,138,0.1)", border: "1px solid rgba(90,173,138,0.3)", borderRadius: 20, padding: "3px 12px", fontSize: "0.65rem", fontWeight: 700, color: "#5aad8a" }}>
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#5aad8a", boxShadow: "0 0 4px #5aad8a", display: "inline-block" }} />
-              Pinecone Connected
+              Live evidence base
             </span>
             <span style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "rgba(77,127,181,0.1)", border: "1px solid rgba(77,127,181,0.3)", borderRadius: 20, padding: "3px 12px", fontSize: "0.65rem", fontWeight: 700, color: "#7aaad4" }}>
-              ⚡ 5,059 searchable chunks · RAG via Pinecone
+              ⚡ Cited answers in seconds
             </span>
           </div>
         </div>
@@ -282,7 +318,7 @@ export default function ResearchPage() {
             <div className="grid-4" style={{ marginBottom: 28 }}>
               {[
                 { value: "681",       label: "Reports indexed",        color: "#f6c90e" },
-                { value: "5,059",     label: "Searchable chunks",      color: "#f6c90e" },
+                { value: "5,059",     label: "Indexed passages",       color: "#f6c90e" },
                 { value: "20+",       label: "Source organisations",   color: "#f6c90e" },
                 { value: "2004–2025", label: "Publication range",      color: "#f6c90e" },
               ].map(({ value, label, color }) => (
@@ -608,6 +644,7 @@ export default function ResearchPage() {
                 const dColor         = deliveryColor(delivPct, p.status)
                 const dLabel         = deliveryLabel(delivPct, p.status)
                 const sColor         = STATUS_COLORS[p.status] ?? "#6b8aa0"
+                const score          = getScore(p)
                 const isExpanded     = expandedProgram === p.short_name
                 const drawnPct       = p.funding_drawn_bn != null ? Math.round(p.funding_drawn_bn / p.funding_committed_bn * 100) : null
 
@@ -633,6 +670,10 @@ export default function ResearchPage() {
                             <span className="badge" style={{ background: `${sColor}18`, color: sColor, border: `1px solid ${sColor}33`, fontSize: "0.6rem" }}>{p.status}</span>
                             <span className="badge badge-grey" style={{ fontSize: "0.6rem" }}>{p.program_type}</span>
                           </div>
+
+                          {score?.note && (
+                            <div style={{ fontSize: "0.68rem", color: score.color, fontWeight: 600, marginBottom: 8 }}>{score.note}</div>
+                          )}
 
                           {/* Metrics row */}
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px 16px" }}>
@@ -696,6 +737,17 @@ export default function ResearchPage() {
                             </div>
                           </div>
                         </div>
+
+                        {/* Delivery grade */}
+                        {score && (
+                          <div style={{ flexShrink: 0, textAlign: "center", width: 56 }}>
+                            <div style={{ width: 46, height: 46, borderRadius: 10, background: `${score.color}1a`, border: `1.5px solid ${score.color}66`, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto" }}>
+                              <span style={{ fontSize: "1.45rem", fontWeight: 900, color: score.color, lineHeight: 1 }}>{score.grade}</span>
+                            </div>
+                            <div style={{ fontSize: "0.55rem", color: "#4a5a6a", textTransform: "uppercase", letterSpacing: "0.5px", marginTop: 5 }}>Delivery</div>
+                            <div style={{ fontSize: "0.62rem", color: score.color, fontWeight: 800 }}>{score.pct}%</div>
+                          </div>
+                        )}
 
                         {/* Expand toggle */}
                         <div style={{ fontSize: "0.72rem", color: "#4a5a6a", flexShrink: 0, paddingTop: 2 }}>{isExpanded ? "▲" : "▼"}</div>
