@@ -41,6 +41,7 @@ export const ROUTE_MIN_TIER: Record<string, Tier> = {
   "/login": "free",
   "/locked": "free",
   "/auth": "free", // covers /auth/callback and /auth/signout
+  "/admin": "free", // page self-guards to super-admins (see app/admin/page.tsx)
 
   // ── Free (Starter) — substantive pages ──
   "/live-dashboard": "free",      // Housing Data
