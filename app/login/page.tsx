@@ -1,8 +1,10 @@
 "use client"
 
-import { useState, Suspense } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { createClient } from "@/lib/supabase/client"
+
+const PENDING_KEY = "hive_login_email"
 
 function LoginForm() {
   const params = useSearchParams()
@@ -13,6 +15,17 @@ function LoginForm() {
   const [step, setStep] = useState<"email" | "code">("email")
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
+
+  // Survive a reload (e.g. after the user leaves to read the email): if a code
+  // request is pending, restore the code-entry step. Runs post-hydration to
+  // avoid SSR mismatch.
+  useEffect(() => {
+    const pending = sessionStorage.getItem(PENDING_KEY)
+    if (pending) {
+      setEmail(pending)
+      setStep("code")
+    }
+  }, [])
 
   async function sendCode(e: React.FormEvent) {
     e.preventDefault()
@@ -27,6 +40,7 @@ function LoginForm() {
     if (error) {
       setError(error.message)
     } else {
+      sessionStorage.setItem(PENDING_KEY, email)
       setStep("code")
     }
   }
@@ -47,6 +61,7 @@ function LoginForm() {
       return
     }
     // Session cookie is set — full navigation so the server (proxy) sees it.
+    sessionStorage.removeItem(PENDING_KEY)
     window.location.assign(next)
   }
 
@@ -140,7 +155,7 @@ function LoginForm() {
               </button>
             </form>
             <button
-              onClick={() => { setStep("email"); setCode(""); setError("") }}
+              onClick={() => { sessionStorage.removeItem(PENDING_KEY); setStep("email"); setCode(""); setError("") }}
               style={{
                 background: "none",
                 border: "none",
