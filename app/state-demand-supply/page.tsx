@@ -10,6 +10,9 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
   ReferenceLine, Cell,
 } from "recharts"
+import ProUpgradePanel from "@/components/ProUpgradePanel"
+import { useTier } from "@/lib/useTier"
+import { meetsTier } from "@/lib/entitlements"
 
 const STATES = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "NT", "ACT"]
 
@@ -163,6 +166,13 @@ function JumpNav() {
 
 export default function DemandSupplyPage() {
   const [selectedState, setSelectedState] = useState("NSW")
+
+  const { tier, loaded: tierLoaded, gatingActive } = useTier()
+  const proState: "loading" | "unlocked" | "locked" = !tierLoaded
+    ? "loading"
+    : !gatingActive || meetsTier(tier, "pro")
+      ? "unlocked"
+      : "locked"
 
   // ── Population data ──────────────────────────────────────
   const first = HISTORICAL_NATIONAL[0]
@@ -657,6 +667,14 @@ export default function DemandSupplyPage() {
             PART 5 — STATE DEEP-DIVE
         ═══════════════════════════════════════════════════════ */}
         <PartTitle id="state-drill" part="Part 5">State Deep-Dive</PartTitle>
+        {proState === "loading" && <div style={{ padding: 24, textAlign: "center", color: "#6b8aa0", fontSize: "0.85rem" }}>Loading…</div>}
+        {proState === "locked" && (
+          <ProUpgradePanel
+            title="State deep-dive is a Pro feature"
+            body="Drill into any state — true-need estimates, multi-decade projections, and delivery-gap modelling. The free plan includes the state-level growth and waitlist outlook above."
+          />
+        )}
+        {proState === "unlocked" && (<>
         <p style={{ fontSize: "0.88rem", color: "#94a3b8", marginBottom: 16, lineHeight: 1.6 }}>
           Waitlist history, supply pipeline, delivery gap, who is waiting, and what needs to change — state by state.
         </p>
@@ -960,6 +978,7 @@ export default function DemandSupplyPage() {
         {/* ═══════════════════════════════════════════════════════
             PART 6 — POLICY LEVERS
         ═══════════════════════════════════════════════════════ */}
+        </>)}
         <PartTitle id="policy" part="Part 6">Policy Levers</PartTitle>
         <p style={{ fontSize: "0.88rem", color: "#94a3b8", marginBottom: 20, lineHeight: 1.6 }}>
           The evidence from population trends, waitlist data, and delivery gaps converges on clear advocacy positions for the housing sector.

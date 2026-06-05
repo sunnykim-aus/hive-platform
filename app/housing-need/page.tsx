@@ -9,6 +9,9 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, Cell, PieChart, Pie,
 } from "recharts"
+import ProUpgradePanel from "@/components/ProUpgradePanel"
+import { useTier } from "@/lib/useTier"
+import { meetsTier } from "@/lib/entitlements"
 
 // ── Shared styles ────────────────────────────────────────────
 const sectionHeader = {
@@ -76,6 +79,13 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 }
 
 export default function HousingNeedPage() {
+  const { tier, loaded: tierLoaded, gatingActive } = useTier()
+  const proState: "loading" | "unlocked" | "locked" = !tierLoaded
+    ? "loading"
+    : !gatingActive || meetsTier(tier, "pro")
+      ? "unlocked"
+      : "locked"
+
   const [selectedCohort, setSelectedCohort] = useState("lone-person")
   const [genderTab, setGenderTab] = useState<"women" | "men">("women")
 
@@ -404,6 +414,14 @@ export default function HousingNeedPage() {
           that makes private market housing structurally inaccessible — not just unaffordable.
         </SectionLabel>
 
+        {proState === "loading" && <div style={{ padding: 24, textAlign: "center", color: "#6b8aa0", fontSize: "0.85rem" }}>Loading…</div>}
+        {proState === "locked" && (
+          <ProUpgradePanel
+            title="Cohort-level analysis is a Pro feature"
+            body="Explore each of the six cohorts the market structurally fails — scale, key facts, what they need, and why the market fails them. The free plan includes the national overview above."
+          />
+        )}
+        {proState === "unlocked" && (<>
         {/* Cohort selector — tab style, no icons */}
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 16, borderBottom: "1px solid #1e2d40", paddingBottom: 12 }}>
           {VULNERABLE_COHORTS.map(c => (
@@ -500,6 +518,7 @@ export default function HousingNeedPage() {
           <strong style={{ color: "#f6c90e" }}>They are structural mismatches</strong> between what the market is incentivised to build and what these cohorts need.
           Social and community housing is not a residual option — it is the primary solution for approximately 740,000 Australian households.
         </Analysis>
+        </>)}
         </div>{/* end #cohorts */}
 
         <hr style={divider} />
