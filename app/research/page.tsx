@@ -2,6 +2,9 @@
 import { useState } from "react"
 import HiveSearch from "@/components/HiveSearch"
 import Markdown from "@/components/Markdown"
+import ProUpgradePanel from "@/components/ProUpgradePanel"
+import { useTier } from "@/lib/useTier"
+import { meetsTier } from "@/lib/entitlements"
 import { downloadWordBrief, printPdfBrief, type BriefOpts } from "@/lib/briefExport"
 import { POLICY_TIMELINE, TYPE_LABELS as POLICY_TYPE_LABELS, TYPE_COLORS as POLICY_TYPE_COLORS } from "@/lib/data/policy-timeline"
 import { PROGRAMS } from "@/lib/data/programs"
@@ -136,6 +139,14 @@ const TOP_TABS = ["Ask Research", "Policy Analyser", "Program Scorecard", "Sourc
 
 export default function ResearchPage() {
   const [activeTab,        setActiveTab]        = useState("Ask Research")
+
+  // In-page tier gating: AI tabs (Ask Research, Policy Analyser) are Pro+.
+  const { tier, loaded: tierLoaded, gatingActive } = useTier()
+  const proState: "loading" | "unlocked" | "locked" = !tierLoaded
+    ? "loading"
+    : !gatingActive || meetsTier(tier, "pro")
+      ? "unlocked"
+      : "locked"
 
   // Policy Analyser state (API wiring untouched)
   const [selectedIdx,  setSelectedIdx]  = useState(0)
@@ -334,8 +345,17 @@ export default function ResearchPage() {
               ))}
             </div>
 
-            {/* HiveSearch — API wiring untouched */}
-            <HiveSearch />
+            {/* HiveSearch — gated to Pro+ */}
+            {proState === "unlocked" ? (
+              <HiveSearch />
+            ) : proState === "locked" ? (
+              <ProUpgradePanel
+                title="AI research search is a Pro feature"
+                body="Ask any question and get cited answers across all 681 reports, 20 years of evidence (2004–2025). On the free plan you can browse the Source Library and Program Scorecard."
+              />
+            ) : (
+              <div style={{ padding: 24, textAlign: "center", color: "#6b8aa0", fontSize: "0.85rem" }}>Loading…</div>
+            )}
 
             {/* Key findings from the evidence base */}
             <div style={{ marginTop: 36, marginBottom: 8 }}>
@@ -428,7 +448,16 @@ export default function ResearchPage() {
         )}
 
         {/* ══ TAB 2: POLICY ANALYSER (merged Analysis + Timeline) ════════════ */}
-        {activeTab === "Policy Analyser" && (
+        {activeTab === "Policy Analyser" && proState === "locked" && (
+          <ProUpgradePanel
+            title="AI policy analysis is a Pro feature"
+            body="Analyse any major Australian housing policy against the full 681-report evidence base with AI synthesis. On the free plan you can browse the Source Library and Program Scorecard."
+          />
+        )}
+        {activeTab === "Policy Analyser" && proState === "loading" && (
+          <div style={{ padding: 24, textAlign: "center", color: "#6b8aa0", fontSize: "0.85rem" }}>Loading…</div>
+        )}
+        {activeTab === "Policy Analyser" && proState === "unlocked" && (
           <div>
             {/* Selector + RAG call */}
             <div className="hive-card" style={{ marginBottom: 24 }}>
