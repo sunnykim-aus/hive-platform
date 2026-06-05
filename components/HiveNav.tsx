@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import PortfolioChip from "./PortfolioChip"
+import NavAuth from "./NavAuth"
 
 const PAGES = [
   { label: "Home",                  href: "/" },
@@ -73,6 +74,7 @@ export default function HiveNav() {
           <span style={{ fontSize: "0.67rem", color: "#2a3d52", fontWeight: 500 }}>
             681 reports · Updated monthly
           </span>
+          <NavAuth />
         </div>
       </div>
 
