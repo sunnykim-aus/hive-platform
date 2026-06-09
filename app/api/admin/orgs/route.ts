@@ -49,6 +49,22 @@ export async function POST(req: Request) {
   return NextResponse.json({ ok: true })
 }
 
+// Delete an organisation. Attached profiles fall back to free
+// (profiles.org_id is ON DELETE SET NULL).
+export async function DELETE(req: Request) {
+  try {
+    await requireAdmin()
+  } catch {
+    return NextResponse.json({ error: "forbidden" }, { status: 403 })
+  }
+  const { id } = await req.json()
+  if (!id) return NextResponse.json({ error: "id required" }, { status: 400 })
+  const db = createAdminClient()
+  const { error } = await db.from("organisations").delete().eq("id", id)
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 })
+  return NextResponse.json({ ok: true })
+}
+
 // Update an organisation's tier / seats / domains / name.
 export async function PATCH(req: Request) {
   try {

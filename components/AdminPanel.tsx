@@ -126,6 +126,19 @@ export default function AdminPanel({ adminEmail }: { adminEmail: string }) {
     if (res.ok) load()
   }
 
+  async function deleteOrg(o: Org) {
+    if (!confirm(`Delete "${o.name}"? Members (${o.members}) will revert to free. This cannot be undone.`)) return
+    setMsg("")
+    const res = await fetch("/api/admin/orgs", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: o.id }),
+    })
+    const j = await res.json()
+    setMsg(res.ok ? "Organisation deleted ✓" : `Error: ${j.error}`)
+    if (res.ok) load()
+  }
+
   async function attachUser(e: React.FormEvent) {
     e.preventDefault()
     setMsg("")
@@ -192,7 +205,10 @@ export default function AdminPanel({ adminEmail }: { adminEmail: string }) {
                 <input style={{ ...input, width: "100%" }} value={o.seat_limit ?? ""} placeholder="∞" onChange={(e) => patchOrg(o.id, { seat_limit: e.target.value === "" ? null : Number(e.target.value) })} />
               </div>
               <div><span style={label}>Domains</span><input style={{ ...input, width: "100%" }} value={o.email_domains.join(", ")} onChange={(e) => patchOrg(o.id, { email_domains: e.target.value.split(",").map((d) => d.trim().toLowerCase()).filter(Boolean) })} /></div>
-              <button onClick={() => saveOrg(o)} style={btn}>Save</button>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <button onClick={() => saveOrg(o)} style={btn}>Save</button>
+                <button onClick={() => deleteOrg(o)} style={{ ...ghost, color: "#f87171", borderColor: "#3a2030", padding: "5px 12px" }}>Delete</button>
+              </div>
             </div>
           ))}
           {!loading && orgs.length === 0 && <p style={{ color: "#6b8aa0", fontSize: "0.85rem" }}>No organisations yet.</p>}
