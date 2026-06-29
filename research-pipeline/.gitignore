@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+data/ahuri/
+data/aihw/
+data/dss/
+data/pc/
+data/housing_australia/
+data/treasury/
+data/power_housing/
+data/abs/

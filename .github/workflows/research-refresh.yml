@@ -1,0 +1,56 @@
+name: Research index refresh
+
+# Keeps the HIVE research evidence base (Pinecone "hive-research") current:
+# crawls the 9 government/research sources for NEW reports, then upserts only
+# new chunks. Idempotent (url-based chunk ids) — safe to re-run anytime.
+
+on:
+  schedule:
+    - cron: "0 3 15 * *"   # 15th of each month, 03:00 UTC
+  workflow_dispatch: {}     # allow manual runs from the Actions tab
+
+concurrency:
+  group: research-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write       # to commit the updated metadata + ledger
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: research-pipeline/requirements.txt
+
+      - name: Install dependencies
+        working-directory: research-pipeline
+        run: pip install -r requirements.txt
+
+      - name: Crawl sources for new reports
+        working-directory: research-pipeline
+        run: python -m crawler.run_all
+
+      - name: Upsert new chunks to Pinecone
+        working-directory: research-pipeline
+        env:
+          PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
+          PINECONE_INDEX: hive-research
+          PINECONE_NAMESPACE: research
+        run: python -m pipeline.pinecone_ingest
+
+      - name: Commit updated metadata + ledger
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add research-pipeline/data/reports_meta.json research-pipeline/data/indexed_ids.json
+          if git diff --staged --quiet; then
+            echo "No new reports — nothing to commit."
+          else
+            git commit -m "auto: research index refresh $(date +%F) [skip ci]"
+            git push
+          fi
