@@ -1,0 +1,28 @@
+name: Supabase keep-alive
+
+# Free-tier Supabase projects pause after 7 days of inactivity. A light query
+# every few days resets that timer so HIVE auth never goes dark.
+# (Proper fix for production: upgrade to Supabase Pro — no auto-pause + backups.)
+
+on:
+  schedule:
+    - cron: "0 6 */3 * *"   # every 3rd day, 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase (counts as activity)
+        run: |
+          URL="https://fpzxxxynxayxzbxtpemr.supabase.co/rest/v1/organisations?select=id&limit=1"
+          code=$(curl -s -o /dev/null -w '%{http_code}' \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+            "$URL")
+          echo "Supabase responded: $code"
+          # 200 = ok; anything that reached the project keeps it awake.
+          if [ "$code" = "000" ]; then
+            echo "::error::Supabase unreachable (paused?) — check the project."
+            exit 1
+          fi
