@@ -1,11 +1,23 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Pinecone } from "@pinecone-database/pinecone"
 import Anthropic from "@anthropic-ai/sdk"
+import { getSession } from "@/lib/auth"
+import { meetsTier } from "@/lib/entitlements"
 
 const pc        = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function POST(req: NextRequest) {
+  // Pro+ gate — the UI hides Ask Research for free users; enforce it here too
+  // so the endpoint can't be called directly to bypass the paywall.
+  const session = await getSession()
+  if (!meetsTier(session.tier, "pro")) {
+    return NextResponse.json(
+      { error: "AI research search requires a CHP Pro plan." },
+      { status: 403 },
+    )
+  }
+
   try {
     const { query } = await req.json()
     if (!query?.trim()) {

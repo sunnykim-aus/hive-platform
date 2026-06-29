@@ -1,11 +1,23 @@
 import { NextRequest, NextResponse } from "next/server"
 import { Pinecone } from "@pinecone-database/pinecone"
 import Anthropic from "@anthropic-ai/sdk"
+import { getSession } from "@/lib/auth"
+import { meetsTier } from "@/lib/entitlements"
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY! })
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY! })
 
 export async function POST(req: NextRequest) {
+  // Pro+ gate — enforce the same paywall the UI shows, so the endpoint
+  // can't be called directly to bypass it.
+  const session = await getSession()
+  if (!meetsTier(session.tier, "pro")) {
+    return NextResponse.json(
+      { error: "AI policy analysis requires a CHP Pro plan." },
+      { status: 403 },
+    )
+  }
+
   try {
     const { policyName, fundingAmount, year } = await req.json()
 
