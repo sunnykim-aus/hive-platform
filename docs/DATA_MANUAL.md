@@ -27,7 +27,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟡 traced (§5) — full engine |
-| **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | ⬜ TODO |
+| **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | ⬜ TODO |
 | **climate-risk** | climate-risk | KPIs/score tables | ⬜ TODO |
 | **building-energy** | building-energy | KPIs/tables | ⬜ TODO |
@@ -265,5 +265,37 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Page status:** 🟡 — **entire viability engine traced end-to-end** (TDC → debt → gap → break-even → sensitivity). This is VALIDATION_SPEC #1/#6: top NotebookLM-check priority. ⚠️ `STATE_LAND_CONTRIBUTION` and R3/R4 grant estimates are explicitly flagged in-code as estimates — surface that in any number shown to customers.
 
-<!-- NEXT: funding-sector — funding/haff/chp-sector/construction, 9 charts -->
+# 6. Funding & Programs / Funding-Sector  (`app/funding-sector/page.tsx`)
+
+**Data files:** `funding`, `haff`, `chp-sector`, `construction`.
+**Sources:** Housing Australia program guidelines + annual reports 2023-24, Treasury Budget Papers 2023-24→2025-26, state HA reports, NHFIC/HA Impact Reports (funding) · HA media releases + Senate Estimates + Budget Papers (haff) · AIHW HOU 322 + NHR + CHP annual reports (chp-sector) · ABS 6427.0 + Rawlinsons + AIHW + UNSW City Futures (construction).
+**Display helper:** `fmtMoney` — `amount_m ≥ 1000 ? (amount_m/1000).toFixed(1)+"B" : amount_m+"M"`.
+
+### HAFF round breakdown (per selected round `r = HAFF_ROUNDS[tab]`)
+- **📊 Homes by state** (BarChart, page.tsx:204) — `r.by_state`, bar `homes`.
+- **🥧 Homes by sector** (PieChart, page.tsx:218) — `r.by_sector`, value `homes`.
+- **📊 Homes by bedrooms** (BarChart, page.tsx:231) — `r.by_bedrooms`, bar `homes`.
+- **🥧 Homes by dwelling type** (PieChart, page.tsx:247) — `r.by_dwelling_type`.
+- **Source:** haff.ts (HA media releases / Budget). **Calc:** direct from round data; R3+ are *indicative proportions based on R1-2 distribution* (in-code note, page.tsx:144 — ⚠️ flag as estimate). **Cadence:** per HAFF round.
+
+### HAFF summary + state table (page.tsx:524, 550-559)
+- **📊 stateTotals** (BarChart) — grants/homes by state. **Table footers:** `Σ projects`, `Σ grant_m.toFixed(1)`M. **KPI:** `haffPct = min(100, haffSummary.pct_of_5yr_target)`. **Source:** haff.ts. **Cadence:** per round / Budget.
+
+### Top CHPs (page.tsx:870, 921)
+- **📊 Top-20 CHPs by dwellings** (BarChart, top20Data) · **📊 CHP dwellings by state** (stateChpData).
+- **Calc:** `top5Total = Σ TOP_CHPS[0:5].dwellings`; `top20Total = Σ TOP_CHPS.dwellings`; concentration `round(top20Total ÷ SECTOR_OVERVIEW.community_housing × 100)`% (lines 312-313, 776, 865). **Source:** chp-sector.ts (AIHW HOU 322 + NHR + CHP reports). **Cadence:** AIHW annual + CHP reports.
+
+### 📈 Sector trend (LineChart, page.tsx:954) + 📈 Construction cost (LineChart, page.tsx:1249)
+- **trendData** = `SECTOR_TRENDS` (CHP stock growth). **costData** = `COST_INDEX` (construction cost index). **Source:** chp-sector / construction (ABS 6427.0). **Calc:** direct. **Cadence:** AIHW annual · ABS 6427.0 quarterly.
+
+### 🔢 Opportunity / impact KPIs (page.tsx:323-330)
+- `criticalCount = count(opportunity_band == "Critical")`; `noCoverageCount = count(tier1_chps.length == 0)`; **`avgOppScore = round(Σ opportunity_score ÷ count)`**. ⚠️ **`opportunity_score` / `opportunity_band` are HIVE-computed composite scores — their formula must be documented (🟡; likely shared with Asset Intelligence §, confirm there).**
+- `yieldDrop = round((1 − BILLION_DOLLAR_YIELD[2025] ÷ BILLION_DOLLAR_YIELD[2019]) × 100)` — % drop in homes-per-$bn since 2019. `costIncrease = round(impact.cost_increase_abs ÷ 1000)`. **Source:** construction.ts / HA. **Cadence:** annual.
+
+### 📋 Funding mechanisms navigator
+- `FUNDING_MECHANISMS` filtered by type (grant/loan/equity/tax/guarantee). **Source:** funding.ts (HA/Treasury/state). **Calc:** display/filter only. **Cadence:** per Budget.
+
+**Page status:** 🟡 — all 9 charts + concentration/yield/impact KPIs traced. **Actions:** (1) document `opportunity_score` formula; (2) mark R3+ HAFF splits as indicative in any customer-facing view.
+
+<!-- NEXT: asset-intelligence + climate-risk (composite scores) -->
 <!-- ============================================================= -->
