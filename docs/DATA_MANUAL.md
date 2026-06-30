@@ -28,14 +28,14 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟡 traced (§5) — full engine |
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
-| **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | ⬜ TODO |
-| **climate-risk** | climate-risk | KPIs/score tables | ⬜ TODO |
+| **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟡 traced (§7) |
+| **climate-risk** | climate-risk | KPIs/score tables | 🟡 traced (§8) |
 | **building-energy** | building-energy | KPIs/tables | ⬜ TODO |
 | **livable-housing** | livable-housing | KPIs/tables | ⬜ TODO |
 | **esg-impact** | esg | KPIs/tables | ⬜ TODO |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ⬜ TODO |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | ⬜ TODO |
-| **my-portfolio** | climate-risk | per-asset metrics | ⬜ TODO |
+| **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
 
 > Redirect stubs (haff→, ask-research→, etc.) carry no charts of their own.
 
@@ -297,5 +297,43 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Page status:** 🟡 — all 9 charts + concentration/yield/impact KPIs traced. **Actions:** (1) document `opportunity_score` formula; (2) mark R3+ HAFF splits as indicative in any customer-facing view.
 
-<!-- NEXT: asset-intelligence + climate-risk (composite scores) -->
+# 7. Asset Intelligence — Compound Risk  (`app/asset-intelligence/page.tsx` → `lib/data/asset-intelligence.ts`)
+
+> Powers the **"152 suburbs compound risk / 13 extreme"** headline (VALIDATION_SPEC #3). Scores are **computed live** by `computeCompoundRisk()`, combining three other datasets — no stored compound numbers.
+
+**Inputs (imported):** `climate-risk.ts` (suburb climate score) · `building-energy.ts` (`STATE_ENERGY_DATA`) · `livable-housing.ts` (`STATE_COMPLIANCE`).
+
+### Compound Risk Score — `computeCompoundRisk(suburb)` (asset-intelligence.ts:72)
+- **Climate score** = `suburb.overall_score` (direct from climate-risk.ts, §8).
+- **Energy gap score** = `min(100, round((7 − avg_nathers_stars) ÷ 6 × 100))` — distance below 7-star NatHERS on a 6-star scale.
+- **LHD gap score** = `min(100, round(100 − pct_meeting_silver))` — distance below 100% Livable-Housing Silver compliance.
+- **Compound score** = `round(climate × 0.40 + energyGap × 0.35 + lhdGap × 0.25)`.
+- **Band** (`getCompoundBand`): **Extreme ≥85 · Critical ≥72 · High ≥58 · Moderate ≥42 · Low <42**. The "triple-failure" suburbs = Extreme band (all three dimensions severe).
+- **Headline counts:** "152 / 13 extreme" = counts of `CLIMATE_RISK_SUBURBS` whose computed `compound_band` = (all risk) / Extreme. Recompute = re-run over the suburb list.
+
+### Financial implication calcs (asset-intelligence.ts:102-105)
+- `energyExtra = avg_annual_energy_bill − 1400` (excess vs 7-star baseline $1,400/yr).
+- `lhdUpgrade = upgrade_cost_to_silver_bn × 1000 ÷ total_social_dwellings` ($k per dwelling).
+- `energyUpgrade = 13` ($k, 2★→5★ per-dwelling, from building-energy).
+- `totalFix = round(lhdUpgrade + energyUpgrade)`.
+
+### HAFF Round-4 readiness flags (asset-intelligence.ts:109-119)
+- Flag if `haff_pipeline_7star_pct < 72` · `haff_pipeline_compliant_pct < 70` · `insurance_status ∈ {effectively_uninsurable, withdrawal_risk}`. `haffReady = no flags`.
+
+**Source:** composite — see §8 (climate), §9 (energy), §10 (LHD). **Cadence:** driven by slowest input (Census 5-yr for climate exposure; energy/LHD ~annual). **Status:** 🟡 — weights (40/35/25) and band thresholds are HIVE-defined; document rationale + validate the 152/13 counts.
+
+# 8. Climate Risk  (`app/climate-risk/page.tsx` + `my-portfolio` → `lib/data/climate-risk.ts`)
+
+**Geographic unit:** SA2 (≈ suburb), high-priority social-housing suburbs across all 8 states/territories.
+**Sources:** BOM (temperature + climate projections) · state planning portals (flood overlays, bushfire-prone land) · CSIRO *Climate Change in Australia* (2°C scenario) · Insurance Council of Australia (catastrophe + insurance) · Geoscience Australia (coastal elevation + SLR) · ABS SEIFA (`seifa_score`).
+
+### Hazard + composite scoring (data file header + per-suburb records)
+- **Hazard score bands (0–100):** Critical ≥75 · High 58–74 · Moderate 42–57 · Low <42.
+- **Composite `overall_score` (applicable hazards only, re-normalised):** **Extreme Heat 30% · Flood 25% · Bushfire 20% · Coastal/SLR 15% · Cyclone 10%.** Only hazards present at the suburb are weighted (weights renormalise to those present).
+- **Sub-hazard detail (per suburb):** heat (`days_over_35` current/2030/2050, `days_over_40`, urban-heat-island factor, tree-canopy %, cooling-access %), flood (`in_flood_overlay`, overlay type, `pct_area_in_overlay`, last major event), `insurance_status` (insured / withdrawal_risk / effectively_uninsurable), `est_social_dwellings`, `social_housing_density`.
+- **Calc:** sub-hazard scores transcribed from source agencies; `overall_score` = weighted blend of applicable hazards. **Cadence:** CSIRO/BOM projections ad-hoc; planning overlays ~annual; insurance data annual.
+
+**Status:** 🟡 — scoring model + weights documented; the per-suburb hazard sub-scores need source-trace per agency (NotebookLM), and the weight scheme is HIVE-defined (document rationale).
+
+<!-- NEXT: building-energy + livable-housing + esg + sustainability -->
 <!-- ============================================================= -->
