@@ -64,6 +64,7 @@ sources — they are not computed at runtime except where a formula is shown.**
   - `gap = median_market_rent_pw_2024 − round(median_renter_income_k×1000 ÷ 52 × 0.30)` = 600 − round(65,000÷52×0.30) = **$225/wk** (market rent minus the 30%-of-income affordable rent).
   - `craCovers = round(cra_max_single_pw ÷ gap × 100)` = round(94÷225×100) = **42%** (share of the gap that max Commonwealth Rent Assistance covers).
 - **Cadence:** SIH ~annual · Census 5-yr (next 2026) · AHURI ad-hoc · CRA annual.
+- **Shared visual calc — `StatBar` (page.tsx:58):** every KPI bar meter on this page fills to `pct = min(100, value ÷ max × 100)` (capped at 100). Presentation only — does not change the underlying figure.
 - **Status:** 🟡 (confirm SIH stress figures + waitlist 213k against current state-register totals).
 
 ### §2 · How Australia Lives
@@ -82,7 +83,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **📊 BarChart — Presenting reasons by gender** (page.tsx:584) — `data = SHS_PRESENTING_REASONS[genderTab]`, bar = `pct`. Women: DV 43%, financial 22%… Men: financial 38%, housing crisis 24%… **Source:** AIHW SHS 2022-23. **Calc:** direct %. **Cadence:** AIHW annual.
 
 ### §6 · Typology Mismatch
-- **📋 Need-vs-supply rows** (page.tsx:634) — `TYPOLOGY_MISMATCH` (bedroom size, location, accessibility, tenure security) each with need_pct vs supply_pct. `radarData` is computed (page.tsx:113) for an optional radar view. **Source:** composite — ABS Census (bedroom/location), AIHW (accessibility/disability 42%/97%), tenancy norms. **Calc:** transcribed; gap = need_pct − supply_pct. **Cadence:** Census 5-yr / AIHW annual.
+- **📋 Need-vs-supply rows** (page.tsx:634) — `TYPOLOGY_MISMATCH` (bedroom size, location, accessibility, tenure security) each with need_pct vs supply_pct. `radarData` (page.tsx:113) just re-maps each row to `{dimension: first word, Need: need_pct, Supply: supply_pct}` for a radar/paired view — **no new computation**; the gap is shown visually as the Need-vs-Supply spread, not calculated. **Source:** composite — ABS Census (bedroom/location), AIHW (accessibility/disability 42%/97%), tenancy norms. **Calc:** values transcribed from source. **Cadence:** Census 5-yr / AIHW annual.
 
 ### §7 · Hidden Homelessness Iceberg
 - **📋 Layered iceberg** (page.tsx:715) — `HOMELESSNESS_LAYERS`: rough sleeping 8,200 · crisis accom 21,000 · boarding 18,700 · severe overcrowding 14,400 · couch-surfing 47,400 (ABS Census 2021 categories; crisis = AIHW) → hidden: AHURI estimate 400,000 · core need 740,000 (AHURI 2023). Headline `ABS_CENSUS_HOMELESS_TOTAL = 122,494`. **Calc:** Census-night counts (visible) vs AHURI modelled estimates (hidden) — note the two methodologies differ. **Cadence:** Census 5-yr · AIHW annual · AHURI ad-hoc.
