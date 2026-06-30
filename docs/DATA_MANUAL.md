@@ -30,9 +30,9 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟡 traced (§7) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 traced (§8) |
-| **building-energy** | building-energy | KPIs/tables | ⬜ TODO |
-| **livable-housing** | livable-housing | KPIs/tables | ⬜ TODO |
-| **esg-impact** | esg | KPIs/tables | ⬜ TODO |
+| **building-energy** | building-energy | KPIs/tables | 🟡 traced (§9) |
+| **livable-housing** | livable-housing | KPIs/tables | 🟡 traced (§10) |
+| **esg-impact** | esg | KPIs/tables | 🟡 traced (§11) |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ⬜ TODO |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | ⬜ TODO |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
@@ -335,5 +335,55 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Status:** 🟡 — scoring model + weights documented; the per-suburb hazard sub-scores need source-trace per agency (NotebookLM), and the weight scheme is HIVE-defined (document rationale).
 
-<!-- NEXT: building-energy + livable-housing + esg + sustainability -->
+# 9. Building Energy  (`app/building-energy/page.tsx` → `lib/data/building-energy.ts`)
+
+**Rating systems:** NatHERS (0–10★ thermal) · NABERS (1–6★ operational). NCC 2022 mandates 7★ NatHERS for new builds (May 2023); existing social stock ~2–3★.
+**Sources:** CSIRO NatHERS distribution study 2023 · AIHW *Housing Assistance in Australia 2023* (social-housing energy) · AGL/Origin/EnergyAustralia residential cost benchmarks 2024 · ClimateWorks Australia *Towards Zero Emissions* 2023.
+
+### National aggregates — `getEnergyStats()` (building-energy.ts:333)
+- `totalStock = Σ social_dwellings`
+- `below3star = Σ round(social_dwellings × pct_below_3star ÷ 100)` (also below6star, meeting7star)
+- `avgBill = round(Σ(avg_annual_energy_bill × social_dwellings) ÷ totalStock)` — **dwelling-weighted** mean
+- `totalRetrofitGap = Σ retrofit_gap_cost_m`
+- `avgEnergyPoverty = round(Σ(energy_poverty_pct × social_dwellings) ÷ totalStock)` — dwelling-weighted
+
+### Page calcs (🔢 KPIs + calculator)
+- `orgGap = max(0, 7 − orgNathers)`; `sectorGap = max(0, 7 − sectorAvg)` (stars below NCC 7★).
+- **`annualExtraCost = round(max(0, (7 − orgNathers) ÷ (7 − 1) × 2200))`** — extra energy bill: star-gap normalised over the 6-star range × $2,200 max penalty.
+- "~`round(below3star ÷ 1000)`k dwellings 1–2★ = `round(below3star ÷ totalStock × 100)`% of stock."
+- `extra = cost − ENERGY_COST_BY_CLIMATE["7-star"][zone]` (excess vs 7★ by climate zone).
+- `barWidth = max(3, min(100, pct_social_stock × 3.5))` — presentation only.
+
+**Feeds:** `STATE_ENERGY_DATA.avg_nathers_stars` & `haff_pipeline_7star_pct` → Compound Risk §7. **Cadence:** CSIRO/AIHW ~annual · energy benchmarks annual. **Status:** 🟡 — aggregates + $2,200 penalty assumption traced (document the $2,200 basis).
+
+# 10. Livable Housing (LHD)  (`app/livable-housing/page.tsx` → `lib/data/livable-housing.ts`)
+
+**Standard:** Livable Housing Design Guidelines (Silver/Gold/Platinum). HAFF requires Silver min; R3 Gold for specialist.
+**Sources:** Livable Housing Australia LHDG 4th Ed (2017, upd. 2021) · HA HAFF R1-3 Design Guidelines · AIHW 2023 · AHURI *Accessible housing in Australia* (2022) · COAG NHA 2023 · ABS Disability, Ageing & Carers 2022.
+
+### National aggregates — `getNationalStats()` (livable-housing.ts:320)
+- `totalStock = Σ total_social_dwellings`
+- `totalSilver = Σ round(total_social_dwellings × pct_meeting_silver ÷ 100)` (also totalGold)
+- `totalNeeding = Σ dwellings_needing_silver_upgrade`
+- `totalCost = Σ upgrade_cost_to_silver_bn` ($B national upgrade)
+
+### Page calcs
+- "% meeting Silver" = `round(totalSilver ÷ totalStock × 100)`; below-Silver = `(totalNeeding ÷ 1000).toFixed(0)`k; national upgrade `totalCost.toFixed(1)`B.
+- **Retrofit calculator:** `minTotal = (cost.min × numDwellings ÷ 1000).toFixed(1)`, `maxTotal = (cost.max × numDwellings ÷ 1000).toFixed(1)` ($k×dwellings → $M); `numDwellings = max(1, parseInt(input))`.
+- Stream tiers via `STREAM_HAFF_TIER` (Gold mandatory / Platinum-SDA filters).
+
+**Feeds:** `STATE_COMPLIANCE.pct_meeting_silver`, `upgrade_cost_to_silver_bn`, `total_social_dwellings`, `haff_pipeline_compliant_pct` → Compound Risk §7. **Cadence:** AIHW/AHURI ~annual. **Status:** 🟡 — aggregates + calculator traced; per-state compliance %s need source-trace.
+
+# 11. ESG Impact  (`app/esg-impact/page.tsx` → `lib/data/esg.ts`)
+
+**Framework:** E / S / G pillars synthesising HIVE data into one evaluative lens (GRESB-style).
+**Sources:** **E** — CSIRO NatHERS 2023, ClimateWorks 2023, AIHW 2023, BOM · **S** — AIHW Housing Assistance 2023, SHS Annual Report 2023, CHIA 2023 · **G** — NHR Register 2024, HA Annual Report 2024, CHIA Sector Data · **Scoring methodology** — AHURI ESG framework research 2022 + GRESB real-assets methodology.
+
+### Composite score — `SECTOR_COMPOSITE_SCORE` (esg.ts:380)
+- **`= round(Σ SECTOR_ESG_SCORES.score ÷ SECTOR_ESG_SCORES.length)`** — straight mean of the pillar scorecards (E 32, S 48, G 56, …).
+- Pillar metrics: `ENVIRONMENTAL_METRICS`, `SOCIAL_METRICS`, `GOVERNANCE_METRICS` (each metric: value + rating). `INVESTMENT_USE_CASES`, `ESG_MATURITY_LEVELS` are reference tables.
+
+**Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 — composite formula traced; the individual pillar scores (32/48/56) are HIVE/AHURI-framework judgements — document scoring rubric.
+
+<!-- NEXT: sustainability (hub) + research -->
 <!-- ============================================================= -->
