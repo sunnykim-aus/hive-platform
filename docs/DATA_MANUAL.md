@@ -25,8 +25,8 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟡 traced (§2) |
 | **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 traced (§1 below) |
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
-| **population** | population | 1📊 1🔀 1📈 | ⬜ TODO |
-| **feasibility** (Development Viability) | feasibility | 1📊 + calculators | ⬜ TODO |
+| **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
+| **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟡 traced (§5) — full engine |
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | ⬜ TODO |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | ⬜ TODO |
 | **climate-risk** | climate-risk | KPIs/score tables | ⬜ TODO |
@@ -175,5 +175,95 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Page status:** 🟡 — all 11 charts + national rollups + true-need KPIs traced. **Action:** document the basis of `TRUE_NEED_MULTIPLIER` (per-state) and the `delivery`/`accessible_total` definitions; confirm projections release.
 
-<!-- NEXT: population — population.ts, 3 charts -->
+# 4. Population  (`app/population/page.tsx` → `lib/data/population.ts`)
+
+**Sources (data file header):** ABS **Cat. 3222.0** (Population Projections) · **Cat. 3101.0** (National/State ERP) · **Cat. 3412.0** (Migration, Australia) · SQM Research · CoreLogic. *(This header is the authority for the population source referenced in §3 and §2.)*
+
+### 🔀 National population + growth components (ComposedChart, page.tsx:102)
+- **Data:** `histData` from `HISTORICAL_NATIONAL` — line `population` (population_m); bars `natural` / `nim`.
+- **Calc (lines 23-24):** `natural = round(natural_increase × 1000)`, `nim = round(nim × 1000)` (source in thousands → persons). **Derived:** `totalGrowth = (last.population_m − first.population_m).toFixed(2)`; `peak`/`trough = reduce max/min of HISTORICAL_NOM_DETAIL by total_k`.
+- **Cadence:** ABS ERP **quarterly** (3101.0) · projections ad-hoc (3222.0).
+
+### 📈 State population projections (LineChart, page.tsx:174)
+- **Data:** `stateChartData` per-state series to 2041. **Source:** ABS 3222.0. **Calc:** direct projections. **Cadence:** ABS projections (ad-hoc).
+
+### 📊 Net Overseas Migration components (BarChart, page.tsx:207)
+- **Data:** `nomData` from `HISTORICAL_NOM_DETAIL`. **Source:** ABS 3412.0. **Calc:** components plotted (×1000 where in thousands). **Cadence:** ABS migration **annual** · NOM quarterly.
+
+**Page status:** ✅ — 3 charts + derived growth/peak/trough traced; sources cited to ABS Cat. nos. (NotebookLM check still pending across all pages).
+
+# 5. Development Viability / Feasibility  (`app/feasibility/page.tsx` → `lib/data/feasibility.ts`)
+
+> **This page computes the headline $137k per-dwelling funding gap** (VALIDATION_SPEC #1). Every output is computed live by `computeFeasibility()` — not stored. Below is the full chain.
+
+**Sources (data file header — re-audited May 2026), per constant:**
+| Constant | Value | Source |
+|---|---|---|
+| `SQM_COST` ($/m²) | by typology | Rawlinsons Construction Cost Guide **2025, Table 1.3** (community housing) |
+| `STATE_COST_MULTIPLIER` | per state | Rawlinsons 2025 State Cost Index + Turner & Townsend 2025 |
+| `PROFESSIONAL_FEES_PCT` | 0.08 | AIHW · Housing Australia CHP guidance 2024 |
+| `CONTINGENCY_PCT` | 0.12 | AIHW · HA 2024 |
+| `FINANCE_COST_PCT` | 0.06 | 18-mo draw-down @7%pa, 60% util ≈ 6.3% (header), constant set to 6% |
+| `COUNCIL_CONTRIBUTIONS` | per state | NSW DoP s.7.11 · VIC ICP register · QLD infra charges register |
+| `STATUTORY_CHARGES` | per state | Sydney Water developer charges + state utility schedules 2025 |
+| `SOCIAL_RENT_WEEKLY` | per state | AIHW: **25% × (50% × state median household income)** |
+| state median incomes | — | ABS Household Income & Wealth **2023-24** |
+| `MARKET_RENT_WEEKLY` | per state | PropTrack National Rental Report **Q1 2025** (metro median) |
+| `AFFORDABLE_RENT_RATIO` | 0.749 | HAFF guidelines: <75% of market rent |
+| `OPEX_RATIO` | 0.30 | HA CHP benchmarks 2024 (30–35%) |
+| `NHFIC_RATE` | 0.055 | Housing Australia Annual Report 2023-24 + AOFM bond data |
+| `LOAN_TERM_YEARS` | 30 | HA loan program |
+| `DSCR` | 1.10 | HA minimum lending standard (mixed tenure) |
+| `HAFF_GRANT_OPTIONS` | R1-3 avg **$55,451**, R3 $78,531, R4est $95,000 | R1-3avg = total HAFF grants **$2,223.6M ÷ 40,000 homes**; verified vs Treasury budget papers |
+| `STATE_LAND_CONTRIBUTION` | NSW $200k … NT $50k | Housing Australia / state HA annual reports 2023-24 (⚠️ "highly project-specific, central metro estimates only") |
+
+### The core formula — `computeFeasibility(state, typology, tenure, haffRound)` (feasibility.ts:391)
+
+**A. Total Development Cost (ex-land):**
+1. `gross_area = round(net_area_m2 × gross_factor)`
+2. `sqm_rate = round(SQM_COST[type] × STATE_COST_MULTIPLIER[state])`
+3. `hard_cost = round(gross_area × sqm_rate)`
+4. `professional_fees = round(hard_cost × 0.08)`
+5. `contingency = round(hard_cost × 0.12)`
+6. `finance_cost = round(hard_cost × 0.06)`
+7. `council = COUNCIL_CONTRIBUTIONS[state]` · `statutory = STATUTORY_CHARGES[state]`
+8. **`TDC = hard_cost + professional_fees + contingency + finance_cost + council + statutory`**
+
+**B. Rental income:**
+9. `social_rent = SOCIAL_RENT_WEEKLY[state]`
+10. `affordable_rent = round(MARKET_RENT_WEEKLY[state] × 0.749)`
+11. `blended_rent = round(social_rent × social_pct + affordable_rent × affordable_pct)`
+
+**C. Debt capacity** — `computeDebtCapacity(rent)` (feasibility.ts:259):
+- `NOI = rent × 52 × (1 − OPEX_RATIO)` → `available = NOI ÷ DSCR` → **`debt = round(available ÷ DEBT_SERVICE_FACTOR)`**
+- `DEBT_SERVICE_FACTOR = r(1+r)^n ÷ ((1+r)^n − 1)` = 0.055×1.055³⁰÷(1.055³⁰−1) = **0.068805** (standard mortgage constant, 5.5%/30yr).
+
+**D. Funding stack & gap:**
+12. `nhfic_debt = computeDebtCapacity(blended_rent)`
+13. `state_land = STATE_LAND_CONTRIBUTION[state]`
+14. `total_funded = haff_grant + nhfic_debt + state_land`
+15. **`funding_gap = max(0, TDC − total_funded)`** ← **the $137k headline (NSW 2-bed, R1-3 avg, 100% social)**
+16. `gap_per_m2 = round(gap ÷ net_area_m2)` · `haff_coverage_pct = round(haff_grant ÷ TDC × 100)`
+
+**E. Break-even affordable %** (feasibility.ts:428-431):
+- `debt_needed = TDC − haff_grant − state_land`
+- `blend_needed = debt_needed × DEBT_SERVICE_FACTOR × DSCR ÷ (52 × (1 − OPEX_RATIO))`
+- `breakeven_aff_pct = (blend_needed − social_rent) ÷ (affordable_rent − social_rent)` (0 = already viable; >1 = unachievable by tenure mix alone)
+- `gap_at_100pct_affordable = max(0, TDC − (haff_grant + computeDebtCapacity(affordable_rent) + state_land))`
+
+### 📊 Sensitivity — gap vs ±build cost (BarChart, the page's 1 chart)
+- **Data:** `r.sensitivity` (feasibility.ts:438) — TDC × {0.85, 0.90, 1.00, 1.10, 1.15}; each `gap = max(0, scaledTDC − total_funded)`. **Calc:** ±10/15% construction-cost stress on the gap.
+
+### 🔢 Page-level derived (page.tsx)
+- `fmtK(n) = "$" + round(n÷1000) + "k"` (display).
+- **Scenario compare (lines 145-169):** `gapA/gapB = max(0, tdc − grant{A|B} − debt − land)`; `avgGapA/B = round(Σ gap ÷ count)`; `additionalCost = |totalCostB − totalCostA|`; `total(n) = round(n × dwellings)`.
+- `fundedPct = round(funded ÷ tdc × 100)` (line 781); `perM2 = gap>0 ? round(gap ÷ net_area_m2) : 0` (line 844).
+- NOI display (lines 678-679, 981): `round(blended_rent × 52 × 0.70)` NOI/yr; OpEx `round(blended_rent × 52 × 0.30 ÷ 52)`/wk.
+- "Shift to `ceil(breakeven × 100)`%+ affordable to close gap" (lines 194, 1002).
+
+**Cadence:** Rawlinsons **annual** · PropTrack **quarterly** · ABS income **biennial** · HA annual · HAFF **per round** (R3 opened Jan 2026 → update grant options).
+
+**Page status:** 🟡 — **entire viability engine traced end-to-end** (TDC → debt → gap → break-even → sensitivity). This is VALIDATION_SPEC #1/#6: top NotebookLM-check priority. ⚠️ `STATE_LAND_CONTRIBUTION` and R3/R4 grant estimates are explicitly flagged in-code as estimates — surface that in any number shown to customers.
+
+<!-- NEXT: funding-sector — funding/haff/chp-sector/construction, 9 charts -->
 <!-- ============================================================= -->
