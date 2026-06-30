@@ -33,8 +33,8 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **building-energy** | building-energy | KPIs/tables | 🟡 traced (§9) |
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 traced (§10) |
 | **esg-impact** | esg | KPIs/tables | 🟡 traced (§11) |
-| **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ⬜ TODO |
-| **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | ⬜ TODO |
+| **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
+| **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
 
 > Redirect stubs (haff→, ask-research→, etc.) carry no charts of their own.
@@ -385,5 +385,56 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 — composite formula traced; the individual pillar scores (32/48/56) are HIVE/AHURI-framework judgements — document scoring rubric.
 
-<!-- NEXT: sustainability (hub) + research -->
+# 12. Sustainability (hub)  (`app/sustainability/page.tsx`)
+
+**Pure rollup page — no new calculations.** Aggregates other sections' outputs into one dashboard.
+- `energyStats = getEnergyStats()` (§9) → "Below 3-star ~`round(below3star÷1000)`k dwellings".
+- `lhdStats = getNationalStats()` (§10) → "Need upgrade ~`round(totalNeeding÷1000)`k"; "National upgrade cost `$totalCost.toFixed(1)`B".
+- `compStats` (compound risk §7) → "Extreme compound risk `compStats.extreme` suburbs" (= **13**, count of Extreme-band suburbs).
+- **Source/calc/cadence:** entirely inherited from §7 (asset-intelligence), §9 (building-energy), §10 (livable-housing), §11 (esg). **Status:** ✅ — rollup only; correctness depends on the source sections.
+
+# 13. Evidence & Policy / Research  (`app/research/page.tsx` → `lib/data/programs.ts`, `policy-timeline.ts`)
+
+**Sources:** AHURI · Treasury · government reports (programs + policy-timeline headers). AI search backed by the crawled report corpus → Pinecone (`hive-research`/`research`).
+
+### 🔢 Program funding KPIs (research.tsx:204-208)
+- `totalCommitted = Σ funding_committed_bn`; `totalDrawn = Σ (funding_drawn_bn ?? 0)`.
+- `activeCount = count(status ∈ Active|Ongoing)`; `completedCount = count(status ∈ Completed|Closed)`.
+- `totalInvestment = Σ POLICY_TIMELINE.amount_bn`.
+
+### 📋 Program Scorecard grade — `getScore(prog)` (research.tsx:255) — **VALIDATION_SPEC #8**
+- `pct = round(actual_value ÷ target_value × 100)`; `pctLabel = pct≥200 ? (pct/100).toFixed(1)+"×" : pct+"%"`.
+- `gradeFromPct(p)` = **A ≥95 · B ≥80 · C ≥60 · D ≥40 · F <40**.
+- **Exceeded** (`pct ≥ 150`) → **A**.
+- **Completed** → `gradeFromPct(min(pct, 120))`.
+- **Active (pace-adjusted):** `elapsedPct = round(clamp(0,1, (now − start) ÷ (end − start)) × 100)`; `ratio = pct ÷ elapsedPct`; grade = **A ≥1.05 · B ≥0.9 · C ≥0.7 · D ≥0.5 · F <0.5** (delivery vs time elapsed).
+- **Active, no timeline** → `gradeFromPct(pct)`.
+
+### 🔢 Evidence-base counts & escalation
+- **"681 reports / 5,059 passages"** (VALIDATION_SPEC #4) — `REPORTS` count + Pinecone `vector_count(namespace=research)`. Auto-refreshed monthly by the research-pipeline. `filteredReports = REPORTS.filter(search/agency)`.
+- Primary-outcome %: `min(round(actual_value ÷ target_value × 100), 999)` (capped to avoid chart overflow).
+- **"58.5% cost escalation since 2019 → $10B HAFF ≈ $5.5B effective"** — derived narrative from `BILLION_DOLLAR_YIELD` (construction.ts): yield drop drives effective-purchasing-power statement.
+- **AI "Ask Research"** → `POST /api/policy-impact` (Pinecone retrieval + LLM). Pro-gated.
+
+**Cadence:** programs/policy AHURI+Treasury ad-hoc (budget cycle); evidence base **monthly auto** (research-pipeline). **Status:** 🟡 — grade rubric + funding rollups fully traced; the A–F thresholds are HIVE-defined (document rationale); confirm 681/5,059 against live Pinecone count.
+
+---
+
+## Coverage summary
+
+All **14 content pages traced** via exhaustive calc-sweep (every `Math.*`, arithmetic, `reduce`/`map`/`filter` cross-checked against the section). Composite/assumption items flagged for VALIDATION_SPEC follow-up:
+
+| Flag | Where | Action |
+|---|---|---|
+| `TRUE_NEED_MULTIPLIER` (per-state) | §3 Supply Pipeline | document basis |
+| `opportunity_score` / band | §6 Funding | document formula |
+| Compound weights 40/35/25 + bands | §7 Asset Intelligence | document rationale; validate 152/13 |
+| Climate hazard weights (30/25/20/15/10) | §8 Climate Risk | document rationale; source-trace sub-scores |
+| $2,200 energy penalty | §9 Building Energy | document basis |
+| ESG pillar scores (32/48/56) | §11 ESG | document rubric |
+| Program grade A–F thresholds | §13 Research | document rationale |
+| State land + R3/R4 HAFF estimates | §5 Viability | mark "estimate" in customer view |
+
+Next: run the **NotebookLM double-reference check** (per VALIDATION_SPEC) on the flagged figures, and promote each page 🟡→✅ as its sources reconcile.
+
 <!-- ============================================================= -->
