@@ -238,6 +238,22 @@ Primary AHURI 2026 source. Validates the **social-rent income side** (not market
 
 **Still open (not in this source):** market rents (PropTrack), build rate + multipliers (Rawlinsons), council/land.
 
+## ▶ Notebook B double-check run sheet (NotebookLM confirmation of the corrected figures)
+
+Corrections were made from **direct web extraction** of primary sources; run these in NotebookLM as an **independent second reference** (upload the CURRENT sources or you'll get false "not supported").
+
+**Upload:** ABS *Estimating Homelessness: Census 2021* · AIHW *Housing Assistance in Australia 2025* · AHURI/City Futures *Calibrating Australia's social & affordable housing needs* (2022) · Shelter WA *Eligibility Trap* (already up).
+
+| # | Prompt | Expected confirm |
+|---|---|---|
+| B3 | "Quote the total homeless on Census night 2021 and the count in each operational group (rough sleeping, supported accom, staying-temp, boarding, other temp lodging, severely crowded)." | 7,636 / 24,291 / 16,597 / 22,137 / 3,934 / 47,895 · total 122,494 |
+| B2 | "Quote households on the public-housing and SOMIH waiting lists at the latest date (AIHW)." | 169k public + 15.1k SOMIH ≈ 184,000 (Jun 2024) |
+| B4 | "Quote the AHURI estimate of households whose housing doesn't meet their needs, and the 2041 projection." | 640,000 → 940,000 (2041) |
+| B1 | "Did ABS release SIH 2023-24 renter/housing-cost stats? Quote the release status." | withdrawn / not released |
+| CRA | "Quote the max weekly CRA for a single person in Eligibility Trap Table 3." | $110 |
+
+→ Two independent sources agreeing (my web extract + NotebookLM cited passage) = strong ✅ per VALIDATION_SPEC.
+
 ## Progress
 - **Feasibility:** structure ✅ · all state values extracted ✅ · internal-consistency ✅ ·
   NSW $137k triangulated 🟡 · **multiplier cross-checked vs T&T ✅ (WA flagged 🔴)** ·
