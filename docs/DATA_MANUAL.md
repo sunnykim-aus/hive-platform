@@ -62,7 +62,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Figures & source (validated + CORRECTED 2026-07, Notebook B):**
   - **122,494 homeless** on Census night — ✅ ABS Census 2021 (latest; 2026 Census ~2027). **Breakdown corrected** to exact ABS groups: rough 7,636 · supported 24,291 · boarding 22,137 · **severe-crowding 47,895** · staying-temp 16,597 · other 3,934 (severe-crowding ↔ couch-surf were swapped).
   - **1.31M rental stress / 640k severe** — 🟡 held; **ABS Census 2021 basis** (SIH 2023-24 withdrawn by ABS 17 Jul 2025 — renters under-sampled → no newer official figure). Label corrected in code.
-  - **waitlist ~~213,000~~ → 184,000** ✅ corrected. AIHW *Housing Assistance 2025*: 169k public + 15.1k SOMIH.
+  - **waitlist ~~213,000~~ → 165,500** ✅✅ double-checked. AIHW *Housing Assistance 2025* (Jun-2024): 159,100 public + 6,400 SOMIH (NotebookLM PDF read corrected my web 184k). Range 165k–188k by edition; community lists integrated/unreported.
   - **core housing need ~~740k~~ → 640,000** ✅ corrected. AHURI/City Futures 2022 (2021 Census; → ~940k by 2041).
   - **CRA max single ~~$94~~ → $110** ✅ (AHURI/Shelter WA Table 3, Mar-2026) — raises craCovers 42% → ~49%.
 - **Calculation (derived, page.tsx:95-97):**
