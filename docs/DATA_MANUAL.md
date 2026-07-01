@@ -413,6 +413,46 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **`= round(Σ SECTOR_ESG_SCORES.score ÷ SECTOR_ESG_SCORES.length)`** — straight mean of the pillar scorecards (E 32, S 48, G 56, …).
 - Pillar metrics: `ENVIRONMENTAL_METRICS`, `SOCIAL_METRICS`, `GOVERNANCE_METRICS` (each metric: value + rating). `INVESTMENT_USE_CASES`, `ESG_MATURITY_LEVELS` are reference tables.
 
+#### The 23 underlying metrics (what the pillar scores are judged from)
+Each metric = a measurable sector data point; its **rating** = how the value compares to a benchmark. Scale: **Lagging** (far below target) · **Below Average** · **Adequate** (meets minimum) · **Leader** (best-in-class). Pillar score is a HIVE judgement over the pillar's ratings (not a formula). Most sources are external; **2 are HIVE-internal** (marked ⚑, the climate/LHD data we re-based).
+
+**🌱 Environmental → 32** (6 of 7 Lagging)
+| Metric | Value | Benchmark | Rating | Source |
+|---|---|---|---|---|
+| Avg NatHERS | 2.9★ | 7★ (NCC) | Lagging | CSIRO 2023 |
+| Carbon intensity | 9.8 t CO₂/dw/yr | <3.5t (2035) | Lagging | ClimateWorks 2023 |
+| Solar PV | ~12% | 33% national | Lagging | AIHW·ABS 2024 |
+| Green Star/NABERS | <2% | ~28% commercial | Lagging | GBCA 2024 |
+| Tenant energy poverty | ~38% | ~8.5% national | Lagging | AIHW·ABS 2022 |
+| HAFF pipeline 7★+ | ~79% | 100% (R4) | Adequate | HA 2024-25 |
+| SH in critical climate zones | ~48 suburbs | ≥75/100 | Lagging | ⚑ HIVE Climate 2026 |
+
+**🏘️ Social → 48** (mixed; 1 Leader)
+| Metric | Value | Benchmark | Rating | Source |
+|---|---|---|---|---|
+| Tenant stability | ~78% | 85%+ | Adequate | AIHW 2023 |
+| Avg wait time | 4.2 yrs | <2 yrs | Lagging | state registers 2024 |
+| Unmet SHS requests | 62% | <20% | Lagging | AIHW SHS 2022-23 |
+| First Nations tenants | ~22% | 3.8% pop (5.8×) | Below Avg | AIHW·ABS |
+| Disability/health | ~31% | 18% pop | Below Avg | AIHW·ABS 2022 |
+| DV women housed | 38% | 7-day immediate | Lagging | AIHW·ANROWS |
+| Livable Silver compliance | ~9% | 100% new builds | Lagging | ⚑ HIVE Livable 2026 |
+| Social ROI | $1.70/$1 | positive | **Leader** | AHURI 338 (2020) |
+
+**⚖️ Governance → 56** (mostly Adequate)
+| Metric | Value | Benchmark | Rating | Source |
+|---|---|---|---|---|
+| NHR compliance | ~94% | 100% | Adequate | NHR 2024 |
+| Median gearing | 52% | ≤65% (HA) | Adequate | HA 2023-24 |
+| DSCR | 1.38× | ≥1.10× | Adequate | HA·CHIA |
+| Board independence | ~62% | ≥50% | Adequate | CHIA·AICD |
+| HAFF covenant compliance | ~88% | 100% | Adequate | HA 2024-25 |
+| Annual report publication | ~71% | 100% (T1-2) | Below Avg | CHIA 2023 |
+| Whistleblower policy | ~68% | 100% | Below Avg | HA·CHIA |
+| Formal ESG reporting | ~18% | 100% (2028) | Lagging | CHIA 2023 |
+
+**Roll-up:** each metric → rating vs benchmark → pillar score (HIVE judgement) → mean of 3 = **45**. ⚠️ A strict rating-average would be ~37 (Social/Gov set +8–14 above their rating-implied levels → mild optimism). Present as **HIVE ESG framework**, not an external rating.
+
 **Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 **HIVE construct — honestly disclosed (2026-07).** Composite **45** = mean(E32/S48/G56). The page **already carries a methodology note** ("HIVE-derived estimates … sector as a whole … individual CHP requires on-site assessment") — good, responsible disclosure. How the pillar scores were set (reverse-engineered): they track each pillar's metric-rating distribution (Env 6/7 "Lagging"→32 ✓) but are **subjective (no rubric)** and lean **optimistic** — Social (~34 implied → 48) and Governance (~48 → 56) sit +8–14 above a strict rating-average; a strict average of all three ≈ 37 vs the stated 45. **Two remaining gaps:** (a) "based on GRESB/UNPRI/ICMA" overclaims — the scores are analyst judgements *informed by* (not computed via) those frameworks → soften to "informed by"; (b) the "green finance threshold **65+**" is not a real standard → label "HIVE benchmark" or replace with an actual green-bond criterion.
 
 # 12. Sustainability (hub)  (`app/sustainability/page.tsx`)
