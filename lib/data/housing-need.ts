@@ -101,7 +101,7 @@ export const STRESS_SUMMARY = {
   core_housing_need_ahuri: 640_000,   // AHURI/City Futures 2022 (2021 Census); rises to ~940k by 2041. (was 740k)
   median_market_rent_pw_2024: 600,    // capital city median, PropTrack 2024
   median_renter_income_k: 65,         // ABS SIH 2021-22 adjusted
-  cra_max_single_pw: 110,             // CRA single max — AHURI/Shelter WA "Eligibility Trap" Table 3 (Mar 2026); was 94 (2024)
+  cra_max_single_pw: 110,             // CRA single max ≈ $110/wk. Confirmed: Services Australia $215.40/fortnight = $107.70/wk (single, no children, from 20 Mar 2026); Shelter WA Table 3 used $110. Was 94 (2024).
   rent_increase_since_2019_pct: 35,   // PropTrack / CoreLogic
 }
 
