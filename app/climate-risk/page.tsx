@@ -139,7 +139,7 @@ export default function ClimateRiskPage() {
         <div className="grid-4" style={{ marginBottom: 20 }}>
           {[
             { label: "Suburbs Profiled", value: totalSuburbs, color: "#f6c90e", delta: "Across all 8 states/territories" },
-            { label: "Critical Risk Suburbs", value: criticalTotal, color: "#c0614a", delta: "Score ≥ 75 — compound/extreme hazard" },
+            { label: "Critical Risk Suburbs", value: criticalTotal, color: "#c0614a", delta: "Highest climate-risk tier (HIVE ranking, corrected 2026)" },
             { label: "Social Dwellings at High+ Risk", value: `${(dwellingsAtRisk/1000).toFixed(0)}k`, color: "#c0614a", delta: "Estimated social dwellings in Critical/High zones" },
             { label: "Insurance Withdrawal Risk", value: insuranceTotal, color: "#c49a3a", delta: "Suburbs with limited/unaffordable coverage" },
           ].map(({ label, value, color, delta }) => (

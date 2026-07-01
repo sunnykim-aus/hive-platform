@@ -61,11 +61,14 @@ export const COMPOUND_RISK_COLORS: Record<CompoundRiskBand, string> = {
   Low:      "#5aad8a",
 }
 
+// Bands recalibrated 2026-07 to the corrected-data compound scale (range ~55–83 after the
+// heat re-base). These are HIVE's RELATIVE risk tiers across the 152 profiled suburbs — a
+// ranking, not an absolute/official classification. "Extreme" = highest tier ≈ top ~10%.
 function getCompoundBand(score: number): CompoundRiskBand {
-  if (score >= 85) return "Extreme"    // genuine triple-failure — all three dimensions severe
-  if (score >= 72) return "Critical"   // two dimensions severe + one high
-  if (score >= 58) return "High"       // one severe + others significant
-  if (score >= 42) return "Moderate"   // manageable with targeted intervention
+  if (score >= 75) return "Extreme"    // highest tier (~top 10%) — climate + energy + LHD all severe
+  if (score >= 68) return "Critical"
+  if (score >= 62) return "High"
+  if (score >= 56) return "Moderate"
   return "Low"
 }
 

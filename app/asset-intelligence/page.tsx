@@ -86,8 +86,8 @@ export default function AssetIntelligencePage() {
         {/* National KPIs */}
         <div className="grid-4" style={{ marginBottom: 20 }}>
           {[
-            { label: "Extreme Risk Suburbs", value: stats.extreme, color: COMPOUND_RISK_COLORS.Extreme, delta: "Score ≥80 — triple failure across all three dimensions" },
-            { label: "Critical Risk Suburbs", value: stats.critical, color: COMPOUND_RISK_COLORS.Critical, delta: "Score 65–79 — severe compound vulnerability" },
+            { label: "Highest-Risk Suburbs", value: stats.extreme, color: COMPOUND_RISK_COLORS.Extreme, delta: "Top ~10% by compound risk — climate + energy + accessibility (HIVE ranking)" },
+            { label: "Very High Risk Suburbs", value: stats.critical, color: COMPOUND_RISK_COLORS.Critical, delta: "Next tier of severe compound vulnerability" },
             { label: "High+ Risk Suburbs", value: stats.total_high_plus, color: COMPOUND_RISK_COLORS.High, delta: "Requiring urgent cross-domain intervention" },
             { label: "Not HAFF Round 4 Ready", value: stats.haff_not_ready, color: "#c49a3a", delta: "Climate, energy or LHD gaps block Round 4 compliance" },
           ].map(({ label, value, color, delta }) => (

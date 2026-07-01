@@ -275,7 +275,7 @@ export default function HomePage() {
                 The triple failure — and where it concentrates
               </div>
               <p style={{ fontSize: "0.82rem", color: "#94a3b8", lineHeight: 1.75, marginBottom: 0, maxWidth: 680 }}>
-                13 suburbs face extreme compound risk where climate exposure, energy-poor stock, and LHD non-compliance collide simultaneously.
+                A subset of suburbs — HIVE&apos;s highest compound-risk tier (top ~10% of the 152 profiled) — face climate exposure, energy-poor stock, and LHD non-compliance simultaneously.
                 This is where Australia&apos;s most vulnerable tenants live — paying $2,200+ extra in energy costs, in homes that reach 43°C+ on extreme heat days,
                 without the accessibility features to age in place. HIVE is the only platform that maps this intersection across all 152 profiled suburbs.
               </p>

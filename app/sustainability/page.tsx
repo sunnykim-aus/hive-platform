@@ -89,7 +89,7 @@ export default function SustainabilityPage() {
     {
       ...PILLARS[4],
       stats: [
-        { label: "Extreme compound risk", value: `${compStats.extreme} suburbs` },
+        { label: "Highest-risk (top ~10%)", value: `${compStats.extreme} suburbs` },
         { label: "HAFF R4 gaps", value: `${compStats.haff_not_ready} suburbs` },
         { label: "Avg triple fix cost", value: `~$${compStats.avg_fix_cost_k}k/dwelling` },
       ],
@@ -104,7 +104,7 @@ export default function SustainabilityPage() {
         <div className="page-header" style={{ borderLeft: "3px solid #1abc9c" }}>
           <h1 className="page-title">Sustainability</h1>
           <p className="page-subtitle">
-            13 suburbs face extreme compound risk where climate exposure, energy-poor stock, and LHD non-compliance collide simultaneously.
+            A subset of suburbs — HIVE's highest compound-risk tier (top ~10% of the 152 profiled) — face climate exposure, energy-poor stock, and LHD non-compliance simultaneously.
             163k social dwellings are below 3-star NatHERS. Only 9% meet Silver livability standard. The sector ESG composite is 45/100 — 20 points below the green finance threshold.
             These are not separate problems. They concentrate in the same assets, affect the same tenants, and require connected intelligence to solve.
           </p>
@@ -156,8 +156,8 @@ export default function SustainabilityPage() {
         <div id="sus-kpis" style={{ scrollMarginTop: 130, marginBottom: 32 }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(5, minmax(0,1fr))", gap: 8 }}>
             {[
-              { label: "Extreme Risk Suburbs", value: `${compStats.extreme}`, color: "#e67e22", delta: "Climate + energy + LHD triple failure", href: "/asset-intelligence" },
-              { label: "Critical Climate Risk", value: "48", color: "#c0614a", delta: "Score ≥75 · 31 facing insurance loss", href: "/climate-risk" },
+              { label: "Highest-Risk Suburbs", value: `${compStats.extreme}`, color: "#e67e22", delta: "Top ~10% compound risk (HIVE ranking)", href: "/asset-intelligence" },
+              { label: "Critical Climate Risk", value: "8", color: "#c0614a", delta: "Highest climate tier · 31 facing insurance loss", href: "/climate-risk" },
               { label: "Below 3★ NatHERS", value: `~${Math.round(energyStats.below3star/1000)}k`, color: "#5aad8a", delta: `${Math.round(energyStats.below3star/energyStats.totalStock*100)}% of stock — urgent heat risk`, href: "/building-energy" },
               { label: "Below Silver LHD", value: `~${Math.round(lhdStats.totalNeeding/1000)}k`, color: "#f6c90e", delta: "91% of social stock · $2.8B to fix", href: "/livable-housing" },
               { label: "Sector ESG Score", value: `${SECTOR_COMPOSITE_SCORE}/100`, color: "#4d7fb5", delta: "Below Average · 20pts below threshold", href: "/esg-impact" },
