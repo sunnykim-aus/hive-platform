@@ -163,18 +163,19 @@ export const SOCIAL_METRICS: SocialMetric[] = [
     source: "State housing authority waitlist registers 2024; AIHW 2023",
   },
   {
-    // ⚠️ VALIDATION FLAG (2026-07, NotebookLM vs AIHW SHS): this 62% may be MISLABELLED.
-    // In AIHW, 62% is a POSITIVE outcome (clients ending support in housing, up from 50%); the actual
-    // UNMET accommodation rate is ~31% (1 in 3). Confirm HIVE's source before this drives the S-pillar.
+    // CORRECTED 2026-07 (source investigation, AIHW SHS 2022-23): was "62% unmet", which
+    // MISLABELLED a different AIHW stat — 62% is the share of *unassisted requests* that were
+    // for short-term/emergency accommodation, NOT the unmet rate. The true accommodation-unmet
+    // rate: 165,000 clients (60%) needed accommodation, provided to 83,800 (51%) → ~49% unmet.
     id: "unmet_requests",
-    label: "Unmet SHS Requests",
-    value: "62%",
-    numeric: 62,
+    label: "Unmet Accommodation Need (SHS)",
+    value: "~49%",
+    numeric: 49,
     benchmark: "Target: <20% unmet rate",
     rating: "Lagging",
     trend: "static",
-    detail: "62% of requests to Specialist Homelessness Services for immediate accommodation go unmet nationally. This is the system-level failure rate — the proportion of people actively seeking help who don't receive it. The 7% housing success rate for crisis presentations has not improved in 5 years.",
-    source: "AIHW Specialist Homelessness Services Annual Report 2022-23",
+    detail: "Of the ~165,000 Specialist Homelessness Services clients who needed accommodation in 2022-23 (60% of all clients), only ~51% (83,800) were provided it — leaving ~49% with unmet accommodation need. Separately, agencies turned away ~108,000 unassisted requests over the year (~295/day), 62% of them for short-term or emergency accommodation. Corrected from a prior '62% unmet' figure that conflated these two statistics.",
+    source: "AIHW Specialist Homelessness Services Annual Report 2022-23 (Unmet demand / Unassisted requests for services)",
   },
   {
     id: "first_nations",
@@ -365,7 +366,7 @@ export const SECTOR_ESG_SCORES: ESGScoreCard[] = [
     score: 48,
     rating: "Below Average",
     key_strength: "Social ROI of $1.70/$1 invested. Strong prioritisation of family violence, First Nations, disability housing in HAFF pipeline. SHS crisis support scale.",
-    key_gap: "62% of SHS requests unmet. 4.2-year average wait time. 91% of stock fails Livable Housing Silver. Women's housing access only 38%.",
+    key_gap: "~49% of SHS clients needing accommodation don't receive it. 4.2-year average wait time. 91% of stock fails Livable Housing Silver. Women's housing access only 38%.",
     trend: "improving",
     haff_relevance: "HAFF prioritises women's safety, First Nations, disability housing. Scoring favours applications with demonstrated social impact measurement frameworks.",
   },

@@ -278,7 +278,7 @@ export default function ESGPage() {
                 {
                   pillar: "Social" as ESGPillar,
                   why: "Social housing exists because markets fail the most vulnerable. But 'social' in ESG means measurement, not intention. CHPs that cannot quantify their social outcomes cannot attract impact capital, justify government investment, or demonstrate they are meeting their charitable mission.",
-                  urgency: "62% of emergency housing requests go unmet. The gap between social mission and social delivery is the sector's credibility crisis — and it can only be closed through rigorous measurement.",
+                  urgency: "Nearly half of SHS clients who need accommodation don't receive it. The gap between social mission and social delivery is the sector's credibility crisis — and it can only be closed through rigorous measurement.",
                   link: "/housing-need",
                   linkLabel: "Housing Need →",
                 },
