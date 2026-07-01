@@ -116,3 +116,88 @@ For [REGION/STATION], quote the projected annual number of days ≥ 35°C for th
 
 ## Return format
 Give Claude the filled table (Zone → ≥35 now/2030/2050, ≥40 now). Claude maps each zone's suburbs and rewrites `days_over_35_current/2030/2050` and `days_over_40_current` for all 152, preserving each suburb's relative rank within the zone.
+---
+
+# ▶▶ READY-TO-RUN PROMPT LIST (by state)
+
+Run in order. Per state: upload that state's BOM station pages + its projection report, then paste the 2 prompts. Give Claude the answers.
+
+## NSW
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Penrith Lakes, Lismore Airport, Williamtown RAAF, Broken Hill Airport, Bellambi (Wollongong), Wagga Wagga, Sydney (Observatory Hill), Dubbo Airport, Tamworth Airport, Coffs Harbour Airport, Goulburn Airport, Cessnock Airport, Nowra RAN.
+```
+**② Projection** — upload *AdaptNSW / NSW Climate Data Portal (NARCliM)*:
+```
+For each region — W Sydney, Northern Rivers, Newcastle, Far West NSW, Illawarra, Riverina, Sydney metro, Central West NSW, New England, Mid North Coast, Capital Region, Hunter, Shoalhaven — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## QLD
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Amberley AMO, Townsville Aero, Cairns Aero, Mount Isa Aero, Rockhampton Aero, Brisbane Aero, Bundaberg Airport, Mackay Aero, Toowoomba Airport, Sunshine Coast Airport, Oakey Aero.
+```
+**② Projection** — upload *Queensland Future Climate (Qld Govt)*:
+```
+For each region — Ipswich, Townsville, Cairns, QLD Outback, Central QLD, Logan, Wide Bay, Mackay, Toowoomba, Brisbane, Sunshine Coast, Moreton, Darling Downs — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## VIC
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Melbourne (Olympic Park), Sale (East Sale), Ballarat Aerodrome, Wangaratta Aero, Bendigo Airport, Mildura Airport.
+```
+**② Projection** — upload *Victoria's Climate Projections 2019 (DELWP)*:
+```
+For each region — Melbourne, Gippsland, Ballarat, Hume VIC, Bendigo, Wimmera/Mallee — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## WA
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Perth Airport, Port Hedland Airport, Kalgoorlie-Boulder Airport, Merredin.
+```
+**② Projection** — upload *CSIRO/BoM Climate Change in Australia (Rangelands/SW WA)*:
+```
+For each region — Perth, Pilbara, WA Outback S, WA Wheatbelt — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## SA
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Adelaide (Kent Town), Woomera Aerodrome, Mount Gambier Aero.
+```
+**② Projection** — upload *South Australian Climate Projections / CSIRO*:
+```
+For each region — Adelaide, SA Outback, SE SA — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## NT
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Alice Springs Airport, Darwin Airport.
+```
+**② Projection** — upload *CSIRO Climate Change in Australia (Monsoonal North / Rangelands)*:
+```
+For each region — NT Outback, Darwin — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## TAS
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Hobart (Ellerslie Road), Launceston Airport, Devonport Airport.
+```
+**② Projection** — upload *Climate Futures for Tasmania*:
+```
+For each region — Hobart, Launceston, NW Tas, SE Tas — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
+
+## ACT
+**① BOM baseline** — upload BOM stats for these stations first:
+```
+From the BOM climate statistics, give the ANNUAL mean number of days ≥35°C and days ≥40°C for each of: Canberra Airport.
+```
+**② Projection** — upload *ACT Climate Projections / AdaptNSW*:
+```
+For each region — Canberra — quote the projected annual number of days ≥35°C for baseline, ~2030 and ~2050, and the emissions scenario (prefer SSP2-4.5 or RCP8.5).
+```
