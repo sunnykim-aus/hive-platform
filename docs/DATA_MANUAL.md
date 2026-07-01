@@ -32,7 +32,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
 | **building-energy** | building-energy | KPIs/tables | 🟡 validated §9 (NatHERS optimistic) |
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 validated §10 (Silver optimistic) |
-| **esg-impact** | esg | KPIs/tables | 🔴 HIVE construct §11 (label) |
+| **esg-impact** | esg | KPIs/tables | 🟡 §11 — HIVE construct, honestly disclosed |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
@@ -413,7 +413,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **`= round(Σ SECTOR_ESG_SCORES.score ÷ SECTOR_ESG_SCORES.length)`** — straight mean of the pillar scorecards (E 32, S 48, G 56, …).
 - Pillar metrics: `ENVIRONMENTAL_METRICS`, `SOCIAL_METRICS`, `GOVERNANCE_METRICS` (each metric: value + rating). `INVESTMENT_USE_CASES`, `ESG_MATURITY_LEVELS` are reference tables.
 
-**Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🔴 **HIVE construct (2026-07):** the sector composite **45** = mean of pillar scores E32/S48/G56, which are **HIVE/AHURI-framework judgements** — there is **no published "social-housing sector ESG = 45"**. GRESB (cited methodology) is a real relative-quintile ESG benchmark, so the *approach* is legitimate, but the score is HIVE's own. **Must be presented as "HIVE ESG framework", never as an external/official rating.** Document the pillar scoring rubric.
+**Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 **HIVE construct — honestly disclosed (2026-07).** Composite **45** = mean(E32/S48/G56). The page **already carries a methodology note** ("HIVE-derived estimates … sector as a whole … individual CHP requires on-site assessment") — good, responsible disclosure. How the pillar scores were set (reverse-engineered): they track each pillar's metric-rating distribution (Env 6/7 "Lagging"→32 ✓) but are **subjective (no rubric)** and lean **optimistic** — Social (~34 implied → 48) and Governance (~48 → 56) sit +8–14 above a strict rating-average; a strict average of all three ≈ 37 vs the stated 45. **Two remaining gaps:** (a) "based on GRESB/UNPRI/ICMA" overclaims — the scores are analyst judgements *informed by* (not computed via) those frameworks → soften to "informed by"; (b) the "green finance threshold **65+**" is not a real standard → label "HIVE benchmark" or replace with an actual green-bond criterion.
 
 # 12. Sustainability (hub)  (`app/sustainability/page.tsx`)
 
