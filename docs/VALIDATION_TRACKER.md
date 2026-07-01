@@ -133,7 +133,7 @@ paste the prompt, then fill the state columns from its cited answer.
 | B1 1.31M / 640k rental stress | Housing Need | STRESS_SUMMARY | ABS Census 2021 | 🟡 held — **SIH 2023-24 withdrawn** (ABS 17 Jul 2025, renters under-sampled); 2021 newest official. Source label corrected in code. |
 | B2 waitlist ~~213k~~→**165.5k** | Housing Need | 165,500 | AIHW *Housing Assistance 2025* Jun-2024: 159,100 public + 6,400 SOMIH | ✅✅ **double-check corrected my web extract** (I had 184k; NotebookLM PDF read = 165.5k — more authoritative). Range 165k–188k by edition; community-housing lists integrated/unreported; 2026 edition pending. All sources < 213k. |
 | B3 122,494 homeless | Housing Need | ABS_CENSUS_HOMELESS_TOTAL | ABS Census 2021 | ✅✅ **double-confirmed** (web + NotebookLM): 7,636/24,291/16,597/22,137/3,934/47,895. Note: ABS applies small random adjustments so groups may not sum exactly to 122,494 |
-| B4 core need ~~740k~~→**640k** | Housing Need | HOMELESSNESS_LAYERS + STRESS_SUMMARY | AHURI/City Futures 2022 (2021 Census; →940k 2041) | ✅ **corrected in code** |
+| B4 core need ~~740k~~→**640k** | Housing Need | HOMELESSNESS_LAYERS + STRESS_SUMMARY | AHURI/City Futures 2022 (2021 Census; →940k 2041) | ✅✅ **double-confirmed** (web + NotebookLM: 640,000 → 940,000 by 2041) |
 | B5 SHS over-rep (7× / 2.3×) | Housing Need | SHS_CLIENT_PROFILE | AIHW SHS | ✅ arithmetic (25%÷3.5% = 7×) |
 | — CRA max single ~~$94~~→**$110** | Housing Need | STRESS_SUMMARY | AHURI/Shelter WA Table 3 (Mar-2026) | ✅ corrected (raises craCovers 42%→49%) |
 | 152 / 13 compound | Asset Intel | computed | inputs: CSIRO/AIHW | 🔴 |
