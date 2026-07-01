@@ -191,6 +191,24 @@ SA $560→$650 narrows to $209k. ACT $720→$620 widens to $201k. All states sta
 4. **Housing Australia — latest HAFF outcomes / funding-committed announcement** → grant total
 5. **Relabel in code:** 5.5% rate + 1.10 DSCR as *HIVE modeling assumptions* (HA lends below-market; exact terms confidential) — these can't be externally sourced.
 
+## RUN 2 partial (Notebook B) — AHURI/Shelter WA "The Eligibility Trap" (Apr 2026)
+
+Primary AHURI 2026 source. Validates the **social-rent income side** (not market rent / build cost).
+
+**Confirmed ✅:**
+- **CRA = $110/wk** (single max, private/CHP) — Table 3, "current March 2026". *Our $110 assumption confirmed.*
+- **Rent = 25% of income** (public housing; 25-30% NSW/ACT) — confirms HIVE's 25%.
+- **Public housing = no CRA; community housing (CHP) = +CRA** → HIVE's CHP-received basis is correct.
+- **IEL (single, max weekly income), ROGS 2026:** WA $551 (lowest) · QLD $609 · NSW $795 · VIC $797 · TAS $797 · SA $882 · ACT $925 · NT $1,114.
+- **Waitlist counts (ROGS 2026):** WA **22,409** (2024) · VIC **56,532** (2026) · QLD **32,951** (2025). → 3 states = 111,892; useful anchor for the 213k national (row B2).
+
+**Flag 🔴 — social rents run high + don't track IELs:**
+- Base case single JobSeeker in a CHP: 25% × $404 + $110 CRA = **~$211/wk**. HIVE WA = $260 (~$50 high).
+- No consistent income basis: WA has the *lowest* IEL ($551) but HIVE's 2nd-highest rent ($260); SA has a *high* IEL ($882) but HIVE's lowest rent ($212).
+- **Action:** rebuild `SOCIAL_RENT_WEEKLY` per state = 25% × actual tenant income (≤ IEL, benefit-weighted) + $110 CRA. Lower social rent → lower debt → *wider* gaps.
+
+**Still open (not in this source):** market rents (PropTrack), build rate + multipliers (Rawlinsons), council/land.
+
 ## Progress
 - **Feasibility:** structure ✅ · all state values extracted ✅ · internal-consistency ✅ ·
   NSW $137k triangulated 🟡 · **multiplier cross-checked vs T&T ✅ (WA flagged 🔴)** ·

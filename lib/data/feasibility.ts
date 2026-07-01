@@ -186,12 +186,20 @@ export const TYPOLOGIES: Record<string, Typology> = {
  *   WA  $108,000 → VLI $54,000 → $13,500/yr → $260/wk
  *   SA   $88,000 → VLI $44,000 → $11,000/yr → $212/wk
  *
- * VALIDATION (2026-07, NotebookLM A4): the "50% of median income" derivation above is
- * weak — real CHP social tenants earn far less. More defensible reconciliation is that
- * the CHP RECEIVES: income-based rent (AHURI actual ≈ $129–164/wk) + Commonwealth Rent
- * Assistance (CRA ≈ $94 single / ~$110 family-weighted). Income + CRA ≈ these values, so
- * the numbers hold on a CHP-received basis. Per-state income/CRA split NOT yet confirmed —
- * implied income (value − $110) is below the AHURI band for SA/TAS/QLD (verify those).
+ * VALIDATION (2026-07): the "50% of median income" derivation above is WRONG for social
+ * housing — actual tenant income is capped at the state Income Eligibility Limit (IEL) and
+ * most tenants are on benefits, far below it. Correct basis = 25% of ACTUAL tenant income
+ * + CRA (for CHP tenants only; public housing gets no CRA).
+ * Confirmed by AHURI/Shelter WA "The Eligibility Trap" (Apr 2026), Table 3 (current Mar 2026):
+ *   - rent = 25% of income (public; 25-30% NSW/ACT)  ✅
+ *   - CRA = $110/wk (single max, private/CHP)         ✅ confirmed
+ *   - WA IEL single = $551/wk (lowest in AU); IELs: QLD $609, NSW $795, VIC $797, TAS $797,
+ *     SA $882, ACT $925, NT $1,114
+ *   - Base case single JobSeeker in a CHP: 25%×$404 + $110 CRA = ~$211/wk received.
+ * => HIVE per-state social rents ($212-288) run HIGH vs the JobSeeker-single base (~$211) and
+ *    do NOT track the IELs (WA lowest IEL but 2nd-highest HIVE rent; SA high IEL, lowest rent).
+ *    REBUILD per-state on actual tenant-income (≤IEL) × 25% + $110 CRA. Values below unchanged
+ *    pending that rebuild.
  */
 export const SOCIAL_RENT_WEEKLY: Record<string, number> = {
   NSW: 264,
