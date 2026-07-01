@@ -158,6 +158,39 @@ Recompute the affected state gaps (ask Claude) and promote the row 🔴→✅. *
 
 ---
 
+## RUN 1–4 results (2026-07, Notebook A) — read this before continuing
+
+**The big lesson: most "not supported" = wrong/dated SOURCE uploaded, not a wrong HIVE number.**
+The notebook currently holds *secondary/older* docs (Summer Foundation 2024, HIA Taxation
+CIE 2023-24, AHURI 2017, HA Corporate Plan 2024-25, Rawlinsons 2026 *cover pages only*).
+To get ✅ we must upload the **primary current releases**.
+
+**Confirmed ✅ (bank these):** 40,000-dwelling target · $10B HAFF / $500M-floor (indexed 2029-30) ·
+NSW statutory $12,068 (= HIVE $12,000) · social income-rent ~$155 (AHURI) · Sydney market rent $730 (2024).
+
+**Flags 🔴/🟡 from this run:**
+| Input | HIVE | Source said | Note |
+|---|---|---|---|
+| Build rate $4,200 | $4,200 | Rawlinsons cost tables NOT in upload (cover only); unit costs quoted $404k/$501k/$820k (noisy) | still 🟡 — need actual Rawlinsons 2026 Table 1.3 |
+| Rate 5.5% / DSCR 1.10 | 5.5%/1.10 | HA plan qualitative only — "cheaper than private, longer term"; **no number published** | ⬛ **HIVE assumption — will never get external ✅; relabel** |
+| HAFF grant $55,451 | $55,451 | target 40k ✅; no "total committed" in upload; floor-basis → **$71,250/home** | 🟡 possibly higher → would *reduce* gap |
+| CRA component $110 | $110 | AHURI 2017 models ~$58/wk (dated + all-social avg incl. non-CRA public) | 🟡 need current Services Australia CRA schedule |
+| Market rent (8) | see 1.2 | 2024 PropTrack via Summer Foundation: **Perth $580 (HIVE $750!)** · Adelaide $650 ($560) · Canberra $620 ($720) · Melb $570 · Bris $630 · Darwin $600 · Hobart $520 | 🔴 Perth/Adelaide/Canberra off — but 2024 secondary; need primary PropTrack |
+| NSW council $20,000 | $20,000 | HIA/CIE: Sydney local infra $11,175 | 🟡 HIVE ~$9k high |
+
+**$137k robustness (NSW, market rent $730 ✅):** across grant $55k–$71k × CRA $58–$110,
+NSW gap = **$122k–$149k** → the flagship holds ~$130–140k regardless. ✅ robust.
+
+**Market-rent correction impact:** WA $750→$580 *widens* gap; with mult 0.92 too, WA ≈ $169k.
+SA $560→$650 narrows to $209k. ACT $720→$620 widens to $201k. All states stay ≫ NSW.
+
+### ▶ Next: upload PRIMARY current sources to Notebook A
+1. **PropTrack National Rental Report** — the actual latest PDF (not Summer Foundation) → market rents
+2. **Rawlinsons 2026 Ed.34 — Table 1.3 (apartment) + State Cost Index pages** → build rate + multipliers
+3. **Services Australia — Rent Assistance rate schedule (current)** → CRA component
+4. **Housing Australia — latest HAFF outcomes / funding-committed announcement** → grant total
+5. **Relabel in code:** 5.5% rate + 1.10 DSCR as *HIVE modeling assumptions* (HA lends below-market; exact terms confidential) — these can't be externally sourced.
+
 ## Progress
 - **Feasibility:** structure ✅ · all state values extracted ✅ · internal-consistency ✅ ·
   NSW $137k triangulated 🟡 · **multiplier cross-checked vs T&T ✅ (WA flagged 🔴)** ·
