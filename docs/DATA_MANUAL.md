@@ -32,7 +32,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
 | **building-energy** | building-energy | KPIs/tables | 🔴 §9 — NatHERS unsourceable (no published data) |
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 §10 — Silver optimistic (no SH-specific data) |
-| **esg-impact** | esg | KPIs/tables | 🟡 §11 — HIVE construct, honestly disclosed |
+| **esg-impact** | esg | KPIs/tables | 🔴 §11 — metric-layer errors (audit needed) |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
@@ -452,6 +452,12 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 | Formal ESG reporting | ~18% | 100% (2028) | Lagging | CHIA 2023 |
 
 **Roll-up:** each metric → rating vs benchmark → pillar score (HIVE judgement) → mean of 3 = **45**. ⚠️ A strict rating-average would be ~37 (Social/Gov set +8–14 above their rating-implied levels → mild optimism). Present as **HIVE ESG framework**, not an external rating.
+
+**⚠️ NotebookLM metric audit (2026-07) — errors found in the INPUTS:**
+- **(b) "Unmet SHS requests 62%" — likely MISLABELLED.** In AIHW SHS, 62% is a *positive* outcome (clients ending support in housing, up from 50%); the actual *unmet* accommodation rate is **~31%** (1 in 3). HIVE appears to have flipped a positive figure into a negative one. **Correct or clarify.**
+- **(e) "Formal ESG reporting 18%" → ~12%** (CHIA: "20+ early adopters" of 166 members). Overstated.
+- **(a) NatHERS 2.9★ — unsourceable** (§9; no published social-housing NatHERS).
+- **(c) NHR 94% · (d) DSCR 1.38× · (f) gearing 52%** — not in the uploaded sources (aggregate CHIA data gives liab/equity ~48.5%); need the CHIA Financial Benchmarking report to confirm. → **the metric layer needs a full audit; several pillar inputs are wrong or unverified.**
 
 **Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 **HIVE construct — honestly disclosed (2026-07).** Composite **45** = mean(E32/S48/G56). The page **already carries a methodology note** ("HIVE-derived estimates … sector as a whole … individual CHP requires on-site assessment") — good, responsible disclosure. How the pillar scores were set (reverse-engineered): they track each pillar's metric-rating distribution (Env 6/7 "Lagging"→32 ✓) but are **subjective (no rubric)** and lean **optimistic** — Social (~34 implied → 48) and Governance (~48 → 56) sit +8–14 above a strict rating-average; a strict average of all three ≈ 37 vs the stated 45. **Two remaining gaps:** (a) "based on GRESB/UNPRI/ICMA" overclaims — the scores are analyst judgements *informed by* (not computed via) those frameworks → soften to "informed by"; (b) the "green finance threshold **65+**" is not a real standard → label "HIVE benchmark" or replace with an actual green-bond criterion.
 
