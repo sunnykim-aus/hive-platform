@@ -67,7 +67,7 @@ sources — they are not computed at runtime except where a formula is shown.**
   - **CRA max single ~~$94~~ → $110** ✅ (AHURI/Shelter WA Table 3, Mar-2026) — raises craCovers 42% → ~49%.
 - **Calculation (derived, page.tsx:95-97):**
   - `gap = median_market_rent_pw_2024 − round(median_renter_income_k×1000 ÷ 52 × 0.30)` = 600 − round(65,000÷52×0.30) = **$225/wk** (market rent minus the 30%-of-income affordable rent).
-  - `craCovers = round(cra_max_single_pw ÷ gap × 100)` = round(94÷225×100) = **42%** (share of the gap that max Commonwealth Rent Assistance covers).
+  - `craCovers = round(cra_max_single_pw ÷ gap × 100)` = round(**110**÷225×100) = **49%** (share of the gap that max Commonwealth Rent Assistance covers; CRA updated $94→$110 for 2026).
 - **Cadence:** SIH ~annual · Census 5-yr (next 2026) · AHURI ad-hoc · CRA annual.
 - **Shared visual calc — `StatBar` (page.tsx:58):** every KPI bar meter on this page fills to `pct = min(100, value ÷ max × 100)` (capped at 100). Presentation only — does not change the underlying figure.
 - **Status:** 🟢 Notebook-B **corrected in code (2026-07)**: waitlist →184k, core need →640k, CRA →$110, homeless breakdown → exact ABS 2021 groups. Rental stress held at 2021 (no newer official data). B5 SHS over-rep ✅ (25/3.5≈7×, arithmetic). ⚠️ note the `gap`/`craCovers` §1 calc now uses CRA $110.
