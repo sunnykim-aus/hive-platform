@@ -50,11 +50,18 @@ paste the prompt, then fill the state columns from its cited answer.
 ### 1.2 Market rent (weekly)  → **Source: PropTrack National Rental Report, latest Q (1 report)**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
 |---|---|---|---|---|---|---|---|---|---|
-| Current | 730 | 590 | 640 | 750 | 560 | 530 | 650 | 720 | 🔴 all |
-| Confirmed | | | | | | | | | |
-> **NotebookLM:** "From the latest PropTrack rental report, quote the median weekly
-> rent (all dwellings) for each capital city. Give all eight." ⚠️ Check WA $750 > NSW
-> $730 — is Perth really above Sydney?
+| HIVE current | 730 | 590 | 640 | 750 | 560 | 530 | 650 | 720 | — |
+| **Domain Mar-2026 UNIT** | 750 | 600 | 660 | 695 | 550 | ~530? | 600 | 580 | ✅ current |
+| Domain Mar-2026 house | 800 | 590 | 680 | 740 | — | — | 699 | 700 | ref |
+| vs unit | 🟡 low | ✅ | 🟡 low | 🟡 high | ✅ | ? | 🟡 | 🔴 high | |
+
+> **RESOLVED via current web data (Domain Mar-2026 quarter).** The 2024 flags were STALE —
+> Perth surged (2024 $580 → 2026 unit $695 / house $740), so HIVE WA $750 is now defensible.
+> **Key fix = measure:** HIVE labels "all dwellings" but the feasibility is a 2-bed APARTMENT →
+> the **unit median** is the right comparator (house rents run higher). On the unit basis HIVE is
+> mostly within ±$50; outliers **ACT $720 vs unit $580** (high), NT $650 vs $600, WA $750 vs $695.
+> Shelter WA's $600 was Perth-1BR only — superseded. Hobart unit unconfirmed (~$530; vacancy 0.2%).
+> **Proposed set (2026 unit):** NSW 750 · VIC 600 · QLD 660 · WA 695 · SA 550 · TAS 530 · NT 600 · ACT 580.
 
 ### 1.3 Social rent (weekly, CHP-received = income-rent + CRA)  → **Source: AHURI + state housing policy**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
