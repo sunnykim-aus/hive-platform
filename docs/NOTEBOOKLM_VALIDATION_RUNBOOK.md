@@ -296,11 +296,12 @@ note "rubric is HIVE methodology".
 
 | # | Figure | NB | Traced? | Cited passage (paste the quote) | Verdict | Note / fix |
 |---|---|---|---|---|---|---|
-| A1 | $137k gap (50/50 NSW 2-bed) | A | | | | confirm scenario = 50/50, not 100% social |
-| A2 | $55,451 HAFF grant | A | | | | |
-| A3 | 5.5% rate / 1.10 DSCR | A | | | | rates move — note date |
-| A4 | $264 NSW social rent | A | | | | |
-| A5 | $730 Sydney market rent | A | | | | |
+| A1 | $137k gap (50/50 NSW 2-bed) | A | partial | recomputed $136,949 | 🟡 **NSW defensible (Rawlinsons basis)** | = NSW floor; other states $180–520k |
+| A1b | build rate $4,200/m² | A | triangulated | AHURI-Rawl 2017 esc → $4,080–4,760; $501,849/unit → $3,793–4,780 | 🟡 Rawlinsons-basis, not directly quoted | Koste/ABS basis → $3,175–3,771 |
+| A2 | $55,451 HAFF grant | A | partial | 40,000-home target confirmed; total not quoted | 🟡 | HAFF $10B / $500M-min confirmed |
+| A3 | 5.5% rate / 1.10 DSCR | A | no | "not published; performance-based" | 🟡 indicative | note date |
+| A4 | social rent $264 → income$150+CRA$110 | A | ✅ via CRA | AHURI income $129–164 + CRA | ✅ CHP-received basis | fixed weak "50% median" derivation |
+| A5 | $730 Sydney market rent | A | ✅ | "median metro Sydney $730 (2024)" | ✅ confirmed | |
 | A6 | HIVE assumptions (8/12/6%, land) | A | n/a | (document, don't validate) | | write rationale in §5 |
 | B1 | 1.31M / 640k rental stress | B | | | | |
 | B2 | 213k waitlist | B | | | | ⚠️ check year + definition |

@@ -27,8 +27,15 @@
  * WA and SA adjusted via STATE_COST_MULTIPLIER.
  * Source: Rawlinsons 2025 Table 1.3 — Community/social housing (medium density)
  */
+// VALIDATION (2026-07, NotebookLM A1): the $4,200 apartment rate is a RAWLINSONS-BASIS
+// figure, not directly quoted in public sources. Triangulated & defensible:
+//   • AHURI/Rawlinsons 2017 Sydney high-rise social ≈ $3,221/m² → escalate 3–5%/yr → $4,080–4,760 (2025)
+//   • Rawlinsons infill apartment ≈ $501,849/unit ÷ ~105 m² GFA → $3,793–4,780/m²
+//   • Sources note Rawlinsons prices "notably higher" than ABS; Koste 2023 (lower basis) → $3,175–3,771 (2025)
+// => $4,200 sits mid-band on Rawlinsons basis. Label any headline "Rawlinsons cost basis".
+// State multipliers (below) are Rawlinsons State Cost Index values — NOT yet source-confirmed.
 export const SQM_COST: Record<string, number> = {
-  apartment:  4_200,  // medium density 4–8 storey; higher for high-rise
+  apartment:  4_200,  // medium density 4–8 storey; Rawlinsons-basis (see note above)
   townhouse:  3_900,
   detached:   3_400,
 }
@@ -178,6 +185,13 @@ export const TYPOLOGIES: Record<string, Typology> = {
  *   QLD  $95,000 → VLI $47,500 → $11,875/yr → $228/wk
  *   WA  $108,000 → VLI $54,000 → $13,500/yr → $260/wk
  *   SA   $88,000 → VLI $44,000 → $11,000/yr → $212/wk
+ *
+ * VALIDATION (2026-07, NotebookLM A4): the "50% of median income" derivation above is
+ * weak — real CHP social tenants earn far less. More defensible reconciliation is that
+ * the CHP RECEIVES: income-based rent (AHURI actual ≈ $129–164/wk) + Commonwealth Rent
+ * Assistance (CRA ≈ $94 single / ~$110 family-weighted). Income + CRA ≈ these values, so
+ * the numbers hold on a CHP-received basis. Per-state income/CRA split NOT yet confirmed —
+ * implied income (value − $110) is below the AHURI band for SA/TAS/QLD (verify those).
  */
 export const SOCIAL_RENT_WEEKLY: Record<string, number> = {
   NSW: 264,
