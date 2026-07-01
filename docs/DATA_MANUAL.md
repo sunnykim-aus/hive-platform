@@ -23,7 +23,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | Page (`app/…/page.tsx`) | Data file(s) | Charts | Status |
 |---|---|---|---|
 | **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟡 traced (§2) |
-| **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 §1 + Notebook-B checked (waitlist→184k) |
+| **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 §1 + Notebook-B corrected (waitlist→165.5k) |
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
@@ -70,7 +70,7 @@ sources — they are not computed at runtime except where a formula is shown.**
   - `craCovers = round(cra_max_single_pw ÷ gap × 100)` = round(**110**÷225×100) = **49%** (share of the gap that max Commonwealth Rent Assistance covers; CRA updated $94→$110 for 2026).
 - **Cadence:** SIH ~annual · Census 5-yr (next 2026) · AHURI ad-hoc · CRA annual.
 - **Shared visual calc — `StatBar` (page.tsx:58):** every KPI bar meter on this page fills to `pct = min(100, value ÷ max × 100)` (capped at 100). Presentation only — does not change the underlying figure.
-- **Status:** 🟢 Notebook-B **corrected in code (2026-07)**: waitlist →184k, core need →640k, CRA →$110, homeless breakdown → exact ABS 2021 groups. Rental stress held at 2021 (no newer official data). B5 SHS over-rep ✅ (25/3.5≈7×, arithmetic). ⚠️ note the `gap`/`craCovers` §1 calc now uses CRA $110.
+- **Status:** 🟢 Notebook-B **corrected in code (2026-07)**: waitlist →165.5k, core need →640k, CRA →$110, homeless breakdown → exact ABS 2021 groups. Rental stress held at 2021 (no newer official data). B5 SHS over-rep ✅ (25/3.5≈7×, arithmetic). ⚠️ note the `gap`/`craCovers` §1 calc now uses CRA $110.
 
 ### §2 · How Australia Lives
 - **📊 BarChart (horizontal) — Household composition** (page.tsx:229) — `data = HOUSEHOLD_TYPES`, bar = `pct`. Couple w/children 31%, couple no-children 28%, lone-person 27%, single-parent 11%, other 3%. **Source:** ABS Census 2021. **Calc:** direct % of households from Census; `count_m` = pct × ~10.9M total households. **Cadence:** Census 5-yr.
