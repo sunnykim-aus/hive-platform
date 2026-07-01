@@ -130,10 +130,10 @@ paste the prompt, then fill the state columns from its cited answer.
 
 | Figure | Page | Current | Source to check | Status |
 |---|---|---|---|---|
-| 1.31M / 640k rental stress | Housing Need | STRESS_SUMMARY | ABS SIH | 🔴 |
-| 213k waitlist | Housing Need | 213,000 | 8 state registers | 🔴 ⚠️ def. risk |
-| 122,494 homeless | Housing Need | ABS_CENSUS_HOMELESS_TOTAL | ABS 2049.0 | 🔴 |
-| 740k core need | Housing Need | HOMELESSNESS_LAYERS | AHURI | 🔴 |
+| B1 1.31M / 640k rental stress | Housing Need | STRESS_SUMMARY | ABS Census 2021 / SIH 2019-20 | 🟡 **SIH 2023-24 NOT released** (ABS pulled it 17 Jul 2025 — renters under-sampled); 2021 is newest official → can't update |
+| B2 213k waitlist | Housing Need | 213,000 | AIHW *Housing Assistance 2025* | 🔴 **overstated** — AIHW: 169k public + 15.1k SOMIH ≈ **184k**; ROGS state-sum ~190-197k → restate ~184-190k |
+| B3 122,494 homeless | Housing Need | ABS_CENSUS_HOMELESS_TOTAL | ABS Census 2021 | ✅ total (latest; 2026 Census ~2027). 🔴 **breakdown mislabelled** — ABS severe-crowding 39.1% ≈ 47,900 (HIVE 14,400) vs couch-surf — appear swapped |
+| B4 740k core need | Housing Need | HOMELESSNESS_LAYERS | AHURI (report TBC) | 🟡 not found in current sources; NHSAC 2025 uses Accord-shortfall framing (262k) — needs the specific older AHURI report |
 | 152 / 13 compound | Asset Intel | computed | inputs: CSIRO/AIHW | 🔴 |
 | Climate hazard weights | Climate Risk | 30/25/20/15/10 | — | ⬛ |
 | $2,200 energy penalty | Building Energy | 2200 | — | ⬛ |

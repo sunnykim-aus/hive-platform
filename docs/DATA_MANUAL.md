@@ -23,7 +23,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | Page (`app/…/page.tsx`) | Data file(s) | Charts | Status |
 |---|---|---|---|
 | **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟡 traced (§2) |
-| **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 traced (§1 below) |
+| **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 §1 + Notebook-B checked (waitlist→184k) |
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
@@ -59,13 +59,17 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 ### §1 · National Snapshot — 🔢 KPI cards
 - **Data:** `STRESS_SUMMARY`, `HOMELESSNESS_LAYERS`, `ABS_CENSUS_HOMELESS_TOTAL`.
-- **Figures & source:** 1.31M in rental stress, 640k severe (ABS SIH 2021-22) · 740k core housing need (AHURI 2023) · 122,494 homeless on Census night (ABS Census 2021) · 213,000 social-housing waitlist (state registers; stored in `TENURE_TYPES` note).
+- **Figures & source (validated 2026-07, Notebook B):**
+  - **122,494 homeless** on Census night — ✅ ABS Census 2021 (latest; 2026 Census data ~2027). ⚠️ *category breakdown* mislabelled (severe-crowding ≈47,900 not 14,400).
+  - **1.31M rental stress / 640k severe** — 🟡 ABS Census 2021 / SIH 2019-20. **SIH 2023-24 was NOT released** (ABS withdrew 17 Jul 2025, renters under-sampled) → no newer official figure; cite as 2021.
+  - **213,000 waitlist** — 🔴 **overstated.** AIHW *Housing Assistance 2025*: 169k public + 15.1k SOMIH ≈ **184,000**; ROGS state-sum ~190-197k → restate ~184-190k.
+  - **740k core housing need** — 🟡 AHURI figure not found in current sources (report TBC; NHSAC 2025 uses a 262k Accord-shortfall framing).
 - **Calculation (derived, page.tsx:95-97):**
   - `gap = median_market_rent_pw_2024 − round(median_renter_income_k×1000 ÷ 52 × 0.30)` = 600 − round(65,000÷52×0.30) = **$225/wk** (market rent minus the 30%-of-income affordable rent).
   - `craCovers = round(cra_max_single_pw ÷ gap × 100)` = round(94÷225×100) = **42%** (share of the gap that max Commonwealth Rent Assistance covers).
 - **Cadence:** SIH ~annual · Census 5-yr (next 2026) · AHURI ad-hoc · CRA annual.
 - **Shared visual calc — `StatBar` (page.tsx:58):** every KPI bar meter on this page fills to `pct = min(100, value ÷ max × 100)` (capped at 100). Presentation only — does not change the underlying figure.
-- **Status:** 🟡 (confirm SIH stress figures + waitlist 213k against current state-register totals).
+- **Status:** 🟡 Notebook-B checked (2026-07): homeless total ✅; **waitlist 213k → restate ~184k (AIHW 2025)**; rental stress locked at 2021 (SIH 2023-24 withdrawn); 740k core-need source TBC; homeless breakdown needs relabel. Values not yet changed in code — pending decision.
 
 ### §2 · How Australia Lives
 - **📊 BarChart (horizontal) — Household composition** (page.tsx:229) — `data = HOUSEHOLD_TYPES`, bar = `pct`. Couple w/children 31%, couple no-children 28%, lone-person 27%, single-parent 11%, other 3%. **Source:** ABS Census 2021. **Calc:** direct % of households from Census; `count_m` = pct × ~10.9M total households. **Cadence:** Census 5-yr.
