@@ -44,7 +44,7 @@ export const TENURE_TYPES: TenureRecord[] = [
   { label: "Owner — no mortgage", pct: 31, color: "#5aad8a", stress_note: "Lowest housing cost burden" },
   { label: "Owner — with mortgage", pct: 35, color: "#4d7fb5", stress_note: "Rate-sensitive; ~15% in mortgage stress" },
   { label: "Private renter", pct: 26, color: "#c49a3a", stress_note: "Primary at-risk population — 1 in 3 in stress" },
-  { label: "Social housing", pct:  4, color: "#6b8aa0", stress_note: "Capped at income-based rent; waitlist: 213,000" },
+  { label: "Social housing", pct:  4, color: "#6b8aa0", stress_note: "Capped at income-based rent; waitlist ~184,000 (AIHW Housing Assistance 2025: 169k public + 15k SOMIH)" },
   { label: "Other / not stated", pct: 4, color: "#555", stress_note: "Includes rent-free, boarding, not stated" },
 ]
 
@@ -96,12 +96,12 @@ export const RENTAL_STRESS_BY_QUINTILE: RentalStressRecord[] = [
 // ── National Stress Aggregates ────────────────────────────────
 export const STRESS_SUMMARY = {
   total_renter_households: 3_120_000,
-  in_rental_stress: 1_310_000,        // >30% income on rent
-  in_severe_rental_stress: 640_000,   // >50% income on rent
-  core_housing_need_ahuri: 740_000,   // AHURI 2023 definition
+  in_rental_stress: 1_310_000,        // >30% income on rent — ABS Census 2021 basis (SIH 2023-24 withdrawn by ABS Jul 2025)
+  in_severe_rental_stress: 640_000,   // >50% income on rent — ABS Census 2021 basis
+  core_housing_need_ahuri: 640_000,   // AHURI/City Futures 2022 (2021 Census); rises to ~940k by 2041. (was 740k)
   median_market_rent_pw_2024: 600,    // capital city median, PropTrack 2024
   median_renter_income_k: 65,         // ABS SIH 2021-22 adjusted
-  cra_max_single_pw: 94,              // Commonwealth Rent Assistance, single 2024
+  cra_max_single_pw: 110,             // CRA single max — AHURI/Shelter WA "Eligibility Trap" Table 3 (Mar 2026); was 94 (2024)
   rent_increase_since_2019_pct: 35,   // PropTrack / CoreLogic
 }
 
@@ -367,40 +367,41 @@ export interface HomelessnessLayer {
 }
 
 export const HOMELESSNESS_LAYERS: HomelessnessLayer[] = [
+  // Exact ABS Census 2021 operational groups (verified 2026-07). Total = 122,494.
   {
     label: "Rough sleeping / improvised dwellings",
-    count: 8_200,
+    count: 7_636,
     color: "#c0614a",
     visibility: "visible",
-    description: "The visible face of homelessness — sleeping rough, in cars, improvised shelters. ABS Census 2021.",
+    description: "Improvised dwellings, tents or sleeping out — the visible face of homelessness. ABS Census 2021.",
   },
   {
-    label: "Crisis / supported accommodation",
-    count: 21_000,
+    label: "Supported accommodation for the homeless",
+    count: 24_291,
     color: "#e67e22",
     visibility: "visible",
-    description: "In SHS-funded crisis accommodation: refuges, shelters, transitional housing. Counted by AIHW.",
+    description: "In SHS-funded/supported accommodation: refuges, shelters, transitional housing. ABS Census 2021.",
   },
   {
     label: "Boarding houses (insecure)",
-    count: 18_700,
+    count: 22_137,
     color: "#c49a3a",
     visibility: "semi-hidden",
     description: "Boarding house residents without lease rights — can be displaced with little notice. ABS Census 2021.",
   },
   {
     label: "Severely overcrowded dwellings",
-    count: 14_400,
+    count: 47_895,
     color: "#f6c90e",
     visibility: "semi-hidden",
-    description: "Living in dwellings requiring 4+ additional bedrooms (ABS CNOS definition). Concentrated in First Nations communities.",
+    description: "Living in 'severely' crowded dwellings (needs 4+ extra bedrooms, ABS CNOS). ABS Census 2021 — the largest single group (39.1%). Concentrated in First Nations communities.",
   },
   {
-    label: "Couch-surfing / temporary with others",
-    count: 47_400,
+    label: "Staying temporarily with other households",
+    count: 16_597,
     color: "#5aad8a",
     visibility: "semi-hidden",
-    description: "Staying temporarily with friends or family without long-term accommodation. ABS Census 2021. Largest single category.",
+    description: "Couch-surfing — staying temporarily with friends or family without long-term accommodation. ABS Census 2021. (Plus 3,934 in other temporary lodging.)",
   },
   {
     label: "Hidden homelessness (AHURI estimate)",
@@ -411,10 +412,10 @@ export const HOMELESSNESS_LAYERS: HomelessnessLayer[] = [
   },
   {
     label: "Core housing need (AHURI)",
-    count: 740_000,
+    count: 640_000,
     color: "#0d3320",
     visibility: "hidden",
-    description: "AHURI 2023 estimate of households in core housing need: below standards of suitability, affordability, or availability, with no capacity to solve it themselves in the private market.",
+    description: "AHURI/City Futures 2022 estimate (2021 Census): households in housing that does not meet their needs (suitability, affordability or availability). Rises to ~940,000 by 2041. (was 740k)",
   },
 ]
 
