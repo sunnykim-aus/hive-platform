@@ -715,8 +715,8 @@ export default function ESGPage() {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12, marginBottom: 20 }}>
               <div style={{ fontSize: "0.75rem", color: "#4a5a6a" }}>
                 {orgScores.composite >= 65
-                  ? <span style={{ color: "#5aad8a", fontWeight: 700 }}>✅ Above 65 threshold — green finance accessible</span>
-                  : <span>Gap to green finance threshold: <strong style={{ color: "#c49a3a" }}>{65 - orgScores.composite} points</strong></span>}
+                  ? <span style={{ color: "#5aad8a", fontWeight: 700 }}>✅ Above HIVE&apos;s 65 green-finance benchmark</span>
+                  : <span>Gap to HIVE green-finance benchmark (65): <strong style={{ color: "#c49a3a" }}>{65 - orgScores.composite} points</strong></span>}
               </div>
               <button onClick={saveESG} style={{
                 background: esgSaved ? "rgba(90,173,138,0.1)" : "rgba(246,201,14,0.1)",
@@ -735,7 +735,7 @@ export default function ESGPage() {
         <div style={{ marginTop: 32, borderTop: "1px solid #1e2d40", paddingTop: 14 }}>
           <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "#4a5a6a", letterSpacing: "1.8px", textTransform: "uppercase", marginBottom: 6 }}>Methodology</div>
           <div style={{ fontSize: "0.7rem", color: "#4a5a6a", lineHeight: 1.6 }}>
-            ESG scores are HIVE-derived estimates based on published sector data, AHURI research, and international ESG frameworks (GRESB, UNPRI, ICMA Green Bond Principles).
+            ESG scores are HIVE-derived estimates based on published sector data and AHURI research, and <em>informed by</em> (not computed via) international ESG frameworks (GRESB, UNPRI, ICMA Green Bond Principles). The 65 &ldquo;green-finance&rdquo; mark is a HIVE readiness benchmark, not an official standard.
             Sector composite is a simple average of E (32), S (48), G (56). Individual CHP scoring requires on-site assessment.
             Data sources cited inline. Scores reflect the sector as a whole — leading CHPs significantly outperform these averages.
           </div>

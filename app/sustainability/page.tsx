@@ -82,7 +82,7 @@ export default function SustainabilityPage() {
       ...PILLARS[3],
       stats: [
         { label: "Sector composite ESG", value: `${SECTOR_COMPOSITE_SCORE}/100` },
-        { label: "Below green finance threshold", value: "65+ needed" },
+        { label: "Below HIVE green-finance benchmark", value: "65+ (HIVE)" },
         { label: "Producing ESG reports", value: "~18% of T1" },
       ],
     },
@@ -105,7 +105,7 @@ export default function SustainabilityPage() {
           <h1 className="page-title">Sustainability</h1>
           <p className="page-subtitle">
             A subset of suburbs — HIVE's highest compound-risk tier (top ~10% of the 152 profiled) — face climate exposure, energy-poor stock, and LHD non-compliance simultaneously.
-            163k social dwellings are below 3-star NatHERS. Only 9% meet Silver livability standard. The sector ESG composite is 45/100 — 20 points below the green finance threshold.
+            163k social dwellings are below 3-star NatHERS. Only 9% meet Silver livability standard. The HIVE ESG framework rates the sector at 45/100 — 20 points below HIVE&apos;s green-finance readiness benchmark (65).
             These are not separate problems. They concentrate in the same assets, affect the same tenants, and require connected intelligence to solve.
           </p>
         </div>
@@ -160,7 +160,7 @@ export default function SustainabilityPage() {
               { label: "Critical Climate Risk", value: "8", color: "#c0614a", delta: "Highest climate tier · 31 facing insurance loss", href: "/climate-risk" },
               { label: "Below 3★ NatHERS", value: `~${Math.round(energyStats.below3star/1000)}k`, color: "#5aad8a", delta: `${Math.round(energyStats.below3star/energyStats.totalStock*100)}% of stock — urgent heat risk`, href: "/building-energy" },
               { label: "Below Silver LHD", value: `~${Math.round(lhdStats.totalNeeding/1000)}k`, color: "#f6c90e", delta: "91% of social stock · $2.8B to fix", href: "/livable-housing" },
-              { label: "Sector ESG Score", value: `${SECTOR_COMPOSITE_SCORE}/100`, color: "#4d7fb5", delta: "Below Average · 20pts below threshold", href: "/esg-impact" },
+              { label: "HIVE ESG framework score", value: `${SECTOR_COMPOSITE_SCORE}/100`, color: "#4d7fb5", delta: "Below Average · 20pts below HIVE benchmark (65)", href: "/esg-impact" },
             ].map(({ label, value, color, delta, href }) => (
               <a key={label} href={href} style={{ textDecoration: "none", height: "100%" }}>
                 <div className="hive-card hive-card-hover" style={{
