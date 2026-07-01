@@ -205,7 +205,15 @@ Primary AHURI 2026 source. Validates the **social-rent income side** (not market
 **Flag 🔴 — social rents run high + don't track IELs:**
 - Base case single JobSeeker in a CHP: 25% × $404 + $110 CRA = **~$211/wk**. HIVE WA = $260 (~$50 high).
 - No consistent income basis: WA has the *lowest* IEL ($551) but HIVE's 2nd-highest rent ($260); SA has a *high* IEL ($882) but HIVE's lowest rent ($212).
-- **Action:** rebuild `SOCIAL_RENT_WEEKLY` per state = 25% × actual tenant income (≤ IEL, benefit-weighted) + $110 CRA. Lower social rent → lower debt → *wider* gaps.
+- **DONE (2026-07): `SOCIAL_RENT_WEEKLY` rebuilt** = 25% × [45% JobSeeker $404 + 35% pension $530 + 20% working@0.9×IEL] + CRA $110. Now tracks the IEL; band $227–252 (was $212–288):
+
+| | NSW | VIC | QLD | WA | SA | TAS | NT | ACT |
+|---|---|---|---|---|---|---|---|---|
+| was | 264 | 240 | 228 | 260 | 212 | 216 | 242 | 288 |
+| **rebuilt** | **238** | **238** | **229** | **227** | **242** | **238** | **252** | **243** |
+| gap Δ | +$7k | +$0.5k | $0 | +$8k | −$7k | −$6k | −$3k | +$11k |
+
+  NSW flagship gap $137k → **~$144k**. ⚠️ Gaps still use *unvalidated* market rents + multipliers → not final. Assumption: income mix 45/35/20 (adjustable). Verified arithmetically (Python replica of `computeFeasibility`); browser check blocked by launch.json cwd bug (npm ran from `/Users/sunnykim`).
 
 **Still open (not in this source):** market rents (PropTrack), build rate + multipliers (Rawlinsons), council/land.
 

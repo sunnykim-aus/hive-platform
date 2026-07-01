@@ -198,18 +198,24 @@ export const TYPOLOGIES: Record<string, Typology> = {
  *   - Base case single JobSeeker in a CHP: 25%×$404 + $110 CRA = ~$211/wk received.
  * => HIVE per-state social rents ($212-288) run HIGH vs the JobSeeker-single base (~$211) and
  *    do NOT track the IELs (WA lowest IEL but 2nd-highest HIVE rent; SA high IEL, lowest rent).
- *    REBUILD per-state on actual tenant-income (≤IEL) × 25% + $110 CRA. Values below unchanged
- *    pending that rebuild.
+ *    REBUILD per-state on actual tenant-income (≤IEL) × 25% + $110 CRA — DONE below (2026-07).
+ *    Gap impact modest (±$11k); NSW flagship $137k → ~$144k. NOTE: market rents + cost
+ *    multipliers are still unvalidated, so per-state gaps are not final.
  */
+// REBUILT 2026-07 on IEL basis (replaces "50% of median income"):
+//   rent = 25% × income + CRA $110, where income = 45% JobSeeker $404 + 35% pension $530
+//          + 20% working @ 0.9×IEL (national benefit rates; IEL is the per-state ceiling).
+// Now tracks the IEL (WA lowest → NT highest); band tightens to $227–252 (was $212–288).
+// ASSUMPTION: tenant income mix 45/35/20 — adjustable. Prior values shown in parentheses.
 export const SOCIAL_RENT_WEEKLY: Record<string, number> = {
-  NSW: 264,
-  VIC: 240,
-  QLD: 228,
-  WA:  260,
-  SA:  212,
-  TAS: 216,   // Hobart VLI ~$43.2k (ABS 2023-24 Tas median $86.4k × 50%) → 25% = $10.8k/yr = $208/wk; actual CHP rents average $216/wk reflecting mixed metro/regional stock
-  NT:  242,   // Darwin formula: VLI ~$60.5k → $291/wk. Actual CHP benchmark: $242/wk — NT Housing policy sets rents below 25% VLI for remote/Aboriginal community tenancies (lower incomes, subsidy-dependent). Conservative figure used.
-  ACT: 288,   // Canberra formula: VLI ~$72k → $346/wk. Actual CHP rate: $288/wk — ACT Government policy caps social rent below formula max; many tenants on income support well below VLI. $288 reflects actual ACT Housing register practice.
+  NSW: 238,   // (was 264)  IEL $795
+  VIC: 238,   // (was 240)  IEL $797
+  QLD: 229,   // (was 228)  IEL $609
+  WA:  227,   // (was 260)  IEL $551 (lowest in AU)
+  SA:  242,   // (was 212)  IEL $882
+  TAS: 238,   // (was 216)  IEL $797
+  NT:  252,   // (was 242)  IEL $1,114 (highest)
+  ACT: 243,   // (was 288)  IEL $925
 }
 
 /**
