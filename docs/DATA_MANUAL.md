@@ -324,6 +324,32 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Source:** composite — see §8 (climate), §9 (energy), §10 (LHD). **Cadence:** driven by slowest input (Census 5-yr for climate exposure; energy/LHD ~annual). **Status:** 🟢 **Notebook C — validated + REBUILT 2026-07.** The old "**152 / 13 extreme**" headline was an artifact: heat_score was ~0.87-correlated with the (then-inflated) 35°C-day counts, and overall_score was hand-elevated above its own stated composite formula. After the heat re-base (§8) the scores were rebuilt — heat_score = 0.6·exposure(BOM days + humid-tropical floor) + 0.4·vulnerability(canopy/cooling/UHI/tenant); overall_score = proper weighted composite (heat30/flood25/bushfire20/coastal15/cyclone10, applicable-only). On corrected data the absolute "extreme" count → **~0**, confirming it was never a robust statistic. **Reframed (Frame A):** the product now presents the **top ~10% (16) as "highest-risk" — an explicit HIVE relative ranking**, not an absolute "N extreme" claim. Highest-risk = remote NT/WA First Nations communities. Inputs still anchored (NatHERS 1.8–3.6 vs "1.5–3 stars"; Silver 3–18% vs "~5%"). **Weights/thresholds are HIVE methodology; present as HIVE analysis.**
 
+### 🔬 Worked example — **Derby, WA** (every number on the suburb card, reproducible)
+
+*Derby · Derby-West Kimberley · 1,000 social dwellings · SEIFA 728 · overall 66 (Critical)*
+
+**Step A — Extreme Heat score = 94** (rebuilt 2026, BOM-based)
+- **Exposure** = `min(100, 20 + days35×0.55 + days40×1.0)` = 20 + 142×0.55 + 31×1.0 = 129 → **100** (capped). *(BOM Pilbara climatology: 142 days ≥35°C, 31 ≥40°C — one of Australia's hottest inhabited places → maxed.)*
+- **Vulnerability** = `35 + (25−canopy) + (100−cooling)×0.2 + (UHI−1)×8 + tenant`
+  = 35 + (25−6)=19 + (100−~20)×0.2=16 + (~1.3−1)×8=2.4 + Critical(+12) = **~84**. *(6% canopy, ~20% cooling access, Critical tenant vulnerability — remote Indigenous community, poor stock.)*
+- **Heat = 0.60×100 + 0.40×84 = 94.** *("142 days >35°C now → 205 by 2050" = BOM current + CSIRO projection.)*
+
+**Step B — the 5 hazard scores** (heat rebuilt; flood/bushfire/coastal/cyclone are event/mapping-based, validated accurate)
+| Heat | Flood | Bushfire | Coastal/SLR | Cyclone |
+|---|---|---|---|---|
+| **94** | **72** (Fitzroy River, 2023 flood) | **18** (not bushfire-prone) | **58** (King Sound tidal/surge) | **80** (Wind Region C, Cat 4, 12%/yr) |
+
+**Step C — overall_score = 66** (weighted composite of applicable hazards)
+`= (94×0.30 + 72×0.25 + 18×0.20 + 58×0.15 + 80×0.10) ÷ 1.0`
+`= 28.2 + 18.0 + 3.6 + 8.7 + 8.0 = 66.5 → 66` → **Critical** (≥62 on the rebuilt scale).
+
+**Step D — compound risk = 75** (Asset Intelligence, `computeCompoundRisk`)
+`= climate(66)×0.40 + energyGap(WA 73)×0.35 + lhdGap(WA 93)×0.25`
+`= 26.4 + 25.6 + 23.3 = 75` → **≥75 = "highest-risk" tier (top ~10%, one of the 16).**
+*(WA energyGap = (7−2.6)/6×100 = 73; lhdGap = 100−7 = 93.)*
+
+**Plain-English:** Derby's 94 heat score = *how hot it actually is* (142 days ≥35°C → exposure maxed) × *how badly its people can cope* (no shade, no cooling, vulnerable remote community → 84), blended 60:40. Grounded in BOM measurements + real housing vulnerability, not perception.
+
 # 8. Climate Risk  (`app/climate-risk/page.tsx` + `my-portfolio` → `lib/data/climate-risk.ts`)
 
 **Geographic unit:** SA2 (≈ suburb), high-priority social-housing suburbs across all 8 states/territories.
