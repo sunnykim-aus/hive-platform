@@ -337,6 +337,8 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 **Status:** 🟡 — scoring model + weights documented (Notebook C). The composite `overall_score` per suburb is a **HIVE construct** from BOM/CSIRO/ICA/Geoscience projections — the *methodology* traces to those agencies but individual per-suburb hazard scores are not published figures. Hazard weights (Heat 30/Flood 25/Bushfire 20/Coastal 15/Cyclone 10) are HIVE-defined. Present as HIVE analysis, not official hazard ratings.
 
+**C3 — per-suburb data spot-check (2026-07):** suburbs are **real** and grounded in real risk. Flood facts substantially confirmed (Lismore 14.4m peak / highest on record ✅ — corrected in code: peak was **28 Feb** not "March", ~1,400 Lismore homes damaged vs "4,000+" region-wide). ⚠️ **Heat projections look high** — e.g. Mount Druitt `days_over_35` 38 now → 62 by 2050 sits above the published Sydney baseline (~5–15 days); needs per-station BOM/CSIRO/AdaptNSW source-trace (NotebookLM prompts in VALIDATION_TRACKER C3). Until then, treat `days_over_35` figures as indicative.
+
 # 9. Building Energy  (`app/building-energy/page.tsx` → `lib/data/building-energy.ts`)
 
 **Rating systems:** NatHERS (0–10★ thermal) · NABERS (1–6★ operational). NCC 2022 mandates 7★ NatHERS for new builds (May 2023); existing social stock ~2–3★.
