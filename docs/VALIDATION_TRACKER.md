@@ -33,11 +33,19 @@ paste the prompt, then fill the state columns from its cited answer.
 ### 1.1 State cost multiplier  → **Source: Rawlinsons 2025 State Cost Index (1 table)**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
 |---|---|---|---|---|---|---|---|---|---|
-| Current | 1.00 | 0.96 | 1.00 | 1.13 | 0.93 | 0.96 | 1.42 | 1.08 | 🔴 all |
-| Confirmed | | | | | | | | | |
-> **NotebookLM (Notebook A):** "From the Rawlinsons State Cost Index, quote the
-> construction cost index for each state/capital relative to Sydney/NSW = 1.00.
-> Give all eight." ⚠️ NT 1.42 (42% remote premium) and WA 1.13 are the big levers — check first.
+| Current (HIVE) | 1.00 | 0.96 | 1.00 | 1.13 | 0.93 | 0.96 | 1.42 | 1.08 | — |
+| **T&T GCMI 2025** (Sydney=1.00) | 1.00 | 0.87 | 1.03 | **0.92** | 0.85 | n/a | n/a | n/a | cross-check |
+| Verdict vs T&T | ✅ | 🟡 high | 🟡 low | 🔴 **+21pt** | 🟡 high | 🔴? | 🟡 | 🟡 |
+| Rawlinsons (user) | ? | ? | ? | ? | ? | ? | ? | ? | pending |
+
+> **Cross-check done (2026-07, T&T GCMI 2025, US$/m²):** Sydney $3,046 · Brisbane $3,135 · Perth $2,815 · Melbourne $2,655 · Adelaide $2,587.
+> - **🔴 WA 1.13 overstated** — T&T puts Perth at 0.92 (BELOW Sydney); HIVE's "resources premium" looks like a legacy mining-boom figure. Correcting WA → gap **$254,781 → $138,092** (−$117k/dwelling).
+> - **🟡 QLD 1.00 slightly low** — Brisbane now 1.03 (above Sydney); correcting → gap $221,958 → $238,628.
+> - **🟡 VIC 0.96 / SA 0.93** run ~8–9 pts above T&T (0.87 / 0.85) — same direction, lean high.
+> - **NT/ACT/TAS not in T&T:** public data supports NT large premium (Darwin cyclone +20–40%, remote to $5k/m²); ACT ≈ Sydney + govt premium (1.08 plausible); TAS (0.96) unconfirmed.
+> - ⚠️ T&T is a *general* all-building index (methodology ≠ Rawlinsons apartment-specific) → **signal, not replacement**. **Confirm with Rawlinsons 2025 State Cost Index (user).**
+>
+> **When you have Rawlinsons (Notebook A upload):** "From the Rawlinsons 2025 State Cost Index / location index, quote the construction cost index for each capital relative to Sydney = 1.00. Give all eight (NSW, VIC, QLD, WA, SA, TAS, NT, ACT)." ⚠️ Resolve WA first (T&T–HIVE disagree by 21 pts).
 
 ### 1.2 Market rent (weekly)  → **Source: PropTrack National Rental Report, latest Q (1 report)**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
@@ -119,7 +127,39 @@ paste the prompt, then fill the state columns from its cited answer.
 
 ---
 
+## ▶ NotebookLM Run Sheet — feasibility (do in this order)
+
+Each task = open the notebook, upload the ONE source, paste the prompt, fill the tracker row. Ordered highest-leverage first.
+
+### RUN 1 · Market rents (8 states) — Notebook A
+**Upload:** PropTrack National Rental Report, latest quarter (proptrack.com.au → Insights Hub).
+> Paste: *"From the latest PropTrack rental report, quote the median weekly rent (all dwellings) for each capital city: Sydney, Melbourne, Brisbane, Perth, Adelaide, Hobart, Darwin, Canberra. Give the exact figure for each."*
+**Watch:** HIVE has WA $750 > NSW $730 — confirm Perth really tops Sydney (T&T said Perth is *cheaper* to build, but rents ≠ build cost, so this can still hold). Fill row **1.2**.
+
+### RUN 2 · Social rents + CRA (8 states) — Notebook B
+**Upload:** AHURI report on social/community housing rents + (if available) a state housing rent-policy page.
+> Paste: *"From these sources, quote the average weekly rent charged for community/social housing (income-based rent), per state if given. Separately: does community housing rent include Commonwealth Rent Assistance (CRA), and what is the maximum weekly CRA for a single person and for a family? Quote each figure."*
+**Watch:** implied income (HIVE value − $110 CRA) is below the AHURI $129–164 band for **SA $102 / TAS $106 / QLD $118** — confirm those three. Fill row **1.3**.
+
+### RUN 3 · Council + statutory charges (16 values) — Notebook A
+**Upload:** NSW s.7.11 / VIC ICP / QLD infrastructure-charges schedule (+ Sydney Water developer-charges page).
+> Paste: *"Quote the per-dwelling (a) local/council infrastructure contribution and (b) statutory utility connection charge for infill residential development in each capital city, and note any social-housing exemption or reduction. Give figures per state where available."*
+**Watch:** NotebookLM A1 already found NSW infill infra ≈ $11,175 vs HIVE council **$20,000** — NSW council looks HIGH. NSW statutory $12,068 already ✅. Fill rows **1.4 / 1.5**.
+
+### RUN 4 · The $137k stack (A1–A6) — Notebook A
+Already scripted in `NOTEBOOKLM_VALIDATION_RUNBOOK.md` → Part 1 (A1 build rate, A2 grant, A3 rate/DSCR, A4 social+CRA ✅, A5 market ✅). Run any A-rows still blank.
+
+### RUN 5 · State cost multipliers — **USER (Rawlinsons, not NotebookLM)**
+Rawlinsons is paid, so NotebookLM can't. T&T cross-check already done (row 1.1). When you open Rawlinsons 2025 State Cost Index:
+> Confirm the 8 city indices relative to Sydney = 1.00. **Resolve WA first** (T&T 0.92 vs HIVE 1.13 — 21-pt gap). Then QLD (T&T 1.03 vs 1.00), and NT/ACT/TAS (no public cross-check).
+
+### After each run
+Recompute the affected state gaps (ask Claude) and promote the row 🔴→✅. **Do not** market any state's gap until its multiplier + rents are confirmed.
+
+---
+
 ## Progress
-- **Feasibility:** structure ✅, all state values extracted ✅, internal-consistency run ✅,
-  NSW scenario triangulated 🟡. **External source-checks pending** (6 lookups → 42 values).
-- **Other pages:** listed; detailed blocks to follow.
+- **Feasibility:** structure ✅ · all state values extracted ✅ · internal-consistency ✅ ·
+  NSW $137k triangulated 🟡 · **multiplier cross-checked vs T&T ✅ (WA flagged 🔴)** ·
+  social-rent+CRA basis fixed in code ✅. **Remaining:** RUN 1–5 (external sources).
+- **Other pages (B/C/D):** listed in Part 2; detailed blocks + prompts to follow next.
