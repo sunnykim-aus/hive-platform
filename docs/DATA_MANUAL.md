@@ -26,7 +26,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 traced (§1 below) |
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
-| **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟡 traced (§5) — full engine |
+| **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟡 traced (§7) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 traced (§8) |
@@ -194,28 +194,25 @@ sources — they are not computed at runtime except where a formula is shown.**
 
 # 5. Development Viability / Feasibility  (`app/feasibility/page.tsx` → `lib/data/feasibility.ts`)
 
-> **This page computes the headline $137k per-dwelling funding gap** (VALIDATION_SPEC #1). Every output is computed live by `computeFeasibility()` — not stored. Below is the full chain.
+> Computes the headline per-dwelling **funding gap** (VALIDATION_SPEC #1). Every output is computed live by `computeFeasibility()` — not stored. **Notebook-A validated 2026-07** — most inputs confirmed/updated to current sources below; only build rate + cost multipliers await Rawlinsons 2026.
 
-**Sources (data file header — re-audited May 2026), per constant:**
-| Constant | Value | Source |
-|---|---|---|
-| `SQM_COST` ($/m²) | by typology | Rawlinsons Construction Cost Guide **2025, Table 1.3** (community housing) |
-| `STATE_COST_MULTIPLIER` | per state | Rawlinsons 2025 State Cost Index + Turner & Townsend 2025 |
-| `PROFESSIONAL_FEES_PCT` | 0.08 | AIHW · Housing Australia CHP guidance 2024 |
-| `CONTINGENCY_PCT` | 0.12 | AIHW · HA 2024 |
-| `FINANCE_COST_PCT` | 0.06 | 18-mo draw-down @7%pa, 60% util ≈ 6.3% (header), constant set to 6% |
-| `COUNCIL_CONTRIBUTIONS` | per state | NSW DoP s.7.11 · VIC ICP register · QLD infra charges register |
-| `STATUTORY_CHARGES` | per state | Sydney Water developer charges + state utility schedules 2025 |
-| `SOCIAL_RENT_WEEKLY` | per state | AIHW: **25% × (50% × state median household income)** |
-| state median incomes | — | ABS Household Income & Wealth **2023-24** |
-| `MARKET_RENT_WEEKLY` | per state | PropTrack National Rental Report **Q1 2025** (metro median) |
-| `AFFORDABLE_RENT_RATIO` | 0.749 | HAFF guidelines: <75% of market rent |
-| `OPEX_RATIO` | 0.30 | HA CHP benchmarks 2024 (30–35%) |
-| `NHFIC_RATE` | 0.055 | Housing Australia Annual Report 2023-24 + AOFM bond data |
-| `LOAN_TERM_YEARS` | 30 | HA loan program |
-| `DSCR` | 1.10 | HA minimum lending standard (mixed tenure) |
-| `HAFF_GRANT_OPTIONS` | R1-3 avg **$55,451**, R3 $78,531, R4est $95,000 | R1-3avg = total HAFF grants **$2,223.6M ÷ 40,000 homes**; verified vs Treasury budget papers |
-| `STATE_LAND_CONTRIBUTION` | NSW $200k … NT $50k | Housing Australia / state HA annual reports 2023-24 (⚠️ "highly project-specific, central metro estimates only") |
+**Per-constant source + validation status (Notebook A, validated 2026-07):**
+| Constant | Value(s) | Source | Status |
+|---|---|---|---|
+| `SQM_COST` apartment | **$4,200/m²** | Rawlinsons (2026 basis) — triangulated: 2017 AHURI-Rawlinsons escalated → $4,080–4,760; Rawlinsons infill $501,849/unit | 🟡 Rawlinsons-basis, **not directly quoted** (Koste/ABS lower ~$3,175–3,771) |
+| `STATE_COST_MULTIPLIER` | NSW 1.00 … WA 1.13 … NT 1.42 | Rawlinsons State Cost Index + T&T | 🔴 **WA 1.13 vs T&T 0.92 (Perth below Sydney)**; QLD 1.00 vs 1.03 — pending Rawlinsons |
+| `PROFESSIONAL_FEES` 0.08 · `CONTINGENCY` 0.12 · `FINANCE` 0.06 | | HA/AIHW CHP guidance | ⬛ HIVE assumption (document rationale) |
+| `SOCIAL_RENT_WEEKLY` | **rebuilt** NSW 238 · VIC 238 · QLD 229 · WA 227 · SA 242 · TAS 238 · NT 252 · ACT 243 | **= 25% × tenant income (≤ state IEL) + CRA $110**. AHURI/Shelter WA *The Eligibility Trap* (Apr 2026) | ✅ method (25% ✅, CRA $110 ✅); values model-based (income mix 45/35/20) |
+| `MARKET_RENT_WEEKLY` | **NSW 750 · VIC 600 · QLD 660 · WA 695 · SA 550 · TAS 530 · NT 600 · ACT 580** | **Domain Rental Report Mar-2026 — UNIT (apartment) medians** | ✅ current (unit = right comparator for apartments) |
+| `AFFORDABLE_RENT_RATIO` 0.749 | | HAFF guidelines <75% of market | ✅ |
+| `COUNCIL_CONTRIBUTIONS` | NSW 11k · VIC 18k · QLD 14k · WA 12k · SA 9k · TAS 6k · NT 5k · ACT 4k | HIA/CIE city benchmark, **net-of-exemption** | 🟡 indicative (LGA-specific; social housing often exempt) |
+| `STATUTORY_CHARGES` | NSW $12,000 … | Sydney Water + state utilities | ✅ NSW $12,068 confirmed; others pending |
+| `OPEX_RATIO` 0.30 | | HA CHP benchmarks (30–35%) | 🟡 |
+| `NHFIC_RATE` 5.5% · `DSCR` 1.10 | | HA lends "below private-sector rate" — **exact rate/DSCR NOT published** | ⬛ **HIVE modeling assumption** (unpublishable) |
+| `DEBT_SERVICE_FACTOR` 0.068805 | | = 5.5%/30yr mortgage constant | ✅ math-verified |
+| `HAFF_GRANT` R1-3 avg **$55,451** | | 40,000-home target ✅; total-committed not quoted; legislative-floor basis → ~$71,250 | 🟡 (either would *reduce* gap) |
+| `STATE_LAND_CONTRIBUTION` | NSW $200k … NT $50k | state HA reports | 🟡 "estimate only" (flagged in-code) |
+| **CRA** $110/wk | | Services Australia; AHURI *Eligibility Trap* Table 3 (Mar-2026), single max | ✅ confirmed |
 
 ### The core formula — `computeFeasibility(state, typology, tenure, haffRound)` (feasibility.ts:391)
 
@@ -230,8 +227,8 @@ sources — they are not computed at runtime except where a formula is shown.**
 8. **`TDC = hard_cost + professional_fees + contingency + finance_cost + council + statutory`**
 
 **B. Rental income:**
-9. `social_rent = SOCIAL_RENT_WEEKLY[state]`
-10. `affordable_rent = round(MARKET_RENT_WEEKLY[state] × 0.749)`
+9. `social_rent = SOCIAL_RENT_WEEKLY[state]` — **rebuilt (2026)** = 25% × actual tenant income (≤ state IEL, benefit-weighted) + CRA $110. *(Replaces the weak "50% of median income" derivation; CHP tenants get CRA, public housing does not.)*
+10. `affordable_rent = round(MARKET_RENT_WEEKLY[state] × 0.749)` — market rent = Domain **2026 unit** median.
 11. `blended_rent = round(social_rent × social_pct + affordable_rent × affordable_pct)`
 
 **C. Debt capacity** — `computeDebtCapacity(rent)` (feasibility.ts:259):
@@ -242,7 +239,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 12. `nhfic_debt = computeDebtCapacity(blended_rent)`
 13. `state_land = STATE_LAND_CONTRIBUTION[state]`
 14. `total_funded = haff_grant + nhfic_debt + state_land`
-15. **`funding_gap = max(0, TDC − total_funded)`** ← **the $137k headline (NSW 2-bed, R1-3 avg, 100% social)**
+15. **`funding_gap = max(0, TDC − total_funded)`** ← headline example **NSW 2-bed apt, 50/50 tenure, R1-3 avg ≈ $131,000** (updated 2026 inputs; was quoted $137k on old inputs). ⚠️ NSW is the **national FLOOR** — other states $190k–$529k (NT). Never present the floor as typical. 100% social = ~$205k+.
 16. `gap_per_m2 = round(gap ÷ net_area_m2)` · `haff_coverage_pct = round(haff_grant ÷ TDC × 100)`
 
 **E. Break-even affordable %** (feasibility.ts:428-431):
@@ -261,9 +258,9 @@ sources — they are not computed at runtime except where a formula is shown.**
 - NOI display (lines 678-679, 981): `round(blended_rent × 52 × 0.70)` NOI/yr; OpEx `round(blended_rent × 52 × 0.30 ÷ 52)`/wk.
 - "Shift to `ceil(breakeven × 100)`%+ affordable to close gap" (lines 194, 1002).
 
-**Cadence:** Rawlinsons **annual** · PropTrack **quarterly** · ABS income **biennial** · HA annual · HAFF **per round** (R3 opened Jan 2026 → update grant options).
+**Cadence:** Rawlinsons **annual** (Ed. 34 = 2026) · Domain rents **quarterly** · IEL/CRA **annual** (ROGS/Services Australia) · HAFF **per round**.
 
-**Page status:** 🟡 — **entire viability engine traced end-to-end** (TDC → debt → gap → break-even → sensitivity). This is VALIDATION_SPEC #1/#6: top NotebookLM-check priority. ⚠️ `STATE_LAND_CONTRIBUTION` and R3/R4 grant estimates are explicitly flagged in-code as estimates — surface that in any number shown to customers.
+**Page status:** 🟢 **Notebook A validated 2026-07.** Confirmed/updated: market rents (Domain 2026 unit) ✅ · social rent + CRA $110 + 25% rule ✅ (AHURI/Shelter WA) · council indicative ✅ · statutory NSW ✅ · debt-service factor ✅. **Still pending (→ VALIDATION_TRACKER):** build rate $4,200 + state multipliers (**Rawlinsons 2026 — user**; WA/NT flagged) · HAFF grant $55k vs $71k · `NHFIC_RATE`/`DSCR` are **unpublished HIVE assumptions** (label as such) · `STATE_LAND` estimate. **Per-state gaps are not final until the multipliers are confirmed.**
 
 # 6. Funding & Programs / Funding-Sector  (`app/funding-sector/page.tsx`)
 
