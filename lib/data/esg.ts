@@ -295,6 +295,42 @@ export const GOVERNANCE_METRICS: GovernanceMetric[] = [
     source: "NRSCH Sector Financial Performance Report 2023-24 (Interest Cover Ratio, national result)",
   },
   {
+    // Added 2026-07 from NRSCH 2024 dashboard (primary source, fully verified).
+    id: "ebitda_margin",
+    label: "Operating EBITDA Margin (Tier 1)",
+    value: "18.7%",
+    numeric: 18.7,
+    benchmark: "NRSCH benchmark: Tier 1 ≥8% · Tier 2 ≥3% · 73% of CHPs compliant",
+    rating: "Adequate",
+    trend: "static",
+    detail: "NRSCH national result: Tier 1 CHPs run an 18.7% operating EBITDA margin (19.1% prior year), Tier 2 8.6% (up from 7.6%) — both well above the regulator's profitability benchmarks (8% / 3%). 73% of CHPs are above benchmark, so profitability is sound sector-wide; the 27% below are concentrated in smaller providers with thin operating surpluses.",
+    source: "NRSCH Sector Financial Performance Report 2023-24 (Operating EBITDA Margin, national result)",
+  },
+  {
+    // Added 2026-07 from NRSCH 2024 dashboard (primary source, fully verified).
+    id: "working_capital",
+    label: "Working Capital Ratio (Tier 1)",
+    value: "2.12",
+    numeric: 2.12,
+    benchmark: "NRSCH benchmark: ≥1.5 · 61% of CHPs compliant",
+    rating: "Adequate",
+    trend: "worsening",
+    detail: "NRSCH national result: Tier 1 CHPs hold $2.12 of current assets per $1 of current liabilities (down from 2.55), Tier 2 1.76 — above the regulator's 1.5 liquidity benchmark. But only 61% of CHPs are compliant, and the ratio is trending down as maturing CHPs run leaner liquidity buffers, so 39% now sit below the short-term-obligations threshold.",
+    source: "NRSCH Sector Financial Performance Report 2023-24 (Working Capital Ratio, national result)",
+  },
+  {
+    // Added 2026-07 from NRSCH 2024 dashboard — sector's weakest financial metric (55% compliant).
+    id: "operating_cashflow",
+    label: "Operating Cashflow Adequacy (Tier 1)",
+    value: "1.21",
+    numeric: 1.21,
+    benchmark: "NRSCH benchmark: Tier 1 ≥1.2 · Tier 2 ≥1.05 · only 55% of CHPs compliant",
+    rating: "Below Average",
+    trend: "worsening",
+    detail: "NRSCH national result: Tier 1 operating cashflow adequacy is 1.21 (down from 1.25) — barely above its 1.2 benchmark — while Tier 2 is 1.04, just below its 1.05 benchmark. This is the sector's weakest financial metric: only 55% of CHPs are compliant and it is trending down. The Registrars flag it as a watch item, though not yet a viability concern, as CHPs run tighter cash buffers to fund growth.",
+    source: "NRSCH Sector Financial Performance Report 2023-24 (Operating Cashflow Adequacy, national result)",
+  },
+  {
     id: "board_independence",
     label: "Board Independence Rate",
     value: "~62%",

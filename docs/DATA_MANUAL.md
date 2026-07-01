@@ -407,13 +407,13 @@ sources — they are not computed at runtime except where a formula is shown.**
 # 11. ESG Impact  (`app/esg-impact/page.tsx` → `lib/data/esg.ts`)
 
 **Framework:** E / S / G pillars synthesising HIVE data into one evaluative lens (GRESB-style).
-**Sources:** **E** — CSIRO NatHERS 2023, ClimateWorks 2023, AIHW 2023, BOM · **S** — AIHW Housing Assistance 2023, SHS Annual Report 2023, CHIA 2023 · **G** — NHR Register 2024, HA Annual Report 2024, CHIA Sector Data · **Scoring methodology** — AHURI ESG framework research 2022 + GRESB real-assets methodology.
+**Sources:** **E** — CSIRO NatHERS 2023, ClimateWorks 2023, AIHW 2023, BOM · **S** — AIHW Housing Assistance 2023, SHS Annual Report 2023, CHIA 2023 · **G** — NRSCH Sector Financial Performance Report 2023-24 (gearing, ICR, EBITDA margin, working capital, cashflow adequacy), state Registrar Sector Performance Reports 2024, CHIA Sector Data · **Scoring methodology** — AHURI ESG framework research 2022 + GRESB real-assets methodology.
 
 ### Composite score — `SECTOR_COMPOSITE_SCORE` (esg.ts:380)
 - **`= round(Σ SECTOR_ESG_SCORES.score ÷ SECTOR_ESG_SCORES.length)`** — straight mean of the pillar scorecards (E 32, S 48, G 56, …).
 - Pillar metrics: `ENVIRONMENTAL_METRICS`, `SOCIAL_METRICS`, `GOVERNANCE_METRICS` (each metric: value + rating). `INVESTMENT_USE_CASES`, `ESG_MATURITY_LEVELS` are reference tables.
 
-#### The 23 underlying metrics (what the pillar scores are judged from)
+#### The 26 underlying metrics (what the pillar scores are judged from)
 Each metric = a measurable sector data point; its **rating** = how the value compares to a benchmark. Scale: **Lagging** (far below target) · **Below Average** · **Adequate** (meets minimum) · **Leader** (best-in-class). Pillar score is a HIVE judgement over the pillar's ratings (not a formula). Most sources are external; **2 are HIVE-internal** (marked ⚑, the climate/LHD data we re-based).
 
 **🌱 Environmental → 32** (6 of 7 Lagging)
@@ -445,6 +445,9 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 | Regulatory compliance (NRSCH) | ~94%¹ | 100% | Adequate | NRSCH 2024 |
 | Sector gearing (Tier 1) | 14.6% | ≤30% (NRSCH) | Adequate | NRSCH 2024 |
 | Interest Cover Ratio (Tier 1) | 5.85× | ≥1.5× (NRSCH) | Adequate | NRSCH 2024 |
+| Operating EBITDA margin (Tier 1) | 18.7% | ≥8% (NRSCH) · 73% compliant | Adequate | NRSCH 2024 |
+| Working Capital Ratio (Tier 1) | 2.12 | ≥1.5 (NRSCH) · 61% compliant | Adequate | NRSCH 2024 |
+| Operating Cashflow Adequacy (Tier 1) | 1.21 | ≥1.2 (NRSCH) · **only 55% compliant** | Below Avg | NRSCH 2024 |
 | Board independence | ~62% | ≥50% | Adequate | CHIA·AICD |
 | HAFF covenant compliance | ~88% | 100% | Adequate | HA 2024-25 |
 | Annual report publication | ~71% | 100% (T1-2) | Below Avg | CHIA 2023 |
