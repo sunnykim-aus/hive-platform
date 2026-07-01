@@ -432,7 +432,7 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 |---|---|---|---|---|
 | Tenant stability | ~78% | 85%+ | Adequate | AIHW 2023 |
 | Avg wait time | 4.2 yrs | <2 yrs | Lagging | state registers 2024 |
-| Unmet SHS requests | 62% | <20% | Lagging | AIHW SHS 2022-23 |
+| Unmet accommodation need (SHS) | ~49% | <20% | Lagging | AIHW SHS 2022-23 |
 | First Nations tenants | ~22% | 3.8% pop (5.8×) | Below Avg | AIHW·ABS |
 | Disability/health | ~31% | 18% pop | Below Avg | AIHW·ABS 2022 |
 | DV women housed | 38% | 7-day immediate | Lagging | AIHW·ANROWS |
@@ -449,13 +449,13 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 | HAFF covenant compliance | ~88% | 100% | Adequate | HA 2024-25 |
 | Annual report publication | ~71% | 100% (T1-2) | Below Avg | CHIA 2023 |
 | Whistleblower policy | ~68% | 100% | Below Avg | HA·CHIA |
-| Formal ESG reporting | ~18% | 100% (2028) | Lagging | CHIA 2023 |
+| Formal ESG reporting | ~12% | 100% (2028) | Lagging | CHIA 2024 |
 
 **Roll-up:** each metric → rating vs benchmark → pillar score (HIVE judgement) → mean of 3 = **45**. ⚠️ A strict rating-average would be ~37 (Social/Gov set +8–14 above their rating-implied levels → mild optimism). Present as **HIVE ESG framework**, not an external rating.
 
-**⚠️ NotebookLM metric audit (2026-07) — errors found in the INPUTS:**
-- **(b) "Unmet SHS requests 62%" — likely MISLABELLED.** In AIHW SHS, 62% is a *positive* outcome (clients ending support in housing, up from 50%); the actual *unmet* accommodation rate is **~31%** (1 in 3). HIVE appears to have flipped a positive figure into a negative one. **Correct or clarify.**
-- **(e) "Formal ESG reporting 18%" → ~12%** (CHIA: "20+ early adopters" of 166 members). Overstated.
+**✅ NotebookLM metric audit (2026-07) — errors found in INPUTS, now RESOLVED:**
+- **(b) "Unmet SHS requests 62%" → ~49% [FIXED `3e3a799`].** Source investigation (AIHW SHS 2022-23) confirmed the 62% was a mislabel: AIHW's 62% is the share of *unassisted requests* that were for short-term/emergency accommodation — not an unmet rate. True figure: 165k clients (60%) needed accommodation, 83.8k (51%) were provided it → **~49% unmet**. (Also cross-turned-away: ~108k unassisted requests/yr, ~295/day.)
+- **(e) "Formal ESG reporting 18%" → ~12% [FIXED `dde7490`]** (CHIA: "20+ early adopters" of 166 members, 2024). Overstated.
 - **(a) NatHERS 2.9★ — unsourceable** (§9; no published social-housing NatHERS).
 - **(c) NHR 94% · (d) DSCR 1.38× · (f) gearing 52%** — not in the uploaded sources (aggregate CHIA data gives liab/equity ~48.5%); need the CHIA Financial Benchmarking report to confirm. → **the metric layer needs a full audit; several pillar inputs are wrong or unverified.**
 
