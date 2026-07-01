@@ -31,7 +31,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟢 validated §7 (Notebook C) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
 | **building-energy** | building-energy | KPIs/tables | 🔴 §9 — NatHERS unsourceable (no published data) |
-| **livable-housing** | livable-housing | KPIs/tables | 🟡 validated §10 (Silver optimistic) |
+| **livable-housing** | livable-housing | KPIs/tables | 🟡 §10 — Silver optimistic (no SH-specific data) |
 | **esg-impact** | esg | KPIs/tables | 🟡 §11 — HIVE construct, honestly disclosed |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
@@ -402,7 +402,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Retrofit calculator:** `minTotal = (cost.min × numDwellings ÷ 1000).toFixed(1)`, `maxTotal = (cost.max × numDwellings ÷ 1000).toFixed(1)` ($k×dwellings → $M); `numDwellings = max(1, parseInt(input))`.
 - Stream tiers via `STREAM_HAFF_TIER` (Gold mandatory / Platinum-SDA filters).
 
-**Feeds:** `STATE_COMPLIANCE.pct_meeting_silver`, `upgrade_cost_to_silver_bn`, `total_social_dwellings`, `haff_pipeline_compliant_pct` → Compound Risk §7. **Cadence:** AIHW/AHURI ~annual. **Status:** 🟡 **validated 2026-07:** national ~9% meeting Silver vs published "**~5% of new homes comply**" (voluntary LHDG) → HIVE slightly **optimistic** (rates compliance higher → understates the LHD gap fed into compound §7). Silver-standard definition ✅ (Notebook C). Per-state `pct_meeting_silver` are HIVE estimates near the published anchor.
+**Feeds:** `STATE_COMPLIANCE.pct_meeting_silver`, `upgrade_cost_to_silver_bn`, `total_social_dwellings`, `haff_pipeline_compliant_pct` → Compound Risk §7. **Cadence:** AIHW/AHURI ~annual. **Status:** 🟡 **NotebookLM re-check (2026-07):** anchor **✅ confirmed** — ANUHD/Rights & Inclusion Australia review: the voluntary regime achieved **<5% of the 100%-of-new-homes 2020 target** (i.e. <5% of *new* homes meet Silver). HIVE's social-housing figure **9% is above that anchor** → **optimistic** (existing/social stock should be *lower* than new homes; understates the LHD gap fed into compound §7). ⚠️ Like §9, there is **no published social-housing Silver-compliance figure** — per-state `pct_meeting_silver` (3–18%) are HIVE estimates; label as such, not measured.
 
 # 11. ESG Impact  (`app/esg-impact/page.tsx` → `lib/data/esg.ts`)
 
