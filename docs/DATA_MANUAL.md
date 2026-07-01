@@ -28,8 +28,8 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
-| **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟡 traced (§7) |
-| **climate-risk** | climate-risk | KPIs/score tables | 🟡 traced (§8) |
+| **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟢 validated §7 (Notebook C) |
+| **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
 | **building-energy** | building-energy | KPIs/tables | 🟡 traced (§9) |
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 traced (§10) |
 | **esg-impact** | esg | KPIs/tables | 🟡 traced (§11) |
@@ -322,7 +322,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 ### HAFF Round-4 readiness flags (asset-intelligence.ts:109-119)
 - Flag if `haff_pipeline_7star_pct < 72` · `haff_pipeline_compliant_pct < 70` · `insurance_status ∈ {effectively_uninsurable, withdrawal_risk}`. `haffReady = no flags`.
 
-**Source:** composite — see §8 (climate), §9 (energy), §10 (LHD). **Cadence:** driven by slowest input (Census 5-yr for climate exposure; energy/LHD ~annual). **Status:** 🟡 — weights (40/35/25) and band thresholds are HIVE-defined; document rationale + validate the 152/13 counts.
+**Source:** composite — see §8 (climate), §9 (energy), §10 (LHD). **Cadence:** driven by slowest input (Census 5-yr for climate exposure; energy/LHD ~annual). **Status:** 🟢 **Notebook C validated 2026-07.** 152/13-extreme **arithmetically confirmed** (recomputed `computeCompoundRisk` over the 152 suburbs → Extreme 13, Critical 80, High 59). Inputs defensible vs published anchors: NatHERS 1.8–3.6 (social housing "1.5–3 stars", CSIRO/AHURI); Silver 3–18% ("~5% comply"). ⚠️ **This is a HIVE analytical construct, not an official statistic** — the 152 suburbs are HIVE-selected, and weights 40/35/25 + band thresholds are HIVE methodology. Present as "HIVE compound-risk analysis", never "X suburbs officially at extreme risk".
 
 # 8. Climate Risk  (`app/climate-risk/page.tsx` + `my-portfolio` → `lib/data/climate-risk.ts`)
 
@@ -335,7 +335,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Sub-hazard detail (per suburb):** heat (`days_over_35` current/2030/2050, `days_over_40`, urban-heat-island factor, tree-canopy %, cooling-access %), flood (`in_flood_overlay`, overlay type, `pct_area_in_overlay`, last major event), `insurance_status` (insured / withdrawal_risk / effectively_uninsurable), `est_social_dwellings`, `social_housing_density`.
 - **Calc:** sub-hazard scores transcribed from source agencies; `overall_score` = weighted blend of applicable hazards. **Cadence:** CSIRO/BOM projections ad-hoc; planning overlays ~annual; insurance data annual.
 
-**Status:** 🟡 — scoring model + weights documented; the per-suburb hazard sub-scores need source-trace per agency (NotebookLM), and the weight scheme is HIVE-defined (document rationale).
+**Status:** 🟡 — scoring model + weights documented (Notebook C). The composite `overall_score` per suburb is a **HIVE construct** from BOM/CSIRO/ICA/Geoscience projections — the *methodology* traces to those agencies but individual per-suburb hazard scores are not published figures. Hazard weights (Heat 30/Flood 25/Bushfire 20/Coastal 15/Cyclone 10) are HIVE-defined. Present as HIVE analysis, not official hazard ratings.
 
 # 9. Building Energy  (`app/building-energy/page.tsx` → `lib/data/building-energy.ts`)
 

@@ -136,8 +136,8 @@ paste the prompt, then fill the state columns from its cited answer.
 | B4 core need ~~740k~~→**640k** | Housing Need | HOMELESSNESS_LAYERS + STRESS_SUMMARY | AHURI/City Futures 2022 (2021 Census; →940k 2041) | ✅✅ **double-confirmed** (web + NotebookLM: 640,000 → 940,000 by 2041) |
 | B5 SHS over-rep (7× / 2.3×) | Housing Need | SHS_CLIENT_PROFILE | AIHW SHS | ✅ arithmetic (25%÷3.5% = 7×) |
 | — CRA max single ~~$94~~→**$110** | Housing Need | STRESS_SUMMARY | Services Australia (authoritative) | ✅✅ **double-confirmed**: Services Australia $215.40/fortnight = $107.70/wk single max (from 20 Mar 2026); Shelter WA Table 3 = $110. $110 within rounding. (raises craCovers 42%→49%) |
-| 152 / 13 compound | Asset Intel | computed | inputs: CSIRO/AIHW | 🔴 |
-| Climate hazard weights | Climate Risk | 30/25/20/15/10 | — | ⬛ |
+| **C1** 152 / 13 extreme compound | Asset Intel | computed | recomputed + CSIRO/AHURI anchors | ✅ **arithmetic confirmed** (recomputed computeCompoundRisk over 152 suburbs → Extreme 13, Critical 80, High 59). Inputs defensible: NatHERS 1.8–3.6 vs published "social housing 1.5–3 stars"; Silver 3–18% vs "~5% comply". ⚠️ **HIVE analytical construct, NOT an official statistic** — selected 152 suburbs + HIVE weights/thresholds. Per-suburb climate scores + per-state values are HIVE estimates. |
+| **C2** weights 40/35/25 · climate 30/25/20/15/10 · bands ≥85/72/58/42 | Asset/Climate | — | — | ⬛ **HIVE methodology** — document rationale, not source-validate |
 | $2,200 energy penalty | Building Energy | 2200 | — | ⬛ |
 | ESG pillar scores 32/48/56 | ESG | SECTOR_ESG_SCORES | AHURI/GRESB rubric | ⬛ |
 | Scorecard A–F thresholds | Research | getScore | — | ⬛ |
