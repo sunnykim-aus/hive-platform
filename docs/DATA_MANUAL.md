@@ -30,7 +30,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟢 validated §7 (Notebook C) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
-| **building-energy** | building-energy | KPIs/tables | 🟡 validated §9 (NatHERS optimistic) |
+| **building-energy** | building-energy | KPIs/tables | 🔴 §9 — NatHERS unsourceable (no published data) |
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 validated §10 (Silver optimistic) |
 | **esg-impact** | esg | KPIs/tables | 🟡 §11 — HIVE construct, honestly disclosed |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
@@ -384,7 +384,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - `extra = cost − ENERGY_COST_BY_CLIMATE["7-star"][zone]` (excess vs 7★ by climate zone).
 - `barWidth = max(3, min(100, pct_social_stock × 3.5))` — presentation only.
 
-**Feeds:** `STATE_ENERGY_DATA.avg_nathers_stars` & `haff_pipeline_7star_pct` → Compound Risk §7. **Cadence:** CSIRO/AIHW ~annual · energy benchmarks annual. **Status:** 🟡 **validated 2026-07 (with caveats):** "163k below 3-star" = **162,880 ✅** (Σ stock×pct). ⚠️ NatHERS state values (2.6–3.6) run **optimistic** vs published (existing homes avg **1.8★**, VIC; social housing "very low, 1.5–3★") → likely **understates** the energy problem (and the energyGap fed into compound §7). ⚠️ total stock **387k vs AIHW ~452k** (Jun-2024) — ~14% low. Per-state `pct_below_3star`/`avg_nathers` are HIVE estimates anchored to published ranges. $2,200 penalty still to source.
+**Feeds:** `STATE_ENERGY_DATA.avg_nathers_stars` & `haff_pipeline_7star_pct` → Compound Risk §7. **Cadence:** CSIRO/AIHW ~annual · energy benchmarks annual. **Status:** 🟡→🔴 **NotebookLM re-check (2026-07):** "163k below 3-star" = **162,880 ✅** (Σ stock×pct — arithmetic). BUT ⚠️ **there is NO published social-housing NatHERS data** — AIHW/CSIRO do **not** capture NatHERS ratings for social housing (data is "piecemeal"). So HIVE's per-state `avg_nathers_stars` (1.8–3.6) + national 2.9 + `pct_below_3star` (28–68%) are **HIVE estimates with no sourceable basis at that granularity** — the "CSIRO NatHERS Distribution Study 2023" citation overclaims. Only anchor: **"70% of existing homes ≤3★" (CSIRO)** — and social housing should be *worse* than average, so HIVE's 42%-below-3★ likely **understates** the problem (→ energyGap into compound §7 understated). ⚠️ total stock **387k vs AIHW ~452k**. **Relabel as HIVE estimates; source is a genuine national data gap, not HIVE's fault — but must not be presented as measured.**
 
 # 10. Livable Housing (LHD)  (`app/livable-housing/page.tsx` → `lib/data/livable-housing.ts`)
 
