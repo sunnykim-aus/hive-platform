@@ -442,9 +442,9 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 **⚖️ Governance → 56** (mostly Adequate)
 | Metric | Value | Benchmark | Rating | Source |
 |---|---|---|---|---|
-| NHR compliance | ~94% | 100% | Adequate | NHR 2024 |
-| Median gearing | 52% | ≤65% (HA) | Adequate | HA 2023-24 |
-| DSCR | 1.38× | ≥1.10× | Adequate | HA·CHIA |
+| Regulatory compliance (NRSCH) | ~94%¹ | 100% | Adequate | NRSCH 2024 |
+| Sector gearing (Tier 1) | 14.6% | ≤30% (NRSCH) | Adequate | NRSCH 2024 |
+| Interest Cover Ratio (Tier 1) | 5.85× | ≥1.5× (NRSCH) | Adequate | NRSCH 2024 |
 | Board independence | ~62% | ≥50% | Adequate | CHIA·AICD |
 | HAFF covenant compliance | ~88% | 100% | Adequate | HA 2024-25 |
 | Annual report publication | ~71% | 100% (T1-2) | Below Avg | CHIA 2023 |
@@ -457,7 +457,13 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 - **(b) "Unmet SHS requests 62%" → ~49% [FIXED `3e3a799`].** Source investigation (AIHW SHS 2022-23) confirmed the 62% was a mislabel: AIHW's 62% is the share of *unassisted requests* that were for short-term/emergency accommodation — not an unmet rate. True figure: 165k clients (60%) needed accommodation, 83.8k (51%) were provided it → **~49% unmet**. (Also cross-turned-away: ~108k unassisted requests/yr, ~295/day.)
 - **(e) "Formal ESG reporting 18%" → ~12% [FIXED `dde7490`]** (CHIA: "20+ early adopters" of 166 members, 2024). Overstated.
 - **(a) NatHERS 2.9★ — unsourceable** (§9; no published social-housing NatHERS).
-- **(c) NHR 94% · (d) DSCR 1.38× · (f) gearing 52%** — not in the uploaded sources (aggregate CHIA data gives liab/equity ~48.5%); need the CHIA Financial Benchmarking report to confirm. → **the metric layer needs a full audit; several pillar inputs are wrong or unverified.**
+- **(c/d/f) Governance financials — VERIFIED against NRSCH Sector Financial Performance Report 2024 [FIXED `<gov>`]:**
+  - **gearing 52% → 14.6%** (Tier 1; Tier 2 4.5%). Benchmark ≤65% → **≤30% (NRSCH)**. Prior figure overstated leverage ~3.5× and used the wrong benchmark. 92% of CHPs compliant.
+  - **DSCR 1.38× → relabelled Interest Cover Ratio 5.85×** (Tier 1; T2 5.01×). NRSCH publishes ICR, not a pure DSCR. Benchmark ≥1.5×; 68% compliant; eased from 7.49× under rate pressure.
+  - **NHR 94% → kept as HIVE estimate of overall registration compliance (unconfirmed by a single national rate), now paired with the verified NRSCH financial-benchmark compliance range 55–92%** (Gearing 92 · EBITDA 73 · ICR 68 · Working Capital 61 · Op. Cashflow 55).
+  - **Takeaway:** the sector is *stronger* than HIVE implied — far less leveraged, much higher interest cover. HIVE had *under*stated financial health.
+
+¹ ~94% is a HIVE estimate of overall registration compliance; NRSCH publishes no single national compliance rate. Verified financial-benchmark compliance ranges 55–92% by ratio (see audit note below).
 
 **Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 **HIVE construct — honestly disclosed (2026-07).** Composite **45** = mean(E32/S48/G56). The page **already carries a methodology note** ("HIVE-derived estimates … sector as a whole … individual CHP requires on-site assessment") — good, responsible disclosure. How the pillar scores were set (reverse-engineered): they track each pillar's metric-rating distribution (Env 6/7 "Lagging"→32 ✓) but are **subjective (no rubric)** and lean **optimistic** — Social (~34 implied → 48) and Governance (~48 → 56) sit +8–14 above a strict rating-average; a strict average of all three ≈ 37 vs the stated 45. **Two remaining gaps:** (a) "based on GRESB/UNPRI/ICMA" overclaims — the scores are analyst judgements *informed by* (not computed via) those frameworks → soften to "informed by"; (b) the "green finance threshold **65+**" is not a real standard → label "HIVE benchmark" or replace with an actual green-bond criterion.
 

@@ -9,7 +9,7 @@
  * Sources:
  *   E: CSIRO NatHERS 2023, ClimateWorks Australia 2023, AIHW 2023, BOM
  *   S: AIHW Housing Assistance 2023, SHS Annual Report 2023, CHIA 2023
- *   G: NHR Register 2024, Housing Australia Annual Report 2024, CHIA Sector Data
+ *   G: NRSCH Sector Financial Performance Report 2023-24, state Registrar Sector Performance Reports 2024, CHIA Sector Data
  *   Scoring: AHURI ESG framework research 2022, GRESB real assets methodology
  */
 
@@ -250,37 +250,49 @@ export interface GovernanceMetric {
 
 export const GOVERNANCE_METRICS: GovernanceMetric[] = [
   {
+    // NOTE (2026-07): 94% is a HIVE estimate of overall registration compliance and was NOT
+    // independently confirmed in the NRSCH 2024 financial report. What IS verified: NRSCH's
+    // financial-benchmark compliance by ratio ranges 55–92% (Gearing 92 · EBITDA 73 · ICR 68 ·
+    // Working Capital 61 · Op. Cashflow 55). Value kept but reframed + sourced honestly.
     id: "nhr_compliance",
-    label: "NHR Registration Compliance Rate",
+    label: "Regulatory Compliance (NRSCH)",
     value: "~94%",
     numeric: 94,
     benchmark: "100% (all registered CHPs must maintain compliance)",
     rating: "Adequate",
     trend: "static",
-    detail: "Approximately 94% of NHR-registered CHPs maintain compliance with their tier registration obligations. The 6% non-compliance or at-risk rate is driven primarily by Tier 3 small providers who struggle with reporting requirements. CHIA's compliance support programme has reduced the rate from ~11% in 2019.",
-    source: "NHR Annual Compliance Report 2024; CHIA Sector Data Report 2023",
+    detail: "Overall registration compliance is estimated at ~94% of NRSCH-registered CHPs (HIVE estimate — regulators report 'no significant instances of non-compliance', but no single national compliance rate is published). Verified from the NRSCH 2024 Sector Financial Performance Report: compliance with individual financial benchmarks ranges 55–92% by ratio — Gearing 92%, Operating EBITDA 73%, Interest Cover 68%, Working Capital 61%, Operating Cashflow Adequacy 55%. Non-compliance concentrates in smaller Tier 3 providers.",
+    source: "NRSCH Sector Financial Performance Report 2023-24; state Registrar Sector Performance Reports 2024",
   },
   {
+    // CORRECTED 2026-07 (NRSCH Sector Financial Performance Report 2024): prior 52% (benchmark
+    // ≤65%) was NOT from a primary source and overstated leverage ~3.5×. NRSCH national result:
+    // Tier 1 gearing 14.6% (down from 16.1%), Tier 2 4.5%; regulator benchmark is 30% (not 65%);
+    // 92% of CHPs within benchmark. Sector is far less leveraged than HIVE previously implied.
     id: "financial_gearing",
-    label: "Sector Median Gearing (Debt/Equity)",
-    value: "52%",
-    numeric: 52,
-    benchmark: "Housing Australia: maximum 65% for NHFIC lending",
+    label: "Sector Gearing (Tier 1, Debt/Assets)",
+    value: "14.6%",
+    numeric: 14.6,
+    benchmark: "NRSCH benchmark: ≤30% · 92% of CHPs compliant",
     rating: "Adequate",
-    trend: "worsening",
-    detail: "The sector median gearing has increased from 41% (2018) to 52% (2024) as CHPs take on more debt to fund development pipelines. This is structurally necessary but increases financial vulnerability. Tier 1 CHPs average 58% gearing — approaching the Housing Australia lending threshold.",
-    source: "Housing Australia Annual Report 2023-24; CHIA Financial Benchmarking 2023",
+    trend: "improving",
+    detail: "NRSCH national result: Tier 1 CHP gearing is 14.6% (down from 16.1% the prior year), Tier 2 just 4.5% — well below the regulator's 30% benchmark, with 92% of CHPs compliant. The sector carries modest leverage: rising gearing among larger CHPs reflects deliberate use of debt to fund development pipelines (a sign of maturity, per the Registrars), not distress. This corrects a prior HIVE figure of 52% that was not traceable to a primary source and overstated leverage ~3.5×.",
+    source: "NRSCH Sector Financial Performance Report 2023-24 (Gearing Ratio, national result)",
   },
   {
+    // CORRECTED + RELABELLED 2026-07 (NRSCH 2024): NRSCH does not publish a pure DSCR. HIVE's
+    // "1.38× DSCR" was not from a primary source. The regulator's debt-serviceability metric is
+    // the Interest Cover Ratio (EBITDA/interest): Tier 1 5.85× (down from 7.49×), Tier 2 5.01×;
+    // benchmark 1.5×; 68% of CHPs above benchmark. Serviceability is far stronger than 1.38×.
     id: "interest_coverage",
-    label: "Median Interest Coverage (DSCR)",
-    value: "1.38×",
-    numeric: 1.38,
-    benchmark: "Housing Australia minimum: 1.10× · Prudent: 1.25×+",
+    label: "Sector Interest Cover Ratio (Tier 1)",
+    value: "5.85×",
+    numeric: 5.85,
+    benchmark: "NRSCH benchmark: ≥1.5× · 68% of CHPs compliant",
     rating: "Adequate",
     trend: "worsening",
-    detail: "The sector median DSCR of 1.38× provides a reasonable buffer above the 1.10× minimum. However, interest rate increases 2022-2025 have compressed coverage ratios significantly — from 1.62× in 2021. Rising construction costs further squeeze viability, with some Round 3 projects having projected DSCRs of 1.12-1.15× at current rates.",
-    source: "Housing Australia lending data; CHIA Financial Benchmarking 2023",
+    detail: "NRSCH national result: Tier 1 CHPs cover interest 5.85× from operating earnings (EBITDA/interest), Tier 2 5.01× — comfortably above the regulator's 1.5× benchmark, though down from 7.49× the prior year as rates rose. 68% of CHPs sit above benchmark, so a third of (mostly smaller) providers run tighter cover. This replaces a prior HIVE '1.38× DSCR' figure that was not from a primary source; NRSCH publishes Interest Cover, not a pure debt-service-coverage ratio.",
+    source: "NRSCH Sector Financial Performance Report 2023-24 (Interest Cover Ratio, national result)",
   },
   {
     id: "board_independence",
@@ -374,8 +386,8 @@ export const SECTOR_ESG_SCORES: ESGScoreCard[] = [
     pillar: "Governance",
     score: 56,
     rating: "Adequate",
-    key_strength: "94% NHR compliance rate. Tier 1 CHPs show strong board independence (71%). Financial sustainability adequate at sector level.",
-    key_gap: "Only 18% produce formal ESG reports. 32% lack whistleblower policies. Gearing increasing toward Housing Australia limits. DSCR compression under rate pressure.",
+    key_strength: "Strong balance sheets: Tier 1 gearing just 14.6% (benchmark ≤30%), interest cover 5.85× (benchmark 1.5×). Tier 1 board independence 71%. Financial sustainability sound at sector level per NRSCH.",
+    key_gap: "Only ~12% produce formal ESG reports. 32% lack whistleblower policies. A tail of (mostly smaller Tier 3) providers sits below financial benchmarks — Op. Cashflow Adequacy compliance is only 55%. Interest cover has eased from 7.49× to 5.85× under rate pressure.",
     trend: "static",
     haff_relevance: "Round 3 requires mandatory whistleblower and safeguarding policies. ESG reporting increasingly embedded in green bond covenants. Board governance quality factored in assessment.",
   },
