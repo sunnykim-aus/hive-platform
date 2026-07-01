@@ -77,11 +77,18 @@ paste the prompt, then fill the state columns from its cited answer.
 ### 1.4 Council contributions  → **Source: state planning infrastructure schedules**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
 |---|---|---|---|---|---|---|---|---|---|
-| Current | 20,000 | 18,000 | 14,000 | 10,000 | 9,000 | 8,000 | 5,000 | 9,000 | 🔴 all |
-> ⚠️ NotebookLM A1 surfaced NSW infill infra ≈ $11,175 (vs current $20,000) — NSW
-> council looks HIGH. **NotebookLM:** "Quote per-dwelling local infrastructure /
-> developer contributions for infill residential in each capital (note social-housing
-> exemptions)."
+| was | 20,000 | 18,000 | 14,000 | 10,000 | 9,000 | 8,000 | 5,000 | 9,000 | — |
+| HIA/CIE benchmark | 11,175 | 28,673* | 57,106* | 12,091 | 17,552 | 5,672 | — | 3,151 | market |
+| **updated** | **11,000** | 18,000 | 14,000 | **12,000** | 9,000 | **6,000** | 5,000 | **4,000** | 🟡 indicative |
+
+> **VERIFIED 2026-07 (method + result).** No clean single source — council contributions are
+> **LGA-specific** (NSW s7.11 · VIC ICP · QLD LGIP · WA DCP) and **social/affordable housing is
+> often EXEMPT/reduced** (NSW Housing SEPP etc.). So these are **net-of-exemption indicative
+> estimates**, not exact charges. Method: compare to HIA "Taxation of the Housing Sector" / CIE
+> city benchmarks; align clear outliers; keep conservative where HIVE < benchmark.
+> - *Melbourne $28,673 (Fishermans Bend) and Brisbane $57,106 are premium-precinct figures → NOT adopted; kept conservative.*
+> - Corrected: NSW 20k→11k, WA 10k→12k, TAS 8k→6k, ACT 9k→4k. **Statutory (1.5) unchanged — utility connections are generally NOT exempt.**
+> - To verify a specific project: the target council's Contributions Plan (primary, LGA-specific).
 
 ### 1.5 Statutory charges  → **Source: state utility developer-charge schedules**
 | | NSW | VIC | QLD | WA | SA | TAS | NT | ACT | Status |
@@ -105,12 +112,17 @@ paste the prompt, then fill the state columns from its cited answer.
 | 2-Bed Townhouse | 88 | 1.08 | 🔴 |
 | 3-Bed Detached | 128 | 1.04 | 🔴 |
 
-### 1.8 Per-state GAP outputs (2-bed apt, 50/50, R1-3avg) — recompute after inputs confirmed
-| NSW | VIC | QLD | WA | SA | TAS | NT | ACT |
-|---|---|---|---|---|---|---|---|
-| 136,949 | 191,984 | 221,958 | 254,781 | 225,338 | 265,817 | 522,526 | 182,555 |
-> **Marketing honesty:** $137k (NSW) is the **national floor**. Typical state $180–265k;
-> NT $523k. Present as "from ~$137k (NSW) — most states $200k+", never "$137k typical".
+### 1.8 Per-state GAP outputs (2-bed apt, 50/50, R1-3avg)
+| basis | NSW | VIC | QLD | WA | SA | TAS | NT | ACT |
+|---|---|---|---|---|---|---|---|---|
+| original (old inputs) | 136,949 | 191,984 | 221,958 | 254,781 | 225,338 | 265,817 | 522,526 | 182,555 |
+| **updated** (2026 unit rent + rebuilt social + council) | **130,835** | **190,541** | **218,111** | **274,575** | **220,047** | **258,046** | **529,259** | **214,106** |
+
+> **Updated 2026-07** with three validated corrections (market rent = Domain Mar-2026 unit ·
+> social rent rebuilt on IEL basis · council aligned to HIA benchmark). **Still pending:** build
+> rate + cost multipliers (Rawlinsons — user) → gaps not yet final, esp. WA/NT (multiplier flagged).
+> **Marketing honesty:** NSW ~$131k is the **national floor**; most states $190–275k, NT $529k.
+> Never present the floor as typical.
 
 ---
 

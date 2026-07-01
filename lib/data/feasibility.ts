@@ -80,15 +80,19 @@ export const FINANCE_COST_PCT = 0.06
  * Source: NSW DoP s.7.11 schedules; VIC ICP; QLD Planning Act infrastructure charges.
  * NOTE: Social housing via NSW SSD/SEPP pathway often exempt or reduced.
  */
+// INDICATIVE ESTIMATE (verified 2026-07 vs HIA "Taxation of the Housing Sector" / CIE local-
+// infrastructure benchmarks). Council contributions are LGA-specific and social/affordable
+// housing is often EXEMPT/reduced (NSW Housing SEPP etc.), so these are net-of-exemption
+// estimates, not exact charges. Clear outliers aligned to the HIA city benchmark:
 export const COUNCIL_CONTRIBUTIONS: Record<string, number> = {
-  NSW: 20_000,   // $8k–$50k range; SSD pathway may be exempt
-  VIC: 18_000,
-  QLD: 14_000,
-  WA:  10_000,
-  SA:   9_000,
-  TAS:  8_000,   // Hobart City / regional councils — lower density charges
-  NT:   5_000,   // Darwin City; reduced charges for social housing
-  ACT:  9_000,   // Territory government contributions; land-lease model
+  NSW: 11_000,   // was 20k → HIA Sydney local $11,175
+  VIC: 18_000,   // ≤ HIA Melbourne $28,673 (Fishermans Bend premium) — kept conservative
+  QLD: 14_000,   // ≪ HIA Brisbane $57,106 (premium precinct) — kept conservative
+  WA:  12_000,   // was 10k → HIA Perth $12,091
+  SA:   9_000,   // ≤ HIA Adelaide $17,552 — kept conservative
+  TAS:  6_000,   // was 8k → HIA Hobart $5,672
+  NT:   5_000,   // no HIA benchmark; remote reduced charges
+  ACT:  4_000,   // was 9k → HIA Canberra $3,151
 }
 
 /**
@@ -223,15 +227,18 @@ export const SOCIAL_RENT_WEEKLY: Record<string, number> = {
  * Source: PropTrack National Rental Report Q1 2025
  * NOTE: WA updated from $670 → $750 (Perth rental surge 2023–25; ~12% understatement corrected).
  */
+// UPDATED 2026-07 → Domain Rental Report Mar-2026 quarter, UNIT (apartment) medians — the
+// right comparator for apartment feasibility (house medians run higher). Prior values were
+// stale 2024 all-dwellings figures (e.g. Perth $580 → 2026 unit $695). See VALIDATION_TRACKER 1.2.
 export const MARKET_RENT_WEEKLY: Record<string, number> = {
-  NSW: 730,   // Sydney metro
-  VIC: 590,   // Melbourne metro
-  QLD: 640,   // Brisbane metro
-  WA:  750,   // Perth metro (corrected; was $670)
-  SA:  560,   // Adelaide metro
-  TAS: 530,   // Hobart metro (PropTrack Q1 2025; significant recent increase)
-  NT:  650,   // Darwin metro (PropTrack Q1 2025; high due to resource workers)
-  ACT: 720,   // Canberra metro (PropTrack Q1 2025; government sector demand)
+  NSW: 750,   // Sydney unit (was 730)
+  VIC: 600,   // Melbourne unit (was 590)
+  QLD: 660,   // Brisbane unit (was 640)
+  WA:  695,   // Perth unit (was 750; house $740)
+  SA:  550,   // Adelaide unit (was 560)
+  TAS: 530,   // Hobart unit — unconfirmed (vacancy 0.2%); held
+  NT:  600,   // Darwin unit (was 650)
+  ACT: 580,   // Canberra unit (was 720; house $700 — large house/unit gap)
 }
 
 /**
