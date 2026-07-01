@@ -163,6 +163,9 @@ export const SOCIAL_METRICS: SocialMetric[] = [
     source: "State housing authority waitlist registers 2024; AIHW 2023",
   },
   {
+    // ⚠️ VALIDATION FLAG (2026-07, NotebookLM vs AIHW SHS): this 62% may be MISLABELLED.
+    // In AIHW, 62% is a POSITIVE outcome (clients ending support in housing, up from 50%); the actual
+    // UNMET accommodation rate is ~31% (1 in 3). Confirm HIVE's source before this drives the S-pillar.
     id: "unmet_requests",
     label: "Unmet SHS Requests",
     value: "62%",
@@ -325,13 +328,13 @@ export const GOVERNANCE_METRICS: GovernanceMetric[] = [
   {
     id: "esg_reporting",
     label: "Formal ESG / Impact Reporting",
-    value: "~18%",
-    numeric: 18,
+    value: "~12%",
+    numeric: 12,
     benchmark: "Target: 100% Tier 1 by 2028 (Housing Australia trajectory)",
     rating: "Lagging",
     trend: "improving",
-    detail: "Only 18% of Tier 1 CHPs produce formal ESG or impact reports that go beyond financial statements. This is beginning to change: Housing Australia's green bond programme requires ESG reporting, NHFIC sustainability-linked loans require covenant reporting, and impact investors increasingly require structured ESG disclosure.",
-    source: "CHIA Sector Transparency Index 2023; individual CHP reporting",
+    detail: "~12% of CHPs formally report ESG/impact — CHIA's voluntary ESG Reporting Standard (launched Mar 2023) had 20+ early adopters of 166 full members as at Apr 2024. Corrected from 18% (NotebookLM re-check vs CHIA). Housing Australia green-bond and sustainability-linked-loan covenants are now driving uptake.",
+    source: "CHIA ESG Reporting Standard / Sector data 2024 (20+ of 166 members)",
   },
 ]
 

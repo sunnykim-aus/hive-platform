@@ -735,7 +735,7 @@ export default function ESGPage() {
         <div style={{ marginTop: 32, borderTop: "1px solid #1e2d40", paddingTop: 14 }}>
           <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "#4a5a6a", letterSpacing: "1.8px", textTransform: "uppercase", marginBottom: 6 }}>Methodology</div>
           <div style={{ fontSize: "0.7rem", color: "#4a5a6a", lineHeight: 1.6 }}>
-            ESG scores are HIVE-derived estimates based on published sector data and AHURI research, and <em>informed by</em> (not computed via) international ESG frameworks (GRESB, UNPRI, ICMA Green Bond Principles). The 65 &ldquo;green-finance&rdquo; mark is a HIVE readiness benchmark, not an official standard.
+            ESG scores are HIVE-derived estimates based on published sector data and AHURI research, and aligned with the <strong>CHIA ESG Reporting Standard (2023)</strong> — the community-housing sector&apos;s own framework — with broader-market frameworks (GRESB, ICMA Green Bond Principles) as reference only. The 65 &ldquo;green-finance&rdquo; mark is a HIVE readiness benchmark, not an official standard (no single ESG-score threshold governs green-finance eligibility).
             Sector composite is a simple average of E (32), S (48), G (56). Individual CHP scoring requires on-site assessment.
             Data sources cited inline. Scores reflect the sector as a whole — leading CHPs significantly outperform these averages.
           </div>
