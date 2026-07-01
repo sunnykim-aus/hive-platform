@@ -30,9 +30,9 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟢 validated §7 (Notebook C) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
-| **building-energy** | building-energy | KPIs/tables | 🟡 traced (§9) |
-| **livable-housing** | livable-housing | KPIs/tables | 🟡 traced (§10) |
-| **esg-impact** | esg | KPIs/tables | 🟡 traced (§11) |
+| **building-energy** | building-energy | KPIs/tables | 🟡 validated §9 (NatHERS optimistic) |
+| **livable-housing** | livable-housing | KPIs/tables | 🟡 validated §10 (Silver optimistic) |
+| **esg-impact** | esg | KPIs/tables | 🔴 HIVE construct §11 (label) |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
 | **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
@@ -384,7 +384,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - `extra = cost − ENERGY_COST_BY_CLIMATE["7-star"][zone]` (excess vs 7★ by climate zone).
 - `barWidth = max(3, min(100, pct_social_stock × 3.5))` — presentation only.
 
-**Feeds:** `STATE_ENERGY_DATA.avg_nathers_stars` & `haff_pipeline_7star_pct` → Compound Risk §7. **Cadence:** CSIRO/AIHW ~annual · energy benchmarks annual. **Status:** 🟡 — aggregates + $2,200 penalty assumption traced (document the $2,200 basis).
+**Feeds:** `STATE_ENERGY_DATA.avg_nathers_stars` & `haff_pipeline_7star_pct` → Compound Risk §7. **Cadence:** CSIRO/AIHW ~annual · energy benchmarks annual. **Status:** 🟡 **validated 2026-07 (with caveats):** "163k below 3-star" = **162,880 ✅** (Σ stock×pct). ⚠️ NatHERS state values (2.6–3.6) run **optimistic** vs published (existing homes avg **1.8★**, VIC; social housing "very low, 1.5–3★") → likely **understates** the energy problem (and the energyGap fed into compound §7). ⚠️ total stock **387k vs AIHW ~452k** (Jun-2024) — ~14% low. Per-state `pct_below_3star`/`avg_nathers` are HIVE estimates anchored to published ranges. $2,200 penalty still to source.
 
 # 10. Livable Housing (LHD)  (`app/livable-housing/page.tsx` → `lib/data/livable-housing.ts`)
 
@@ -402,7 +402,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Retrofit calculator:** `minTotal = (cost.min × numDwellings ÷ 1000).toFixed(1)`, `maxTotal = (cost.max × numDwellings ÷ 1000).toFixed(1)` ($k×dwellings → $M); `numDwellings = max(1, parseInt(input))`.
 - Stream tiers via `STREAM_HAFF_TIER` (Gold mandatory / Platinum-SDA filters).
 
-**Feeds:** `STATE_COMPLIANCE.pct_meeting_silver`, `upgrade_cost_to_silver_bn`, `total_social_dwellings`, `haff_pipeline_compliant_pct` → Compound Risk §7. **Cadence:** AIHW/AHURI ~annual. **Status:** 🟡 — aggregates + calculator traced; per-state compliance %s need source-trace.
+**Feeds:** `STATE_COMPLIANCE.pct_meeting_silver`, `upgrade_cost_to_silver_bn`, `total_social_dwellings`, `haff_pipeline_compliant_pct` → Compound Risk §7. **Cadence:** AIHW/AHURI ~annual. **Status:** 🟡 **validated 2026-07:** national ~9% meeting Silver vs published "**~5% of new homes comply**" (voluntary LHDG) → HIVE slightly **optimistic** (rates compliance higher → understates the LHD gap fed into compound §7). Silver-standard definition ✅ (Notebook C). Per-state `pct_meeting_silver` are HIVE estimates near the published anchor.
 
 # 11. ESG Impact  (`app/esg-impact/page.tsx` → `lib/data/esg.ts`)
 
@@ -413,7 +413,7 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **`= round(Σ SECTOR_ESG_SCORES.score ÷ SECTOR_ESG_SCORES.length)`** — straight mean of the pillar scorecards (E 32, S 48, G 56, …).
 - Pillar metrics: `ENVIRONMENTAL_METRICS`, `SOCIAL_METRICS`, `GOVERNANCE_METRICS` (each metric: value + rating). `INVESTMENT_USE_CASES`, `ESG_MATURITY_LEVELS` are reference tables.
 
-**Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🟡 — composite formula traced; the individual pillar scores (32/48/56) are HIVE/AHURI-framework judgements — document scoring rubric.
+**Calc:** composite = unweighted mean of 3 pillar scores; metric ratings transcribed from sources. **Cadence:** annual (pillar sources). **Status:** 🔴 **HIVE construct (2026-07):** the sector composite **45** = mean of pillar scores E32/S48/G56, which are **HIVE/AHURI-framework judgements** — there is **no published "social-housing sector ESG = 45"**. GRESB (cited methodology) is a real relative-quintile ESG benchmark, so the *approach* is legitimate, but the score is HIVE's own. **Must be presented as "HIVE ESG framework", never as an external/official rating.** Document the pillar scoring rubric.
 
 # 12. Sustainability (hub)  (`app/sustainability/page.tsx`)
 
