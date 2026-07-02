@@ -66,7 +66,7 @@ const KEY_FINDINGS = [
   },
   {
     topic: "Construction Cost Inflation",
-    finding: "58.5% cost escalation since 2019 means every $1B announced in 2022 now delivers 45% fewer homes. Government programs face compounding structural underfunding: every year without cost-adjustment reduces effective delivery capacity. The $10B HAFF has the effective purchasing power of a $5.5B fund at 2019 costs.",
+    finding: "58.5% cost escalation since 2019 (ABS PPI + Rawlinsons) means every $1B announced then delivers ~37% fewer homes today. Government programs face compounding structural underfunding: every year without cost-adjustment reduces effective delivery capacity. The $10B HAFF has the effective purchasing power of a ~$6.3B fund at 2019 costs.",
     sources: "ABS PPI 6427.0 · Rawlinsons Construction Cost Guide 2025",
     color: "#c49a3a",
   },

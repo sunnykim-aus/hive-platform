@@ -181,7 +181,7 @@ export default function HomePage() {
               <strong style={{ color: "#fff" }}>3,226 social homes in 2019</strong>{" "}
               builds only{" "}
               <strong style={{ color: "#c0614a" }}>1,786 today</strong>{" "}
-              — a 45% loss in construction purchasing power. 189,536 households are on public housing waitlists — a decade high (RoGS, June 2025). Net overseas migration hit a record 518,000 in 2023. Every year without coordinated action compounds the deficit.
+              — a 37% loss in construction purchasing power. 189,536 households are on public housing waitlists — a decade high (RoGS, June 2025). Net overseas migration hit a record 518,000 in 2023. Every year without coordinated action compounds the deficit.
             </span>
             <div style={{ fontSize: "0.65rem", color: "#3a4d60", marginTop: 8 }}>
               ABS Building Approvals (Cat. 8731.0) · AIHW SHS Annual Report 2023–24 · ABS PPI House Construction (Cat. 6427.0) · ABS Cat. 3412.0. Updated May 2026.

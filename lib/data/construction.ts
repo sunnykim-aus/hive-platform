@@ -132,22 +132,30 @@ export const GLOBAL_EVENTS: GlobalEvent[] = [
   },
 ]
 
+// avg_social_total REBASED 2026-07-02 (Round 2 E6): the prior $310k (2019) / $560k (2025) pair
+// was not traceable to any source. New basis — 2025 ≈ $450k national blended average (HIVE
+// estimate anchored to program evidence: VIC Big Housing Build $5.3B ÷ 12,000+ dwellings ≈
+// $442k [2020-24]; Wangaratta 2025 partnership $18.3M ÷ 44 = $416k; HIVE feasibility metro
+// 2-bed TDC ~$500k+). 2019 = $450k back-cast by the ABS-sourced +58.5% cost index ≈ $284k.
+// avg_market_total remains a HIVE estimate (unverified — flagged).
 export const COST_PER_DWELLING: Record<string, CostPerDwelling> = {
   "2019": {
     social_apartment_sqm: 2300, social_townhouse_sqm: 2100, social_detached_sqm: 1850,
-    avg_social_total: 310000, avg_market_total: 490000,
-    note: "Pre-COVID baseline. Fixed-price contracts routinely delivered within 5–8% of estimate.",
+    avg_social_total: 284000, avg_market_total: 490000,
+    note: "Pre-COVID baseline (back-cast from 2025 via ABS cost index). Fixed-price contracts routinely delivered within 5–8% of estimate.",
   },
   "2025": {
     social_apartment_sqm: 4200, social_townhouse_sqm: 3900, social_detached_sqm: 3400,
-    avg_social_total: 560000, avg_market_total: 820000,
-    note: "Current market. Fixed-price contracts require 15–20% contingency. Many CHPs report HAFF funding gaps of $80,000–$150,000 per dwelling.",
+    avg_social_total: 450000, avg_market_total: 820000,
+    note: "HIVE estimate anchored to VIC BHB (~$442k) and 2025 program evidence (~$416k regional). Fixed-price contracts require 15–20% contingency. Many CHPs report HAFF funding gaps of $80,000–$150,000 per dwelling.",
   },
 }
 
+// Derived from COST_PER_DWELLING avg_social_total — yield drop ≈ 37% (= the ABS +58.5% index,
+// since 2019 is index-back-cast). Replaces the old unsourced 45% claim.
 export const BILLION_DOLLAR_YIELD: Record<number, number> = {
-  2019: Math.round(1000000000 / 310000),
-  2025: Math.round(1000000000 / 560000),
+  2019: Math.round(1000000000 / 284000),
+  2025: Math.round(1000000000 / 450000),
 }
 
 export const STOCK_CONDITION: StockCondition = {
