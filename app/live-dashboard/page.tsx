@@ -521,9 +521,9 @@ export default function LiveDashboardPage() {
             <div className="kpi-delta">{haffSummary.total_social.toLocaleString()} social · {haffSummary.total_affordable.toLocaleString()} affordable</div>
           </div>
           <div className="kpi-card">
-            <div className="kpi-label">Average Grant per Home</div>
+            <div className="kpi-label">Est. Upfront Grant per Home (HIVE)</div>
             <div className="kpi-value" style={{ color: "#5aad8a" }}>${avgGrantPerHome}k</div>
-            <div className="kpi-delta">Across {haffSummary.total_projects} projects · ${haffSummary.total_grants_m.toFixed(0)}M committed</div>
+            <div className="kpi-delta">HIVE estimate — HA publishes no instrument split. Official: $14.0B all-instruments across {haffSummary.total_projects} projects</div>
           </div>
         </div>
         <div className="chart-container" style={{ marginBottom: 32 }}>
@@ -543,7 +543,7 @@ export default function LiveDashboardPage() {
             Three rounds have announced <strong style={{ color: "#f6c90e" }}>{haffSummary.total_homes.toLocaleString()} homes</strong> — {haffSummary.pct_of_5yr_target}% of the 40,000-home five-year target.
             But the critical distinction: <strong style={{ color: "#c0614a" }}>only ~1,100 homes have been completed to date (est. May 2026).</strong>{" "}
             Around 9,000 are under construction; the rest are in planning, procurement, or pre-contract.
-            HAFF is designed as <strong style={{ color: "#fff" }}>gap funding, not full project finance</strong> — the ${avgGrantPerHome}k average grant covers roughly 15–40% of total development cost.
+            HAFF is designed as <strong style={{ color: "#fff" }}>gap funding, not full project finance</strong> — the ~${avgGrantPerHome}k HIVE-estimated upfront grant component covers roughly 15–40% of total development cost (HA publishes no instrument split; its full 25-yr support runs ~$751k/home across all instruments).
             CHPs must stack Housing Australia concessional loans, state government contributions, land, and rental cross-subsidy to make each project viable.{" "}
             <strong style={{ color: "#fff" }}>NSW and VIC dominate</strong> by volume — reflecting both population scale and CHP sector maturity.
             Against 640,000 households in core housing need, 18,650 contracted homes represents{" "}

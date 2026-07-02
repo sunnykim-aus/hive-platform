@@ -92,11 +92,13 @@ export const HAFF_OVERVIEW: HaffOverview = {
 export const HAFF_ROUNDS: Record<string, HaffRound> = {
   "Round 1": {
     announced: "September 2024",  // 185 projects selected Sep 2024; contracts executed through 2024-25
-    // ⚠️ BASIS NOTE (2026-07-02): grants_total_m = estimated UPFRONT CAPITAL-GRANT component only.
-    // HA does not publish a per-round grant split; its support is primarily 25-yr availability
-    // payments + concessional loans (official R1+R2 all-instruments commitment: $14.0B).
-    // R1/R2 grant components are therefore NOT comparable per-home (R1 ~$41k vs R2 ~$220k —
-    // different instrument mixes, R2 sourced from sector reporting, approximate).
+    // ⚠️ BASIS NOTE (updated 2026-07-02, Round 2 E5): grants_total_m is a HIVE INDICATIVE
+    // estimate ONLY. HA publishes NO per-round instrument split (availability payments /
+    // concessional loans / grants) — NotebookLM could not identify $561.8M anywhere in HA
+    // reporting (and flagged that a Budget-page "PDF 562 KB" file size may even be the
+    // artifact behind the figure). Official verified figures: R1+R2 = $14.0B all-instruments,
+    // 279 contracts, 18,650 homes. Do NOT surface per-round grant $ as fact in the UI —
+    // §6 round KPIs now show verified Projects instead; §2 avg-grant labelled HIVE estimate.
     grants_total_m: 561.8,
     projects: 185,               // 185 selected pipeline; 177 contracted. Source: Housing Australia Annual Report 2024-25
     total_homes: 13649,          // 13,649 contracted. Source: Housing Australia Annual Report 2024-25

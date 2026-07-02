@@ -189,7 +189,7 @@ function RoundPanel({ roundName }: { roundName: string }) {
           { label: "Total Homes",      value: r.total_homes.toLocaleString(),     color: "#f6c90e" },
           { label: "Social Homes",     value: r.social_homes.toLocaleString(),     color: "#5aad8a" },
           { label: "Affordable Homes", value: r.affordable_homes.toLocaleString(), color: "#4d7fb5" },
-          { label: "Grant Component (est.)", value: `$${r.grants_total_m.toFixed(0)}M`,  color: "#fff"    },
+          { label: "Projects",         value: r.projects.toLocaleString(),         color: "#fff"    },
         ].map(({ label, value, color }) => (
           <div key={label} className="kpi-card">
             <div className="kpi-label">{label}</div>
@@ -537,7 +537,7 @@ export default function FundingAndSectorPage() {
                     <div className="section-label">All Rounds Summary</div>
                     <table className="hive-table">
                       <thead>
-                        <tr><th>State</th><th>Projects</th><th>Total Homes</th><th>Social</th><th>Affordable</th><th>Grant ($M)</th></tr>
+                        <tr><th>State</th><th>Projects</th><th>Total Homes</th><th>Social</th><th>Affordable</th><th>Est. Grant ($M, HIVE)</th></tr>
                       </thead>
                       <tbody>
                         {stateTotals.map((s) => (
