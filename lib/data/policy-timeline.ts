@@ -5,15 +5,18 @@ export interface PolicyEvent {
   type: string
 }
 
+// Corrected 2026-07-02: merged the 2008 stimulus announcement + 2009 SHI rows (same $5.6B —
+// SHI was the housing component of Nation Building; double-counted before). Accord 10.0 → 3.5
+// (10.0 was HAFF's figure; federal Accord commitment per programs.ts = $3.5B). NRAS year
+// 2011 → 2008 (2008-09 Budget). HomeBuilder 2021 → 2020 (announced Jun 2020).
 export const POLICY_TIMELINE: PolicyEvent[] = [
-  { year: 2008, event: "Nation Building Economic Stimulus Plan announced", amount_bn: 5.6, type: "construction" },
-  { year: 2009, event: "Social Housing Initiative — 20,000 new public housing dwellings", amount_bn: 5.6, type: "public_housing" },
-  { year: 2011, event: "National Rental Affordability Scheme (NRAS) — 50,000 dwellings target", amount_bn: 4.5, type: "affordable_rental" },
+  { year: 2008, event: "Nation Building stimulus — Social Housing Initiative (20,000 new + 80,000 repaired dwellings)", amount_bn: 5.6, type: "public_housing" },
+  { year: 2008, event: "National Rental Affordability Scheme (NRAS) — 50,000 dwellings target", amount_bn: 4.5, type: "affordable_rental" },
   { year: 2012, event: "National Affordable Housing Agreement (NAHA) reform", amount_bn: 1.3, type: "agreement" },
   { year: 2018, event: "National Housing Finance and Investment Corporation (NHFIC) established", amount_bn: 1.0, type: "financing" },
   { year: 2019, event: "First Home Loan Deposit Scheme launched", amount_bn: 0.5, type: "homeownership" },
-  { year: 2021, event: "HomeBuilder scheme (COVID response)", amount_bn: 2.5, type: "construction" },
-  { year: 2022, event: "Housing Accord — 1 million new homes target by 2029", amount_bn: 10.0, type: "supply" },
+  { year: 2020, event: "HomeBuilder scheme (COVID response)", amount_bn: 2.5, type: "construction" },
+  { year: 2022, event: "Housing Accord — 1.2 million new homes target by 2029", amount_bn: 3.5, type: "supply" },
   { year: 2023, event: "Housing Australia Future Fund — $10B for social/affordable housing", amount_bn: 10.0, type: "social_housing" },
   { year: 2024, event: "Help to Buy shared equity scheme", amount_bn: 5.5, type: "homeownership" },
 ]

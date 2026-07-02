@@ -34,7 +34,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **livable-housing** | livable-housing | KPIs/tables | 🟡 §10 — Silver optimistic (no SH-specific data) |
 | **esg-impact** | esg | KPIs/tables | 🔴 §11 — metric-layer errors (audit needed) |
 | **sustainability** (hub) | building-energy, livable-housing, esg, asset-intelligence | rollup KPIs | ✅ traced (§12) — rollup |
-| **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟡 traced (§13) |
+| **research** (Evidence & Policy) | policy-timeline, programs | scorecard, timeline, KPIs | 🟢 validated + corrected (§13) |
 | **my-portfolio** | climate-risk | per-asset metrics | 🟡 traced (§8, shared model) |
 
 > Redirect stubs (haff→, ask-research→, etc.) carry no charts of their own.
@@ -528,7 +528,16 @@ Each metric = a measurable sector data point; its **rating** = how the value com
 - **"58.5% cost escalation since 2019 → $10B HAFF ≈ $5.5B effective"** — derived narrative from `BILLION_DOLLAR_YIELD` (construction.ts): yield drop drives effective-purchasing-power statement.
 - **AI "Ask Research"** → `POST /api/policy-impact` (Pinecone retrieval + LLM). Pro-gated.
 
-**Cadence:** programs/policy AHURI+Treasury ad-hoc (budget cycle); evidence base **monthly auto** (research-pipeline). **Status:** 🟡 — grade rubric + funding rollups fully traced; the A–F thresholds are HIVE-defined (document rationale); confirm 681/5,059 against live Pinecone count.
+**Cadence:** programs/policy AHURI+Treasury ad-hoc (budget cycle); evidence base **monthly auto** (research-pipeline).
+
+**Status:** 🟢 **validated + corrected 2026-07-02.**
+- **"5,059 passages" ✅ VERIFIED LIVE** — Pinecone `describe_index_stats` returned exactly **5,059 vectors** in namespace `research` (checked 2026-07-02).
+- **"681 reports" → "630+"** — crawler meta has 683 records but only **631 unique URLs** (52 duplicates). All 11 on-page "681" references replaced with the defensible floor "630+". *(Pipeline improvement: dedupe reports_meta.json by URL.)*
+- **Grade rubric now attributed on-page**: "HIVE rubric" with full thresholds disclosed (completed A ≥95/B ≥80/C ≥60/D ≥40; active pace-ratio A ≥1.05/B ≥0.9/C ≥0.7/D ≥0.5). Targets/outcomes remain sourced (AIHW·DSS·HA·ABS·ANAO); the grade is HIVE's reading.
+- **POLICY_TIMELINE corrected**: 2008 stimulus + 2009 SHI rows **merged** (same $5.6B — was double-counted in `totalInvestment`); Accord **$10B → $3.5B** (10.0 was HAFF's figure; matches programs.ts); NRAS year 2011 → **2008**; HomeBuilder 2021 → **2020**; Accord target text 1M → 1.2M. New Σ = **$34.4B across 9 events** (was $46.5B/10 — $12.1B of it double-count/misattribution).
+- programs.ts spot-checked ✅: HAFF row matches today's verified 18,650/47%; SHI 19.3k/20k · NRAS 36k/50k · NHFIC $6.3B loans · Accord 177k vs 240k/yr all consistent with cited evaluations.
+- KEY_FINDINGS: "640k shortfall by 2041" rephrased → "640k today → ~940k by 2041".
+⚠️ NotebookLM list: SHI 19,300 exact · NRAS 36,000 exact · Help to Buy $5.5B · NHFIC "15,000 dwellings enabled" · "$10B HAFF ≈ $5.5B effective" ($310k/$560k per-home basis, shared with §6).
 
 ---
 
