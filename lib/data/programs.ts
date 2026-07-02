@@ -59,8 +59,8 @@ export const PROGRAMS: Program[] = [
       { metric: "Existing dwellings repaired/upgraded", target_value: 80000, target_unit: "dwellings", target_year: 2012, source: "DFAHSIA program guidelines" },
     ],
     outcomes: [
-      { metric: "New social housing dwellings", actual_value: 19300, actual_unit: "dwellings", measurement_year: 2013, confidence: "High", source_report: "AIHW Housing Assistance in Australia 2013", notes: "97% of target delivered. Shortfall due to construction cost overruns in remote areas." },
-      { metric: "Existing dwellings repaired/upgraded", actual_value: 80100, actual_unit: "dwellings", measurement_year: 2013, confidence: "High", source_report: "DFAHSIA Final Program Report 2013", notes: "Target met. Fast-tracked delivery within 18 months." },
+      { metric: "New social housing dwellings", actual_value: 19600, actual_unit: "dwellings", measurement_year: 2013, confidence: "High", source_report: "SHI program reporting at 31 Mar 2013 (NotebookLM-verified; was 19,300)", notes: "98% of target delivered. Final funding pool $5.238B (revised down from the announced $5.6B)." },
+      { metric: "Existing dwellings repaired/upgraded", actual_value: 80000, actual_unit: "dwellings", measurement_year: 2013, confidence: "High", source_report: "SHI repairs & maintenance program ($400M element)", notes: "Target met (~80,000). Fast-tracked delivery within 18 months." },
       { metric: "Jobs created (estimated)", actual_value: 15000, actual_unit: "jobs", measurement_year: 2011, confidence: "Medium", source_report: "Treasury stimulus review", notes: "Estimated direct and indirect construction employment." },
       { metric: "% allocated to community housing (vs public)", actual_value: 5, actual_unit: "%", measurement_year: 2013, confidence: "High", source_report: "AHURI Final Report", notes: "Critical gap: CHP sector received ~5% despite evidence CHPs deliver better outcomes per dollar." },
     ],
