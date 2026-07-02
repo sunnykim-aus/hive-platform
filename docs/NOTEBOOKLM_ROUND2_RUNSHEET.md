@@ -133,6 +133,14 @@ management with figures from these sources. Quote the top 5-10 with numbers
 (HIVE's list is led by the usual Tier 1s — I want to verify magnitudes).
 ```
 
+### E8 — HAFF completions (moved from D4 — RoGS/AIHW don't cover non-NASHH programs; HIVE: ~1,100 est. May 2026)
+```
+How many homes funded under the HAFF Facility and National Housing Accord
+Facility does Housing Australia report as COMPLETED (construction finished),
+and how many as under construction, as at the most recent reporting date?
+Quote exact figures and the as-at date.
+```
+
 ---
 
 ## Notebook F — Program scorecard history (§13)
