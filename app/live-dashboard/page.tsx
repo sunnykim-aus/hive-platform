@@ -136,7 +136,7 @@ export default function LiveDashboardPage() {
   const majorStates = ["NSW", "VIC", "QLD", "WA", "SA"]
   const minorStates = ["TAS", "NT", "ACT"]
   const states = [...majorStates, ...minorStates]
-  const years = [2019, 2020, 2021, 2022, 2023, 2024]
+  const years = [2019, 2020, 2021, 2022, 2023, 2024, 2025]
   const waitlistChartData = years.map((yr) => {
     const row: Record<string, number | string> = { year: yr }
     states.forEach((st) => {
@@ -179,8 +179,8 @@ export default function LiveDashboardPage() {
     "Public Housing": r.public_housing_k,
   }))
 
-  // Waitlist total across all states (2024)
-  const waitlistTotal = WAITLIST_DATA.filter(d => d.year === 2024).reduce((s, r) => s + r.applicants, 0)
+  // National public-housing waitlist, households at 30 June 2025 (RoGS 2026 Table 18A.29)
+  const waitlistTotal = WAITLIST_DATA.filter(d => d.year === 2025).reduce((s, r) => s + r.applicants, 0)
 
   return (
     <div style={{ background: "#0b1220", minHeight: "100vh" }}>
@@ -239,7 +239,7 @@ export default function LiveDashboardPage() {
           <div className="kpi-card">
             <div className="kpi-label">On Social Housing Waitlists</div>
             <div className="kpi-value" style={{ fontSize: "1.8rem", color: "#c0614a" }}>{waitlistTotal.toLocaleString()}</div>
-            <div className="kpi-delta">Approved applicants across all states &amp; territories (2024)</div>
+            <div className="kpi-delta">Households on public housing waitlists, all states (RoGS, Jun 2025)</div>
           </div>
           <div className="kpi-card">
             <div className="kpi-label">Households in Rental Stress</div>
@@ -466,12 +466,12 @@ export default function LiveDashboardPage() {
         </div>
 
         <div className="chart-container" style={{ marginBottom: 32 }}>
-          <div className="chart-title">Social Housing Waitlist by State (2019–2024)</div>
+          <div className="chart-title">Public Housing Waitlist by State (2019–2025)</div>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={waitlistChartData} margin={{ top: 10, right: 20, bottom: 0, left: 55 }}>
               <CartesianGrid stroke="#1e1e36" strokeDasharray="3 3" />
               <XAxis dataKey="year" tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={false} />
-              <YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={false} tickFormatter={(v) => `${(v/1000).toFixed(0)}k`} label={{ value: "Approved applicants on waitlist", angle: -90, position: "insideLeft", fill: "#94a3b8", fontSize: 13, dx: -28 }} />
+              <YAxis tick={{ fill: "#94a3b8", fontSize: 12 }} tickLine={false} tickFormatter={(v) => `${(v/1000).toFixed(0)}k`} label={{ value: "Households on waitlist", angle: -90, position: "insideLeft", fill: "#94a3b8", fontSize: 13, dx: -28 }} />
               <Tooltip
                 contentStyle={{ background: "#111827", border: "1px solid #1e2d40", borderRadius: 8, fontSize: 12, color: "#e2e8f0" }} labelStyle={{ color: "#e2e8f0", fontWeight: 600 }} itemStyle={{ color: "#e2e8f0" }}
                 formatter={(value: unknown) => [(value as number).toLocaleString(), ""]}
@@ -493,13 +493,12 @@ export default function LiveDashboardPage() {
             </LineChart>
           </ResponsiveContainer>
           <Analysis>
-            Every line on this chart is rising — there is no state where the waitlist is shrinking.{" "}
-            <strong style={{ color: "#4d7fb5" }}>NSW carries the largest absolute burden</strong> at 61,000+ households, but{" "}
-            <strong style={{ color: "#c0614a" }}>VIC and QLD are showing the steepest growth rates</strong>{" "}
-            — both up over 65% since 2019 — a sign that housing stress has spread well beyond its traditional centres.{" "}
-            Two things are important to understand: these are <strong style={{ color: "#fff" }}>approved, confirmed applicants</strong> who have passed eligibility assessment — not rough estimates of need. And average wait times have grown from 4 years to 8+ years in some states.{" "}
+            The national public-housing waitlist hit a decade high of <strong style={{ color: "#c0614a" }}>189,536 households at June 2025</strong> — up from 168,552 a year earlier (+12%) and 140,578 in 2018.{" "}
+            <strong style={{ color: "#4d7fb5" }}>NSW carries the largest absolute burden</strong> (59,077), with{" "}
+            <strong style={{ color: "#c0614a" }}>VIC close behind (56,230) and QLD jumping 28% in a single year</strong> (18,818 → 24,112).{" "}
+            These are <strong style={{ color: "#fff" }}>households formally assessed as eligible</strong> — not rough estimates of need. And average wait times have grown from 4 years to 8+ years in some states.{" "}
             For community housing providers, every upward-sloping line is a confirmed tenant pipeline.{" "}
-            <em style={{ color: "#94a3b8" }}>Note on measures: these lines sum state-register applicants (~213k in 2024). AIHW&apos;s national household count — 165,500 (159,100 public + 6,400 SOMIH) — is lower because registers and AIHW count on different bases (applications vs households, and register coverage varies by state).</em>
+            <em style={{ color: "#94a3b8" }}>Measure notes: RoGS 2026 Table 18A.29, public housing program, households at 30 June. SOMIH waitlists are separate (17,478 households nationally, Table 18A.31). Community housing has no national waitlist aggregate — integrated registers mean program lists can&apos;t be added without double-counting. QLD&apos;s register is ~99.6% &quot;greatest need&quot; because its eligibility rules restrict entry to priority households — not directly comparable to other states. Pre-2024 history shown for NSW only (AIHW-verified); other states&apos; earlier years await source verification.</em>
           </Analysis>
         </div>
 
@@ -676,7 +675,7 @@ export default function LiveDashboardPage() {
           <div style={{ marginTop: 16 }}>
             {([
               { label: "Core housing need (AHURI/City Futures, 2021 Census)", value: 640000, color: "#c0614a", note: "Households who cannot afford adequate housing without assistance — rises to ~940k by 2041" },
-              { label: "Social housing waitlist — households (AIHW 2025)", value: 165500, color: "#f0a30a", note: "159,100 public housing + 6,400 SOMIH households — assessed, eligible, waiting" },
+              { label: "Public housing waitlist — households (RoGS 2026, Jun 2025)", value: 189536, color: "#f0a30a", note: "Decade high — assessed, eligible, waiting. SOMIH adds 17,478 on separate lists; community lists are integrated (not addable)" },
               { label: "HAFF homes contracted — Rounds 1–2", value: haffSummary.total_homes, color: "#4d7fb5", note: "Contracts signed or in execution — Round 3 (target +21,350) still in application phase" },
               { label: "HAFF homes completed to date (est. May 2026)", value: 1100, color: "#5aad8a", note: "Early Round 1 projects only — the pipeline is real but delivery is slow" },
             ] as const).map((row, i) => {

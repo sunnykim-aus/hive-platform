@@ -44,7 +44,7 @@ export const TENURE_TYPES: TenureRecord[] = [
   { label: "Owner — no mortgage", pct: 31, color: "#5aad8a", stress_note: "Lowest housing cost burden" },
   { label: "Owner — with mortgage", pct: 35, color: "#4d7fb5", stress_note: "Rate-sensitive; ~15% in mortgage stress" },
   { label: "Private renter", pct: 26, color: "#c49a3a", stress_note: "Primary at-risk population — 1 in 3 in stress" },
-  { label: "Social housing", pct:  4, color: "#6b8aa0", stress_note: "Capped at income-based rent; waitlist ~165,500 (AIHW Housing Assistance 2025, Jun-2024: 159,100 public + 6,400 SOMIH; community housing mostly on integrated/unreported lists; ~188k on 2022 basis). Was 213k." },
+  { label: "Social housing", pct:  4, color: "#6b8aa0", stress_note: "Capped at income-based rent; public housing waitlist 189,536 households at Jun 2025 (RoGS 2026 Table 18A.29 — decade high, up from 168,552 in 2024) + SOMIH 17,478 on separate lists (18A.31). AIHW Jun-2024 basis was 165,500. Community housing: integrated registers, no addable national list. Was 213k (untraceable)." },
   { label: "Other / not stated", pct: 4, color: "#555", stress_note: "Includes rent-free, boarding, not stated" },
 ]
 

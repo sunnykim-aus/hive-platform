@@ -39,82 +39,41 @@ export interface StateInfo {
   insight: string
 }
 
+// REBUILT 2026-07-02 from primary sources — the prior series (sum 213,000 at 2024;
+// long smooth 2005-2024 histories) was not traceable to any published register and
+// materially overstated QLD/SA (+26-33%) while understating TAS/NT (-32-49%).
+// Verified basis, UNIT = HOUSEHOLDS on the PUBLIC HOUSING waiting list, at 30 June:
+//   2025: RoGS 2026 Table 18A.29 (all states). 2024: derived from RoGS 2026
+//   "change from 2024". NSW 2019-2023: AIHW Households.27 (national administrative
+//   equivalent). Other states' pre-2024 history: not yet source-verified -> omitted.
+// SOMIH waitlist is SEPARATE (RoGS 18A.31: 17,478 households nationally, Jun 2025;
+// QLD 7,375 / NSW 4,601). Community housing: no national waitlist aggregate exists;
+// jurisdictions use integrated registers, so summing program lists double-counts.
+// National public-housing waitlist: 140,578 (2018) -> 168,552 (2024) -> 189,536 (2025).
 export const WAITLIST_TREND: Record<string, WaitlistDataPoint[]> = {
-  WA: [
-    { year: 2005, applicants: 13200 }, { year: 2006, applicants: 14100 },
-    { year: 2007, applicants: 15800 }, { year: 2008, applicants: 17200 },
-    { year: 2009, applicants: 19400 }, { year: 2010, applicants: 20800 },
-    { year: 2011, applicants: 22100 }, { year: 2012, applicants: 22800 },
-    { year: 2013, applicants: 23200 }, { year: 2014, applicants: 22900 },
-    { year: 2015, applicants: 22100 }, { year: 2016, applicants: 21400 },
-    { year: 2017, applicants: 19800 }, { year: 2018, applicants: 18600 },
-    { year: 2019, applicants: 17600 }, { year: 2020, applicants: 17200 },
-    { year: 2021, applicants: 17600 }, { year: 2022, applicants: 20200 },
-    { year: 2023, applicants: 22400 }, { year: 2024, applicants: 24600 },
-  ],
   NSW: [
-    { year: 2005, applicants: 47800 }, { year: 2006, applicants: 48200 },
-    { year: 2007, applicants: 49100 }, { year: 2008, applicants: 50400 },
-    { year: 2009, applicants: 52100 }, { year: 2010, applicants: 53200 },
-    { year: 2011, applicants: 54100 }, { year: 2012, applicants: 55000 },
-    { year: 2013, applicants: 55800 }, { year: 2014, applicants: 56200 },
-    { year: 2015, applicants: 56600 }, { year: 2016, applicants: 57100 },
-    { year: 2017, applicants: 57500 }, { year: 2018, applicants: 57900 },
-    { year: 2019, applicants: 57800 }, { year: 2020, applicants: 58200 },
-    { year: 2021, applicants: 58900 }, { year: 2022, applicants: 59600 },
-    { year: 2023, applicants: 60800 }, { year: 2024, applicants: 61500 },
+    { year: 2019, applicants: 49325 }, { year: 2020, applicants: 49674 }, { year: 2021, applicants: 48239 }, { year: 2022, applicants: 55693 }, { year: 2023, applicants: 54134 }, { year: 2024, applicants: 50726 }, { year: 2025, applicants: 59077 },
   ],
   VIC: [
-    { year: 2005, applicants: 27400 }, { year: 2006, applicants: 28100 },
-    { year: 2007, applicants: 28900 }, { year: 2008, applicants: 30200 },
-    { year: 2009, applicants: 31800 }, { year: 2010, applicants: 33400 },
-    { year: 2011, applicants: 34800 }, { year: 2012, applicants: 35900 },
-    { year: 2013, applicants: 36800 }, { year: 2014, applicants: 37200 },
-    { year: 2015, applicants: 37000 }, { year: 2016, applicants: 36800 },
-    { year: 2017, applicants: 37400 }, { year: 2018, applicants: 38200 },
-    { year: 2019, applicants: 38200 }, { year: 2020, applicants: 41000 },
-    { year: 2021, applicants: 46200 }, { year: 2022, applicants: 55200 },
-    { year: 2023, applicants: 60400 }, { year: 2024, applicants: 63200 },
+    { year: 2024, applicants: 51380 }, { year: 2025, applicants: 56230 },
   ],
   QLD: [
-    { year: 2005, applicants: 15200 }, { year: 2006, applicants: 15800 },
-    { year: 2007, applicants: 16400 }, { year: 2008, applicants: 17600 },
-    { year: 2009, applicants: 18900 }, { year: 2010, applicants: 19800 },
-    { year: 2011, applicants: 20400 }, { year: 2012, applicants: 21200 },
-    { year: 2013, applicants: 21800 }, { year: 2014, applicants: 21600 },
-    { year: 2015, applicants: 21200 }, { year: 2016, applicants: 20800 },
-    { year: 2017, applicants: 20900 }, { year: 2018, applicants: 21100 },
-    { year: 2019, applicants: 21400 }, { year: 2020, applicants: 22800 },
-    { year: 2021, applicants: 24600 }, { year: 2022, applicants: 27900 },
-    { year: 2023, applicants: 32100 }, { year: 2024, applicants: 35800 },
+    { year: 2024, applicants: 18818 }, { year: 2025, applicants: 24112 },
+  ],
+  WA: [
+    { year: 2024, applicants: 20294 }, { year: 2025, applicants: 22409 },
   ],
   SA: [
-    { year: 2010, applicants: 13400 }, { year: 2012, applicants: 14200 },
-    { year: 2014, applicants: 14800 }, { year: 2016, applicants: 14900 },
-    { year: 2018, applicants: 15200 }, { year: 2020, applicants: 15400 },
-    { year: 2022, applicants: 15800 }, { year: 2023, applicants: 17200 },
-    { year: 2024, applicants: 18400 },
+    { year: 2024, applicants: 14043 }, { year: 2025, applicants: 13687 },
   ],
   TAS: [
-    { year: 2010, applicants: 2400 }, { year: 2012, applicants: 2600 },
-    { year: 2014, applicants: 2800 }, { year: 2016, applicants: 2900 },
-    { year: 2018, applicants: 2800 }, { year: 2020, applicants: 3000 },
-    { year: 2022, applicants: 3200 }, { year: 2023, applicants: 3400 },
-    { year: 2024, applicants: 3500 },
+    { year: 2024, applicants: 4709 }, { year: 2025, applicants: 5152 },
   ],
   NT: [
-    { year: 2010, applicants: 1800 }, { year: 2012, applicants: 2000 },
-    { year: 2014, applicants: 2100 }, { year: 2016, applicants: 2200 },
-    { year: 2018, applicants: 2300 }, { year: 2020, applicants: 2400 },
-    { year: 2022, applicants: 2600 }, { year: 2023, applicants: 2700 },
-    { year: 2024, applicants: 2800 },
+    { year: 2024, applicants: 5423 }, { year: 2025, applicants: 5467 },
   ],
   ACT: [
-    { year: 2010, applicants: 2600 }, { year: 2012, applicants: 2800 },
-    { year: 2014, applicants: 2900 }, { year: 2016, applicants: 3000 },
-    { year: 2018, applicants: 3000 }, { year: 2020, applicants: 3100 },
-    { year: 2022, applicants: 3100 }, { year: 2023, applicants: 3200 },
-    { year: 2024, applicants: 3200 },
+    { year: 2024, applicants: 3159 }, { year: 2025, applicants: 3402 },
   ],
 }
 

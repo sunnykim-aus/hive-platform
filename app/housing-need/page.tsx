@@ -126,7 +126,7 @@ export default function HousingNeedPage() {
             <div style={{ flex: 1, minWidth: 0 }}>
               <h1 className="page-title">Housing Need</h1>
               <p className="page-subtitle">
-                The official waitlist has 213,000 households. The evidence points to 740,000 — nearly 3.5× larger. The gap is not a measurement error. It&apos;s couch-surfers, overcrowded families, and people priced out of even applying. This is who actually needs housing, why the private market structurally cannot serve the bottom two income quintiles, and why building more of the same will not fix it.
+                The official public-housing waitlist has 189,536 households (RoGS, June 2025). The evidence points to 640,000 in core housing need — over 3× larger. The gap is not a measurement error. It&apos;s couch-surfers, overcrowded families, and people priced out of even applying. This is who actually needs housing, why the private market structurally cannot serve the bottom two income quintiles, and why building more of the same will not fix it.
               </p>
             </div>
             <div style={{
@@ -187,7 +187,7 @@ export default function HousingNeedPage() {
           </div>
           <div className="kpi-card">
             <div className="kpi-label">Core Housing Need (AHURI)</div>
-            <div className="kpi-value" style={{ fontSize: "1.6rem", color: "#c49a3a" }}>740k</div>
+            <div className="kpi-value" style={{ fontSize: "1.6rem", color: "#c49a3a" }}>640k</div>
             <div className="kpi-delta">Households with no private market solution · AHURI 2023</div>
           </div>
           <div className="kpi-card">
@@ -203,7 +203,7 @@ export default function HousingNeedPage() {
           the internationally recognised threshold for housing stress. Of those,{" "}
           <strong style={{ color: "#c0614a" }}>640,000 are in severe stress</strong>, spending more than half their income before they can pay for food, transport, or healthcare.
           <br /><br />
-          The AHURI &ldquo;core housing need&rdquo; figure (740,000) is the most rigorous estimate of households with no viable private market solution:
+          The AHURI &ldquo;core housing need&rdquo; figure (640,000) is the most rigorous estimate of households with no viable private market solution:
           their housing is unsuitable, unaffordable, or unavailable — and their income cannot fix any of those three problems.
           This is the irreducible demand for social and community housing.
         </Analysis>
@@ -294,9 +294,9 @@ export default function HousingNeedPage() {
           and there is no right to remain.
           <br /><br />
           The <strong style={{ color: "#6b8aa0" }}>4% in social housing</strong> are the lucky ones who made it through the waitlist.
-          Behind them, <strong style={{ color: "#fff" }}>213,000 approved applicants</strong>{" "}are waiting — some for more than a decade — in that volatile 26%.
+          Behind them, <strong style={{ color: "#fff" }}>189,536 waiting households</strong>{" "}(RoGS, Jun 2025) are queued — some for more than a decade — in that volatile 26%.
           The critical question is not &ldquo;how many social housing dwellings do we have?&rdquo; but &ldquo;how many households cannot survive in the private market?&rdquo;
-          The evidence points to at least 740,000 — nearly 10× the current waitlist.
+          The evidence points to at least 640,000 in core housing need — more than 3× the current waitlist.
         </Analysis>
         </div>{/* end #tenure */}
 
@@ -516,7 +516,7 @@ export default function HousingNeedPage() {
           <br /><br />
           These are not market failures that can be fixed by building more of the same.{" "}
           <strong style={{ color: "#f6c90e" }}>They are structural mismatches</strong> between what the market is incentivised to build and what these cohorts need.
-          Social and community housing is not a residual option — it is the primary solution for approximately 740,000 Australian households.
+          Social and community housing is not a residual option — it is the primary solution for approximately 640,000 Australian households.
         </Analysis>
         </>)}
         </div>{/* end #cohorts */}
@@ -772,7 +772,7 @@ export default function HousingNeedPage() {
               {
                 n: "04",
                 title: "Core housing need — the policy-relevant metric",
-                body: "AHURI's 740,000 estimate counts households whose housing fails at least one of three tests: suitability, affordability, or availability — and whose income cannot solve any of those problems in the private market.",
+                body: "AHURI's 640,000 estimate counts households whose housing fails at least one of three tests: suitability, affordability, or availability — and whose income cannot solve any of those problems in the private market.",
                 highlight: true,
               },
             ].map(item => (
@@ -798,17 +798,17 @@ export default function HousingNeedPage() {
         </div>
 
         <Analysis>
-          The gap between 122,000 and 740,000 is not a measurement error — it is a{" "}
+          The gap between 122,000 and 640,000 is not a measurement error — it is a{" "}
           <strong style={{ color: "#fff" }}>definitional choice with policy consequences</strong>.
           If we accept the ABS Census count as the scale of the problem, we design policy for 122,000 people.
-          If we accept AHURI&apos;s core housing need estimate, we design for 740,000.
+          If we accept AHURI&apos;s core housing need estimate, we design for 640,000.
           <br /><br />
           The evidence strongly supports the AHURI figure.{" "}
           <strong style={{ color: "#c0614a" }}>Couch-surfing is not housing security</strong> — it is one bad conversation away from a park bench.
           Overcrowded dwellings are not acceptable housing — they create health, safety, and educational disadvantage.
-          The 213,000 people on formal waitlists are a subset of a much larger population with the same need and no pathway to meet it.
+          The ~190,000 households on public housing waitlists are a subset of a much larger population with the same need and no pathway to meet it.
           <br /><br />
-          For the housing sector, the 740,000 figure is the pipeline:{" "}
+          For the housing sector, the 640,000 figure is the pipeline:{" "}
           <strong style={{ color: "#f6c90e" }}>every dwelling built is immediately absorbed by demand</strong> that already exists and is not being met.
           There is no risk of vacancy in a market with this level of structural undersupply.
         </Analysis>

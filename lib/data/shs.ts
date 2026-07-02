@@ -36,41 +36,39 @@ export const SHS_DATA: SHSRecord[] = [
   { year: "2024-25", clients: 289000, unassisted: 129000, needing_housing: 160000, got_housing: 46500 },
 ]
 
+// REBUILT 2026-07-02 from primary sources — the prior series (sum 213,000 at 2024;
+// long smooth 2005-2024 histories) was not traceable to any published register and
+// materially overstated QLD/SA (+26-33%) while understating TAS/NT (-32-49%).
+// Verified basis, UNIT = HOUSEHOLDS on the PUBLIC HOUSING waiting list, at 30 June:
+//   2025: RoGS 2026 Table 18A.29 (all states). 2024: derived from RoGS 2026
+//   "change from 2024". NSW 2019-2023: AIHW Households.27 (national administrative
+//   equivalent). Other states' pre-2024 history: not yet source-verified -> omitted.
+// SOMIH waitlist is SEPARATE (RoGS 18A.31: 17,478 households nationally, Jun 2025;
+// QLD 7,375 / NSW 4,601). Community housing: no national waitlist aggregate exists;
+// jurisdictions use integrated registers, so summing program lists double-counts.
+// National public-housing waitlist: 140,578 (2018) -> 168,552 (2024) -> 189,536 (2025).
 export const WAITLIST_DATA: WaitlistRecord[] = [
-  { state: "NSW", year: 2019, applicants: 57800, source: "FACS Annual Report" },
-  { state: "NSW", year: 2020, applicants: 58200, source: "FACS Annual Report" },
-  { state: "NSW", year: 2021, applicants: 58900, source: "FACS Annual Report" },
-  { state: "NSW", year: 2022, applicants: 59600, source: "FACS Annual Report" },
-  { state: "NSW", year: 2023, applicants: 60800, source: "FACS Annual Report" },
-  { state: "NSW", year: 2024, applicants: 61500, source: "FACS Annual Report" },
-  { state: "VIC", year: 2019, applicants: 38200, source: "DFFH Housing Register" },
-  { state: "VIC", year: 2020, applicants: 41000, source: "DFFH Housing Register" },
-  { state: "VIC", year: 2021, applicants: 46200, source: "DFFH Housing Register" },
-  { state: "VIC", year: 2022, applicants: 55200, source: "DFFH Housing Register" },
-  { state: "VIC", year: 2023, applicants: 60400, source: "DFFH Housing Register" },
-  { state: "VIC", year: 2024, applicants: 63200, source: "DFFH Housing Register" },
-  { state: "QLD", year: 2019, applicants: 21400, source: "DCHDE Register" },
-  { state: "QLD", year: 2020, applicants: 22800, source: "DCHDE Register" },
-  { state: "QLD", year: 2021, applicants: 24600, source: "DCHDE Register" },
-  { state: "QLD", year: 2022, applicants: 27900, source: "DCHDE Register" },
-  { state: "QLD", year: 2023, applicants: 32100, source: "DCHDE Register" },
-  { state: "QLD", year: 2024, applicants: 35800, source: "DCHDE Register" },
-  { state: "WA",  year: 2021, applicants: 17600, source: "DPLH Register" },
-  { state: "WA",  year: 2022, applicants: 20200, source: "DPLH Register" },
-  { state: "WA",  year: 2023, applicants: 22400, source: "DPLH Register" },
-  { state: "WA",  year: 2024, applicants: 24600, source: "DPLH Register" },
-  { state: "SA",  year: 2022, applicants: 15800, source: "SAHT Register" },
-  { state: "SA",  year: 2023, applicants: 17200, source: "SAHT Register" },
-  { state: "SA",  year: 2024, applicants: 18400, source: "SAHT Register" },
-  { state: "TAS", year: 2022, applicants: 3200,  source: "Housing Tasmania Register" },
-  { state: "TAS", year: 2023, applicants: 3400,  source: "Housing Tasmania Register" },
-  { state: "TAS", year: 2024, applicants: 3500,  source: "Housing Tasmania Register" },
-  { state: "NT",  year: 2022, applicants: 2600,  source: "NT Housing Register" },
-  { state: "NT",  year: 2023, applicants: 2700,  source: "NT Housing Register" },
-  { state: "NT",  year: 2024, applicants: 2800,  source: "NT Housing Register" },
-  { state: "ACT", year: 2022, applicants: 3100,  source: "ACT Housing Registrar" },
-  { state: "ACT", year: 2023, applicants: 3200,  source: "ACT Housing Registrar" },
-  { state: "ACT", year: 2024, applicants: 3200,  source: "ACT Housing Registrar" },
+  { state: "NSW", year: 2019, applicants: 49325, source: "AIHW Households.27 (via RoGS/NSW chart)" },
+  { state: "NSW", year: 2020, applicants: 49674, source: "AIHW Households.27 (via RoGS/NSW chart)" },
+  { state: "NSW", year: 2021, applicants: 48239, source: "AIHW Households.27 (via RoGS/NSW chart)" },
+  { state: "NSW", year: 2022, applicants: 55693, source: "AIHW Households.27 (via RoGS/NSW chart)" },
+  { state: "NSW", year: 2023, applicants: 54134, source: "AIHW Households.27 (via RoGS/NSW chart)" },
+  { state: "NSW", year: 2024, applicants: 50726, source: "RoGS 2026 Table 18A.29" },
+  { state: "NSW", year: 2025, applicants: 59077, source: "RoGS 2026 Table 18A.29" },
+  { state: "VIC", year: 2024, applicants: 51380, source: "RoGS 2026 Table 18A.29" },
+  { state: "VIC", year: 2025, applicants: 56230, source: "RoGS 2026 Table 18A.29" },
+  { state: "QLD", year: 2024, applicants: 18818, source: "RoGS 2026 Table 18A.29" },
+  { state: "QLD", year: 2025, applicants: 24112, source: "RoGS 2026 Table 18A.29" },
+  { state: "WA", year: 2024, applicants: 20294, source: "RoGS 2026 Table 18A.29" },
+  { state: "WA", year: 2025, applicants: 22409, source: "RoGS 2026 Table 18A.29" },
+  { state: "SA", year: 2024, applicants: 14043, source: "RoGS 2026 Table 18A.29" },
+  { state: "SA", year: 2025, applicants: 13687, source: "RoGS 2026 Table 18A.29" },
+  { state: "TAS", year: 2024, applicants: 4709, source: "RoGS 2026 Table 18A.29" },
+  { state: "TAS", year: 2025, applicants: 5152, source: "RoGS 2026 Table 18A.29" },
+  { state: "NT", year: 2024, applicants: 5423, source: "RoGS 2026 Table 18A.29" },
+  { state: "NT", year: 2025, applicants: 5467, source: "RoGS 2026 Table 18A.29" },
+  { state: "ACT", year: 2024, applicants: 3159, source: "RoGS 2026 Table 18A.29" },
+  { state: "ACT", year: 2025, applicants: 3402, source: "RoGS 2026 Table 18A.29" },
 ]
 
 export interface SHSSummary {
