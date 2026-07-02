@@ -83,8 +83,9 @@ export const PROGRAMS: Program[] = [
       { metric: "Affordable dwellings", target_value: 50000, target_unit: "dwellings", target_year: 2014, source: "2008 Budget announcement" },
     ],
     outcomes: [
-      { metric: "Affordable dwellings delivered", actual_value: 36000, actual_unit: "dwellings", measurement_year: 2014, confidence: "High", source_report: "DSS NRAS Review 2014", notes: "72% of original target. Program closed before full delivery." },
-      { metric: "Dwellings shortfall vs target", actual_value: 14000, actual_unit: "dwellings", measurement_year: 2014, confidence: "High", source_report: "DSS NRAS Review 2014", notes: "Program abolished by Abbott Government in 2014 budget." },
+      // CORRECTED 2026-07-02 (Round 2 F2): prior "36,000 delivered (2014)" matched no source.
+      { metric: "Incentives allocated (incl. reserved)", actual_value: 37583, actual_unit: "incentives", measurement_year: 2015, confidence: "High", source_report: "DSS performance reporting at 30 Jun 2015 (ANAO Apr-2015: 37,679)", notes: "75% of the original 50,000 target. Target was revised DOWN to 38,000 in the 2014-15 Budget. Dwellings actually delivered and available for rent at 30 Jun 2015: 27,614." },
+      { metric: "Dwellings shortfall vs original target", actual_value: 12417, actual_unit: "dwellings", measurement_year: 2015, confidence: "High", source_report: "DSS / ANAO (50,000 − 37,583 incentives)", notes: "Closed to new allocations May 2014 (2014-15 Budget). Existing 10-year incentives run down until ~2026." },
       { metric: "Below-market rent discount delivered", actual_value: 20, actual_unit: "%", measurement_year: 2020, confidence: "High", source_report: "AHURI NRAS evaluation", notes: "Discount maintained as required. Tenant income mix skewed to moderate incomes rather than very low." },
       { metric: "% allocated to very low income households", actual_value: 35, actual_unit: "%", measurement_year: 2013, confidence: "Medium", source_report: "AHURI evaluation of NRAS", notes: "Intended for moderate to low income — less effective for those in greatest housing stress." },
     ],
