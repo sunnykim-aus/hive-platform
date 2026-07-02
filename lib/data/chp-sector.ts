@@ -41,9 +41,13 @@ export const SECTOR_OVERVIEW: SectorOverview = {
   // and MISSED SOMIH (~16k). AIHW Housing Assistance: ~452,000 total social dwellings at June 2024
   // (446,000 at 2023, net +6,000/yr). Share of all households in social housing: 4.7% (2013) -> 4.1% (2024).
   total_social_dwellings: 452_000,
-  public_housing: 281_000,            // AIHW 2024: public housing declining
+  // CORRECTED 2026-07-02 (D6): 281k was HOUSEHOLDS living in PH (285,256 in 2025); DWELLINGS
+  // are 297,684 (Jun 2024) / 296,541 (Jun 2025). RoGS national count.
+  public_housing: 297_700,
   community_housing: 119_000,         // AIHW June 2024: ~119,000 community housing dwellings. Source: aihw.gov.au
-  indigenous_community_housing: 32_000, // AIHW 2023: ~7% (ICH; separately managed)
+  // CORRECTED 2026-07-02 (D6 reconciliation): ~20k, not 32k — derived so components sum to the
+  // AIHW 452k total: PH 297.7 + CH 118.8 + SOMIH ~15.6 + ICH ~20 = 452. (approx; flag for source)
+  indigenous_community_housing: 20_000,
   total_registered_chps: 760,         // NHR: approx 760 registered providers 2024 (NRSCH dashboard; NSW alone has 231)
   tier1_count: 45,                    // NHR Tier 1: manage >2,000 homes or >$100M assets
   tier2_count: 130,                   // NHR Tier 2: mid-size operations
@@ -309,17 +313,23 @@ export interface SectorTrend {
   chp_share_pct: number        // CHP % of total social housing
 }
 
+// REBUILT 2026-07-02 (Round 2 D6) — full verified series, RoGS/AIHW national counts at 30 June.
+// PH = public housing DWELLINGS; CH = community housing TENANCY RENTAL UNITS.
+// chp_share_pct here = CH share of mainstream (PH+CH) stock. Narrative anchors: PH was 88.8%
+// of social housing in 2005 -> 65.9% in 2024; NSW transferred ~10,700 properties in 2018-19.
 export const SECTOR_TRENDS: SectorTrend[] = [
-  // 2013 corrected 62 -> 67 (RoGS/AIHW: 67,385 tenancy rental units at 30 Jun 2013; 2005 was
-  // 30,392; 2025 = 118,425 units with 110,326 households housed). 2015-2021 points are
-  // interpolations between verified anchors - pending source verification (Round 2 D3/D6).
-  { year: 2013, chp_dwellings_k: 67,  public_housing_k: 330, chp_share_pct: 16 },
-  { year: 2015, chp_dwellings_k: 72,  public_housing_k: 325, chp_share_pct: 18 },
-  { year: 2017, chp_dwellings_k: 82,  public_housing_k: 318, chp_share_pct: 20 },
-  { year: 2019, chp_dwellings_k: 90,  public_housing_k: 310, chp_share_pct: 22 },
-  { year: 2021, chp_dwellings_k: 97,  public_housing_k: 302, chp_share_pct: 24 },
-  { year: 2023, chp_dwellings_k: 108, public_housing_k: 290, chp_share_pct: 27 },  // AIHW 2023
-  { year: 2024, chp_dwellings_k: 119, public_housing_k: 281, chp_share_pct: 28 },  // AIHW June 2024 (latest confirmed)
+  { year: 2013, chp_dwellings_k: 67.4, public_housing_k: 328.3, chp_share_pct: 17 },
+  { year: 2015, chp_dwellings_k: 73.6, public_housing_k: 321.6, chp_share_pct: 19 },
+  { year: 2016, chp_dwellings_k: 80.2, public_housing_k: 320, chp_share_pct: 20 },
+  { year: 2017, chp_dwellings_k: 82.9, public_housing_k: 319.9, chp_share_pct: 21 },
+  { year: 2018, chp_dwellings_k: 87.8, public_housing_k: 316.2, chp_share_pct: 22 },
+  { year: 2019, chp_dwellings_k: 100.2, public_housing_k: 305.2, chp_share_pct: 25 },
+  { year: 2020, chp_dwellings_k: 103.9, public_housing_k: 300.4, chp_share_pct: 26 },
+  { year: 2021, chp_dwellings_k: 108.5, public_housing_k: 299.5, chp_share_pct: 27 },
+  { year: 2022, chp_dwellings_k: 112.8, public_housing_k: 297.6, chp_share_pct: 27 },
+  { year: 2023, chp_dwellings_k: 114.2, public_housing_k: 298.4, chp_share_pct: 28 },
+  { year: 2024, chp_dwellings_k: 118.8, public_housing_k: 297.7, chp_share_pct: 29 },
+  { year: 2025, chp_dwellings_k: 118.4, public_housing_k: 296.5, chp_share_pct: 29 },
 ]
 // Note: CHP share grows as public housing stock declines and CHPs expand.
 // By 2029 HAFF target: +40,100 homes, primarily CHP-delivered → CHP share projected ~32%

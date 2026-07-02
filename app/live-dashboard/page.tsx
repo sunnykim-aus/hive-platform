@@ -652,7 +652,7 @@ export default function LiveDashboardPage() {
           </ResponsiveContainer>
           <Analysis>
             The diverging lines tell the structural story of Australian housing policy over a decade.{" "}
-            <strong style={{ color: "#94a3b8" }}>Public housing has declined</strong> from 330k to ~281k — state governments have divested, transferred, and under-maintained stock.{" "}
+            <strong style={{ color: "#94a3b8" }}>Public housing has declined</strong> from 328k dwellings (2013) to ~297k (2025) — state governments have divested, transferred (NSW alone moved ~10,700 properties to CHPs in 2018-19), and under-maintained stock.{" "}
             <strong style={{ color: "#4d7fb5" }}>Community housing has grown</strong> from 67k to 119k, absorbing much of that divested stock and adding new supply through HAFF, NHHA, and state programs.{" "}
             But here&apos;s the ceiling: <strong style={{ color: "#fff" }}>the sector&apos;s growth depends entirely on government grants and concessional debt</strong>.{" "}
             Without a sustained pipeline — HAFF rounds 4, 5, and beyond — the growth curve flattens.{" "}
