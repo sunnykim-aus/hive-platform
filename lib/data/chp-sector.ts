@@ -307,7 +307,10 @@ export interface SectorTrend {
 }
 
 export const SECTOR_TRENDS: SectorTrend[] = [
-  { year: 2013, chp_dwellings_k: 62,  public_housing_k: 330, chp_share_pct: 16 },
+  // 2013 corrected 62 -> 67 (RoGS/AIHW: 67,385 tenancy rental units at 30 Jun 2013; 2005 was
+  // 30,392; 2025 = 118,425 units with 110,326 households housed). 2015-2021 points are
+  // interpolations between verified anchors - pending source verification (Round 2 D3/D6).
+  { year: 2013, chp_dwellings_k: 67,  public_housing_k: 330, chp_share_pct: 16 },
   { year: 2015, chp_dwellings_k: 72,  public_housing_k: 325, chp_share_pct: 18 },
   { year: 2017, chp_dwellings_k: 82,  public_housing_k: 318, chp_share_pct: 20 },
   { year: 2019, chp_dwellings_k: 90,  public_housing_k: 310, chp_share_pct: 22 },

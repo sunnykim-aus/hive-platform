@@ -615,7 +615,7 @@ export default function LiveDashboardPage() {
           <div className="kpi-card">
             <div className="kpi-label">CHP-Managed Properties</div>
             <div className="kpi-value" style={{ color: "#4d7fb5" }}>{(SECTOR_OVERVIEW.community_housing / 1000).toFixed(0)}k</div>
-            <div className="kpi-delta">Up from 62k in 2013 — {Math.round((SECTOR_OVERVIEW.community_housing - 62000) / 62000 * 100)}% growth in 11 years</div>
+            <div className="kpi-delta">Up from 67k in 2013 — {Math.round((SECTOR_OVERVIEW.community_housing - 67385) / 67385 * 100)}% growth in 12 years</div>
           </div>
           <div className="kpi-card">
             <div className="kpi-label">Share of Social Housing Stock</div>
@@ -654,7 +654,7 @@ export default function LiveDashboardPage() {
           <Analysis>
             The diverging lines tell the structural story of Australian housing policy over a decade.{" "}
             <strong style={{ color: "#94a3b8" }}>Public housing has declined</strong> from 330k to ~281k — state governments have divested, transferred, and under-maintained stock.{" "}
-            <strong style={{ color: "#4d7fb5" }}>Community housing has grown</strong> from 62k to 119k, absorbing much of that divested stock and adding new supply through HAFF, NHHA, and state programs.{" "}
+            <strong style={{ color: "#4d7fb5" }}>Community housing has grown</strong> from 67k to 119k, absorbing much of that divested stock and adding new supply through HAFF, NHHA, and state programs.{" "}
             But here&apos;s the ceiling: <strong style={{ color: "#fff" }}>the sector&apos;s growth depends entirely on government grants and concessional debt</strong>.{" "}
             Without a sustained pipeline — HAFF rounds 4, 5, and beyond — the growth curve flattens.{" "}
             The 640,000 households in core housing need cannot be served by 119k properties. The sector needs to be {Math.round(640000 / SECTOR_OVERVIEW.community_housing * 10) / 10}x its current size to meet evidenced need.

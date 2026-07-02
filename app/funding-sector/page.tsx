@@ -970,7 +970,7 @@ export default function FundingAndSectorPage() {
               </div>
               <Analysis>
                 The decade from 2013 to 2023 shows a structural shift in social housing delivery:
-                public housing stock fell from ~330k to ~281k (−15%) while community housing grew from 62k to 119k (+92%).
+                public housing stock fell from ~330k to ~281k (−15%) while community housing grew from 67k to 119k (+77%).
                 CHP share of total social housing rose from 16% to 25% — and with HAFF delivering homes primarily through CHPs,
                 the sector&apos;s share is projected to reach <strong style={{ color: "#fff" }}>32% by 2029</strong>.
                 This structural shift has policy implications: CHPs increasingly hold the sector&apos;s development capacity
