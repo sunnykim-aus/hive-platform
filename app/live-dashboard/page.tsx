@@ -676,7 +676,7 @@ export default function LiveDashboardPage() {
               { label: "Core housing need (AHURI/City Futures, 2021 Census)", value: 640000, color: "#c0614a", note: "Households who cannot afford adequate housing without assistance — rises to ~940k by 2041" },
               { label: "Public housing waitlist — households (RoGS 2026, Jun 2025)", value: 189536, color: "#f0a30a", note: "Decade high — assessed, eligible, waiting. A further 17,478 households are on SOMIH lists (overlap with public lists possible — not simply addable); community lists are integrated" },
               { label: "HAFF homes contracted — Rounds 1–2", value: haffSummary.total_homes, color: "#4d7fb5", note: "Contracts signed or in execution — Round 3 (target +21,350) still in application phase" },
-              { label: "HAFF homes completed to date (est. May 2026)", value: 1100, color: "#5aad8a", note: "Early Round 1 projects only — the pipeline is real but delivery is slow" },
+              { label: "HAFF homes completed to date (est. May 2026)", value: 1100, color: "#5aad8a", note: "Sector estimate — HA publishes contracts (279) and homes (18,650) but no completions split. Early Round 1 projects only" },
             ] as const).map((row, i) => {
               const pct = Math.max(row.value / 640000 * 100, 0.4)
               return (
