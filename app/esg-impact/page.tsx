@@ -177,7 +177,7 @@ export default function ESGPage() {
             How the sector performs across all three pillars — and why it matters for funding, investment, and policy.
             The sector composite ESG score is{" "}
             <strong style={{ color: "#c49a3a" }}>{SECTOR_COMPOSITE_SCORE}/100 (Below Average)</strong>{" "}
-            — a significant gap from the 65+ threshold that opens access to green finance and impact capital.
+            — a significant gap from HIVE&apos;s 65+ green-finance readiness benchmark (a HIVE planning benchmark, not an official eligibility threshold).
           </p>
           <div style={{ fontSize: "0.72rem", color: "#4a5a6a", marginTop: 8 }}>
             Sources: AIHW · CSIRO · CHIA · Housing Australia · NHR · AHURI · ClimateWorks · ABS · state HA data
@@ -285,7 +285,7 @@ export default function ESGPage() {
                 {
                   pillar: "Governance" as ESGPillar,
                   why: "Governance is the enabler. Poor governance — inadequate boards, opaque financials, no ESG reporting — blocks access to every form of capital that the sector needs at scale. Green bonds, impact equity, NHFIC sustainability-linked loans all require governance infrastructure.",
-                  urgency: "Only 18% of Tier 1 CHPs produce ESG reports. This leaves 82% invisible to the capital pools that could fund the sector's growth. It is a self-imposed funding ceiling.",
+                  urgency: "Only ~12% of CHPs formally report ESG (CHIA ESG Reporting Standard uptake). That leaves nearly 9 in 10 invisible to the capital pools that could fund the sector's growth. It is a self-imposed funding ceiling.",
                   link: "/funding-sector",
                   linkLabel: "Funding & Programs →",
                 },

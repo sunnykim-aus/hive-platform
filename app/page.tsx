@@ -26,8 +26,8 @@ export default function HomePage() {
     },
     {
       status: "ERODING CAPACITY", statusColor: "#c0614a", topic: "Construction Costs",
-      primaryValue: "−45%", primaryLabel: "purchasing power",
-      metric: "$1B builds 1,786 homes today vs 3,226 in 2019",
+      primaryValue: "−37%", primaryLabel: "purchasing power",
+      metric: "$1B builds ~2,222 homes today vs ~3,521 in 2019",
       context: "58.5% cost inflation since 2019. Programs announced at 2022 costs face structural funding gaps that compound every year without adjustment.",
       action: "Grant rates in HAFF Round 3 must reflect current build costs — not 2022 assumptions.",
       href: "/feasibility", linkLabel: "Development Viability →",

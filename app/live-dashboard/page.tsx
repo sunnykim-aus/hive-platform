@@ -582,12 +582,12 @@ export default function LiveDashboardPage() {
             <div className="kpi-card" style={{ flex: 1 }}>
               <div className="kpi-label">Homes per $1B in 2019</div>
               <div className="kpi-value" style={{ color: "#5aad8a" }}>{costImpact.homes_per_bn_2019.toLocaleString()}</div>
-              <div className="kpi-delta">At $310k/dwelling (social apartment)</div>
+              <div className="kpi-delta">At ~$284k/dwelling (2019, index back-cast)</div>
             </div>
             <div className="kpi-card" style={{ flex: 1 }}>
               <div className="kpi-label">Homes per $1B in 2025</div>
               <div className="kpi-value" style={{ color: "#c0614a" }}>{costImpact.homes_per_bn_2025.toLocaleString()}</div>
-              <div className="kpi-delta">At $560k/dwelling — 58% higher cost</div>
+              <div className="kpi-delta">At ~$450k/dwelling — 58.5% higher cost</div>
             </div>
             <div className="kpi-card" style={{ flex: 1 }}>
               <div className="kpi-label">Homes Lost per $1B</div>

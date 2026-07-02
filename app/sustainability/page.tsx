@@ -83,7 +83,7 @@ export default function SustainabilityPage() {
       stats: [
         { label: "Sector composite ESG", value: `${SECTOR_COMPOSITE_SCORE}/100` },
         { label: "Below HIVE green-finance benchmark", value: "65+ (HIVE)" },
-        { label: "Producing ESG reports", value: "~18% of T1" },
+        { label: "Producing ESG reports", value: "~12% of CHPs" },
       ],
     },
     {

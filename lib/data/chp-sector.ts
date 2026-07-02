@@ -306,8 +306,11 @@ export const STATE_DISTRIBUTION: StateDistribution[] = [
   { state: "NT",  label: "Northern Territory",chp_dwellings: 3_000, chp_providers: 50,  color: "#1e3a58" },
 ]
 
-// Verification: sum of state CHP dwellings
-// 36000+28000+18000+10000+7000+3500+2500+3000 = 108,000 ✓ matches SECTOR_OVERVIEW.community_housing
+// ⚠️ BASIS NOTE (corrected 2026-07-02, re-evaluation audit): the state split sums to 108,000 —
+// it does NOT match SECTOR_OVERVIEW.community_housing (119,000; the old comment falsely claimed ✓).
+// The split is a HIVE estimate on an older ~108k basis (~91% of current stock); no verified
+// per-state CHP distribution source yet (candidate: state Registrar / CHIA data). Use for
+// RELATIVE shares only, not absolute per-state counts.
 
 // ─── Sector trends ────────────────────────────────────────────────────────────
 

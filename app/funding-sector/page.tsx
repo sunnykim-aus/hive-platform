@@ -916,7 +916,7 @@ export default function FundingAndSectorPage() {
               <div id="chp-distribution" style={{ scrollMarginTop: 130 }} />
               <div className="section-label">State Distribution of Community Housing</div>
               <div className="chart-container" style={{ marginBottom: 16 }}>
-                <div className="chart-title">CHP Dwellings by State</div>
+                <div className="chart-title">CHP Dwellings by State (HIVE estimate, ~108k basis — use for relative shares)</div>
                 <ResponsiveContainer width="100%" height={240}>
                   <BarChart data={stateChpData} margin={{ top: 10, right: 20, bottom: 0, left: 55 }}>
                     <CartesianGrid stroke="#1e2d40" strokeDasharray="3 3" />

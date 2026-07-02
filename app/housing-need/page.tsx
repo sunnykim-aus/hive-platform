@@ -673,7 +673,7 @@ export default function HousingNeedPage() {
           Australia could approve 300,000 dwellings this year, and if they were all 4-bedroom detached houses in outer suburbs
           with no accessibility features, the waitlist would barely move — because those dwellings do not match the cohort that needs social housing.
           <br /><br />
-          <strong style={{ color: "#f6c90e" }}>65% of the waitlist is lone persons and single parents</strong> who need 1–2 bedroom dwellings near services.{" "}
+          <strong style={{ color: "#f6c90e" }}>75% of the waitlist is lone persons and single parents</strong> who need 1–2 bedroom dwellings near services.{" "}
           <strong style={{ color: "#c0614a" }}>42% of SHS clients have a disability</strong> but only 3% of new stock is accessible.{" "}
           <strong style={{ color: "#4d7fb5" }}>78% of vulnerable cohorts need inner/middle ring locations</strong> — near health services, transport, schools —
           but the construction industry delivers 65% of volume in outer suburban greenfield.

@@ -78,7 +78,7 @@ const KEY_FINDINGS = [
   },
   {
     topic: "CHP vs Direct Delivery",
-    finding: "AHURI research consistently shows CHPs deliver 15–20% more dwellings per million invested compared to state housing authorities, with measurably better long-term tenancy outcomes. The CHP sector's growth from 16% to 28% of social housing stock since 2013 reflects this efficiency advantage — accelerated by HAFF's CHP-first design.",
+    finding: "AHURI research consistently shows CHPs deliver 15–20% more dwellings per million invested compared to state housing authorities, with measurably better long-term tenancy outcomes. The CHP sector's growth from 16% to 26% of social housing stock since 2013 reflects this efficiency advantage — accelerated by HAFF's CHP-first design.",
     sources: "AHURI Final Report 378, 2022 · AIHW Housing Assistance 2024",
     color: "#5aad8a",
   },
