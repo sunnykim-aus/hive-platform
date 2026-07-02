@@ -18,7 +18,11 @@ export const POLICY_TIMELINE: PolicyEvent[] = [
   { year: 2020, event: "HomeBuilder scheme (COVID response)", amount_bn: 2.5, type: "construction" },
   { year: 2022, event: "Housing Accord — 1.2 million new homes target by 2029", amount_bn: 3.5, type: "supply" },
   { year: 2023, event: "Housing Australia Future Fund — $10B for social/affordable housing", amount_bn: 10.0, type: "social_housing" },
-  { year: 2024, event: "Help to Buy shared equity scheme", amount_bn: 5.5, type: "homeownership" },
+  // Updated 2026-07-02 (Round 2 F4): $5.5B was the pre-2025-26-Budget level; +$800M added to
+  // lift price/income caps -> $6.3B current. Legislated Nov 2024; Program Directions registered
+  // 13 Jun 2025; operational launch late 2025. 40,000 households; equity up to 30% existing /
+  // 40% new; 2% deposit.
+  { year: 2024, event: "Help to Buy shared equity scheme (now $6.3B after 2025-26 Budget top-up)", amount_bn: 6.3, type: "homeownership" },
 ]
 
 export const TYPE_COLORS: Record<string, string> = {
