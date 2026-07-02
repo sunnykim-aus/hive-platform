@@ -110,7 +110,11 @@ export const PROGRAMS: Program[] = [
     outcomes: [
       { metric: "AHBA loans approved to CHPs", actual_value: 5.0, actual_unit: "$B", measurement_year: 2025, confidence: "High", source_report: "Housing Australia Annual Report 2024-25", notes: "Far exceeded the initial $1B target. Funded via $2.8B of social/sustainability bonds (7 issuances); ~$860M interest savings for the CHP sector. Corrected from 6.3 (which conflated total HA finance across facilities)." },
       { metric: "Interest rate saving vs market", actual_value: 0.8, actual_unit: "% per annum", measurement_year: 2023, confidence: "Medium", source_report: "NHFIC Impact Report", notes: "Estimated 80bps saving on average loan — material for CHP development viability." },
-      { metric: "New dwellings enabled", actual_value: 15000, actual_unit: "dwellings", measurement_year: 2024, confidence: "Medium", source_report: "Housing Australia Annual Report 2023-24", notes: "Estimated social and affordable dwellings supported through NHFIC finance." },
+      // CORRECTED 2026-07-02 (Round 2 F3): was 15,000 (untraceable). Verified: 18,853 cumulative
+      // at 30 Jun 2024 (AHBA + NHIF); jumps to 46,000+ at Jun 2025 once HAFF/NHAF R1-2 (18,650)
+      // are included, of which 38,000+ social/affordable. "Supported" = Board-approved pipeline,
+      // NOT completions (FY2023-24 completions-supported: just 1,783).
+      { metric: "Dwellings supported (cumulative)", actual_value: 18853, actual_unit: "dwellings", measurement_year: 2024, confidence: "High", source_report: "Housing Australia Annual Report 2023-24 (detailed tables)", notes: "At 30 Jun 2024, via AHBA + NHIF. Rises to 46,000+ at Jun 2025 with HAFF/NHAF Rounds 1-2 included (38,000+ social/affordable). Note: \"supported\" = Board-approved finance pipeline, not completions — FY2023-24 completions were just 1,783." },
     ],
   },
   {
