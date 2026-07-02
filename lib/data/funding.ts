@@ -101,7 +101,7 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
     type: "loan",
     tier: "federal",
     status: "ongoing",
-    program_size_m: 10_000,        // $6.3B issued to date; ongoing facility
+    program_size_m: 10_000,        // $6.3B issued to date; ongoing facility. NOTE (E1 bonus): HA's overall statutory liability cap was raised $10B -> $26B in the 2025-26 Budget — E3 to confirm bond-aggregator specifics
     typical_per_dwelling_k: 215,   // blended social/affordable debt capacity at 5.5%, 30yr
     rate_pct: 5.5,                 // approx 2025 rate (AOFM 10yr ~4.4% + ~1.1% HA margin)
     loan_term_years: 30,
@@ -131,7 +131,11 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
     type: "loan",
     tier: "federal",
     status: "ongoing",
-    program_size_m: 3_000,         // $3B total; concessional and equity streams
+    // CORRECTED 2026-07-02 (Round 2 E1): was $3B - actual is $2B ($1B at 2018 establishment
+    // [up to $175M grants + $825M loans/equity] + $1B increase Sep 2023 targeted at crisis &
+    // transitional housing). Three limbs: NHIF-CI (enabling infrastructure), NHIF-SAH (social/
+    // affordable homes), NHIF-CT (crisis & transitional, launched Nov 2024).
+    program_size_m: 2_000,
     typical_per_dwelling_k: 40,    // enables enabling infrastructure; not direct build funding
     rate_pct: 3.5,                 // concessional: below-market; approx 2025
     loan_term_years: 20,
@@ -141,14 +145,14 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
       "Registered housing developers with affordable housing component",
     ],
     key_conditions: [
-      "Must finance enabling infrastructure (roads, water, sewerage, land remediation)",
-      "Project must create affordable or social housing as a direct outcome",
-      "NOT for construction of dwellings directly",
-      "Minimum $10M project size",
-      "Concessional rate requires 30%+ affordable housing in the development",
+      "Three limbs: Critical Infrastructure (CI) · Social & Affordable Housing (SAH) · Crisis & Transitional (CT, launched Nov 2024)",
+      "CI: enabling infrastructure — water, sewerage, electricity, telecoms, transport, site remediation",
+      "SAH: DOES fund new social/affordable rental homes directly (closes the cost-to-rent gap)",
+      "CT: short-to-medium-term housing for women & children escaping family violence and at-risk youth",
+      "Mix of concessional loans, grants and equity investments",
     ],
     stackable_with: ["haff", "ha-loan", "state-programs"],
-    best_for: "Large greenfield or urban renewal sites requiring infrastructure investment. Unlocks land for CHP delivery.",
+    best_for: "Infrastructure-constrained sites (CI), direct social/affordable delivery (SAH), and crisis/transitional projects (CT).",
     application_window: "Ongoing — applications accepted quarterly.",
     contact: "Housing Australia — nhif@housingaustralia.gov.au",
     color: "#6b8aa0",

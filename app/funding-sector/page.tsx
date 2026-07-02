@@ -348,7 +348,7 @@ export default function FundingAndSectorPage() {
         <div className="page-header">
           <h1 className="page-title">Funding &amp; Programs</h1>
           <p className="page-subtitle">
-            $39.7B in program capacity across 8 active programs — yet only 47% of the HAFF 40,000-home target is contracted (53% remains), construction costs have risen 58.5% since 2019, and the same $1B now builds 45% fewer homes. This is the complete funding intelligence layer: what&apos;s available, what it pays, and what it still can&apos;t close.
+            $38.7B in program capacity across 8 active programs — yet only 47% of the HAFF 40,000-home target is contracted (53% remains), construction costs have risen 58.5% since 2019, and the same $1B now builds 45% fewer homes. This is the complete funding intelligence layer: what&apos;s available, what it pays, and what it still can&apos;t close.
           </p>
         </div>
 
