@@ -74,6 +74,11 @@ export interface CHP {
   note: string
 }
 
+// SOURCE STATUS (2026-07-02, Round 2 E7): per-CHP dwelling counts are HIVE-compiled from
+// individual CHP annual reports and are NOT verifiable against HA/RoGS sources (no national
+// ranked list exists there). Weak corroboration: HA AR 2024-25 names Evolve, Bridge, SGCH,
+// Hume, Foundation Housing and Uniting Vic-Tas among active borrowers — consistent with this
+// universe. Proper verification source: PowerHousing/CHIA yearbooks or state Registrar data.
 export const TOP_CHPS: CHP[] = [
   // ── Ranks 1–5: verified from provider websites / annual reports May 2026 ──
   {
