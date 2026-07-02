@@ -316,7 +316,7 @@ export const HAFF_GRANT_OPTIONS: Record<string, HaffOption> = {
   "r1-3-avg": {
     label: "R1–3 Average",
     grant: 55_451,
-    note: "Planning baseline: total HAFF grants committed ($2,223.6M) ÷ 40,000 home target = $55k/home. Conservative floor — actual per-home rates vary by round and typology.",
+    note: "HIVE planning assumption: ~$55k upfront capital grant per home — a conservative modelling floor. HA does not publish a per-round grant split; its official R1–2 commitment is $14.0B over 25 years across ALL instruments (availability payments + concessional loans + grants ≈ $751k/home). Use $55k as the upfront-grant floor only.",
   },
   "r3-rate": {
     label: "Round 3 Rate",

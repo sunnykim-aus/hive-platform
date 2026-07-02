@@ -44,7 +44,7 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
     tier: "federal",
     status: "next-round-q3-2025",
     program_size_m: 10_000,        // $10B fund (returns ~$500M/yr available for grants)
-    typical_per_dwelling_k: 55,    // weighted avg across R1–R3: $2,223.6M / 40,100 homes
+    typical_per_dwelling_k: 55,    // HIVE planning floor: est. upfront grant component only. Official R1-2 all-instruments commitment = $14.0B / 18,650 homes ≈ $751k/home over 25 yrs (availability payments + concessional loans + grants). Source: housingaustralia.gov.au
     rate_pct: null,
     loan_term_years: null,
     eligible_borrowers: [

@@ -189,7 +189,7 @@ function RoundPanel({ roundName }: { roundName: string }) {
           { label: "Total Homes",      value: r.total_homes.toLocaleString(),     color: "#f6c90e" },
           { label: "Social Homes",     value: r.social_homes.toLocaleString(),     color: "#5aad8a" },
           { label: "Affordable Homes", value: r.affordable_homes.toLocaleString(), color: "#4d7fb5" },
-          { label: "Grant Funding",    value: `$${r.grants_total_m.toFixed(0)}M`,  color: "#fff"    },
+          { label: "Grant Component (est.)", value: `$${r.grants_total_m.toFixed(0)}M`,  color: "#fff"    },
         ].map(({ label, value, color }) => (
           <div key={label} className="kpi-card">
             <div className="kpi-label">{label}</div>
@@ -348,7 +348,7 @@ export default function FundingAndSectorPage() {
         <div className="page-header">
           <h1 className="page-title">Funding &amp; Programs</h1>
           <p className="page-subtitle">
-            $39.7B committed across 8 active programs — yet 47% of the HAFF 40,000-home target remains uncontracted, construction costs have risen 58.5% since 2019, and the same $1B now builds 45% fewer homes. This is the complete funding intelligence layer: what&apos;s available, what it pays, and what it still can&apos;t close.
+            $39.7B in program capacity across 8 active programs — yet only 47% of the HAFF 40,000-home target is contracted (53% remains), construction costs have risen 58.5% since 2019, and the same $1B now builds 45% fewer homes. This is the complete funding intelligence layer: what&apos;s available, what it pays, and what it still can&apos;t close.
           </p>
         </div>
 
@@ -406,9 +406,9 @@ export default function FundingAndSectorPage() {
                 <div className="kpi-delta">Active federal + state mechanisms</div>
               </div>
               <div className="kpi-card">
-                <div className="kpi-label">Combined Committed</div>
+                <div className="kpi-label">Combined Program Capacity</div>
                 <div className="kpi-value" style={{ fontSize: "1.5rem", color: "#f6c90e" }}>${summary.total_committed_bn}B</div>
-                <div className="kpi-delta">Federal + state (incl. loan facilities)</div>
+                <div className="kpi-delta">Federal + state program sizes (incl. loan facilities)</div>
               </div>
               <div className="kpi-card">
                 <div className="kpi-label">Grant Programs</div>
@@ -499,7 +499,7 @@ export default function FundingAndSectorPage() {
                     <div>
                       {[
                         ["5-Year Target",     `${HAFF_OVERVIEW.five_year_target_homes.toLocaleString()} homes (${HAFF_OVERVIEW.social_target.toLocaleString()} social, ${HAFF_OVERVIEW.affordable_target.toLocaleString()} affordable)`],
-                        ["Committed to Date", `$${HAFF_OVERVIEW.total_committed_to_date_m.toLocaleString()}M`],
+                        ["Committed R1–2 (25-yr, all instruments)", `$${(HAFF_OVERVIEW.total_committed_to_date_m / 1000).toFixed(1)}B`],
                         ["Homes Announced",   HAFF_OVERVIEW.total_homes_announced.toLocaleString()],
                       ].map(([k, v]) => (
                         <div key={k} style={{ display: "flex", gap: 12, marginBottom: 10, fontSize: "0.82rem" }}>
@@ -970,7 +970,7 @@ export default function FundingAndSectorPage() {
               </div>
               <Analysis>
                 The decade from 2013 to 2023 shows a structural shift in social housing delivery:
-                public housing stock fell from ~330k to ~290k (−12%) while community housing grew from 62k to 108k (+74%).
+                public housing stock fell from ~330k to ~281k (−15%) while community housing grew from 62k to 119k (+92%).
                 CHP share of total social housing rose from 16% to 25% — and with HAFF delivering homes primarily through CHPs,
                 the sector&apos;s share is projected to reach <strong style={{ color: "#fff" }}>32% by 2029</strong>.
                 This structural shift has policy implications: CHPs increasingly hold the sector&apos;s development capacity
@@ -991,7 +991,7 @@ export default function FundingAndSectorPage() {
               </div>
               <p className="page-subtitle" style={{ marginBottom: 20 }}>
                 Where is housing need concentrated and where does the sector currently lack Tier 1 delivery capacity?
-                Ranked by Opportunity Score — a composite of rental stress, social housing demand, Tier 1 CHP coverage, and population scale.
+                Ranked by HIVE&apos;s Opportunity Score — a HIVE composite of rental stress, social housing demand, Tier 1 CHP coverage, and population scale (weights: need 50% · coverage gap 30% · population 20%).
                 High scores = <strong style={{ color: "#c0614a" }}>high need, low coverage</strong> — these regions need the most attention.
               </p>
 

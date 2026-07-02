@@ -27,7 +27,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟢 validated + corrected (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
-| **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
+| **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟢 validated + corrected (§6) |
 | **asset-intelligence** | asset-intelligence, climate-risk | KPIs/score tables | 🟢 validated §7 (Notebook C) |
 | **climate-risk** | climate-risk | KPIs/score tables | 🟡 §8 — HIVE-constructed scores (C) |
 | **building-energy** | building-energy | KPIs/tables | 🔴 §9 — NatHERS unsourceable (no published data) |
@@ -311,7 +311,20 @@ sources — they are not computed at runtime except where a formula is shown.**
 ### 📋 Funding mechanisms navigator
 - `FUNDING_MECHANISMS` filtered by type (grant/loan/equity/tax/guarantee). **Source:** funding.ts (HA/Treasury/state). **Calc:** display/filter only. **Cadence:** per Budget.
 
-**Page status:** 🟡 — all 9 charts + concentration/yield/impact KPIs traced. **Actions:** (1) document `opportunity_score` formula; (2) mark R3+ HAFF splits as indicative in any customer-facing view.
+### SA4 Opportunity Score (`lib/data/sa4-opportunity.ts`) — formula documented ✅
+- `need = min(100, stress/60×60 + demand_index×0.40)` · `coverageGap` by Tier-1 count (0→100 · 1→78 · 2→52 · 3→28 · else max(8,100−t1×22)) · `pop = min(100, population/4200)`.
+- **`opportunity = need×0.50 + coverageGap×0.30 + pop×0.20`**; bands ≥75 Critical · ≥58 High · ≥42 Moderate · else Well-served.
+- **Weights are HIVE judgement** (inputs sourced: RAI 2023 · AIHW · NHR register). Now labelled "HIVE's Opportunity Score" on-page with weights disclosed. 34 SA4s (header comment corrected from 28).
+
+**Page status:** 🟢 **validated + corrected 2026-07-02.**
+- **HAFF finance re-based to the official anchor** — HA publishes a **$14.0B total 25-yr commitment for R1–2** (availability payments + concessional loans + limited grants; 9,284 social + 9,366 affordable = 18,650 ✅ matches HIVE homes; ≈ **$751k/home all-instruments**). The old "committed to date $2,223.6M" was untraceable → replaced with $14.0B (label: "Committed R1–2 (25-yr, all instruments)").
+- Per-round `grants_total_m` (R1 $561.8M · R2 $1,100M) relabelled **"Grant Component (est.)"** — HA does not publish a per-round grant split; R1 ~$41k vs R2 ~$220k per home are NOT comparable (different instrument mixes). Basis note added in haff.ts.
+- feasibility.ts `$55k` note rewritten: **HIVE planning floor for upfront grant**, not "total grants ÷ 40,000". funding.ts `typical_per_dwelling_k: 55` same.
+- Header prose fixed: "$39.7B **in program capacity**" (was "committed"; = Σ program sizes ✓ arithmetic) · "**only 47% contracted (53% remains)**" (was inverted "47% uncontracted") · KPI "Combined Committed" → "Combined Program Capacity".
+- Sector-shift prose: 290k→**281k** public (−15%) · 108k→**119k** community (+92%) — matches chp-sector.ts.
+- R3 indicative-split disclosure ✅ already on-page ("Indicative proportions based on Rounds 1–2").
+- yieldDrop 45% ✓ arithmetic ($1B÷$310k vs $1B÷$560k) — **basis of $310k/$560k per-home TDC → NotebookLM list**.
+⚠️ NotebookLM double-check list: NHIF $3B size · Housing Support Program $3B (may conflate $500M HSP with $3B New Homes Bonus) · HA Loans $10B cap · state program sizes (VIC 5.3 · QLD 1.1 · WA 2.4 · NSW 2.0 · SA 0.4) · R1 $561.8M grant component provenance · $310k/$560k per-home cost basis · TOP_CHPS dwellings list.
 
 # 7. Asset Intelligence — Compound Risk  (`app/asset-intelligence/page.tsx` → `lib/data/asset-intelligence.ts`)
 

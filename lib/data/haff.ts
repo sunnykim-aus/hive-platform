@@ -81,13 +81,22 @@ export const HAFF_OVERVIEW: HaffOverview = {
   affordable_target: 20000,
   target_period: "2024–2029",
   legislation: "Housing Australia Future Fund Act 2023",
-  total_committed_to_date_m: 2223.6,
+  // CORRECTED 2026-07-02: was 2,223.6 (untraceable "grants committed" figure). Housing Australia's
+  // official total funding commitment for R1+R2 is $14.0B over 25 years — availability payments +
+  // concessional loans + capital grants ("in limited circumstances") ≈ $751k/home all-instruments.
+  // Source: housingaustralia.gov.au "Funding under the HAFF" (9,284 social + 9,366 affordable, 279 projects).
+  total_committed_to_date_m: 14_000,
   total_homes_announced: 18650,  // Rounds 1+2 contracted only. Round 3 in application phase (target: +21,350). Source: Housing Australia 3 Jul 2025.
 }
 
 export const HAFF_ROUNDS: Record<string, HaffRound> = {
   "Round 1": {
     announced: "September 2024",  // 185 projects selected Sep 2024; contracts executed through 2024-25
+    // ⚠️ BASIS NOTE (2026-07-02): grants_total_m = estimated UPFRONT CAPITAL-GRANT component only.
+    // HA does not publish a per-round grant split; its support is primarily 25-yr availability
+    // payments + concessional loans (official R1+R2 all-instruments commitment: $14.0B).
+    // R1/R2 grant components are therefore NOT comparable per-home (R1 ~$41k vs R2 ~$220k —
+    // different instrument mixes, R2 sourced from sector reporting, approximate).
     grants_total_m: 561.8,
     projects: 185,               // 185 selected pipeline; 177 contracted. Source: Housing Australia Annual Report 2024-25
     total_homes: 13649,          // 13,649 contracted. Source: Housing Australia Annual Report 2024-25

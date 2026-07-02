@@ -12,8 +12,14 @@
  *   CHP presence: NHR provider register + individual CHP annual reports (May 2026)
  *   Centroids: ABS SA4 centroid estimates (approximate — for mapping only)
  *
- * NOTE: This dataset covers 28 highest-priority SA4 regions by housing need.
+ * NOTE: This dataset covers the 34 highest-priority SA4 regions by housing need.
  *       Full 107-SA4 dataset requires ABS GeoJSON boundary integration (Phase 2).
+ *
+ * SCORING (HIVE composite — weights are HIVE judgement, inputs sourced above):
+ *   need = min(100, stress/60×60 + demand_index×0.40) · coverageGap by Tier-1 count
+ *   (0→100, 1→78, 2→52, 3→28, else max(8, 100−t1×22)) · popScore = min(100, pop/4200)
+ *   opportunity = need×0.50 + coverageGap×0.30 + popScore×0.20
+ *   bands: ≥75 Critical · ≥58 High · ≥42 Moderate · else Well-served
  */
 
 export interface SA4Region {
