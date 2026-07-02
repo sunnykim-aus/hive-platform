@@ -24,7 +24,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 |---|---|---|---|
 | **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟢 validated + corrected (§2) |
 | **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 §1 + Notebook-B corrected (waitlist→165.5k) |
-| **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
+| **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟢 validated + corrected (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
 | **feasibility** (Development Viability) | feasibility | 1📊 + calculators | 🟢 validated §5 (2026-07) — pending Rawlinsons |
 | **funding-sector** (Funding & Programs) | funding, haff, chp-sector, construction | 5📊 2📈 2🥧 | 🟡 traced (§6) |
@@ -184,10 +184,15 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Data:** `s.household_size_trend`. **Source:** ABS Census/ERP. **Calc:** direct. **Cadence:** Census 5-yr.
 
 ### 🔢 True-need + delivery-rate KPIs
-- **`trueNeedEstimate = round(latest_waitlist × TRUE_NEED_MULTIPLIER[state])`** (line 259) — registered waitlist scaled up to estimated true need. ⚠️ **`TRUE_NEED_MULTIPLIER` is a HIVE-defined per-state assumption — its basis must be documented/validated (🟡).**
+- **`trueNeedEstimate = round(latest_waitlist × TRUE_NEED_MULTIPLIER[state])`** (line 259) — registered waitlist scaled up to estimated true need. ✅ **Relabelled 2026-07-02:** the page previously presented this as "AHURI/NHSC methodology" — an overclaim. Now labelled **HIVE estimate (AHURI-informed)**: the national anchor is real (core need 640k ÷ AIHW waitlist 165.5k ≈ **3.9×**; ÷ register sum 213k ≈ 3.0×), but the per-state spread (NSW 3.8 · VIC 3.5 · QLD 4.1 · WA 3.6 · SA 3.2 · TAS 4.2 · NT 5.8 · ACT 3.4) is a HIVE judgement reflecting relative homelessness/stress rates — not published AHURI figures. Documented in code comment + on-page label + footer.
 - **Delivery as % of waitlist (lines 795-797):** `(requiredFor10yr ÷ latest_waitlist × 100).toFixed(1)`% needed/yr; `(accessible_total ÷ latest_waitlist × 100).toFixed(1)`% actual/yr; gap = `annualGap` dwellings/yr.
 
-**Page status:** 🟡 — all 11 charts + national rollups + true-need KPIs traced. **Action:** document the basis of `TRUE_NEED_MULTIPLIER` (per-state) and the `delivery`/`accessible_total` definitions; confirm projections release.
+**Page status:** 🟢 **validated + corrected 2026-07-02.**
+- Cross-page consistency ✅ — per-state waitlists identical to §2's `WAITLIST_DATA` (sum 213k); national KPI strip relabelled "State registers · AIHW households: 165.5k"; core-need KPI 740k → **640k**.
+- `TRUE_NEED_MULTIPLIER` overclaim fixed — relabelled HIVE estimate (see above).
+- Population anchors (state current/2031/2041) consistent with ABS ERP 2026; population.ts validated under §4.
+- `accessible_total = latest social + affordable completions`; `years_to_clear = waitlist ÷ accessible_total` — definitions traced (state-analysis.ts:459-461).
+⚠️ NotebookLM double-check list: per-state 2024 register values (NSW 61.5k · VIC 63.2k · QLD 35.8k · WA 24.6k · SA 18.4k · TAS 3.5k · NT 2.8k · ACT 3.2k) vs each state authority's annual report · per-state completions series · "less than 5% of backlog" subtitle claim.
 
 # 4. Population  (`app/population/page.tsx` → `lib/data/population.ts`)
 

@@ -21,6 +21,10 @@ const STATE_COLORS: Record<string, string> = {
   TAS: "#1abc9c", NT: "#e67e22", ACT: "#c0614a",
 }
 
+// HIVE modelling assumption (relabelled 2026-07). National anchor is real: AHURI/City Futures
+// core housing need 640k ÷ AIHW waitlist 165.5k ≈ 3.9× (÷ state-register sum 213k ≈ 3.0×).
+// The PER-STATE spread is a HIVE judgement reflecting relative homelessness/stress rates
+// (e.g. NT homelessness ~12× national rate) — NOT published AHURI per-state multipliers.
 const TRUE_NEED_MULTIPLIER: Record<string, number> = {
   NSW: 3.8, VIC: 3.5, QLD: 4.1, WA: 3.6, SA: 3.2,
   TAS: 4.2, NT: 5.8, ACT: 3.4,
@@ -486,8 +490,8 @@ export default function DemandSupplyPage() {
               { n: "10.9M",  label: "Households",         sub: `÷ ${avgHhSize} persons avg`,  color: "#4d7fb5" },
               { n: "3.1M",   label: "Private renters",    sub: "26% of all households",      color: "#c49a3a" },
               { n: "1.31M",  label: "In rental stress",   sub: ">30% of income on rent",     color: "#c0614a" },
-              { n: "740k",   label: "Core housing need",  sub: "AHURI — no market solution", color: "#c0614a" },
-              { n: "213k",   label: "On the waitlist",    sub: "Verified eligible applicants", color: "#6b8aa0" },
+              { n: "640k",   label: "Core housing need",  sub: "AHURI — no market solution", color: "#c0614a" },
+              { n: "213k",   label: "On the waitlist",    sub: "State registers · AIHW households: 165.5k", color: "#6b8aa0" },
             ].map((item, i, arr) => (
               <div key={i} style={{ display: "flex", alignItems: "stretch", minWidth: 110 }}>
                 <div style={{ flex: 1, textAlign: "center" as const, padding: "14px 6px" }}>
@@ -812,19 +816,21 @@ export default function DemandSupplyPage() {
             </>
           }}
           right={{
-            label: "Estimated True Need · AHURI / NHSC Methodology",
+            label: "Estimated True Need · HIVE Estimate (AHURI-informed)",
             color: "#c49a3a",
             content: <>
-              AHURI combines the register with hidden homelessness, severe rental stress (&gt;50% income),
-              and those who gave up registering. In {s.state_full}, a {multiplier}x multiplier suggests true unmet need of{" "}
+              Registers undercount need: hidden homelessness, severe rental stress (&gt;50% income),
+              and those who gave up registering are excluded. Nationally, AHURI/City Futures core housing need (640k) runs
+              ~3.9× the AIHW waitlist — HIVE applies a state-adjusted multiplier ({multiplier}× for {s.state_full}, reflecting
+              relative homelessness and stress rates) to estimate true unmet need of{" "}
               <strong style={{ color: "#c49a3a" }}>{trueNeedEstimate.toLocaleString()} households</strong>.
-              Use for advocacy — cite with methodology.
             </>
           }}
           footer={<>
             KPI cards use the <strong style={{ color: "#fff" }}>official register</strong>.
-            The estimated true need ({trueNeedEstimate.toLocaleString()}) is for{" "}
-            <strong style={{ color: "#fff" }}>policy submissions and advocacy</strong> — cite with AHURI methodology.
+            The estimated true need ({trueNeedEstimate.toLocaleString()}) is a{" "}
+            <strong style={{ color: "#fff" }}>HIVE estimate anchored to AHURI/City Futures core-need research</strong> —
+            the national ~3.9× ratio is published; the per-state adjustment is HIVE&apos;s. Cite it as an estimate, not an official figure.
           </>}
         />
 
