@@ -164,13 +164,19 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
   },
   {
     id: "state-programs",
-    name: "State Housing Programs (VIC Big Housing Build / QLD HISP / WA HHIP / NSW LAHC / SA SAHT)",
+    // CORRECTED 2026-07-02 (Round 2 E4): state programs were badly stale. Verified:
+    // NSW $6.6B Building Homes for NSW (2024-25 Budget; 8,400 public homes) — was $2.0B.
+    // QLD $5.6B Q-CHIP community housing pipeline (2025-26 Budget) — was $1.1B "HISP".
+    // WA $3.2B cumulative new investment since 2021-22 (2024-25 Budget) — was $2.4B.
+    // VIC $5.3B Big Housing Build ✅ confirmed (Homes Victoria Guidance Note v2.0, May 2024).
+    // SA ~$0.4B (A Better Housing Future era; no single headline figure verified — estimate).
+    name: "State Housing Programs (VIC Big Housing Build / QLD Q-CHIP / NSW Building Homes for NSW / WA / SA)",
     short_name: "State Programs",
     funder: "State Governments",
     type: "grant",
     tier: "state",
     status: "state-specific",
-    program_size_m: 11_200,        // combined: VIC $5.3B + QLD $1.1B + WA $2.4B + NSW $2B + SA $0.4B
+    program_size_m: 21_100,        // combined: NSW $6.6B + QLD $5.6B + VIC $5.3B + WA $3.2B + SA ~$0.4B
     typical_per_dwelling_k: 150,   // state land + cash contributions; varies by state/project
     rate_pct: null,
     loan_term_years: null,
