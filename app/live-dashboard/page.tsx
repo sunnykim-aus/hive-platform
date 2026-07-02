@@ -438,10 +438,9 @@ export default function LiveDashboardPage() {
               <strong style={{ color: "#c0614a" }}>~{(fiveYearShortfall / 1000).toFixed(0)}k dwellings</strong>{" "}
               that won&apos;t be built.{" "}
               Critically, <strong style={{ color: "#fff" }}>the Accord target counts all housing — private, investor, social, and affordable.</strong>{" "}
-              Of the ~198k annual approvals, approximately{" "}
-              <strong style={{ color: "#c0614a" }}>12,000 (~6%) are social or affordable</strong>{" "}
-              — a figure that varies sharply by state (NSW 3.8%, VIC 9.8% inflated by Big Housing Build, QLD 3.5%).
-              The remaining 94% will never be accessible to the 640,000 households in core housing need, regardless of how many are built.
+              Against ~198k annual approvals, the <strong style={{ color: "#c0614a" }}>net national gain in social housing stock was just ~6,000 dwellings in 2023-24</strong>{" "}
+              (AIHW: 446,000 → 452,000) — roughly 3% of the pipeline. The share of all households in social housing has slid from 4.7% (2013) to 4.1% (2024).
+              Virtually everything else being built will never be accessible to the 640,000 households in core housing need, regardless of how many homes are approved.
             </Analysis>
           </div>
 
@@ -785,7 +784,7 @@ export default function LiveDashboardPage() {
         <Analysis>
           The data across this dashboard tells one consistent story:{" "}
           <strong style={{ color: "#fff" }}>Australia faces a structural housing deficit, not a cyclical one.</strong>{" "}
-          The 1.31 million households in rental stress and 129,000 unmet requests per year are symptoms of the same cause — a social housing stock of ~432k properties serving a core need of 640k households.{" "}
+          The 1.31 million households in rental stress and 129,000 unmet requests per year are symptoms of the same cause — a social housing stock of ~452k dwellings serving a core need of 640k households.{" "}
           HAFF is the largest federal housing investment in decades, and it matters: 18,650 contracted homes, construction underway, first completions arriving.{" "}
           But 2.9% of evidenced need is momentum — not a solution.{" "}
           <strong style={{ color: "#f6c90e" }}>What closes the gap is a decade-long, sustained pipeline</strong>:{" "}

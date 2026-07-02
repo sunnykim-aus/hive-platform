@@ -22,7 +22,7 @@
 // ─── Sector overview ─────────────────────────────────────────────────────────
 
 export interface SectorOverview {
-  total_social_dwellings: number       // all social housing: public + community + indigenous
+  total_social_dwellings: number       // all social housing: public + community + SOMIH + indigenous community
   public_housing: number               // state/territory housing authority
   community_housing: number            // registered CHPs
   indigenous_community_housing: number // ICH organisations
@@ -37,7 +37,10 @@ export interface SectorOverview {
 }
 
 export const SECTOR_OVERVIEW: SectorOverview = {
-  total_social_dwellings: 432_000,    // AIHW June 2025: ~432,129 total social housing dwellings
+  // CORRECTED 2026-07-02 (Round 2 D5): was 432,000 — which was just PH 281k + CH 119k + ICH 32k
+  // and MISSED SOMIH (~16k). AIHW Housing Assistance: ~452,000 total social dwellings at June 2024
+  // (446,000 at 2023, net +6,000/yr). Share of all households in social housing: 4.7% (2013) -> 4.1% (2024).
+  total_social_dwellings: 452_000,
   public_housing: 281_000,            // AIHW 2024: public housing declining
   community_housing: 119_000,         // AIHW June 2024: ~119,000 community housing dwellings. Source: aihw.gov.au
   indigenous_community_housing: 32_000, // AIHW 2023: ~7% (ICH; separately managed)
@@ -45,7 +48,7 @@ export const SECTOR_OVERVIEW: SectorOverview = {
   tier1_count: 45,                    // NHR Tier 1: manage >2,000 homes or >$100M assets
   tier2_count: 130,                   // NHR Tier 2: mid-size operations
   tier3_count: 585,                   // NHR Tier 3: small local providers
-  chp_share_pct: 28,                  // community_housing / total_social = 119k/432k = 27.5% ≈ 28%. Source: AIHW 2024
+  chp_share_pct: 26,                  // community_housing / total_social = 119k/452k = 26.3% ≈ 26%. Source: AIHW 2024
   sector_growth_rate_pct: 4.2,        // CHIA sector data 2023: ~4.2% p.a. portfolio growth (5yr)
   development_pipeline_homes: 40_000, // HAFF 5-year target: exactly 40,000 homes. Source: Housing Australia
   source: "AIHW Housing Assistance in Australia 2024 (aihw.gov.au); NHR; Housing Australia 2025",
