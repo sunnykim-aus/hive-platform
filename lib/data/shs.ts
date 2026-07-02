@@ -44,7 +44,9 @@ export const SHS_DATA: SHSRecord[] = [
 //   "change from 2024". NSW 2019-2023: AIHW Households.27 (national administrative
 //   equivalent). Other states' pre-2024 history: not yet source-verified -> omitted.
 // SOMIH waitlist is SEPARATE (RoGS 18A.31: 17,478 households nationally, Jun 2025;
-// QLD 7,375 / NSW 4,601). Community housing: no national waitlist aggregate exists;
+// QLD 7,375 / NSW 4,601) — integrated registers mean PH/SOMIH lists can OVERLAP, so do
+// NOT sum them (AIHW's lower ~6,400 was likely an unduplicated/subset count — D2 resolved).
+// Community housing: no national waitlist aggregate exists;
 // jurisdictions use integrated registers, so summing program lists double-counts.
 // National public-housing waitlist: 140,578 (2018) -> 168,552 (2024) -> 189,536 (2025).
 export const WAITLIST_DATA: WaitlistRecord[] = [

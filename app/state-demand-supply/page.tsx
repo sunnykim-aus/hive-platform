@@ -492,7 +492,7 @@ export default function DemandSupplyPage() {
               { n: "3.1M",   label: "Private renters",    sub: "26% of all households",      color: "#c49a3a" },
               { n: "1.31M",  label: "In rental stress",   sub: ">30% of income on rent",     color: "#c0614a" },
               { n: "640k",   label: "Core housing need",  sub: "AHURI — no market solution", color: "#c0614a" },
-              { n: "190k",   label: "On the waitlist",    sub: "Public housing households, Jun 2025 (RoGS) · +17.5k SOMIH", color: "#6b8aa0" },
+              { n: "190k",   label: "On the waitlist",    sub: "Public housing households, Jun 2025 (RoGS) · SOMIH listed separately", color: "#6b8aa0" },
             ].map((item, i, arr) => (
               <div key={i} style={{ display: "flex", alignItems: "stretch", minWidth: 110 }}>
                 <div style={{ flex: 1, textAlign: "center" as const, padding: "14px 6px" }}>
