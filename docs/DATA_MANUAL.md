@@ -22,7 +22,7 @@ Legend for charts: 📊 bar · 📈 line · 🥧 pie · 🔀 composed · 🟦 ar
 
 | Page (`app/…/page.tsx`) | Data file(s) | Charts | Status |
 |---|---|---|---|
-| **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟡 traced (§2) |
+| **live-dashboard** (Housing Data) | shs, building-approvals, housing-need, haff, construction, chp-sector | 2🟦 3📊 2📈 + KPIs | 🟢 validated + corrected (§2) |
 | **housing-need** | housing-need | 3📊 + KPIs/tables | 🟡 §1 + Notebook-B corrected (waitlist→165.5k) |
 | **state-demand-supply** (Supply Pipeline) | population, state-analysis | 7📊 1🔀 3📈 | 🟡 traced (§3) |
 | **population** | population | 1📊 1🔀 1📈 | ✅ traced (§4) |
@@ -132,11 +132,20 @@ sources — they are not computed at runtime except where a formula is shown.**
 - **Data:** `sectorTrendData = SECTOR_TRENDS.map`. **Source:** AIHW HOU 322 + NHR. **Calc:** direct. **Cadence:** AIHW annual.
 
 ### 🔢 Core-need scale-up panel (page.tsx:660-688)
-- **"Sector must grow N×":** `round(740000 ÷ SECTOR_OVERVIEW.community_housing × 10) ÷ 10` — core housing need (AHURI 740k) ÷ current community-housing stock, to 1 decimal.
-- **Cohort bars vs core need:** each `pct = max(value ÷ 740000 × 100, 0.4)` (min 0.4 for visibility); label `round(value ÷ 740000 × 100)`%.
-- **Source:** AHURI 2023 (740k) + AIHW HOU 322 (community_housing). **Cadence:** AHURI ad-hoc / AIHW annual.
+- **"Sector must grow N×":** `round(640000 ÷ SECTOR_OVERVIEW.community_housing × 10) ÷ 10` — core housing need (AHURI/City Futures 640k) ÷ current community-housing stock (119k), to 1 decimal → **5.4×**.
+- **Cohort bars vs core need:** each `pct = max(value ÷ 640000 × 100, 0.4)` (min 0.4 for visibility); label `round(value ÷ 640000 × 100)`%.
+- **Source:** AHURI/City Futures (640k, 2021 Census) + AIHW HOU 322 (community_housing). **Cadence:** AHURI ad-hoc / AIHW annual.
 
-**Page status:** 🟡 — all 7 charts + gauge + 4 derived KPIs traced; confirm `target`, `annual_run_rate`, 2024 waitlist sum, HAFF totals against latest releases.
+**Page status:** 🟢 **validated + corrected 2026-07-02.** The data files were current (AIHW Jun 2025 · HA Jul 2025 · AIHW SHS 2024-25) but the **prose hardcoded stale figures** — all fixed:
+- core need 740k → **640k** (9 places incl. proportional-scale chart base + scale-up calc);
+- waitlist row 213k → **165,500** (AIHW 2025 households); by-state chart keeps the state-register series (~213k sum) with an explicit note distinguishing the two measures;
+- HAFF "25,804 announced" → **18,650 contracted** R1-2 (✅ HA media 3 Jul 2025; R3 +21,350 in application); 3.5% → **2.9%** of need; avg grant $86k → **$89k** (=1,661.8M ÷ 18,650);
+- "What would it take" recomputed: 64k/yr · $5.7B/yr (10-yr) · 32k/yr · $2.9B/yr (20-yr) · **128 years** at ~5k/yr;
+- CHP stock 108k → **119k**, social stock 398k → **432k**, public 290k → **281k** (match chp-sector.ts / AIHW);
+- "350 **people** turned away/day" → "350 unassisted **requests**/day" (AIHW counts requests ✅ 129k confirmed vs AIHW 2024-25);
+- **shs.ts unit break fixed**: `unassisted` 2021-22→2023-24 re-based to AIHW *requests* series (105k/108k/110k) — pre-2021-22 rows are the older unassisted-*people* basis (documented in code, not charted).
+
+⚠️ Still to double-check via NotebookLM (lower stakes): per-state WAITLIST_DATA series (NSW 61.5k etc. vs state register reports) · "62k community housing in 2013" baseline · "~1,100 HAFF completions (May 2026)" · "12,000 (~6%) of approvals are social/affordable" · COST_INDEX quarterly values · SECTOR_TRENDS series.
 
 # 3. Supply Pipeline / State Demand-Supply  (`app/state-demand-supply/page.tsx`)
 

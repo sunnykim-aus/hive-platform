@@ -353,7 +353,7 @@ export default function LiveDashboardPage() {
                 </div>
                 <div style={{ fontSize: "0.82rem", color: "#94a3b8", lineHeight: 1.8 }}>
                   Counts every <strong style={{ color: "#fff" }}>service request</strong> that couldn&apos;t be met — including multiple attempts by the same person. Captures the <strong style={{ color: "#fff" }}>volume of pressure</strong> on the system.<br /><br />
-                  In 2024–25: <strong style={{ color: "#c0614a" }}>129,000 unmet requests</strong> — around <strong style={{ color: "#c0614a" }}>350 people turned away every single day</strong>
+                  In 2024–25: <strong style={{ color: "#c0614a" }}>129,000 unmet requests</strong> — around <strong style={{ color: "#c0614a" }}>350 unassisted requests every single day</strong>
                 </div>
               </div>
             </div>
@@ -441,7 +441,7 @@ export default function LiveDashboardPage() {
               Of the ~198k annual approvals, approximately{" "}
               <strong style={{ color: "#c0614a" }}>12,000 (~6%) are social or affordable</strong>{" "}
               — a figure that varies sharply by state (NSW 3.8%, VIC 9.8% inflated by Big Housing Build, QLD 3.5%).
-              The remaining 94% will never be accessible to the 740,000 households in core housing need, regardless of how many are built.
+              The remaining 94% will never be accessible to the 640,000 households in core housing need, regardless of how many are built.
             </Analysis>
           </div>
 
@@ -498,7 +498,8 @@ export default function LiveDashboardPage() {
             <strong style={{ color: "#c0614a" }}>VIC and QLD are showing the steepest growth rates</strong>{" "}
             — both up over 65% since 2019 — a sign that housing stress has spread well beyond its traditional centres.{" "}
             Two things are important to understand: these are <strong style={{ color: "#fff" }}>approved, confirmed applicants</strong> who have passed eligibility assessment — not rough estimates of need. And average wait times have grown from 4 years to 8+ years in some states.{" "}
-            For community housing providers, every upward-sloping line is a confirmed tenant pipeline.
+            For community housing providers, every upward-sloping line is a confirmed tenant pipeline.{" "}
+            <em style={{ color: "#94a3b8" }}>Note on measures: these lines sum state-register applicants (~213k in 2024). AIHW&apos;s national household count — 165,500 (159,100 public + 6,400 SOMIH) — is lower because registers and AIHW count on different bases (applications vs households, and register coverage varies by state).</em>
           </Analysis>
         </div>
 
@@ -542,13 +543,13 @@ export default function LiveDashboardPage() {
           </ResponsiveContainer>
           <Analysis>
             Three rounds have announced <strong style={{ color: "#f6c90e" }}>{haffSummary.total_homes.toLocaleString()} homes</strong> — {haffSummary.pct_of_5yr_target}% of the 40,000-home five-year target.
-            But the critical distinction: <strong style={{ color: "#c0614a" }}>fewer than 1,000 homes have been completed to date.</strong>{" "}
+            But the critical distinction: <strong style={{ color: "#c0614a" }}>only ~1,100 homes have been completed to date (est. May 2026).</strong>{" "}
             Around 9,000 are under construction; the rest are in planning, procurement, or pre-contract.
             HAFF is designed as <strong style={{ color: "#fff" }}>gap funding, not full project finance</strong> — the ${avgGrantPerHome}k average grant covers roughly 15–40% of total development cost.
             CHPs must stack Housing Australia concessional loans, state government contributions, land, and rental cross-subsidy to make each project viable.{" "}
             <strong style={{ color: "#fff" }}>NSW and VIC dominate</strong> by volume — reflecting both population scale and CHP sector maturity.
-            Against 740,000 households in core housing need, 25,804 announced homes represents{" "}
-            <strong style={{ color: "#c0614a" }}>3.5% of evidenced need</strong> — essential momentum, but Rounds 4 and 5 are needed just to reach the 40,000 target, and the target itself barely scratches the surface of the structural deficit.
+            Against 640,000 households in core housing need, 18,650 contracted homes represents{" "}
+            <strong style={{ color: "#c0614a" }}>2.9% of evidenced need</strong> — essential momentum, but Rounds 4 and 5 are needed just to reach the 40,000 target, and the target itself barely scratches the surface of the structural deficit.
           </Analysis>
         </div>
 
@@ -653,11 +654,11 @@ export default function LiveDashboardPage() {
           </ResponsiveContainer>
           <Analysis>
             The diverging lines tell the structural story of Australian housing policy over a decade.{" "}
-            <strong style={{ color: "#94a3b8" }}>Public housing has declined</strong> from 330k to 290k — state governments have divested, transferred, and under-maintained stock.{" "}
-            <strong style={{ color: "#4d7fb5" }}>Community housing has grown</strong> from 62k to 108k, absorbing much of that divested stock and adding new supply through HAFF, NHHA, and state programs.{" "}
+            <strong style={{ color: "#94a3b8" }}>Public housing has declined</strong> from 330k to ~281k — state governments have divested, transferred, and under-maintained stock.{" "}
+            <strong style={{ color: "#4d7fb5" }}>Community housing has grown</strong> from 62k to 119k, absorbing much of that divested stock and adding new supply through HAFF, NHHA, and state programs.{" "}
             But here&apos;s the ceiling: <strong style={{ color: "#fff" }}>the sector&apos;s growth depends entirely on government grants and concessional debt</strong>.{" "}
             Without a sustained pipeline — HAFF rounds 4, 5, and beyond — the growth curve flattens.{" "}
-            The 740,000 households in core housing need cannot be served by 108k properties. The sector needs to be {Math.round(740000 / SECTOR_OVERVIEW.community_housing * 10) / 10}x its current size to meet evidenced need.
+            The 640,000 households in core housing need cannot be served by 119k properties. The sector needs to be {Math.round(640000 / SECTOR_OVERVIEW.community_housing * 10) / 10}x its current size to meet evidenced need.
           </Analysis>
         </div>
 
@@ -671,21 +672,21 @@ export default function LiveDashboardPage() {
 
         {/* Proportional gap bars */}
         <div className="chart-container" style={{ marginBottom: 24 }}>
-          <div className="chart-title">Housing Response vs Evidenced Need — Proportional Scale (740,000 = 100%)</div>
+          <div className="chart-title">Housing Response vs Evidenced Need — Proportional Scale (640,000 = 100%)</div>
           <div style={{ marginTop: 16 }}>
             {([
-              { label: "Core housing need (AHURI 2023)", value: 740000, color: "#c0614a", note: "Households who cannot afford adequate housing without assistance" },
-              { label: "Social housing waitlist — approved applicants (2024)", value: 213000, color: "#f0a30a", note: "Already assessed, confirmed eligible, waiting — all states & territories" },
-              { label: "HAFF homes announced — Rounds 1–3 (announced, not yet built)", value: haffSummary.total_homes, color: "#4d7fb5", note: "Contracts signed or in execution — fewer than 1,100 completed to date" },
+              { label: "Core housing need (AHURI/City Futures, 2021 Census)", value: 640000, color: "#c0614a", note: "Households who cannot afford adequate housing without assistance — rises to ~940k by 2041" },
+              { label: "Social housing waitlist — households (AIHW 2025)", value: 165500, color: "#f0a30a", note: "159,100 public housing + 6,400 SOMIH households — assessed, eligible, waiting" },
+              { label: "HAFF homes contracted — Rounds 1–2", value: haffSummary.total_homes, color: "#4d7fb5", note: "Contracts signed or in execution — Round 3 (target +21,350) still in application phase" },
               { label: "HAFF homes completed to date (est. May 2026)", value: 1100, color: "#5aad8a", note: "Early Round 1 projects only — the pipeline is real but delivery is slow" },
             ] as const).map((row, i) => {
-              const pct = Math.max(row.value / 740000 * 100, 0.4)
+              const pct = Math.max(row.value / 640000 * 100, 0.4)
               return (
                 <div key={i} style={{ marginBottom: i < 3 ? 22 : 0 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5, fontSize: "0.8rem" }}>
                     <span style={{ color: "#cbd5e1" }}>{row.label}</span>
                     <span style={{ color: row.color, fontWeight: 700 }}>
-                      {row.value.toLocaleString()} · {Math.round(row.value / 740000 * 100)}%
+                      {row.value.toLocaleString()} · {Math.round(row.value / 640000 * 100)}%
                     </span>
                   </div>
                   <div style={{ height: 24, background: "#1a2535", borderRadius: 4, overflow: "hidden" }}>
@@ -712,7 +713,7 @@ export default function LiveDashboardPage() {
                 { metric: "Housing supply vs Accord target", detail: `${approvals.pct_of_target}% of target · trend flat for 18+ months`, color: "#c0614a" },
                 { metric: "Social housing waitlists", detail: "All states & territories rising · average wait now 4–8+ years", color: "#c0614a" },
                 { metric: "HAFF delivery pipeline", detail: `${haffSummary.pct_of_5yr_target}% of 40k target announced · construction underway`, color: "#c49a3a" },
-                { metric: "CHP sector capacity", detail: "108k properties · growing but entirely grant-dependent", color: "#c49a3a" },
+                { metric: "CHP sector capacity", detail: "119k properties · growing but entirely grant-dependent", color: "#c49a3a" },
                 { metric: "Construction cost environment", detail: "Stabilised at 58% above 2019 — new floor, not retreating", color: "#c49a3a" },
               ] as const).map((row, i) => (
                 <div key={i} style={{
@@ -735,29 +736,29 @@ export default function LiveDashboardPage() {
           <div className="chart-container">
             <div className="chart-title">What Would It Actually Take?</div>
             <p style={{ fontSize: "0.8rem", color: "#94a3b8", margin: "10px 0 16px", lineHeight: 1.6 }}>
-              To house 740,000 households in core need — at $86k average HAFF grant per home:
+              To house 640,000 households in core need — at $89k average HAFF grant per home (Rounds 1–2 contracted):
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               {([
                 {
                   timeframe: "Close the gap in 10 years",
-                  pace: "74,000 homes/year",
-                  cost: "$6.4B/year in grants",
+                  pace: "64,000 homes/year",
+                  cost: "$5.7B/year in grants",
                   context: "13× current HAFF annual grant capacity",
                   highlight: false,
                 },
                 {
                   timeframe: "Close the gap in 20 years",
-                  pace: "37,000 homes/year",
-                  cost: "$3.2B/year in grants",
+                  pace: "32,000 homes/year",
+                  cost: "$2.9B/year in grants",
                   context: "6.4× current HAFF annual grant capacity",
                   highlight: false,
                 },
                 {
                   timeframe: "At current HAFF pace (~5,000/yr)",
                   pace: "5,000 homes/year",
-                  cost: "~$430M/year",
-                  context: "148 years to close core housing need at this rate",
+                  cost: "~$445M/year",
+                  context: "128 years to close core housing need at this rate",
                   highlight: true,
                 },
               ] as const).map((row, i) => (
@@ -785,9 +786,9 @@ export default function LiveDashboardPage() {
         <Analysis>
           The data across this dashboard tells one consistent story:{" "}
           <strong style={{ color: "#fff" }}>Australia faces a structural housing deficit, not a cyclical one.</strong>{" "}
-          The 1.31 million households in rental stress and 129,000 unmet requests per year are symptoms of the same cause — a social housing stock of ~398k properties serving a core need of 740k households.{" "}
-          HAFF is the largest federal housing investment in decades, and it matters: 25,804 announced homes, construction underway, first completions arriving.{" "}
-          But 3.5% of evidenced need is momentum — not a solution.{" "}
+          The 1.31 million households in rental stress and 129,000 unmet requests per year are symptoms of the same cause — a social housing stock of ~432k properties serving a core need of 640k households.{" "}
+          HAFF is the largest federal housing investment in decades, and it matters: 18,650 contracted homes, construction underway, first completions arriving.{" "}
+          But 2.9% of evidenced need is momentum — not a solution.{" "}
           <strong style={{ color: "#f6c90e" }}>What closes the gap is a decade-long, sustained pipeline</strong>:{" "}
           HAFF rounds 4, 5, 6, 7, 8; rising CHP balance sheets enabling concessional debt at scale; and state government land contributions reducing the grant burden per home.{" "}
           The community housing sector has the governance, the delivery track record, and the capacity to absorb investment at pace.{" "}

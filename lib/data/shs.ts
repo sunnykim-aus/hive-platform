@@ -24,11 +24,14 @@ export const SHS_DATA: SHSRecord[] = [
   { year: "2018-19", clients: 292000, unassisted: 72900, needing_housing: 160200, got_housing: 44100 },
   { year: "2019-20", clients: 290800, unassisted: 74200, needing_housing: 158400, got_housing: 43600 },
   { year: "2020-21", clients: 294000, unassisted: 74800, needing_housing: 159200, got_housing: 44000 },
-  { year: "2021-22", clients: 278900, unassisted: 68500, needing_housing: 150200, got_housing: 42000 },
-  { year: "2022-23", clients: 284300, unassisted: 71800, needing_housing: 155200, got_housing: 43100 },
-  { year: "2023-24", clients: 301200, unassisted: 79600, needing_housing: 163400, got_housing: 44800 },
+  // UNIT NOTE (fixed 2026-07): `unassisted` from 2021-22 onward = unassisted REQUESTS
+  // (AIHW's lead measure: 105k → 108k → 110k → 129k). Rows 2016-17..2020-21 are the older
+  // unassisted-PEOPLE basis (~71-75k) — retained for history, not charted, don't mix in YoY.
+  { year: "2021-22", clients: 278900, unassisted: 105000, needing_housing: 150200, got_housing: 42000 },
+  { year: "2022-23", clients: 284300, unassisted: 108000, needing_housing: 155200, got_housing: 43100 },
+  { year: "2023-24", clients: 301200, unassisted: 110000, needing_housing: 163400, got_housing: 44800 },
   // 2024-25: AIHW SHS Annual Report 2024-25 (published Feb 2026)
-  // clients + unassisted: confirmed. needing_housing = 56% citing accommodation issues.
+  // clients + unassisted requests (~350/day): confirmed. needing_housing = 56% citing accommodation issues.
   // got_housing: estimated from homeless cohort outcomes (~29% housed rate applied to needing_housing).
   { year: "2024-25", clients: 289000, unassisted: 129000, needing_housing: 160000, got_housing: 46500 },
 ]
