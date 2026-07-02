@@ -107,7 +107,7 @@ export const PROGRAMS: Program[] = [
       { metric: "Loans to community housing providers", target_value: 1.0, target_unit: "$B", target_year: 2022, source: "NHFIC establishment legislation" },
     ],
     outcomes: [
-      { metric: "Total loans issued to CHPs", actual_value: 6.3, actual_unit: "$B", measurement_year: 2024, confidence: "High", source_report: "Housing Australia Annual Report 2023-24", notes: "Far exceeded initial targets. 90+ CHP borrowers across all states." },
+      { metric: "AHBA loans approved to CHPs", actual_value: 5.0, actual_unit: "$B", measurement_year: 2025, confidence: "High", source_report: "Housing Australia Annual Report 2024-25", notes: "Far exceeded the initial $1B target. Funded via $2.8B of social/sustainability bonds (7 issuances); ~$860M interest savings for the CHP sector. Corrected from 6.3 (which conflated total HA finance across facilities)." },
       { metric: "Interest rate saving vs market", actual_value: 0.8, actual_unit: "% per annum", measurement_year: 2023, confidence: "Medium", source_report: "NHFIC Impact Report", notes: "Estimated 80bps saving on average loan — material for CHP development viability." },
       { metric: "New dwellings enabled", actual_value: 15000, actual_unit: "dwellings", measurement_year: 2024, confidence: "Medium", source_report: "Housing Australia Annual Report 2023-24", notes: "Estimated social and affordable dwellings supported through NHFIC finance." },
     ],

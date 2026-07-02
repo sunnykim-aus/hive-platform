@@ -101,7 +101,12 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
     type: "loan",
     tier: "federal",
     status: "ongoing",
-    program_size_m: 10_000,        // $6.3B issued to date; ongoing facility. NOTE (E1 bonus): HA's overall statutory liability cap was raised $10B -> $26B in the 2025-26 Budget — E3 to confirm bond-aggregator specifics
+    // VERIFIED 2026-07-02 (Round 2 E3, HA Annual Report 2024-25): $5.0B in AHBA loans APPROVED
+    // to CHPs since establishment (prior HIVE "6.3B issued" overstated the AHBA-specific figure —
+    // likely conflated total HA finance across facilities). Funded via $2.8B of social/
+    // sustainability bonds (7 issuances); ~$860M interest savings generated for the CHP sector.
+    // HA's overall statutory liability cap: $10B -> $26B (2025-26 Budget).
+    program_size_m: 10_000,
     typical_per_dwelling_k: 215,   // blended social/affordable debt capacity at 5.5%, 30yr
     rate_pct: 5.5,                 // approx 2025 rate (AOFM 10yr ~4.4% + ~1.1% HA margin)
     loan_term_years: 30,
