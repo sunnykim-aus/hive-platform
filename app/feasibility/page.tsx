@@ -202,7 +202,7 @@ export default function FeasibilityPage() {
         <div className="page-header">
           <h1 className="page-title">Development Viability</h1>
           <p className="page-subtitle">
-            A $588k 2-bed apartment in NSW. $55k HAFF grant. $195k Housing Australia loan. Still $137k short — and that&apos;s before land.
+            A $579k 2-bed apartment in NSW. $55k HAFF grant. $192k Housing Australia loan. Still $131k short — and that&apos;s before land.
             This tool models the exact funding gap for any state, typology, and HAFF scenario.
             It&apos;s the same calculation used in real HAFF submissions.
           </p>

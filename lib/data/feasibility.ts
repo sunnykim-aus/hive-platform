@@ -203,8 +203,9 @@ export const TYPOLOGIES: Record<string, Typology> = {
  * => HIVE per-state social rents ($212-288) run HIGH vs the JobSeeker-single base (~$211) and
  *    do NOT track the IELs (WA lowest IEL but 2nd-highest HIVE rent; SA high IEL, lowest rent).
  *    REBUILD per-state on actual tenant-income (≤IEL) × 25% + $110 CRA — DONE below (2026-07).
- *    Gap impact modest (±$11k); NSW flagship $137k → ~$144k. NOTE: market rents + cost
- *    multipliers are still unvalidated, so per-state gaps are not final.
+ *    Gap impact modest (±$11k). [Historical note — after the Domain Mar-2026 market-rent
+ *    update the NSW flagship gap computes to ~$131k (TDC $579k · debt $192k), re-verified
+ *    2026-07-02.] NOTE: cost multipliers still await Rawlinsons, so per-state gaps not final.
  */
 // REBUILT 2026-07 on IEL basis (replaces "50% of median income"):
 //   rent = 25% × income + CRA $110, where income = 45% JobSeeker $404 + 35% pension $530

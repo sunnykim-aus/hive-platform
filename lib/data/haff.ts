@@ -121,7 +121,7 @@ export const HAFF_ROUNDS: Record<string, HaffRound> = {
       { state: "NT",  projects: 2,  homes: 205,  social: 112,  affordable: 93,   grant_m: 12.5 },
     ],
     by_sector: [
-      { sector: "General social & affordable housing",  homes: 7946, pct: 58 },
+      { sector: "General social & affordable housing",  homes: 7849, pct: 58 },  // −97 (2026-07-02): sector splits are HIVE-indicative; re-summed to the contracted 13,649
       { sector: "Women & family safety housing",        homes: 2400, pct: 17 },
       { sector: "Youth housing",                        homes: 900,  pct: 7 },
       { sector: "First Nations housing",                homes: 820,  pct: 6 },
@@ -216,7 +216,7 @@ export const HAFF_ROUNDS: Record<string, HaffRound> = {
     notes: "Largest HAFF round yet — targeting 21,350 social and affordable homes. Launched 23 November 2025; applications opened 30 January 2026. Two-stage process: EOI then detailed application (open/demand-driven, not competitive). $600M ringfenced for First Nations housing in remote NT/WA. Focused on hard-to-deliver typologies: regional/remote communities, high-density urban infill, and NDIS specialist supported housing. State-by-state breakdown and project count will be published on contract execution. Source: Housing Australia; Albanese Government media release 23 Nov 2025.",
     by_state: [
       // State allocations not yet announced — proportional estimates based on R1+R2 distribution
-      { state: "NSW", projects: 0, homes: 6400, social: 0, affordable: 0, grant_m: 0 },
+      { state: "NSW", projects: 0, homes: 6500, social: 0, affordable: 0, grant_m: 0 },  // +100 (2026-07-02): indicative split re-summed to the 21,350 R3 target
       { state: "VIC", projects: 0, homes: 4900, social: 0, affordable: 0, grant_m: 0 },
       { state: "QLD", projects: 0, homes: 3800, social: 0, affordable: 0, grant_m: 0 },
       { state: "WA",  projects: 0, homes: 2800, social: 0, affordable: 0, grant_m: 0 },
