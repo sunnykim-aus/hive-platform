@@ -251,25 +251,29 @@ export const FUNDING_MECHANISMS: FundingMechanism[] = [
   },
   {
     id: "housing-support",
-    name: "National Housing Accord — Housing Support Program",
-    short_name: "Housing Support Program",
+    // CORRECTED 2026-07-02 (Round 2 E2, Treasury-verified): the old entry conflated two programs
+    // under "Housing Support Program $3B". Actual: New Homes Bonus = $3.0B (performance payments
+    // to states exceeding their Accord share) + Housing Support Program = $0.5B (competitive
+    // kick-start funding to state/local govs for services, amenities, planning capability).
+    // Combined $3.5B endorsed by National Cabinet (Aug 2023).
+    name: "National Housing Accord — New Homes Bonus & Housing Support Program",
+    short_name: "New Homes Bonus + HSP",
     funder: "Commonwealth",
     type: "grant",
     tier: "both",
     status: "active",
-    program_size_m: 3_000,
+    program_size_m: 3_500,
     typical_per_dwelling_k: 0,      // goes to states/councils for planning/infrastructure; not per-home
     rate_pct: null,
     loan_term_years: null,
     eligible_borrowers: [
       "State and territory governments",
-      "Local governments (via state allocation)",
+      "Local governments (HSP: competitive; NHB: via state performance)",
       "NOT directly accessible by CHPs",
     ],
     key_conditions: [
-      "Performance-based: states receive payments for exceeding baseline housing completions",
-      "Also funds planning reform (zoning, DA fast-track, height uplift)",
-      "Infrastructure investment to unlock supply (roads, sewerage for housing)",
+      "New Homes Bonus ($3B): performance-based — states paid for exceeding their share of the 1.2M-homes Accord target",
+      "Housing Support Program ($500M): competitive activation payments — connecting essential services, amenities, planning capability",
       "CHPs benefit indirectly from faster approvals and better-serviced land",
     ],
     stackable_with: ["haff", "ha-loan", "nhif"],
